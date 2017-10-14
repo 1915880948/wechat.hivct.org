@@ -9,6 +9,7 @@
 namespace application\web\www\controllers\site;
 
 use application\web\www\components\WwwBaseAction;
+use common\core\base\Schema;
 
 /**
  * Class TestAction
@@ -16,7 +17,10 @@ use application\web\www\components\WwwBaseAction;
  */
 class TestAction extends WwwBaseAction
 {
+    public $responseType = 'json';
+
     public function run()
     {
+        return Schema::SuccessNotify('success');
     }
 }

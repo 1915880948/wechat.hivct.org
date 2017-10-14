@@ -23,3 +23,7 @@ define('IS_DEV_MODE', (isset($_SERVER['SERVER_NAME']) && strpos($_SERVER['SERVER
  * 判断是否本地模式
  */
 define('IS_LOCAL_MODE', env('IS_LOCAL_DEV'));
+
+if(file_exists(__DIR__ . "/functions.php")){
+    include __DIR__ . "/functions.php";
+}

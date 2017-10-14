@@ -30,12 +30,19 @@ class TranslateController extends MessageController
         $messages = [];
         $tokens = token_get_all($subject);
 
-        if(strpos($fileName, 'login.blade.php') !== false){
+        if(strpos($fileName, '0.blade.php') !== false){
+            preg_match_all('/(Yii::t\(.*?\))/i',$subject,$matches);
+            echo "<pre>";
+            print_r($matches);
+            echo "</pre>";
+
+
             preg_match_all('/\{\{(.*?)\}\}/si', $subject, $matches);
             $todoMatches = [];
             if(isset($matches[1]) && $matches[1]){
                 $todoMatches = $matches[1];
             }
+            exit;
             preg_match_all('/\{!!.*?(Yii::t.*?\)).*?!!\}/si', $subject, $matches);
             if(isset($matches[1]) && $matches[1]){
                 $todoMatches = ArrayHelper::merge($todoMatches, $matches[1]);

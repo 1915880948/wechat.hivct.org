@@ -26,7 +26,7 @@ foreach(glob(Yii::getAlias("@{$project}/console/*Controller.php")) as $item){
     // $config['controllerMap'][$consoleName] = ['class' => "{$project}\\console\\{$className}"];
     $config['controllerMap'][$consoleName] = ['class' => "{$project}\\console\\{$className}"];
 }
-
+$config['runtimePath'] = Yii::getAlias("@root/runtime/{$project}");
 // if($_SERVER['argv']){
 //     foreach($_SERVER['argv'] as $k => $param){
 //         $projectPrefix = '--project=';

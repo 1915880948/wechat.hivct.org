@@ -9,6 +9,7 @@
 namespace application\web\www\controllers;
 
 use application\web\www\components\WwwBaseController;
+use common\core\base\controller\ActionsTrait;
 use yii\filters\AccessControl;
 
 /**
@@ -17,19 +18,7 @@ use yii\filters\AccessControl;
  */
 class SiteController extends WwwBaseController
 {
-    public function actions()
-    {
-        $actionDirs = __DIR__ . "/" . $this->id;
-        $actionNamespace = __NAMESPACE__ . '\\' . $this->id;
-        $actions = [];
-        foreach(glob($actionDirs . "/*.php") as $actionFile){
-            $filename = pathinfo($actionFile, PATHINFO_FILENAME);
-            $actionName = strtolower(str_replace('Action', '', $filename));
-            $actions[$actionName] = $actionNamespace . '\\' . $filename;
-        }
-
-        return $actions;
-    }
+    use ActionsTrait;
 
     public function behaviors()
     {

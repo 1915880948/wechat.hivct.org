@@ -12,7 +12,8 @@ use common\core\template\blade\ViewRenderer;
 $appId = basename(__DIR__);
 $appName = defined('APP_GROUP') ? APP_GROUP : APP_NAME;
 $modules = [];
-foreach(glob(Yii::getAlias("@{$appName}/modules/*")) as $item){
+$viewPaths = [];
+foreach(glob(Yii::getAlias("@{$appName}/web/{$appId}/modules/*")) as $item){
     if(is_dir($item) && file_exists($item . "/config.php")){
         $config = include $item . "/config.php";
         if(isset($config['class'])){
@@ -20,6 +21,7 @@ foreach(glob(Yii::getAlias("@{$appName}/modules/*")) as $item){
                 $config['id'] = md5($config['class']);
             }
             $modules[$config['id']] = $config;
+            $viewPaths[] = $item."/views";
         }
     }
 }
@@ -55,6 +57,19 @@ return [
                     // 'class'     => '\cyneek\yii2\blade\ViewRenderer',
                     'class'     => ViewRenderer::className(),
                     'cachePath' => '@runtime/cache',
+                ],
+            ],
+        ],
+        'i18n'         => [
+            'translations' => [
+                '*' => [
+                    'class'    => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@application/messages',
+                    // // 'sourceLanguage' => 'zh-CN',
+                    'fileMap'  => [
+                        'www'       => 'www.php',
+                        'www/error' => 'www.error.php',
+                    ],
                 ],
             ],
         ],

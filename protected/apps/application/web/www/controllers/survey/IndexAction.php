@@ -19,8 +19,10 @@ class IndexAction extends WwwBaseAction
 {
     public function run($step = 0)
     {
-        $file = "survey_index_{$step}";
+        // $file = "survey_index_{$step}";
+        //
+        // return $this->renderPage($file);
 
-        return $this->renderPage($file);
+        return $this->controller->redirect(['/survey/selfcheckingbase']);
     }
 }

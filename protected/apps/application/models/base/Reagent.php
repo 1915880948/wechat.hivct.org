@@ -1,8 +1,8 @@
 <?php
 
 namespace application\models\base;
-use Yii;
-use application\models\db\TblReagent ;
+
+use application\models\db\TblReagent;
 
 /**
  * This is the model class for tableClass "TblReagent".
@@ -11,5 +11,20 @@ use application\models\db\TblReagent ;
  */
 class Reagent extends TblReagent
 {
+    /**
+     * 返回所有的ReAgent
+     * @return array|\yii\db\ActiveRecord[]|Reagent[]
+     */
+    public static function getFrontAll()
+    {
+        return self::find()
+                   ->andWhere(['status' => 1])
+                   ->all();
+    }
 
+    public static function all()
+    {
+        return self::find()
+                   ->all();
+    }
 }

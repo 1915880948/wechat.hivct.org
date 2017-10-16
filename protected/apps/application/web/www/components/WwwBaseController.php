@@ -8,8 +8,6 @@
 
 namespace application\web\www\components;
 
-use application\common\api\YxzApi;
-use application\models\service\FrontUserService;
 use common\core\base\BaseController;
 
 /**
@@ -18,12 +16,6 @@ use common\core\base\BaseController;
  */
 class WwwBaseController extends BaseController
 {
-    // public $layout = 'main.blade.php';
-    public $layout = null;
-
-
-
-
     /**
      * 覆盖父类,表示login/info/clear 不需要登录
      * @inheritdoc

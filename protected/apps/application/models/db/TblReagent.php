@@ -9,6 +9,9 @@ use Yii;
  *
  * @property integer $id
  * @property string $name
+ * @property string $subname
+ * @property string $description
+ * @property string $type
  * @property string $price
  * @property integer $status
  * @property integer $stock
@@ -30,10 +33,13 @@ class TblReagent extends \application\common\db\ApplicationActiveRecord
     public function rules()
     {
         return [
+            [['type', 'comment'], 'required'],
             [['price'], 'number'],
             [['status', 'stock'], 'integer'],
-            [['comment'], 'required'],
-            [['name'], 'string', 'max' => 100],
+            [['name'], 'string', 'max' => 30],
+            [['subname'], 'string', 'max' => 100],
+            [['description'], 'string', 'max' => 500],
+            [['type'], 'string', 'max' => 10],
             [['comment'], 'string', 'max' => 255],
             [['name'], 'unique']
         ];
@@ -47,6 +53,9 @@ class TblReagent extends \application\common\db\ApplicationActiveRecord
         return [
             'id' => 'ID',
             'name' => '试剂名称',
+            'subname' => '附加名称',
+            'description' => 'Description',
+            'type' => 'free/charge/gift',
             'price' => '价格',
             'status' => '0=删除，1=正常',
             'stock' => '库存，-1无限',

@@ -1,17 +1,17 @@
 <?php
 /**
- * @category OauthController
+ * @category CheckController
  * @author   gouki <gouki.xiao@gmail.com>
- * @created 2017/8/14 02:15
+ * @created 2017/10/16 09:17
  * @since
  */
 
 namespace application\web\www\controllers;
 
-use common\core\base\BaseController;
+use application\web\www\components\WwwBaseController;
 use common\core\base\controller\ActionsTrait;
 
-class OauthController extends BaseController
+class CheckController extends WwwBaseController
 {
     use ActionsTrait;
 }

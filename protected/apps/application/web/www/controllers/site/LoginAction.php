@@ -20,9 +20,7 @@ class LoginAction extends WwwBaseAction
 {
     public function run()
     {
-        if(\Yii::$app->getUser()
-                     ->getIsGuest()
-        ){
+        if(yUser()->getIsGuest()){
             $app = Weixin::getApp();
             $response = $app->oauth->scopes(['snsapi_userinfo'])
                                    ->redirect(Url::to(['site/callback', 'state' => base64_encode($this->request->getReferrer())], true));

@@ -5,139 +5,71 @@
  * @created 2016/10/15 12:39
  * @since
  */
+
 namespace application\web\www;
 
-use application\common\api\District;
 use application\models\base\Users;
-use qiqi\helper\ip\IpHelper;
-use qiqi\helper\log\FileLogHelper;
+use Overtrue\Socialite\User;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\IdentityInterface;
 
 /**
  * Class WwwUser
  * @package application\web\www
  */
-class WwwUser extends Account implements IdentityInterface
+class WwwUser extends Users implements IdentityInterface
 {
-    //专门用来预览的用户ID
-    const PREVIEW_USER_ID = 2;
-    //一年才过期
-    const USER_LOGIN_EXPIRE = 31104000;
-    //权限
-    const USER_SUPER_ADMIN = 1;
-    const USER_ADMIN = 2;
-    const USER_GUEST = 3;
-    protected static $groups = [
-        self::USER_SUPER_ADMIN => '超级管理员',
-        self::USER_ADMIN       => '管理员',
-        self::USER_GUEST       => '游客'
-    ];
-
-    public static function getGroups()
-    {
-        return self::$groups;
-    }
-
-    public static function getGroupName($groupid)
-    {
-        return ArrayHelper::getValue(self::$groups, $groupid, '无权限');
-    }
-
     public static function findIdentity($id)
     {
         return static::find()
-                     ->andWhere(['userid' => $id])
-                     ->andWhere(['groupid' => self::USER_GUEST])
+                     ->andWhere(['uid' => $id])
                      ->one();
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
     {
+        return static::find()
+                     ->andWhere(['openid' => $token])
+                     ->one();
     }
 
     public function getId()
     {
-        return $this->userid;
+        return $this->uid;
     }
 
     public function getAuthKey()
     {
-        return $this->userid;
+        return $this->openid;
     }
 
     public function validateAuthKey($authKey)
     {
-        return $this->userid == $authKey;
+        return $this->openid == $authKey;
     }
 
     /**
-     * 注册用户
-     * @param $userInfo
-     * @return array
+     * @param User $weUser
+     * @return Users
      */
-    public static function registerUser($userInfo)
+    public static function createByWechat(User $weUser, $userDetail = null)
     {
-
-        $model = new WwwUser();
-        $model->username = $model->phone = isset($userInfo['phone']) ? $userInfo['phone'] : $userInfo['mobile'];
-        $model->nickname = isset($userInfo['nickName']) ? $userInfo['nickName'] : "";
-        $model->department = $userInfo['department'];
-        $model->realname = isset($userInfo['realname']) ? $userInfo['realname'] : $userInfo['name'];
-        $model->type = $userInfo['type'];
-        $model->hospital = $userInfo['hospital'];
-        $model->password = md5(microtime(1));
-        $model->regdateline = time();
-        $model->region = isset($userInfo['addr'])?$userInfo['addr']:null;
-        $districtId = null;
-        if( isset($userInfo['addr'])){
-            $addresses = explode("|",$userInfo['addr']);
-            if($addresses[0]){
-                $districtId = District::getProvinceId($addresses[0]);
-
-            }
-        }
-        // FileLogHelper::xlog([$model->getAttributes(),$districtId,$userInfo],'register');
-        $model->lastpost = time();
-        $model->groupid = WwwUser::USER_GUEST;
-        $model->regip = IpHelper::getRealIP();
-        $model->district_id = strval( isset($userInfo['city']) ? $userInfo['city'] : ($districtId?$districtId:'000000'));
-        $model->gender = isset($userInfo['gender']) ? $userInfo['gender'] : 0;
-        $model->jobtitle = isset($userInfo['title']) ? $userInfo['title'] : (isset($userInfo['jobtitle']) ? $userInfo['jobtitle'] : '');
-        $model->hospital_level = isset($userInfo['hospital_level'])?$userInfo['hospital_level']:(isset($userInfo['level'])?$userInfo['level']:"");
-        $model->uid = isset($userInfo['uid'])?$userInfo['uid']:'0';
-        $model->channel = isset($userInfo['channel'])?$userInfo['channel']:0;
-        // FileLogHelper::xlog(['register',$model->getAttributes(),$districtId,$userInfo],'register');
-        return [$model->save(), $model];
-    }
-
-    public function validatePassword($plainPassword, $password = null)
-    {
-        if($password == null){
-            $password = $this->password;
-        }
-        return $this->encodePassword($plainPassword) == $password;
-    }
-
-    public function encodePassword($plainPassword)
-    {
-        return md5($plainPassword);
-    }
-
-    public function getRegip()
-    {
-        if(!$this->regip){
-            $this->regip = IpHelper::getRealIP();
-        }
-        return $this->regip;
-    }
-
-    public function setRegip($regip = null)
-    {
-        if($regip){
-            $this->regip = $regip;
-        } else{
-            $this->regip = $this->getRegip();
-        }
+        $model = new static;
+        $original = $weUser->getOriginal();
+        $weAttr = $weUser->getAttributes();
+        $model->openid = $weUser->getId();
+        $model->unionid = ArrayHelper::getValue($original, 'unionid', $weUser->getId());
+        $model->headimgurl = $weUser->getAvatar();
+        $model->gender = ArrayHelper::getValue($original, 'sex', '');
+        $model->nickname = $weUser->getNickname();
+        $model->realname = $weUser->getName();
+        $model->country = ArrayHelper::getValue($weAttr, 'country', '');
+        $model->province = ArrayHelper::getValue($weAttr, 'province', '');
+        $model->city = ArrayHelper::getValue($weAttr, 'city', '');
+        $model->is_subscribe = $userDetail->subscribe ?? 0; //-1表示没有获取过用户信息
+        $model->tags = Json::encode($userDetail->tagid_list ?? []);
+        $model->save();
+        return $model;
     }
 }

@@ -27,6 +27,11 @@ class WwwUser extends Users implements IdentityInterface
                      ->one();
     }
 
+    /**
+     * @param mixed $token
+     * @param null  $type
+     * @return WwwUser|array|null|\yii\db\ActiveRecord
+     */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::find()
@@ -49,27 +54,4 @@ class WwwUser extends Users implements IdentityInterface
         return $this->openid == $authKey;
     }
 
-    /**
-     * @param User $weUser
-     * @return Users
-     */
-    public static function createByWechat(User $weUser, $userDetail = null)
-    {
-        $model = new static;
-        $original = $weUser->getOriginal();
-        $weAttr = $weUser->getAttributes();
-        $model->openid = $weUser->getId();
-        $model->unionid = ArrayHelper::getValue($original, 'unionid', $weUser->getId());
-        $model->headimgurl = $weUser->getAvatar();
-        $model->gender = ArrayHelper::getValue($original, 'sex', '');
-        $model->nickname = $weUser->getNickname();
-        $model->realname = $weUser->getName();
-        $model->country = ArrayHelper::getValue($weAttr, 'country', '');
-        $model->province = ArrayHelper::getValue($weAttr, 'province', '');
-        $model->city = ArrayHelper::getValue($weAttr, 'city', '');
-        $model->is_subscribe = $userDetail->subscribe ?? 0; //-1表示没有获取过用户信息
-        $model->tags = Json::encode($userDetail->tagid_list ?? []);
-        $model->save();
-        return $model;
-    }
 }

@@ -8,12 +8,20 @@
 
 namespace application\web\www\controllers\survey;
 
+use application\models\base\SurveyList;
 use application\web\www\components\WwwBaseAction;
 
 class SelfCheckingFollowupAction extends WwwBaseAction
 {
-    public function run()
+    /**
+     * @param int $id
+     * @return string
+     */
+    public function run($id = 0)
     {
-        return $this->render();
+        if(!$model = SurveyList::findByPk($id)){
+            $model = new SurveyList();
+        }
+        return $this->render(compact('model'));
     }
 }

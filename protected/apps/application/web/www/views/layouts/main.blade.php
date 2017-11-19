@@ -119,7 +119,7 @@
                   val += 'px';
               }
               return val;
-          }
+          };
           flexible.px2rem = function (d) {
               var val = parseFloat(d) / this.rem;
               if (typeof d === 'string' && d.match(/px$/)) {
@@ -130,11 +130,13 @@
 
       })(window, window['lib'] || (window['lib'] = {}));
   </script>
-  <link rel="stylesheet" href="{{yStatic('lib/weui.min.css')}}">
-  <link rel="stylesheet" href="{{yStatic('css/jquery-weui.min.css')}}">
+  <link rel="stylesheet" href="{{yStatic('weui/lib/weui.min.css')}}">
+  <link rel="stylesheet" href="{{yStatic('weui/css/jquery-weui.min.css')}}">
   <link rel="stylesheet" href="{{gStatic('vendor/progress/nprogress.css')}}">
   <link rel="stylesheet" href="{{yStatic('css/main.css')}}">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_477728_5if4etztk06hia4i.css">
   <script src="{{gStatic('vendor/jquery/jquery-2.2.3.min.js')}}"></script>
+  {{--<script src="{{gStatic('vendor/jquery/jquery.1.11.2.min.js')}}"></script>--}}
 </head>
 <body ontouchstart>
 <div data-pjax id="pjax-container" class="weui-tab">
@@ -144,13 +146,15 @@
   @stack('global.footer')
   @stack('foot-script')
 </div>
-<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+{{--<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>--}}
+<script src="{{yStatic('weui/js/jquery-weui.min.js')}}"></script>
 <script src="{{gStatic('vendor/jquery/pjax.js')}}"></script>
 <script src="{{gStatic('vendor/plugins/layer/layer.js')}}"></script>
-<script src="{{gStatic('vendor/fastclick/fastclick.min.js')}}"></script>
+{{--<script src="{{gStatic('vendor/fastclick/fastclick.min.js')}}"></script>--}}
 <script src="{{gStatic('vendor/hammer.min.js')}}"></script>
 <script src="{{gStatic('vendor/jquery/jquery.hammer.js')}}"></script>
 <script src="{{gStatic('vendor/progress/nprogress.js')}}"></script>
+<script src="{{yStatic('js/app.js')}}"></script>
 <script>
     $(function () {
 //        FastClick.attach(document.body);

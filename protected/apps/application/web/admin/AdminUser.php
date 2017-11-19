@@ -5,62 +5,69 @@
  * @created 2016/10/3 00:29
  * @since
  */
+
 namespace application\web\admin;
 
-use application\models\base\Users;
+use application\models\base\Admins;
+use application\models\base\manage\Manager;
 use qiqi\helper\ip\IpHelper;
-use yii\helpers\ArrayHelper;
+use yii\base\Security;
 use yii\web\IdentityInterface;
+
+include __DIR__ . "/functions.php";
 
 /**
  * Class AdminUser
  * @package application\web\admin
+ * @property mixed $authKey
+ * @property mixed $id
+ * @property null  $regip
  */
-class AdminUser extends Users implements IdentityInterface
+class AdminUser extends Admins implements IdentityInterface
 {
-    const USER_SUPER_ADMIN = 1;
-    const USER_ADMIN = 2;
-    const USER_GUEST = 3;
-    protected static $groups = [
-        self::USER_SUPER_ADMIN => '超级管理员',
-        self::USER_ADMIN       => '管理员',
-        self::USER_GUEST       => '游客'
-    ];
-
-    public static function getGroups()
+    /**
+     * @param $name
+     * @return AdminUser|array|null|\yii\db\ActiveRecord
+     */
+    public static function findByUserName($name)
     {
-        return self::$groups;
-    }
-
-    public static function getGroupName($groupid)
-    {
-        return ArrayHelper::getValue(self::$groups, $groupid, '无权限');
+        return static::find()
+                     ->andWhere(['account' => $name])
+                     ->one();
     }
 
     public function getId()
     {
-        return $this->userid;
+        return $this->aid;
     }
 
     public static function findIdentity($id)
     {
-        return static::find()
-                     ->andWhere(['userid' => $id])
-                     ->andWhere(['<>', 'groupid', self::USER_GUEST])->one();
+        return static::findByPk($id);
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
     {
+        return static::findByUsername($token);
     }
 
     public function getAuthKey()
     {
-        return $this->userid;
+        return $this->id;
     }
 
     public function validateAuthKey($authKey)
     {
-        return $this->userid == $authKey;
+        return $this->id == $authKey;
+    }
+
+    public function validatePasswordHash($plainPassword, $password = null)
+    {
+        if($password == null){
+            $password = $this->password;
+        }
+        return \Yii::$app->getSecurity()->validatePassword($plainPassword,$password);
+        // return $this->encodePassword($plainPassword) == $password;
     }
 
     public function validatePassword($plainPassword, $password = null)
@@ -68,28 +75,24 @@ class AdminUser extends Users implements IdentityInterface
         if($password == null){
             $password = $this->password;
         }
-        return $this->encodePassword($plainPassword) == $password;
+        return $plainPassword == $password;
     }
 
     public function encodePassword($plainPassword)
     {
-        return md5($plainPassword);
+        //return md5($plainPassword);
     }
 
     public function getRegip()
     {
-        if(!$this->regip){
-            $this->regip = IpHelper::getRealIP();
+        if(!$this->login_ip){
+            $this->login_ip = IpHelper::getRealIP();
         }
-        return $this->regip;
+        return $this->login_ip;
     }
 
     public function setRegip($regip = null)
     {
-        if($regip){
-            $this->regip = $regip;
-        } else{
-            $this->regip = $this->getRegip();
-        }
+        $this->login_ip = $regip;
     }
 }

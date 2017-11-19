@@ -28,7 +28,6 @@ return [
     'basePath'            => "@{$appName}/web/{$appId}",
     'viewPath'            => "@{$appName}/web/{$appId}/views",
     'controllerNamespace' => "{$appName}\\web\\{$appId}\\controllers",
-    'language'            => 'en',
     'components'          => [
         'user'         => [
             'identityClass'   => "{$appName}\\web\\{$appId}\\ApiUser",

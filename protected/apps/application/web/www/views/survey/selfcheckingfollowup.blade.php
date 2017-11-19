@@ -14,112 +14,119 @@
     <h1 class="app-title">转介及后续服务</h1>
   </header>
   <div class="weui-cells weui-cells_form">
-    <div class="weui-cells__title">如果本次检测阳性，是否愿意接受我们提供以下服务：</div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd ">提供进一步快检服务</div>
-      <div class="weui-cell__ft">
-        <input id="partner_sns" name="partner_sns" value="1" class="weui-switch" type="checkbox">
+    <form id="_form">
+      {!! yInput('hidden','id',$request->get('id')) !!}
+      <div class="weui-cells__title">如果本次检测阳性，是否愿意接受我们提供以下服务：</div>
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd ">提供进一步快检服务</div>
+        <div class="weui-cell__ft">
+          <input id="fast_detect_service" name="fast_detect_service" class="weui-switch" type="checkbox">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">提供确证和CD4检测机构信息</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">提供确证和CD4检测机构信息</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="org_for_cd4" name="org_for_cd4">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">提供抗病毒治疗或相关医疗机构信息</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">提供抗病毒治疗或相关医疗机构信息</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="org_therapy" name="org_therapy">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">提供性病诊断治疗机构信息</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">提供性病诊断治疗机构信息</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="org_syphilis" name="org_syphilis">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">提供机会性感染治疗及其他相关治疗机构信息</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">提供机会性感染治疗及其他相关治疗机构信息</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="org_syphilis_other" name="org_syphilis_other">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">提供心理咨询和帮助机构信息</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">提供心理咨询和帮助机构信息</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="org_psychological" name="org_psychological">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">提供母婴阻断机构信息</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">提供母婴阻断机构信息</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="org_pmtct" name="org_pmtct">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">提供结核诊断治疗机构信息</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">提供结核诊断治疗机构信息</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="org_phthisis" name="org_phthisis">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell ">
-      <div class="weui-cell__hd" style="width:20%">其他</div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="sex_after_drug_3month_num" id="sex_after_drug_3month_num" placeholder="请输入"></div>
-      <div class="weui-cell__ft">
-        {{--<button class="" style="width:1rem;">人</button>--}}
+      <div class="weui-cell ">
+        <div class="weui-cell__hd" style="width:20%">其他</div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="org_other" id="org_other" placeholder="请输入"></div>
+        <div class="weui-cell__ft">
+          {{--<button class="" style="width:1rem;">人</button>--}}
+        </div>
       </div>
-    </div>
-    <div class="weui-cells__title">你对感染HIV后是否需要接受治疗的看法是：</div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">积极接受治疗</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cells__title">你对感染HIV后是否需要接受治疗的看法是：</div>
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">积极接受治疗</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="active_treatment" name="active_treatment">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">担心药物副作用，暂不接受</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">担心药物副作用，暂不接受</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="unaccept_medical" name="unaccept_medical">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">未到治疗标准就不用治疗</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">未到治疗标准就不用治疗</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="treatment_until_standard" name="treatment_until_standard">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">担心很快耐药</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">担心很快耐药</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="resistant_care" name="resistant_care">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">担心吃药后被人发现</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">担心吃药后被人发现</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="explore_care" name="explore_care">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell weui-cell_switch">
-      <div class="weui-cell__bd">认为无法治愈，不治疗，任其自然l</div>
-      <div class="weui-cell__ft">
-        <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="1">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">认为无法治愈，不治疗，任其自然l</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" id="not_treatment" name="not_treatment">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell ">
-      <div class="weui-cell__hd" style="width:20%">其他</div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="sex_after_drug_3month_num" id="sex_after_drug_3month_num" placeholder="请输入"></div>
-      <div class="weui-cell__ft">
-        {{--<button class="" style="width:1rem;">人</button>--}}
+      <div class="weui-cell ">
+        <div class="weui-cell__hd" style="width:20%">其他</div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="treatment_other" id="treatment_other" placeholder="请输入"></div>
+        <div class="weui-cell__ft">
+          {{--<button class="" style="width:1rem;">人</button>--}}
+        </div>
       </div>
-    </div>
+    </form>
     <!---->
     <!---->
     <div class="weui-btn-area">
-      <a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckingh'])}}" id="showTooltips">完成</a>
+      {{--<a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckingh'])}}" id="showTooltips">完成</a>--}}
+      {!! yLink('完成','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
+        'next'=>yUrl(['/user/default/index']),
+        'post'=>yUrl(['/survey/save','type'=>'followup'])
+      ]]) !!}
     </div>
   </div>
 
@@ -135,7 +142,7 @@
               items: ['不记得日期', '从未检测过']
           });
           $('#hiv_check_mode').select({
-              title: "主动检测还是被动员？",
+              title: "主动检测还是被动？",
               items: ['主动', '被动']
           });
           $('#hiv_check_reason').select({
@@ -157,7 +164,16 @@
               title: "您希望多久再免费邮件试剂 ？",
               items: ['1个月', '2个月', '3个月', '6个月', '一年', '不想再测']
           });
-
+          $('#next-btn').on('click', function () {
+              var self = $(this);
+              $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
+                  if (result.status) {
+                      location.href = $(self).data('next') + '?id=' + result.items.id;
+                      return;
+                  }
+                  $.alert(result.items[0]);
+              })
+          })
       });
   </script>
 @endpush

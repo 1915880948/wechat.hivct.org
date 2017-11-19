@@ -14,7 +14,6 @@ use application\web\www\WwwUser;
 use Overtrue\Socialite\User;
 use qiqi\helper\log\FileLogHelper;
 use wechat\Weixin;
-use yii\helpers\ArrayHelper;
 
 /**
  * Class CallbackAction
@@ -52,17 +51,7 @@ class CallbackAction extends WwwBaseAction
             }
         } else{
             if((time() - strtotime($wUser->updated_at)) > env('WECHAT_USER_TAGS_UPDATE_TIME')){//如果超过一天就更新吧
-                $original = $user->getOriginal();
-                $weAttr = $user->getAttributes();
-                $wUser->avatar = $user->getAvatar();
-                $wUser->gender = ArrayHelper::getValue($original, 'sex', '');
-                $wUser->nickname = $user->getNickname();
-                $wUser->name = $user->getName();
-                $wUser->country = ArrayHelper::getValue($weAttr, 'country', '');
-                $wUser->province = ArrayHelper::getValue($weAttr, 'province', '');
-                $wUser->city = ArrayHelper::getValue($weAttr, 'city', '');
-                $wUser->is_subscribe = $userDetail->subscribe ?? 0; //-1表示没有获取过用户信息
-                $wUser->save();
+                $wUser->updateByWechat($user, $wUser);
             }
         }
         $loginStatus = \Yii::$app->getUser()

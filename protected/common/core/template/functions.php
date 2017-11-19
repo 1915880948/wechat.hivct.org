@@ -1,8 +1,5 @@
 <?php
-use application\common\base\traits\OptionTrait;
-use application\common\widget\YLinkPager;
-use application\models\service\GlobalSettingService;
-use application\models\service\SettingService;
+
 use common\core\base\Configure;
 use common\core\image\ThumbImage;
 use qiqi\helper\StringHelper;
@@ -11,11 +8,12 @@ use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\log\Logger;
 use yii\web\Cookie;
+use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 /**
  * @param string $url
- * @param bool $scheme
+ * @param bool   $scheme
  * @return string
  */
 function yUrl($url = '', $scheme = false)
@@ -24,7 +22,7 @@ function yUrl($url = '', $scheme = false)
 }
 
 /**
- * @param $route
+ * @param      $route
  * @param bool $scheme
  * @return string
  */
@@ -85,9 +83,9 @@ function yUser()
 }
 
 /**
- * @param $message
+ * @param        $message
  * @param string $category
- * @param int $type
+ * @param int    $type
  */
 function yLog($message, $category = 'application', $type = Logger::LEVEL_ERROR)
 {
@@ -138,10 +136,16 @@ function yCsrfTag()
     return Html::csrfMetaTags();
 }
 
+function yCsrfInput()
+{
+    return Html::hiddenInput(Yii::$app->getRequest()->csrfParam, Yii::$app->getRequest()
+                                                                          ->getCsrfToken());
+}
+
 /**
- * @param $type
- * @param null $name
- * @param null $value
+ * @param       $type
+ * @param null  $name
+ * @param null  $value
  * @param array $options
  * @return string
  */
@@ -151,8 +155,8 @@ function yInput($type, $name = null, $value = null, $options = [])
 }
 
 /**
- * @param $name
- * @param null $selection
+ * @param       $name
+ * @param null  $selection
  * @param array $items
  * @param array $options
  * @return string
@@ -171,12 +175,13 @@ function yRadioBoxList($name, $selection = null, $items = [], $options = [])
 {
     return Html::radioList($name, $selection, $items, $options);
 }
-function yCheckBox($name, $checked=false, $options = [])
+
+function yCheckBox($name, $checked = false, $options = [])
 {
     return Html::checkbox($name, $checked, $options);
 }
 
-function yRadioBox($name, $checked=false, $options = [])
+function yRadioBox($name, $checked = false, $options = [])
 {
     return Html::radio($name, $checked, $options);
 }
@@ -209,7 +214,7 @@ function yEndTag($name)
 /**
  * @param string $action
  * @param string $method
- * @param array $options
+ * @param array  $options
  * @return string
  */
 function yBeginForm($action = '', $method = 'post', $options = [])
@@ -225,9 +230,14 @@ function yEndForm()
     return Html::endForm();
 }
 
+function yActiveForm($config)
+{
+    return ActiveForm::begin($config);
+}
+
 /**
- * @param $text
- * @param null $url
+ * @param       $text
+ * @param null  $url
  * @param array $options
  * @return string
  */
@@ -237,7 +247,7 @@ function yLink($text, $url = null, $options = [])
 }
 
 /**
- * @param $src
+ * @param       $src
  * @param array $options
  * @return string
  */
@@ -247,7 +257,7 @@ function yImg($src, $options = [])
 }
 
 /**
- * @param $src
+ * @param       $src
  * @param array $options
  * @return string
  */
@@ -267,7 +277,7 @@ function yThumb($file, $group)
 }
 
 /**
- * @param $file
+ * @param       $file
  * @param array $options
  * @return bool|string
  */
@@ -305,7 +315,7 @@ function yLinkPager($options = [])
 }
 
 /**
- * @param $key
+ * @param      $key
  * @param null $defaultValue
  * @return null
  */
@@ -315,7 +325,7 @@ function yParams($key, $defaultValue = null)
 }
 
 /**
- * @param $key
+ * @param      $key
  * @param null $defaultValue
  * @return mixed
  */
@@ -326,7 +336,7 @@ function ySetting($key, $defaultValue = null)
 }
 
 /**
- * @param $key
+ * @param      $key
  * @param null $defaultValue
  * @return mixed
  */
@@ -356,8 +366,8 @@ function yAlias($alias)
 }
 
 /**
- * @param $str
- * @param $length
+ * @param     $str
+ * @param     $length
  * @param int $havedot
  * @return string
  */
@@ -387,21 +397,24 @@ function yPjaxEnd()
 {
     Pjax::end();
 }
+
 /**
- * @param $name
+ * @param       $name
  * @param array $params
  * @return mixed|null
  */
-function yApp($name,$params = []){
+function yApp($name, $params = [])
+{
     if(isset(Yii::$app->$name)){
         return Yii::$app->$name;
     }
-    if(is_callable([Yii::$app,$name])){
-        return call_user_func_array([Yii::$app,$name],$params);
+    if(is_callable([Yii::$app, $name])){
+        return call_user_func_array([Yii::$app, $name], $params);
     }
     return null;
 }
 
-function app($name,$params = []){
-    return Yii::createObject($name,$params);
+function app($name, $params = [])
+{
+    return Yii::createObject($name, $params);
 }

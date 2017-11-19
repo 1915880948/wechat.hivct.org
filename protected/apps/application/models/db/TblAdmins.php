@@ -13,6 +13,7 @@ use Yii;
  * @property string $nickname
  * @property integer $login_time
  * @property string $login_ip
+ * @property integer $is_super
  */
 class TblAdmins extends \application\common\db\ApplicationActiveRecord
 {
@@ -30,7 +31,7 @@ class TblAdmins extends \application\common\db\ApplicationActiveRecord
     public function rules()
     {
         return [
-            [['login_time'], 'integer'],
+            [['login_time', 'is_super'], 'integer'],
             [['account', 'nickname'], 'string', 'max' => 100],
             [['password'], 'string', 'max' => 255],
             [['login_ip'], 'string', 'max' => 50],
@@ -50,6 +51,7 @@ class TblAdmins extends \application\common\db\ApplicationActiveRecord
             'nickname' => '昵称',
             'login_time' => '最后登录时间',
             'login_ip' => '最后登录IP',
+            'is_super' => 'Is Super',
         ];
     }
 }

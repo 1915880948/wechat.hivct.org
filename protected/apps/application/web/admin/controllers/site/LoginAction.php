@@ -5,6 +5,7 @@
  * @created 16/4/30 13:01
  * @since
  */
+
 namespace application\web\admin\controllers\site;
 
 use application\web\admin\components\AdminBaseAction;
@@ -18,12 +19,6 @@ use qiqi\helper\MessageHelper;
  */
 class LoginAction extends AdminBaseAction
 {
-    public function init()
-    {
-        $this->controller->layout = 'main-blank';
-        parent::init();
-    }
-
     public function run()
     {
         if(!\Yii::$app->user->isGuest){
@@ -31,12 +26,13 @@ class LoginAction extends AdminBaseAction
         }
         $model = new AdminUserLoginForm();
         if($this->request->getIsPost()){
-            $model->load($this->request->post());
+            $model->username = $this->request->post('username', '');
+            $model->password = $this->request->post('password', '');
             if($model->validate() && $model->login()){
-                return MessageHelper::show('提示信息', '恭喜你登录成功', ['site/index']);
+                return MessageHelper::show('提示信息', '恭喜你登录成功', ['/site/index']);
             }
             GSession::setDbError($model);
-            return MessageHelper::errorShow('提示', '用户名或者密码不正常', ['site/login']);
+            return MessageHelper::errorShow('提示', '用户名或者密码不正常', ['/site/login']);
         }
         return $this->render(['model' => $model]);
     }

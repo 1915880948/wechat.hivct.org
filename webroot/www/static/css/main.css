@@ -1,39 +1,26 @@
-body, html{
-  height:100%;
-  -webkit-tap-highlight-color:transparent;
-}
-.app-title{
-  text-align:center;
-  font-size: 0.45rem;
-  color:#3CC51F;
-  font-weight:400;
-  margin: 0 5%;
-}
-.app-sub-title{
-  text-align:center;
-  color:#888;
-  font-size:14px;
-}
-.app-header{
-  padding:25px 0;
-}
-.app-content-padded{
-  padding:15px;
-}
-.app-second-title{
-  text-align:center;
-  font-size:24px;
-  color:#3CC51F;
-  font-weight:400;
-  margin:0 15%;
-}
-footer{
-  text-align:center;
-  font-size:14px;
-  padding:20px;
-}
-footer a{
-  color:#999;
-  text-decoration:none;
-}
-.weui-cells{margin:0 auto;}
+/** global */
+body, html{ height:100%; -webkit-tap-highlight-color:transparent; }
+.app-title{ text-align:center; font-size:0.75rem; color:#3CC51F; font-weight:400; margin:0 5%; }
+.app-sub-title{ text-align:center; color:#888; font-size:14px; }
+.app-header{ padding:25px 0; }
+.app-content-padded{ padding:15px; }
+.app-second-title{ text-align:center; font-size:24px; color:#3CC51F; font-weight:400; margin:0 15%; }
+.app-hide{ display:none; }
+/** footer */
+footer{ text-align:center; font-size:14px; padding:20px; }
+footer a{ color:#999; text-decoration:none; }
+/** weui extends */
+.weui-cells{ margin:0 0.01rem 1.5rem 0.01rem}
+.weui-select-modal .weui-cells{max-height:10rem;}
+.toolbar .toolbar-inner{ height:1.2rem; font-size:0.55rem; }
+.toolbar .picker-button{ height:1.2rem; line-height:1.2rem; font-size:0.55rem }
+.toolbar, .toolbar .title{ font-size:0.55rem }
+.toolbar .title{ line-height:1.2rem; }
+/**/
+.weui-picker-modal .picker-items{ font-size:0.55rem; }
+.weui-picker-modal .picker-item{ padding:0 0.55rem }
+.weui-picker-modal{ height:auto;bottom:0rem; }
+/**/
+.weui-picker-modal .weui-cell__bd{width:80%}
+.weui-cells:after, .weui-cells:after{}
+/*.weui-picker-modal .picker-center-highlight{top:30%;margin-top:-32px}*/

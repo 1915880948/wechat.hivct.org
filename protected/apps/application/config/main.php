@@ -12,6 +12,7 @@ if($name === "console"){
     $name = basename(__DIR__);
 }
 return [
+    'language'            => 'zh-CN',
     'runtimePath' => PROJECT_ROOT . "/runtime/{$name}",
     'components'  => [
         'request'    => [

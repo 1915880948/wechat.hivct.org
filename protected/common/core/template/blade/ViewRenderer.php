@@ -141,7 +141,12 @@ class ViewRenderer extends BaseViewRenderer
      */
     protected function extend(){
         $this->blade->getCompiler()->extend(function($value) {
-            return preg_replace('/\@define(.+)/', '<?php ${1}; ?>', $value);
+            $value= preg_replace_callback('/@define\(\s*(.+)\s{0,}\)\r?\n/si',function($matches){
+
+                return sprintf('<?php %s; ?>',trim($matches[1]));
+            }, $value);
+
+            return $value;
         });
     }
 }

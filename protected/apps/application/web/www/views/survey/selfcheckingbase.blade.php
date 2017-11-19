@@ -1,91 +1,108 @@
 @extends('layouts.main')@section('title','艾滋病自我检测试剂调查问卷')
-
+@push('head-style')
+  <style>
+    .weui-cells__title{
+      font-size:0.5rem;
+      color:skyblue;
+    }
+    .weui-cell__hd{ width:60% }
+    .weui-input{ text-align:right }
+    /*.weui-cell__bd{ width:60% }*/
+    .weui-cell__ft{ flex:0; width:1.5rem; }
+    .weui-cells_form .weui-cell__ft{ font-size:0.45rem }
+  </style>
+@endpush
 @section('content')
   <header class="app-header">
     <h1 class="app-title">请输入您的基本信息</h1>
   </header>
-  <div class="weui-cells weui-cells_form">
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="name" id="name" placeholder="请输入您的姓名">
+  <form id="_form">
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="name" id="name" placeholder="请输入您的姓名">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">民族</label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="nation" id="nation" placeholder="请选择您的民族" onfocus="this.blur()">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">民族</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="nation" id="nation" placeholder="请选择" onfocus="this.blur()">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">性别 </label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="gender" id="gender" placeholder="请选择您的性别" onfocus="this.blur()">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">性别 </label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="gender" id="gender" placeholder="请选择" onfocus="this.blur()">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label for="" class="weui-label">出生年月</label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="birthday" id="birthday" value="" data-toggle='date'>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="" class="weui-label">出生年月</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="birthday" id="birthday" value="" data-toggle='date'>
+        </div>
       </div>
-    </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">文化程度 </label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="education" id="education" placeholder="请选择您的文化程度" onfocus="this.blur()">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">文化程度 </label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="education" id="education" placeholder="请选择" onfocus="this.blur()">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">婚姻状况 </label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="marriage" id="marriage" onfocus="this.blur()" placeholder="请选择您的婚姻状况">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">婚姻状况 </label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="marriage" id="marriage" onfocus="this.blur()" placeholder="请选择">
+        </div>
       </div>
-    </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">主要职业 </label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="job" id="job" onfocus="this.blur()" placeholder="请选择您的主要职业">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">主要职业 </label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="job" id="job" onfocus="this.blur()" placeholder="请选择">
+        </div>
       </div>
-    </div>
-    <div id="otherjob" class="hide" style="display:none">
-      <div class="weui-cells__title">请手工填入您的职业</div>
-      <div class="weui-cells">
-        <div class="weui-cell">
-          <div class="weui-cell__bd">
-            <input class="weui-input" type="text" name="job_other" placeholder="请输入文本">
+      <div id="otherjob" class="app-hide">
+        <div class="weui-cells__title">请手工填入您的职业</div>
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <input class="weui-input" type="text" name="job_other" placeholder="请输入文本">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">月平均收入 </label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="income" id="income" onfocus="this.blur()" placeholder="请选择您的月平均收入">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">月平均收入 </label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="income" id="income" onfocus="this.blur()" placeholder="请选择">
+        </div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">户籍所在地 </label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="household" id="household" onfocus="this.blur()" placeholder="请选择">
+        </div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">现居地 </label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="livecity" id="livecity" onfocus="this.blur()" placeholder="请选择">
+        </div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">当地居住时长 </label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" name="livetime" id="livetime" onfocus="this.blur()" placeholder="请选择">
+        </div>
+      </div>
+      <div class="weui-btn-area">
+        {{--<a class="weui-btn weui-btn_primary" data-next="{{yUrl(['/survey/selfcheckingsex'])}}" id="next-btn">继续 性行为调查</a>--}}
+        {!! yLink('继续 性行为调查','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
+          'next'=>yUrl(['/survey/selfcheckingsex']),
+          'post'=>yUrl(['/survey/save','type'=>'base'])
+        ]]) !!}
       </div>
     </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">户籍所在地 </label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="household" id="household" onfocus="this.blur()" placeholder="请选择您的户籍所在地">
-      </div>
-    </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">现居地 </label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="livecity" id="livecity" onfocus="this.blur()" placeholder="请选择您的现居地">
-      </div>
-    </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd"><label class="weui-label">当地居住时长 </label></div>
-      <div class="weui-cell__bd">
-        <input class="weui-input" type="text" name="livetime" id="livetime" onfocus="this.blur()" placeholder="请选择您在当地的居住时长">
-      </div>
-    </div>
-    <div class="weui-btn-area">
-      <a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckingsex'])}}" id="showTooltips">继续 性行为调查</a>
-    </div>
-  </div>
-
+  </form>
 @stop
 
 @push('foot-script')
@@ -112,6 +129,12 @@
           $('#job').select({
               title: "请选择婚职业",
               items: ["学生", "餐饮食品业", "商业服务业", "医务人员", "自由职业", "离退休人员", "待业", "其他"]
+          }).on('change', function () {
+              if ($(this).val() == "其他") {
+                  $('#otherjob').removeClass('app-hide');
+              } else {
+                  $('#otherjob').addClass('app-hide');
+              }
           });
           $('#income').select({
               title: "请选择月平均收入",
@@ -128,6 +151,16 @@
           $("#livecity").cityPicker({
               showDistrict: false
           });
+          $('#next-btn').on('click', function () {
+              var self = $(this);
+              $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
+                  if (result.status) {
+                      location.href = $(self).data('next') + '?id=' + result.items.id;
+                      return;
+                  }
+                  $.alert(result.items[0]);
+              })
+          })
       });
   </script>
 @endpush

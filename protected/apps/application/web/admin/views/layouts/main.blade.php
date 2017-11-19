@@ -1,195 +1,93 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]--><!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]--><!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8"/>
+  <title>@yield('title',env('APP_NAME'))</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{yApp('name')}} | @yield('title','')</title>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  {!! yCsrfTag() !!}
-  <link rel="stylesheet" href="{{yStatic('vendor/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="http://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="http://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="{{yStatic('vendor/adminlte/css/AdminLTE.min.css')}}">
-  <link rel="stylesheet" href="{{yStatic('vendor/adminlte/css/skins/_all-skins.min.css')}}">
-  <link rel="stylesheet" href="{{yStatic('vendor/plugins/iCheck/flat/blue.css')}}">
-  <link rel="stylesheet" href="{{yStatic('vendor/plugins/morris/morris.css')}}">
-  <link rel="stylesheet" href="{{yStatic('vendor/plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">
-  <link rel="stylesheet" href="{{yStatic('vendor/plugins/datepicker/datepicker3.css')}}">
-  <link rel="stylesheet" href="{{yStatic('vendor/plugins/daterangepicker/daterangepicker.css')}}">
-  <link rel="stylesheet" href="{{yStatic('vendor/plugins/chosen/chosen.min.css')}}">
-  {{--<link rel="stylesheet" href="{{yStatic('vendor/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">--}}
-  @yield('head-style')
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="" name="description"/>
+  <meta content="" name="author"/>
+  <!-- BEGIN GLOBAL MANDATORY STYLES -->
+  <link href="{{yStatic('assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css"/>
+  <!-- END GLOBAL MANDATORY STYLES -->
+  <!-- BEGIN THEME GLOBAL STYLES -->
+  <link href="{{yStatic('assets/global/css/components-md.min.css')}}" rel="stylesheet" id="style_components" type="text/css"/>
+  <link href="{{yStatic('assets/global/css/plugins-md.min.css')}}" rel="stylesheet" type="text/css"/>
+  <!-- END THEME GLOBAL STYLES -->
+  <!-- BEGIN THEME LAYOUT STYLES -->
+  <link href="{{yStatic('assets/layouts/layout/css/layout.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/layouts/layout/css/themes/light2.min.css')}}" rel="stylesheet" type="text/css" id="style_color"/>
+  <link href="{{yStatic('assets/layouts/layout/css/custom.min.css')}}" rel="stylesheet" type="text/css"/>
+  <!-- END THEME LAYOUT STYLES -->
+  <link rel="shortcut icon" href="favicon.ico"/>
   <!--[if lt IE 9]>
-  <script src="http://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-  <script src="http://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script><![endif]-->
-  @yield('head-script')
+  <script src="{{yStatic('assets/global/plugins/respond.min.js')}}"></script>
+  <script src="{{yStatic('assets/global/plugins/excanvas.min.js')}}"></script><![endif]-->
+  <script src="{{yStatic('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}" type="text/javascript"></script>
+  {!! yCsrfTag() !!}
 </head>
-<body class="hold-transition skin-blue layout-boxed sidebar-mini skin-purple-light">
-<div class="wrapper">
-  <header class="main-header">
-    <a href="{{yApp('getHomeUrl')}}" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">RP</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>RYAN</b> Phonics</span> </a>
-    @include('widgets.navtop')
-  </header>
-  <aside class="main-sidebar">
-    <section class="sidebar">
-      {{--@include('widgets.userpanel')--}}
-      {{--@include('widgets.search')--}}
-      @include('widgets.sidebar')
-    </section>
-  </aside>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    @if(gHasError())
-      <div class="alert alert-warning alert-dismissible">
-        <h4><i class="icon fa fa-warning"></i> {{env('ERROR_TITLE')}}!</h4>
-        {{gGetError()}}
-      </div>
-    @endif
-    @yield('breadcrumb')
-    <section class="content">
-      @yield('content')
-    </section>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+@include('global.header')
+<div class="page-container">
+  <div class="page-sidebar-wrapper">
+    @include('global.sidebar')
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.8
+  <div class="page-content-wrapper" data-pjax id="pjax-container">
+    <div class="page-content">
+      @stack('head-style')
+      @stack('head-script')
+      @yield('breadcrumb')
+      <div class="row">
+        <div class="col-md-12">
+          @yield('content','点击左侧菜单开始操作')
+        </div>
+      </div>
+      @stack('foot-script')
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-  </footer>
-  {{--@include('widgets.control')--}}
+    @include('global.quick-sidebar')
+  </div>
+  @include('global.footer')
+  <script src="{{yStatic('assets/global/plugins/moment.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/morris/morris.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/morris/raphael-min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/counterup/jquery.waypoints.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/counterup/jquery.counterup.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/layouts/layout4/scripts/layout.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/layouts/layout4/scripts/demo.min.js')}}" type="text/javascript"></script>
+  <script src="{{gStatic('vendor/layer/layer.js')}}" type="text/javascript"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
+  {{--<script src="{{gStatic('app.js')}}" type="text/javascript"></script>--}}
+  <script>
+      $(function () {
+          var clipboard = new Clipboard('.zclipboard', {
+              text: function (trigger) {
+                  return trigger.getAttribute('data-zclip');
+              }
+          });
+          clipboard.on('success', function (e) {
+              layer.msg('COPY SUCCESS');
+          }).on('error', function (e) {
+              console.error('Action:', e.action);
+              console.error('Trigger:', e.trigger);
+          });
+      })
+  </script>
 </div>
-<!-- ./wrapper -->
-<script src="{{yStatic('vendor/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-<script src="http://cdn.staticfile.org/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script>
-    $.widget.bridge('uibutton', $.ui.button);
-</script>
-<script src="{{yStatic('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="http://cdn.staticfile.org/raphael/2.2.7/raphael.min.js"></script>
-<script src="{{yStatic('vendor/plugins/morris/morris.min.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/knob/jquery.knob.js')}}"></script>
-<script src="http://cdn.staticfile.org/moment.js/2.18.1/moment.min.js"></script>
-<script src="{{yStatic('vendor/plugins/daterangepicker/daterangepicker.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/bootbox/bootbox.min.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/fastclick/fastclick.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/chosen/chosen.jquery.min.js')}}"></script>
-<script src="{{yStatic('vendor/adminlte/js/app.min.js')}}"></script>
-<script src="{{yStatic('vendor/adminlte/js/demo.js')}}"></script>
-<script src="{{yStatic('vendor/yii/yii.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/layer/layer.js')}}"></script>
-{{--<script src="{{yStatic('vendor/clipboard/jquery.zeroclipboard.min.js')}}"></script>--}}
-<script src="//cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
-<script>
-    $(function () {
-        $('.chosen-select').chosen();
-        $('.v-preview').on('click', function () {
-            var v = $(this).data('src');
-            layer.open({
-                type: 1,
-                skin: 'layui-layer-rim', //加上边框
-                area: ['480px', '360px'], //宽高
-                content: "<img src='" + v + "' style='width:100%'/>"
-            });
-        });
-//        $("body").on('copy', '.zclipboard', function (e) {
-//            e.clipboardData.clearData();
-//            console.log($(this).data("zclip"));
-//            e.clipboardData.setData("text/plain", $(this).data("zclip"));
-//            layer.msg('COPY成功');
-//            e.preventDefault();
-//        });
-        var clipboard = new Clipboard('.zclipboard', {
-            text: function (trigger) {
-                return trigger.getAttribute('data-zclip');
-            }
-        });
-        clipboard.on('success', function (e) {
-            layer.msg('COPY SUCCESS');
-        });
-
-        clipboard.on('error', function (e) {
-            console.error('Action:', e.action);
-            console.error('Trigger:', e.trigger);
-        });
-        $('#changelog').on('click', function () {
-            layer.open({
-                type: 2,
-                title: '更新记录(最后更新时间：{{adminUpdateTime()}})',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['600px', '80%'],
-                content: '{{yUrl(['site/changelog'])}}' //iframe的url
-            });
-        });
-        setInterval(function () {
-            $.post('{{yUrl(['api/queue'])}}', {_csrf: $('meta[name="csrf-token"]').attr('content')}, function (result) {
-                if (result.status) {
-                    var s = result.items;
-                    var html = [];
-                    if (s.video !== undefined && s.video > 0) {
-                        html.push("有 " + s.video + "个视频自动被处理");
-                    }
-                    if (s.process !== undefined) {
-                        if (s.process.process > 0){
-                            html.push("有 " + s.process.process + "正在处理中");
-                        }
-                        if (s.process.retry){
-                            html.push("有" + s.process.retry + "个需要重试");
-                        }
-                    }
-                    if (s.reset !== undefined &&  s.reset > 0) {
-                        html.push("重置" + s.reset + "条视频，它们将再次被处理");
-                    }
-                    if (html.length > 0) {
-                        layer.open({
-                            title: '视频处理',
-                            type: 1,
-                            skin: 'layui-layer-demo', //样式类名
-                            closeBtn: 0, //不显示关闭按钮
-                            anim: 2,
-                            area: ['340px', '215px'],
-                            offset: 'rb',
-                            shade: 0,
-                            shadeClose: true, //开启遮罩关闭
-                            time: 5000,
-                            content: "<ol>"+html.join("<br />")+"</ol>"
-                        });
-                    }
-
-                }
-            });
-        }, 30*1000);
-    })
-</script>
-{{--<script src='http://cdn.bootcss.com/socket.io/1.3.7/socket.io.js'></script>--}}
-{{--<script>--}}
-{{--var socket = io('http://localhost:2120');--}}
-{{--// uid可以是自己网站的用户id，以便针对uid推送以及统计在线人数--}}
-{{--uid = 123;--}}
-{{--// socket连接后以uid登录--}}
-{{--socket.on('connect', function () {--}}
-{{--socket.emit('login', uid);--}}
-{{--});--}}
-{{--// 后端推送来消息时--}}
-{{--socket.on('new_msg', function (msg) {--}}
-{{--console.log("收到消息：" + msg);--}}
-{{--});--}}
-{{--// 后端推送来在线数据时--}}
-{{--socket.on('update_online_count', function (online_stat) {--}}
-{{--console.log(online_stat);--}}
-{{--});--}}
-{{--</script>--}}
-@yield('foot-script')
 </body>
 </html>

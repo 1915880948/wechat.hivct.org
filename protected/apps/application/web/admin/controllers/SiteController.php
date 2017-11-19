@@ -5,6 +5,7 @@
  * @created 16/4/30 11:53
  * @since
  */
+
 namespace application\web\admin\controllers;
 
 use application\web\admin\components\AdminBaseController;
@@ -18,6 +19,7 @@ use yii\filters\AccessControl;
 class SiteController extends AdminBaseController
 {
     use ActionsTrait;
+
     /**
      * 覆盖父类,表示login/info/clear 不需要登录
      * @inheritdoc
@@ -25,13 +27,12 @@ class SiteController extends AdminBaseController
      */
     public function behaviors()
     {
-        return [];
         return [
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'info', 'clear','video'],
+                        'actions' => ['login', 'info', 'clear', 'error', 'test', 'debug'],
                         'allow'   => true,
                         'roles'   => ['?'],
                     ],
@@ -44,5 +45,4 @@ class SiteController extends AdminBaseController
             ],
         ];
     }
-
 }

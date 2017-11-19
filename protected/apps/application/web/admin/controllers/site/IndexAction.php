@@ -5,6 +5,7 @@
  * @created 16/4/30 12:59
  * @since
  */
+
 namespace application\web\admin\controllers\site;
 
 use application\web\admin\components\AdminBaseAction;
@@ -17,7 +18,6 @@ class IndexAction extends AdminBaseAction
 {
     public function run()
     {
-
         return $this->render();
     }
 }

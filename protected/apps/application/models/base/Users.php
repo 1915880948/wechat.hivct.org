@@ -4,8 +4,10 @@ namespace application\models\base;
 
 use application\models\db\TblUsers;
 use EasyWeChat\Foundation\Application;
+use Overtrue\Socialite\User;
 use qiqi\helper\log\FileLogHelper;
 use wechat\Weixin;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -15,6 +17,30 @@ use yii\helpers\Json;
  */
 class Users extends TblUsers
 {
+    /**
+     * @param User $weUser
+     * @return Users
+     */
+    public static function createByWechat(User $weUser, $userDetail = null)
+    {
+        $model = new static;
+        $original = $weUser->getOriginal();
+        $weAttr = $weUser->getAttributes();
+        $model->openid = $weUser->getId();
+        $model->unionid = ArrayHelper::getValue($original, 'unionid', $weUser->getId());
+        $model->headimgurl = $weUser->getAvatar();
+        $model->gender = ArrayHelper::getValue($original, 'sex', '');
+        $model->nickname = $weUser->getNickname();
+        $model->realname = $weUser->getName();
+        $model->country = ArrayHelper::getValue($weAttr, 'country', '');
+        $model->province = ArrayHelper::getValue($weAttr, 'province', '');
+        $model->city = ArrayHelper::getValue($weAttr, 'city', '');
+        $model->is_subscribe = $userDetail->subscribe ?? 0; //-1表示没有获取过用户信息
+        $model->tags = Json::encode($userDetail->tagid_list ?? []);
+        $model->save();
+        return $model;
+    }
+
     public function getTags()
     {
         if(!$this->tags || ((time() - strtotime($this->updated_at)) > env('WECHAT_USER_TAGS_UPDATE_TIME'))){
@@ -52,6 +78,21 @@ class Users extends TblUsers
             $this->tags = '[]';
         }
         return;
+    }
+
+    public function updateByWechat(User $user, Users $wUser)
+    {
+        $original = $user->getOriginal();
+        $weAttr = $user->getAttributes();
+        $wUser->headimgurl = $user->getAvatar();
+        $wUser->gender = ArrayHelper::getValue($original, 'sex', '');
+        $wUser->nickname = $user->getNickname();
+        $wUser->realname = $user->getName();
+        $wUser->country = ArrayHelper::getValue($weAttr, 'country', '');
+        $wUser->province = ArrayHelper::getValue($weAttr, 'province', '');
+        $wUser->city = ArrayHelper::getValue($weAttr, 'city', '');
+        $wUser->is_subscribe = $userDetail->subscribe ?? 0; //-1表示没有获取过用户信息
+        $wUser->save();
     }
 
     protected function checkSubscribe()

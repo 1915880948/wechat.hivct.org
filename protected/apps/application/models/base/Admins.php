@@ -1,8 +1,8 @@
 <?php
 
 namespace application\models\base;
-use Yii;
-use application\models\db\TblAdmins ;
+
+use application\models\db\TblAdmins;
 
 /**
  * This is the model class for tableClass "TblAdmins".
@@ -11,5 +11,8 @@ use application\models\db\TblAdmins ;
  */
 class Admins extends TblAdmins
 {
-
+    public function isSuperAdmin()
+    {
+        return $this->is_super > 0;
+    }
 }

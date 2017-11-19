@@ -5,6 +5,7 @@
  * @created 2016/10/8 00:13
  * @since
  */
+
 namespace application\web\admin\models;
 
 use application\web\admin\AdminUser;
@@ -40,7 +41,7 @@ class AdminUserLoginForm extends Model
     {
         if(!$this->hasErrors()){
             $user = $this->getUser();
-            if(!$user || !$user->validatePassword($this->password, $user->password)){
+            if(!$user || !$user->validatePasswordHash($this->password, $user->password)){
                 $this->addError($attribute, '用户名或者密码错误.');
             }
         }
@@ -65,10 +66,7 @@ class AdminUserLoginForm extends Model
     public function getUser()
     {
         if(!$this->_user){
-            $this->_user = AdminUser::find()
-                                    ->andWhere(['username' => $this->username])
-                                    ->andWhere(['<>', 'groupid', AdminUser::USER_GUEST])
-                                    ->one();
+            $this->_user = AdminUser::findByUserName($this->username);
         }
         return $this->_user;
     }

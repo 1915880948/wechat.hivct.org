@@ -1,66 +1,45 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]--><!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]--><!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8"/>
+  <title>Metronic | User Login 3</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{{yStatic('vendor/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="http://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="http://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="{{yStatic('vendor/adminlte/css/AdminLTE.min.css')}}">
-  <link rel="stylesheet" href="{{yStatic('vendor/plugins/iCheck/flat/blue.css')}}">
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="" name="description"/>
+  <meta content="" name="author"/>
+  <link href="{{yStatic('assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/css/components-md.min.css')}}" rel="stylesheet" id="style_components" type="text/css"/>
+  <link href="{{yStatic('assets/global/css/plugins-md.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/pages/css/login-3.min.css')}}" rel="stylesheet" type="text/css"/>
   <!--[if lt IE 9]>
-  <script src="http://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-  <script src="http://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+  <script src="{{yStatic('assets/global/plugins/respond.min.js')}}"></script>
+  <script src="{{yStatic('assets/global/plugins/excanvas.min.js')}}"></script><![endif]-->
+  <script src="{{yStatic('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}" type="text/javascript"></script>
+  <link rel="shortcut icon" href="favicon.ico"/>
+  {!! yCsrfTag() !!}
+  @stack('head-style')
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="{{yApp('getHomeUrl')}}">后台管理系统</a>
-  </div>
-  <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
-    <form action="../../index2.html" method="post">
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email"> <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password"> <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label> <input type="checkbox"> Remember Me </label>
-          </div>
-        </div>
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-        </div>
-      </div>
-    </form>
-    <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
-    </div>
-    <!-- /.social-auth-links -->
-    <a href="#">I forgot my password</a><br> <a href="register.html" class="text-center">Register a new membership</a>
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<script src="{{yStatic('vendor/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-<script src="{{yStatic('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="{{yStatic('vendor/plugins/iCheck/icheck.min.js')}}"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
+<body @yield('bodyClass')>
+@yield('content')
+@stack('foot-script')
+<script src="{{yStatic('assets/global/plugins/jquery-validation/js/jquery.validate.min.js')}}" type="text/javascript"></script>
+<script src="{{yStatic('assets/global/plugins/jquery-validation/js/additional-methods.min.js')}}" type="text/javascript"></script>
+<script src="{{yStatic('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
+<script src="{{yStatic('assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
+<script src="{{yStatic('assets/pages/scripts/login.min.js')}}" type="text/javascript"></script>
 </body>
 </html>

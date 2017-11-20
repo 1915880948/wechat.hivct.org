@@ -19,6 +19,7 @@ class Users extends TblUsers
 {
     /**
      * @param User $weUser
+     * @param null $userDetail
      * @return Users
      */
     public static function createByWechat(User $weUser, $userDetail = null)
@@ -35,8 +36,8 @@ class Users extends TblUsers
         $model->country = ArrayHelper::getValue($weAttr, 'country', '');
         $model->province = ArrayHelper::getValue($weAttr, 'province', '');
         $model->city = ArrayHelper::getValue($weAttr, 'city', '');
-        $model->is_subscribe = $userDetail->subscribe ?? 0; //-1表示没有获取过用户信息
-        $model->tags = Json::encode($userDetail->tagid_list ?? []);
+        $model->is_subscribe = isset($userDetail->subscribe) ? $userDetail->subscribe : 0; //-1表示没有获取过用户信息
+        $model->tags = Json::encode(isset($userDetail->tagid_list) ? $userDetail->tagid_list : []);
         $model->save();
         return $model;
     }
@@ -91,7 +92,7 @@ class Users extends TblUsers
         $wUser->country = ArrayHelper::getValue($weAttr, 'country', '');
         $wUser->province = ArrayHelper::getValue($weAttr, 'province', '');
         $wUser->city = ArrayHelper::getValue($weAttr, 'city', '');
-        $wUser->is_subscribe = $userDetail->subscribe ?? 0; //-1表示没有获取过用户信息
+        $wUser->is_subscribe = isset($wUser->subscribe) ? $wUser->subscribe : 0; //-1表示没有获取过用户信息
         $wUser->save();
     }
 

@@ -38,7 +38,7 @@ class SaveAction extends WwwBaseAction
     {
         $model = new SurveyList();
         $model->setAttributes($datas);
-        $datas['name'] = $datas['name'] ?? "";
+        $datas['name'] = isset($datas['name'])?$datas['name']:"";
         if(!$model->name){
             $model->addError('name', '姓名不能为空');
         }

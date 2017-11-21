@@ -9,6 +9,7 @@
 namespace application\web\www\components;
 
 use common\core\base\BaseController;
+use yii\filters\AccessControl;
 
 /**
  * Class WwwBaseController
@@ -24,16 +25,16 @@ class WwwBaseController extends BaseController
     public function behaviors()
     {
         return [
-            // 'access' => [
-            //     'class' => AccessControl::className(),
-            //     'rules' => [
-            //         [
-            //             //'actions' => [ 'index', 'withdraw' ],
-            //             'allow' => true,
-            //             'roles' => ['@'],
-            //         ],
-            //     ],
-            // ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //'actions' => [ 'index', 'withdraw' ],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
 }

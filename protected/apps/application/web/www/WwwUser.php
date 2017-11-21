@@ -17,6 +17,8 @@ use yii\web\IdentityInterface;
 /**
  * Class WwwUser
  * @package application\web\www
+ * @property mixed $authKey
+ * @property mixed $id
  */
 class WwwUser extends Users implements IdentityInterface
 {

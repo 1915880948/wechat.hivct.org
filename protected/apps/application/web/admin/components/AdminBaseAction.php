@@ -5,6 +5,7 @@
  * @created 2016/10/1 23:15
  * @since
  */
+
 namespace application\web\admin\components;
 
 use application\web\admin\AdminUser;
@@ -37,8 +38,8 @@ class AdminBaseAction extends BaseAction
     {
         $params = ArrayHelper::merge([
             'request'  => $this->request,
-            'selfurl'  => $this->getUniqueId(),
-            'selfUrl'  => $this->getUniqueId(),
+            'selfurl'  => "/" . $this->getUniqueId(),
+            'selfUrl'  => "/" . $this->getUniqueId(),
             'userinfo' => $this->userinfo,
             'self'     => $this,
         ], $params);

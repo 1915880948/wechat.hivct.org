@@ -8,10 +8,10 @@
 
 namespace application\web\admin\modules\system\controllers;
 
-use application\web\admin\modules\system\components\UserBaseController;
+use application\web\admin\modules\system\components\SystemBaseController;
 use common\core\base\controller\ActionKeywordsTrait;
 
-class DefaultController extends UserBaseController
+class DefaultController extends SystemBaseController
 {
     use ActionKeywordsTrait;
 }

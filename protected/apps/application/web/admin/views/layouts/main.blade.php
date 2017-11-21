@@ -25,6 +25,7 @@
   <link href="{{yStatic('assets/layouts/layout/css/layout.min.css')}}" rel="stylesheet" type="text/css"/>
   <link href="{{yStatic('assets/layouts/layout/css/themes/light2.min.css')}}" rel="stylesheet" type="text/css" id="style_color"/>
   <link href="{{yStatic('assets/layouts/layout/css/custom.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('css/css.css')}}" rel="stylesheet" type="text/css"/>
   <!-- END THEME LAYOUT STYLES -->
   <link rel="shortcut icon" href="favicon.ico"/>
   <!--[if lt IE 9]>
@@ -50,7 +51,14 @@
     <div class="page-content">
       @stack('head-style')
       @stack('head-script')
+
       @yield('breadcrumb')
+      @if($error = gGetError())
+        <div class="m-heading-1 border-green m-bordered">
+          <p> {{$error}}
+          </p>
+        </div>
+      @endif
       <div class="row">
         <div class="col-md-12">
           @yield('content','点击左侧菜单开始操作')

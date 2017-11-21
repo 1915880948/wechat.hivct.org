@@ -8,7 +8,11 @@
 
 namespace application\web\admin\modules\system\controllers\logistics;
 
+use application\models\base\Logistics;
 use application\web\admin\components\AdminBaseAction;
+use common\core\session\GSession;
+use qiqi\helper\MessageHelper;
+use yii\helpers\Url;
 
 /**
  * 送货点管理
@@ -17,8 +21,29 @@ use application\web\admin\components\AdminBaseAction;
  */
 class IndexAction extends AdminBaseAction
 {
-    public function run()
+    /**
+     * @param int $id
+     * @return string
+     */
+    public function run($id = 0)
     {
+        $model = Logistics::findByPk($id);
+        if(!$model){
+            $model = new Logistics();
+            $model->loadDefaultValues();
+        }
+        if($this->request->getIsPost()){
 
+            if($model->create($this->request->post())){
+                // return $this->controller->redirect(Url::current());
+                return MessageHelper::success(($id ? "编辑 " : "新增") . "成功", gUrl($this->getUniqueId()));
+            }
+
+            GSession::setDbError($model);
+        }
+        $reagents = Logistics::getInstance();
+        $provider = $reagents->search([]);
+
+        return $this->render(compact('provider', 'model'));
     }
 }

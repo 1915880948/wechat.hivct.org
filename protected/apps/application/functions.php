@@ -7,6 +7,8 @@
  */
 
 use common\core\session\GSession;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /**
  * @param $url
@@ -27,4 +29,25 @@ function gHasError()
 function gGetError()
 {
     return GSession::getDbError();
+}
+
+function gSession()
+{
+    return Yii::createObject(GSession::class);
+}
+
+function gArrayHelper()
+{
+    return Yii::createObject(ArrayHelper::class);
+}
+
+/**
+ * @param      $url
+ * @param bool $schema
+ * @return string
+ */
+function gUrl($url, $schema = false)
+{
+    $url = "/" . Url::to($url);
+    return Url::to($url,$schema);
 }

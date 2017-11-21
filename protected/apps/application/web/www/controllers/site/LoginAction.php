@@ -18,8 +18,13 @@ use yii\helpers\Url;
  */
 class LoginAction extends WwwBaseAction
 {
+    /**
+     * 自己跳到oauth去处理吧
+     * @return $this|\yii\web\Response
+     */
     public function run()
     {
+        return $this->controller->redirect(['/oauth/index']);
         if(yUser()->getIsGuest()){
             $app = Weixin::getApp();
             $response = $app->oauth->scopes(['snsapi_userinfo'])

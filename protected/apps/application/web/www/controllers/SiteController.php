@@ -30,6 +30,10 @@ class SiteController extends WwwBaseController
                         'actions' => ['login', 'province', 'test', 'upload'],
                         'allow'   => true,
                         'roles'   => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
                     ]
                 ],
             ],

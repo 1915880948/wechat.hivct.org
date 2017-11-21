@@ -8,14 +8,14 @@
 
 namespace application\web\admin\modules\system\controllers;
 
-use application\web\admin\modules\system\components\SystemBaseController;
+use application\web\admin\modules\system\components\UserBaseController;
 use common\core\base\controller\ActionsTrait;
 
 /**
  * Class MenuController
  * @package application\web\admin\modules\system\controllers
  */
-class MenuController extends SystemBaseController
+class MenuController extends UserBaseController
 {
     use ActionsTrait;
 }

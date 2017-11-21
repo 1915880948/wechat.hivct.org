@@ -10,6 +10,6 @@ namespace application\web\admin\modules\system\components;
 
 use application\web\admin\components\AdminBaseController;
 
-class SystemBaseController extends AdminBaseController
+class UserBaseController extends AdminBaseController
 {
 }

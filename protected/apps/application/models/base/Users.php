@@ -108,4 +108,9 @@ class Users extends TblUsers
         }
         return $this->is_subscribe;
     }
+
+    public static function isVip($openId)
+    {
+        return true;
+    }
 }

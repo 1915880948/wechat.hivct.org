@@ -1,6 +1,6 @@
 <?php
 /**
- * @category SystemModule
+ * @category UserModule
  * @author   gouki <gouki.xiao@gmail.com>
  * @created 2017/10/28 09:27
  * @since

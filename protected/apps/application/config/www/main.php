@@ -59,19 +59,19 @@ return [
                 ],
             ],
         ],
-        // 'i18n'         => [
-        //     'translations' => [
-        //         '*' => [
-        //             'class'    => 'yii\i18n\PhpMessageSource',
-        //             'basePath' => '@application/messages',
-        //             // // 'sourceLanguage' => 'zh-CN',
-        //             'fileMap'  => [
-        //                 'www'       => 'www.php',
-        //                 'www/error' => 'www.error.php',
-        //             ],
-        //         ],
-        //     ],
-        // ],
+        'i18n'         => [
+            'translations' => [
+                '*' => [
+                    'class'    => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@application/messages',
+                    // // 'sourceLanguage' => 'zh-CN',
+                    'fileMap'  => [
+                        'www'       => 'www.php',
+                        'www/error' => 'www.error.php',
+                    ],
+                ],
+            ],
+        ],
     ],
     'bootstrap'           => env('APP') == 'dev' ? ['debug', 'log'] : ['log'],
     'modules'             => $modules,

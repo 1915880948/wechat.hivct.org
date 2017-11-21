@@ -4,7 +4,7 @@
 
 
 @section('content')
-
+  {{yUser()->getIdentity()}}
   {{--@include('global.footer')--}}
   @include('global.navbar')
 @stop

@@ -44,7 +44,7 @@ return [
             'dsn'                 => env('DB_DSN'), // MySQL, MariaDB
             'username'            => env('DB_USERNAME'), //数据库用户名
             'password'            => env('DB_PASSWORD'), //数据库密码
-            'charset'             => 'utf8mb4',
+            'charset'             => env('DB_CHARSET'),
             'tablePrefix'         => env('DB_PREFIX'),
             'enableSchemaCache'   => true,
             'schemaCacheDuration' => 3600,

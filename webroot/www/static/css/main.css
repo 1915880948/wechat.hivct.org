@@ -24,3 +24,4 @@ footer a{ color:#999; text-decoration:none; }
 .weui-picker-modal .weui-cell__bd{width:80%}
 .weui-cells:after, .weui-cells:after{}
 /*.weui-picker-modal .picker-center-highlight{top:30%;margin-top:-32px}*/
+.weui-tabbar{position:fixed;}

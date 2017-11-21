@@ -10,6 +10,7 @@ namespace application\web\www\controllers;
 
 use application\web\www\components\WwwBaseController;
 use common\core\base\controller\ActionsTrait;
+use yii\filters\AccessControl;
 
 /**
  * Class SiteController
@@ -18,4 +19,20 @@ use common\core\base\controller\ActionsTrait;
 class SiteController extends WwwBaseController
 {
     use ActionsTrait;
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['login', 'province', 'test', 'upload'],
+                        'allow'   => true,
+                        'roles'   => ['?'],
+                    ]
+                ],
+            ],
+        ];
+    }
 }

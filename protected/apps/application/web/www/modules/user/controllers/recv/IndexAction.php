@@ -8,13 +8,19 @@
 
 namespace application\web\www\modules\user\controllers\recv;
 
+use application\models\base\Reagent;
 use application\web\www\components\WwwBaseAction;
 
 class IndexAction extends WwwBaseAction
 {
     public function run()
     {
-
-        return $this->render();
+        $model = new Reagent();
+        $reagents = Reagent::all();
+        $products=[];
+        foreach($reagents as $reagent){
+            $products[$reagent['type']][] = $reagent;
+        }
+        return $this->render(compact('products','model'));
     }
 }

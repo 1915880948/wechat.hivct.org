@@ -22,9 +22,9 @@ class Reagent extends TblReagent
      * @var array
      */
     private static $_options = [
-        self::TYPE_FREE   => '免费',
-        self::TYPE_GIFT   => '礼品',
-        self::TYPE_CHARGE => '正常商品',
+        self::TYPE_FREE   => '免费试剂',
+        self::TYPE_GIFT   => '免费赠品',
+        self::TYPE_CHARGE => '付费试剂',
     ];
 
     /**
@@ -41,6 +41,7 @@ class Reagent extends TblReagent
     public static function all()
     {
         return self::find()
+                   ->asArray()
                    ->all();
     }
 

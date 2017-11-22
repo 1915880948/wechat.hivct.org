@@ -10,12 +10,12 @@ body, html{ height:100%; -webkit-tap-highlight-color:transparent; }
 footer{ text-align:center; font-size:14px; padding:20px; }
 footer a{ color:#999; text-decoration:none; }
 /** weui extends */
-.weui-cells{ margin:0 0.01rem 1.5rem 0.01rem}
+.weui-cells{ margin:0 0.01rem 1.5rem 0.01rem;font-size:14px;}
 .weui-select-modal .weui-cells{max-height:10rem;}
-.toolbar .toolbar-inner{ height:1.2rem; font-size:0.55rem; }
-.toolbar .picker-button{ height:1.2rem; line-height:1.2rem; font-size:0.55rem }
-.toolbar, .toolbar .title{ font-size:0.55rem }
-.toolbar .title{ line-height:1.2rem; }
+.toolbar .toolbar-inner{ height:1rem; font-size:0.45rem; }
+.toolbar .picker-button{ height:1rem; line-height:1rem; font-size:0.45rem }
+.toolbar, .toolbar .title{ font-size:0.45rem }
+.toolbar .title{ line-height:1rem; }
 /**/
 .weui-picker-modal .picker-items{ font-size:0.55rem; }
 .weui-picker-modal .picker-item{ padding:0 0.55rem }
@@ -25,3 +25,14 @@ footer a{ color:#999; text-decoration:none; }
 .weui-cells:after, .weui-cells:after{}
 /*.weui-picker-modal .picker-center-highlight{top:30%;margin-top:-32px}*/
 .weui-tabbar{position:fixed;}
+.weui-switch, .weui-switch-cp__box{width:42px;height:22px;border-radius:16px;}
+.weui-switch-cp__box:before, .weui-switch:before{width:40px;height:20px;border-radius:10px;}
+.weui-switch-cp__box:after, .weui-switch:after{width:20px;height:20px;border-radius:10px;}
+
+.picker-calendar-month-picker, .picker-calendar-year-picker{height:1rem;line-height:1rem;}
+.picker-calendar-month-picker a.icon-only, .picker-calendar-year-picker a.icon-only{height:1rem;line-height:1rem;}
+.picker-calendar-month-picker .current-month-value, .picker-calendar-month-picker .current-year-value, .picker-calendar-year-picker .current-month-value, .picker-calendar-year-picker .current-year-value{height:1rem;}
+i.icon.icon-next, i.icon.icon-prev{width:.5rem;height:.5rem;}
+.picker-calendar-week-days{height:1rem;}
+.picker-calendar-week-days+.picker-calendar-months{height:5rem;}
+.weui-picker-calendar .picker-modal-inner{height:6.5rem;}

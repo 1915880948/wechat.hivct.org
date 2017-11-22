@@ -9,6 +9,7 @@
 namespace application\web\www\controllers\site;
 
 use application\web\www\components\WwwBaseAction;
+use application\web\www\WwwUser;
 use wechat\Weixin;
 use yii\helpers\Url;
 
@@ -24,6 +25,10 @@ class LoginAction extends WwwBaseAction
      */
     public function run()
     {
+        if(env('IS_LOCAL_DEV')){
+            \Yii::$app->user->login(WwwUser::findByPk(1));
+            return $this->controller->redirect(['/site/index']);
+        }
         return $this->controller->redirect(['/oauth/index']);
         if(yUser()->getIsGuest()){
             $app = Weixin::getApp();

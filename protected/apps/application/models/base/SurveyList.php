@@ -37,4 +37,12 @@ class SurveyList extends TblSurveyList
             'livetime'    => '当地居住时长',
         ];
     }
+
+    public function getSurveyByUserId($userId)
+    {
+        return self::find()
+            ->andWhere(['uid'=>$userId])
+            ->asArray()
+            ->one();
+    }
 }

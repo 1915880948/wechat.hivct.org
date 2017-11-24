@@ -5,6 +5,6 @@
 
 @section('content')
   {{print_r(yUser()->getIdentity())}}
-  {{--@include('global.footer')--}}
+  @include('global.footer')
   @include('global.navbar')
 @stop

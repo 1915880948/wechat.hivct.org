@@ -142,7 +142,7 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">对于参加HIV检测是否有顾虑？</div>
           <div class="weui-cell__ft">
-            <input class="weui-switch" type="checkbox" id="is_detect_care" name="partner_bar">
+            <input class="weui-switch" type="checkbox" id="is_detect_care" name="is_detect_care">
           </div>
         </div>
         <div class="weui-cell">
@@ -171,7 +171,7 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">疾控中心</div>
           <div class="weui-cell__ft">
-            <input class="weui-switch" type="checkbox" id="detect_channel_jk_center" name="detect_channel_jk_center   ">
+            <input class="weui-switch" type="checkbox" id="detect_channel_jk_center" name="detect_channel_jk_center">
           </div>
         </div>
         <div class="weui-cell weui-cell_switch">

@@ -8,8 +8,11 @@
 
 namespace application\web\www\modules\user\controllers\recv;
 
+use application\models\base\Logistics;
 use application\models\base\Reagent;
 use application\web\www\components\WwwBaseAction;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 class IndexAction extends WwwBaseAction
 {
@@ -21,6 +24,14 @@ class IndexAction extends WwwBaseAction
         foreach($reagents as $reagent){
             $products[$reagent['type']][] = $reagent;
         }
-        return $this->render(compact('products','model'));
+        $alllogistics=Logistics::getInstance()->getAllActivateLogistics();
+        foreach($alllogistics as $v){
+            $logistics[] = [
+                'title'=>$v['title'],
+                'value'=>$v['id']
+            ];
+        }
+        $logistics = Json::encode($logistics);
+        return $this->render(compact('products','model','logistics'));
     }
 }

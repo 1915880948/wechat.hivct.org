@@ -28,6 +28,17 @@ class Logistics extends TblLogistics
         return false;
     }
 
+    /**
+     * @return Logistics[]|array|\yii\db\ActiveRecord[]
+     */
+    public function getAllActivateLogistics()
+    {
+        return self::find()
+                   ->andWhere(['status' => 1])
+                   ->asArray()
+                   ->all();
+    }
+
     protected function checkDataValid()
     {
         if(!$this->title){

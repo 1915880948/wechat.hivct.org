@@ -10,16 +10,17 @@ body, html{ height:100%; -webkit-tap-highlight-color:transparent; }
 footer{ text-align:center; font-size:14px; padding:20px; }
 footer a{ color:#999; text-decoration:none; }
 /** weui extends */
-.weui-cells{ margin:0 0.01rem 1.5rem 0.01rem;font-size:14px;}
+.weui-cells{margin: 0 0.01rem;font-size:14px;}
 .weui-select-modal .weui-cells{max-height:10rem;}
-.toolbar .toolbar-inner{ height:1rem; font-size:0.45rem; }
-.toolbar .picker-button{ height:1rem; line-height:1rem; font-size:0.45rem }
-.toolbar, .toolbar .title{ font-size:0.45rem }
-.toolbar .title{ line-height:1rem; }
+.toolbar{line-height:1.5rem;}
+.toolbar .toolbar-inner{ height:1.25rem; font-size:14px; }
+.toolbar .picker-button{ height:1.25rem; line-height:1.25rem; font-size:14px; }
+.toolbar, .toolbar .title{ font-size:14px }
+.toolbar .title{ line-height:1.25rem; }
 /**/
-.weui-picker-modal .picker-items{ font-size:0.55rem; }
+.weui-picker-modal .picker-items{ font-size:14px; }
 .weui-picker-modal .picker-item{ padding:0 0.55rem }
-.weui-picker-modal{ height:auto;bottom:0rem; }
+.weui-picker-modal{ height:auto;bottom:0; }
 /**/
 .weui-picker-modal .weui-cell__bd{width:80%}
 .weui-cells:after, .weui-cells:after{}

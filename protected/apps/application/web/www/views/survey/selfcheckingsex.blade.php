@@ -19,7 +19,7 @@
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd paddingleft">你曾经有过性行为吗？</div>
         <div class="weui-cell__ft">
-          <input id="has_sex" class="weui-switch" type="checkbox">
+          <input id="has_sex" name="has_sex" class="weui-switch" type="checkbox">
         </div>
       </div>
       <div id="sex_survey" class="app-hide">
@@ -157,12 +157,12 @@
             <input id="anal_sex_full_use" name="anal_sex_full_use" class="weui-switch" type="checkbox">
           </div>
         </div>
-        <div class="weui-cell ">
-          <div class="weui-cell__bd">在最近3个月没有全程使用安全套的比例：</div>
-          <div class="weui-cell__ft">
-            <input class="weui-input" type="text" name="anal_sex_percent" id="anal_sex_percent" placeholder="请选择">
+          <div class="weui-cell ">
+            <div class="weui-cell__hd">在最近3个月没有全程使用安全套的比例：</div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" name="anal_sex_percent" id="anal_sex_percent" placeholder="请选择">
+             </div>
           </div>
-        </div>
         <div class="weui-cell ">
           <div class="weui-cell__hd">最近一次与同性发生性行为是否使用安全套：</div>
           <div class="weui-cell__bd">

@@ -23,6 +23,10 @@ class SelfCheckingBaseAction extends WwwBaseAction
         if(!$model = SurveyList::findByPk($id)){
             $model = new SurveyList();
         }
-        return $this->render(compact('model'));
+        $userId = \Yii::$app->getUser()->identity->getId();
+
+        $survey = $model->getSurveyByUserId( $userId );
+//        print_r( ($survey) ); exit;
+        return $this->render(compact('model','survey'));
     }
 }

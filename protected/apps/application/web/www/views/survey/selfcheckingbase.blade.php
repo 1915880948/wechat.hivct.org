@@ -21,7 +21,7 @@
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="name" id="name" placeholder="请输入您的姓名">
+          <input class="weui-input" type="text" name="name" id="name" value="{{ $survey['name'] }}" placeholder="请输入您的姓名">
         </div>
       </div>
       <div class="weui-cell">
@@ -33,7 +33,7 @@
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">性别 </label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="gender" id="gender" placeholder="请选择" onfocus="this.blur()">
+          <input class="weui-input" type="text" name="gender" id="gender" value="{{$survey['gender']?$survey['gender']:'男'}}" placeholder="请选择" onfocus="this.blur()">
         </div>
       </div>
       <div class="weui-cell">
@@ -85,7 +85,7 @@
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">现居地 </label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="livecity" id="livecity" onfocus="this.blur()" placeholder="请选择">
+          <input class="weui-input" type="text" name="livecity" id="livecity" data-code="110000" value="北京 北京市" onfocus="this.blur()" placeholder="请选择">
         </div>
       </div>
       <div class="weui-cell">
@@ -156,7 +156,10 @@
           });
           $('#next-btn').on('click', function () {
               var self = $(this);
-              $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
+              var code = $('#livecity').data('code');
+              var jsonDate = $('#_form').serializeArray();
+              jsonDate.push({'name':'livecity_code','value':code});
+              $.jsonPost($(self).data('post'), jsonDate, function (result) {
                   if (result.status) {
                       location.href = $(self).data('next') + '?id=' + result.items.id;
                       return;

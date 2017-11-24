@@ -165,16 +165,16 @@
               title: "请选择共用针具的频率",
               items: ["未共用", "有时共用", "每次都共用"]
           });
-          $('#next-btn').on('click', function () {
-              var self = $(this);
-              $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
-                  if (result.status) {
-                      location.href = $(self).data('next') + '?id=' + result.items.id;
-                      return;
-                  }
-                  $.alert(JSON.stringify(result.items));
-              })
-          })
+//          $('#next-btn').on('click', function () {
+//              var self = $(this);
+//              $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
+//                  if (result.status) {
+//                      location.href = $(self).data('next') + '?id=' + result.items.id;
+//                      return;
+//                  }
+//                  $.alert(JSON.stringify(result.items));
+//              })
+//          })
           $('#is_use_drug').on('click', function () {
               $('#drug_form').toggleClass('app-hide', !$(this).is(":checked"));
           });

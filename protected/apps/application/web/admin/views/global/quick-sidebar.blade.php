@@ -3,7 +3,7 @@
   <div class="page-quick-sidebar">
     <ul class="nav nav-tabs">
       <li class="active">
-        <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab"> Users <span class="badge badge-danger">2</span> </a>
+        <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab"> User <span class="badge badge-danger">2</span> </a>
       </li>
       <li>
         <a href="javascript:;" data-target="#quick_sidebar_tab_2" data-toggle="tab"> Alerts <span class="badge badge-success">7</span> </a>

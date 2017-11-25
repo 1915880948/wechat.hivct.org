@@ -157,12 +157,12 @@
             <input id="anal_sex_full_use" name="anal_sex_full_use" class="weui-switch" type="checkbox">
           </div>
         </div>
-          <div class="weui-cell ">
-            <div class="weui-cell__hd">在最近3个月没有全程使用安全套的比例：</div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" type="text" name="anal_sex_percent" id="anal_sex_percent" placeholder="请选择">
-             </div>
+        <div class="weui-cell ">
+          <div class="weui-cell__hd">在最近3个月没有全程使用安全套的比例：</div>
+          <div class="weui-cell__bd">
+            <input class="weui-input" type="text" name="anal_sex_percent" id="anal_sex_percent" placeholder="请选择">
           </div>
+        </div>
         <div class="weui-cell ">
           <div class="weui-cell__hd">最近一次与同性发生性行为是否使用安全套：</div>
           <div class="weui-cell__bd">
@@ -176,12 +176,11 @@
           </div>
         </div>
       </div>
-      <!---->
       <div class="weui-btn-area">
-        {{--<a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckingdrug'])}}" id="showTooltips">继续 毒品使用情况调查</a>--}}
+        <input type="hidden" name="eventId" value="{{$request->get('eventId')}}"> <input type="hidden" name="step" value="{{$request->get('step')}}">
         {!! yLink('继续 毒品使用情况调查','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
-          'next'=>yUrl(['/survey/selfcheckingdrug']),
-          'post'=>yUrl(['/survey/save','type'=>'sex'])
+        'next'=>yUrl($surveyUrl['next']),
+        'post'=>yUrl($surveyUrl['post'])
         ]]) !!}
       </div>
     </form>
@@ -240,7 +239,7 @@
               var self = $(this);
               $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
                   if (result.status) {
-                      location.href = $(self).data('next') + '?id=' + result.items.id;
+                      location.href = $(self).data('next');
                       return;
                   }
                   $.alert(result.items[0]);

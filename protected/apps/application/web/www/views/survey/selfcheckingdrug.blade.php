@@ -23,7 +23,7 @@
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">您使用过毒品吗？</div>
         <div class="weui-cell__ft">
-          <input id="is_use_drug" name="is_use_drug"  class="weui-switch" type="checkbox">
+          <input id="is_use_drug" name="is_use_drug" class="weui-switch" type="checkbox">
         </div>
       </div>
       <div id="drug_form" class="app-hide">
@@ -42,7 +42,7 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">最近一个月,您使用过毒品吗?</div>
           <div class="weui-cell__ft">
-            <input id="is_use_drug_near_month" name="is_use_drug_near_month"  class="weui-switch" type="checkbox">
+            <input id="is_use_drug_near_month" name="is_use_drug_near_month" class="weui-switch" type="checkbox">
           </div>
         </div>
         <div id="drug_near_month" class="app-hide">
@@ -58,14 +58,14 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">你曾经注射过毒品吗?</div>
           <div class="weui-cell__ft">
-            <input id="is_use_inject" name="is_use_inject"  class="weui-switch" type="checkbox">
+            <input id="is_use_inject" name="is_use_inject" class="weui-switch" type="checkbox">
           </div>
         </div>
         <div id="inject_cond" class="app-hide">
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">最近一个月，您注射过毒品吗?</div>
             <div class="weui-cell__ft">
-              <input id="is_use_inject_near_month" name="is_use_inject_near_month"  class="weui-switch" type="checkbox">
+              <input id="is_use_inject_near_month" name="is_use_inject_near_month" class="weui-switch" type="checkbox">
             </div>
           </div>
           <div id="inject_near_month_cond" class="app-hide">
@@ -81,13 +81,13 @@
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">您曾经与别人共用过针具吗？</div>
             <div class="weui-cell__ft">
-              <input id="is_use_pinhead" name="is_use_pinhead"  class="weui-switch" type="checkbox">
+              <input id="is_use_pinhead" name="is_use_pinhead" class="weui-switch" type="checkbox">
             </div>
           </div>
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">最近一个月，您注射毒品时与别人共用过针具吗?</div>
             <div class="weui-cell__ft">
-              <input id="is_use_pinhead_near_month" name="is_use_pinhead_near_month"  class="weui-switch" type="checkbox">
+              <input id="is_use_pinhead_near_month" name="is_use_pinhead_near_month" class="weui-switch" type="checkbox">
             </div>
           </div>
           <div class="weui-cell ">
@@ -106,7 +106,7 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">最近3个月,您有没有过吸食毒品后发生性行为？</div>
           <div class="weui-cell__ft">
-            <input id="is_sex_after_drug_3month" name="is_sex_after_drug_3month"  class="weui-switch" type="checkbox">
+            <input id="is_sex_after_drug_3month" name="is_sex_after_drug_3month" class="weui-switch" type="checkbox">
           </div>
         </div>
         <div id="sex_after_drug_3month_cond" class="app-hide">
@@ -122,7 +122,7 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">最近1个月,您有没有过吸食毒品后发生性行为？</div>
           <div class="weui-cell__ft">
-                <input id="is_sex_after_drug_1month" name="is_sex_after_drug_1month"  class="weui-switch" type="checkbox">
+            <input id="is_sex_after_drug_1month" name="is_sex_after_drug_1month" class="weui-switch" type="checkbox">
           </div>
         </div>
         <div id="sex_after_drug_1month_cond" class="app-hide">
@@ -138,10 +138,10 @@
         <!---->
       </div>
       <div class="weui-btn-area">
-        {{--<a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckingphthisic'])}}" id="showTooltips">继续 结核相关的调查</a>--}}
+        <input type="hidden" name="eventId" value="{{$request->get('eventId')}}"/> <input type="hidden" name="step" value="{{$request->get('step')}}"/>
         {!! yLink('继续 结核相关的调查','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
-          'next'=>yUrl(['/survey/selfcheckingphthisic']),
-          'post'=>yUrl(['/survey/save','type'=>'drug'])
+        'next'=>yUrl($surveyUrl['next']),
+        'post'=>yUrl($surveyUrl['post'])
         ]]) !!}
       </div>
     </form>
@@ -197,7 +197,7 @@
               var self = $(this);
               $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
                   if (result.status) {
-                      location.href = $(self).data('next') + '?id=' + result.items.id;
+                      location.href = $(self).data('next');
                       return;
                   }
                   $.alert(result.items[0]);

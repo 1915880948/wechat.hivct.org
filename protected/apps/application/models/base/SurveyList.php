@@ -4,15 +4,54 @@ namespace application\models\base;
 
 use application\models\db\TblSurveyList;
 use qiqi\helper\base\InstanceTrait;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for tableClass "TblSurveyList".
  * className SurveyList
  * @package application\models\base
+ * @property mixed $totalStepCount
+ * @property array $stepNames
  */
 class SurveyList extends TblSurveyList
 {
     use InstanceTrait;
+
+    public function getTotalStepCount()
+    {
+        return count($this->getStepNames());
+    }
+
+    public function getStepNames()
+    {
+        return [
+            0 => 'base',
+            1 => 'sex',
+            2 => 'drug',
+            3 => 'phthisic',
+            4 => 'hiv',
+            5 => 'partner',
+            6 => 'followup',
+        ];
+    }
+
+    public function getStepByName($name)
+    {
+        $name = str_replace('selfchecking', '', basename($name));
+        return array_search($name, $this->getStepNames());
+    }
+
+    public function getStepName($step)
+    {
+        return ArrayHelper::getValue($this->getStepNames(), $step, 'base');
+    }
+
+    public function getStepUrl($step, $eventId)
+    {
+        $step = (int) $step;
+        $stepName = $this->getStepName($step);
+        return ["/survey/selfchecking{$stepName}", 'eventId' => $eventId, 'step' => $step];
+    }
 
     /**
      * @inheritdoc
@@ -41,8 +80,8 @@ class SurveyList extends TblSurveyList
     public function getSurveyByUserId($userId)
     {
         return self::find()
-            ->andWhere(['uid'=>$userId])
-            ->asArray()
-            ->one();
+                   ->andWhere(['uid' => $userId])
+                   ->asArray()
+                   ->one();
     }
 }

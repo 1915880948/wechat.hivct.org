@@ -40,17 +40,17 @@
     $.success = function (msg) {
         return layer.msg(msg, {icon: 1});
     };
-    $.alert = function (msg, params) {
-        return layer.msg(msg, {icon: 2});
-    };
-    $.confirm = function (msg, btns, success, fail) {
-        layer.config({closeBtn: 0});
-        return layer.confirm(msg, {
-            btn: btns ? btns : ['确认', '取消'] //按钮
-        }, success, fail ? fail : function () {
-
-        });
-    };
+    // $.alert = function (msg, params) {
+    //     return layer.msg(msg, {icon: 2});
+    // };
+    // $.confirm = function (msg, btns, success, fail) {
+    //     layer.config({closeBtn: 0});
+    //     return layer.confirm(msg, {
+    //         btn: btns ? btns : ['确认', '取消'] //按钮
+    //     }, success, fail ? fail : function () {
+    //
+    //     });
+    // };
     $('a[data-alert]').hammer().on('tap', function () {
         console.log(11);
         var self = $(this);

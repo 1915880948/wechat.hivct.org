@@ -8,6 +8,7 @@
 
 namespace application\web\www\controllers\survey;
 
+use application\models\base\SurveyList;
 use application\web\www\components\WwwBaseAction;
 
 /**
@@ -17,12 +18,14 @@ use application\web\www\components\WwwBaseAction;
  */
 class IndexAction extends WwwBaseAction
 {
-    public function run($step = 0)
+    public function run($eventId, $step = 0)
     {
-        // $file = "survey_index_{$step}";
-        //
-        // return $this->renderPage($file);
+        if(!$eventId){
+            $this->controller->redirect(['/user/recv', 'type' => 'survey']);
+        }
 
-        return $this->controller->redirect(['/survey/selfcheckingbase']);
+        $stepUrls = SurveyList::getInstance()->getStepUrl($step,$eventId);
+
+        return $this->controller->redirect($stepUrls);
     }
 }

@@ -118,16 +118,16 @@
           {{--<button class="" style="width:1rem;">人</button>--}}
         </div>
       </div>
+      <!---->
+      <!---->
+      <div class="weui-btn-area">
+        <input type="hidden" name="eventId" value="{{$request->get('eventId')}}"/> <input type="hidden" name="step" value="{{$request->get('step')}}"/>
+        {!! yLink('完成','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
+          'next'=>yUrl($surveyUrl['next']),
+          'post'=>yUrl($surveyUrl['post'])
+        ]]) !!}
+      </div>
     </form>
-    <!---->
-    <!---->
-    <div class="weui-btn-area">
-      {{--<a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckingh'])}}" id="showTooltips">完成</a>--}}
-      {!! yLink('完成','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
-        'next'=>yUrl(['/user/default/index']),
-        'post'=>yUrl(['/survey/save','type'=>'followup'])
-      ]]) !!}
-    </div>
   </div>
 
 @stop
@@ -168,7 +168,7 @@
               var self = $(this);
               $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
                   if (result.status) {
-                      location.href = $(self).data('next') + '?id=' + result.items.id;
+                      location.href = $(self).data('next');
                       return;
                   }
                   $.alert(result.items[0]);

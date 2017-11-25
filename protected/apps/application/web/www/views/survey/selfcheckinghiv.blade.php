@@ -222,13 +222,13 @@
       <!---->
       <!---->
       <div class="weui-btn-area">
-        {{--<a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckingpartner'])}}" id="showTooltips">继续 配偶/性伴及其他检测</a>--}}
+        <input type="hidden" name="eventId" value="{{$request->get('eventId')}}"/> <input type="hidden" name="step" value="{{$request->get('step')}}"/>
         {!! yLink('继续 配偶/性伴及其他检测','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
-          'next'=>yUrl(['/survey/selfcheckingpartner']),
-          'post'=>yUrl(['/survey/save','type'=>'hiv'])
+        'next'=>yUrl($surveyUrl['next']),
+        'post'=>yUrl($surveyUrl['post'])
         ]]) !!}
       </div>
-  </div>
+    </form>
   </div>
 
 @stop
@@ -284,7 +284,7 @@
               var self = $(this);
               $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
                   if (result.status) {
-                      location.href = $(self).data('next') + '?id=' + result.items.id;
+                      location.href = $(self).data('next');
                       return;
                   }
                   $.alert(result.items[0]);

@@ -5,9 +5,10 @@ namespace application\models\db;
 use Yii;
 
 /**
- * This is the model class for table "{{%users}}".
+ * This is the model class for table "{{%user}}".
  *
  * @property integer $uid
+ * @property string $uuid
  * @property string $openid
  * @property string $unionid
  * @property string $nickname
@@ -31,14 +32,14 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  */
-class TblUsers extends \application\common\db\ApplicationActiveRecord
+class TblUser extends \application\common\db\ApplicationActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%users}}';
+        return '{{%user}}';
     }
 
     /**
@@ -49,12 +50,14 @@ class TblUsers extends \application\common\db\ApplicationActiveRecord
         return [
             [['gender', 'age', 'is_updated', 'is_subscribe', 'subscribe_time'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
+            [['uuid'], 'string', 'max' => 36],
             [['openid', 'unionid', 'birthdate', 'nation'], 'string', 'max' => 50],
             [['nickname', 'realname', 'headimgurl', 'email', 'tags'], 'string', 'max' => 255],
             [['province', 'city', 'country'], 'string', 'max' => 200],
             [['qq'], 'string', 'max' => 11],
             [['telephone'], 'string', 'max' => 15],
-            [['address'], 'string', 'max' => 100]
+            [['address'], 'string', 'max' => 100],
+            [['uuid'], 'unique']
         ];
     }
 
@@ -65,6 +68,7 @@ class TblUsers extends \application\common\db\ApplicationActiveRecord
     {
         return [
             'uid' => 'Uid',
+            'uuid' => 'uuid,唯一ID',
             'openid' => '微信openid',
             'unionid' => 'Unionid',
             'nickname' => '微信昵称',

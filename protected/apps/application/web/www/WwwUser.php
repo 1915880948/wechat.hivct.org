@@ -8,10 +8,7 @@
 
 namespace application\web\www;
 
-use application\models\base\Users;
-use Overtrue\Socialite\User;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
+use application\models\base\User;
 use yii\web\IdentityInterface;
 
 /**
@@ -20,7 +17,7 @@ use yii\web\IdentityInterface;
  * @property mixed $authKey
  * @property mixed $id
  */
-class WwwUser extends Users implements IdentityInterface
+class WwwUser extends User implements IdentityInterface
 {
     public static function findIdentity($id)
     {
@@ -55,5 +52,4 @@ class WwwUser extends Users implements IdentityInterface
     {
         return $this->openid == $authKey;
     }
-
 }

@@ -8,20 +8,24 @@
 
 namespace application\web\www\controllers\survey;
 
-use application\models\base\SurveyList;
+use application\web\www\components\suvey\SurveyTrait;
 use application\web\www\components\WwwBaseAction;
 
 class SelfCheckingSexAction extends WwwBaseAction
 {
+    use SurveyTrait;
+
     /**
-     * @param int $id
+     * @param $eventId
+     * @param $step
      * @return string
      */
-    public function run($id = 0)
+    public function run($eventId, $step)
     {
-        if(!$model = SurveyList::findByPk($id)){
-            $model = new SurveyList();
-        }
-        return $this->render(compact('model'));
+        $survey = $this->getSurvey($eventId);
+        $step = $survey->getStepByName($this->id);
+        $surveyUrl = $this->getSurveyUrl($eventId, $step);
+
+        return $this->render(compact('model', 'survey', 'surveyUrl'));
     }
 }

@@ -21,62 +21,62 @@
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd ">咳嗽、咳痰持续2周以上</div>
         <div class="weui-cell__ft">
-          <input id="cough_2week" name="cough_2week"  class="weui-switch" type="checkbox">
+          <input id="cough_2week" name="cough_2week" class="weui-switch" type="checkbox">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">反复咳出的痰中带血</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="cough_withblood" name="cough_withblood" >
+          <input class="weui-switch" type="checkbox" id="cough_withblood" name="cough_withblood">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">夜间经常出汗</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="sweat_on_night" name="sweat_on_night" >
+          <input class="weui-switch" type="checkbox" id="sweat_on_night" name="sweat_on_night">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">无法解思的体重明显下降</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="weight_downgrade" name="weight_downgrade" >
+          <input class="weui-switch" type="checkbox" id="weight_downgrade" name="weight_downgrade">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">经常容易疲劳或呼吸短促</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="always_tired" name="always_tired" >
+          <input class="weui-switch" type="checkbox" id="always_tired" name="always_tired">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">反复发热持续2周以上</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="fever_2week" name="fever_2week" >
+          <input class="weui-switch" type="checkbox" id="fever_2week" name="fever_2week">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">淋巴结肿大</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="lymphadenectasis" name="lymphadenectasis" >
+          <input class="weui-switch" type="checkbox" id="lymphadenectasis" name="lymphadenectasis">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">结核病人接触史</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="tuberculosis_contact_history" name="tuberculosis_contact_history" >
+          <input class="weui-switch" type="checkbox" id="tuberculosis_contact_history" name="tuberculosis_contact_history">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">无结核相关症状</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="no_tuberculosis" name="no_tuberculosis" >
+          <input class="weui-switch" type="checkbox" id="no_tuberculosis" name="no_tuberculosis">
         </div>
       </div>
       <div class="weui-cells__title">是否做过相关检查？</div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">最近是否做过结核检查（痰检或X胸片）？</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="is_phthisic_checked" name="is_phthisic_checked" >
+          <input class="weui-switch" type="checkbox" id="is_phthisic_checked" name="is_phthisic_checked">
         </div>
       </div>
       <div class="weui-cell ">
@@ -88,7 +88,7 @@
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">最近是否做过梅毒检测？</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="is_syphilis" name="is_syphilis" >
+          <input class="weui-switch" type="checkbox" id="is_syphilis" name="is_syphilis">
         </div>
       </div>
       <div class="weui-cell ">
@@ -100,7 +100,7 @@
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">最近是否做过乙肝检测？</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="is_hepatitis_b" name="is_hepatitis_b" >
+          <input class="weui-switch" type="checkbox" id="is_hepatitis_b" name="is_hepatitis_b">
         </div>
       </div>
       <div class="weui-cell ">
@@ -112,7 +112,7 @@
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">最近是否做过丙肝检测？</div>
         <div class="weui-cell__ft">
-          <input class="weui-switch" type="checkbox" id="is_hepatitis_c" name="is_hepatitis_c" >
+          <input class="weui-switch" type="checkbox" id="is_hepatitis_c" name="is_hepatitis_c">
         </div>
       </div>
       <div class="weui-cell ">
@@ -128,10 +128,10 @@
         {{--<a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckinghiv'])}}" id="showTooltips">继续 HIV快速检测</a>--}}
       </div>
       <div class="weui-btn-area">
-        {{--<a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckingphthisic'])}}" id="showTooltips">继续 结核相关的调查</a>--}}
+        <input type="hidden" name="eventId" value="{{$request->get('eventId')}}"/> <input type="hidden" name="step" value="{{$request->get('step')}}"/>
         {!! yLink('继续 HIV快速检测','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
-          'next'=>yUrl(['/survey/selfcheckinghiv']),
-          'post'=>yUrl(['/survey/save','type'=>'phthisic'])
+        'next'=>yUrl($surveyUrl['next']),
+        'post'=>yUrl($surveyUrl['post'])
         ]]) !!}
       </div>
     </form>
@@ -151,7 +151,7 @@
               var self = $(this);
               $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
                   if (result.status) {
-                      location.href = $(self).data('next') + '?id=' + result.items.id;
+                      location.href = $(self).data('next');
                       return;
                   }
                   $.alert(result.items[0]);

@@ -5,11 +5,13 @@
  * @created 2016/10/3 00:10
  * @since
  */
+
 namespace application\common\db;
 
 use common\core\db\base\QActiveRecord;
 use common\core\db\behaviors\CommonBlameableBehavior;
 use common\core\db\behaviors\CommonTimestampBehavior;
+use common\core\db\behaviors\CommonUUIDBehavior;
 use yii\db\Expression;
 
 /**
@@ -22,14 +24,16 @@ class ApplicationActiveRecord extends QActiveRecord
     {
         return [
             [//updated_at
-                'class'              => CommonTimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value'              => new Expression('NOW()'),
+             'class'              => CommonTimestampBehavior::className(),
+             'createdAtAttribute' => 'created_at',
+             'updatedAtAttribute' => 'updated_at',
+             'value'              => new Expression('NOW()'),
             ],
             [//created_by
-
-                'class' => CommonBlameableBehavior::className(),
+             'class' => CommonBlameableBehavior::className(),
+            ],
+            [//created_by
+             'class' => CommonUUIDBehavior::className(),
             ],
         ];
     }

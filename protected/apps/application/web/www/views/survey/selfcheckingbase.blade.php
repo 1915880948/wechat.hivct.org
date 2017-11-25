@@ -27,7 +27,7 @@
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">民族</label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="nation" id="nation" placeholder="请选择" onfocus="this.blur()">
+          <input class="weui-input" type="text" name="nation" id="nation" placeholder="请选择" onfocus="this.blur()" value="{{$survey['nation']}}">
         </div>
       </div>
       <div class="weui-cell">
@@ -39,25 +39,25 @@
       <div class="weui-cell">
         <div class="weui-cell__hd"><label for="" class="weui-label">出生年月</label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="birthday" id="birthday" value="" data-toggle='date'>
+          <input class="weui-input" type="text" name="birthday" id="birthday" value="{{$survey['birthday']}}" data-toggle='date'>
         </div>
       </div>
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">文化程度 </label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="education" id="education" placeholder="请选择" onfocus="this.blur()">
+          <input class="weui-input" type="text" name="education" id="education" placeholder="请选择" value="{{$survey['education']}}" onfocus="this.blur()">
         </div>
       </div>
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">婚姻状况 </label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="marriage" id="marriage" onfocus="this.blur()" placeholder="请选择">
+          <input class="weui-input" type="text" name="marriage" id="marriage" onfocus="this.blur()" placeholder="请选择" value="{{$survey['marriage']}}">
         </div>
       </div>
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">主要职业 </label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="job" id="job" onfocus="this.blur()" placeholder="请选择">
+          <input class="weui-input" type="text" name="job" id="job" onfocus="this.blur()" placeholder="请选择" value="{{$survey['job']}}">
         </div>
       </div>
       <div id="otherjob" class="app-hide">
@@ -65,7 +65,7 @@
         <div class="weui-cells">
           <div class="weui-cell">
             <div class="weui-cell__bd">
-              <input class="weui-input" type="text" name="job_other" placeholder="请输入文本">
+              <input class="weui-input" type="text" name="job_other" placeholder="请输入文本" value="{{$survey['job_other']}}">
             </div>
           </div>
         </div>
@@ -73,31 +73,31 @@
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">月平均收入 </label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="income" id="income" onfocus="this.blur()" placeholder="请选择">
+          <input class="weui-input" type="text" name="income" id="income" onfocus="this.blur()" placeholder="请选择" value="{{$survey['income']}}">
         </div>
       </div>
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">户籍所在地 </label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="household" id="household" onfocus="this.blur()" placeholder="请选择">
+          <input class="weui-input" type="text" name="household" id="household" onfocus="this.blur()" placeholder="请选择" value="{{$survey['household']}}">
         </div>
       </div>
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">现居地 </label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="livecity" id="livecity" data-code="110000" value="北京 北京市" onfocus="this.blur()" placeholder="请选择">
+          <input class="weui-input" type="text" name="livecity" id="livecity" data-code="110000" value="{{$survey['livecity']}}" onfocus="this.blur()" placeholder="请选择">
         </div>
       </div>
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">当地居住时长 </label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="livetime" id="livetime" onfocus="this.blur()" placeholder="请选择">
+          <input class="weui-input" type="text" name="livetime" id="livetime" onfocus="this.blur()" placeholder="请选择" value="{{$survey['livetime']}}">
         </div>
       </div>
       <div class="weui-btn-area">
-        {{--<a class="weui-btn weui-btn_primary" data-next="{{yUrl(['/survey/selfcheckingsex'])}}" id="next-btn">继续 性行为调查</a>--}}
+        <input type="hidden" name="eventId" value="{{$request->get('eventId')}}"> <input type="hidden" name="step" value="{{$request->get('step')}}">
         {!! yLink('继续 性行为调查','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
-          'next'=>yUrl(['/survey/selfcheckingsex']),
+          'next'=>yUrl($surveyUrl['next']),
           'post'=>yUrl(['/survey/save','type'=>'base'])
         ]]) !!}
       </div>
@@ -158,10 +158,10 @@
               var self = $(this);
               var code = $('#livecity').data('code');
               var jsonDate = $('#_form').serializeArray();
-              jsonDate.push({'name':'livecity_code','value':code});
+              jsonDate.push({'name': 'livecity_code', 'value': code});
               $.jsonPost($(self).data('post'), jsonDate, function (result) {
                   if (result.status) {
-                      location.href = $(self).data('next') + '?id=' + result.items.id;
+                      location.href = $(self).data('next');
                       return;
                   }
                   $.alert(result.items[0]);

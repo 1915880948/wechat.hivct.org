@@ -9,12 +9,12 @@
       <i class="iconfont icon-wxbzhuye"></i>
     </div>
     <p class="weui-tabbar__label">流程</p>
-  </a> <a href="{{yUrl(['/survey'])}}" class="weui-tabbar__item">
+  </a> <a href="{{yUrl(['/user/recv?type=survey'])}}" class="weui-tabbar__item">
     <div class="weui-tabbar__icon">
       <i class="iconfont icon-wenti-xianxing"></i>
     </div>
     <p class="weui-tabbar__label">调研</p>
-  </a> <a href="#tab4" class="weui-tabbar__item">
+  </a> <a href="{{yUrl(['/user/profile'])}}" class="weui-tabbar__item">
     <div class="weui-tabbar__icon">
       <i class="iconfont icon-yonghu-xianxing"></i>
     </div>

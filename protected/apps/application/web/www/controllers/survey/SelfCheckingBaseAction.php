@@ -8,25 +8,24 @@
 
 namespace application\web\www\controllers\survey;
 
-use application\models\base\SurveyList;
+use application\web\www\components\suvey\SurveyTrait;
 use application\web\www\components\WwwBaseAction;
 
 class SelfCheckingBaseAction extends WwwBaseAction
 {
+    use SurveyTrait;
+
     /**
      * 简单的表单
-     * @param int $id
+     * @param     $eventId
      * @return string
      */
-    public function run($id = 0)
+    public function run($eventId)
     {
-        if(!$model = SurveyList::findByPk($id)){
-            $model = new SurveyList();
-        }
-        $userId = \Yii::$app->getUser()->identity->getId();
+        $survey = $this->getSurvey($eventId);
+        $step = $survey->getStepByName($this->id);
+        $surveyUrl = $this->getSurveyUrl($eventId, $step);
 
-        $survey = $model->getSurveyByUserId( $userId );
-//        print_r( ($survey) ); exit;
-        return $this->render(compact('model','survey'));
+        return $this->render(compact('model', 'survey', 'surveyUrl'));
     }
 }

@@ -13,9 +13,9 @@ class UserOnline extends TblUserOnline
 {
     /**
      * 更新状态
-     * @param Users $account
+     * @param User $account
      */
-    public static function updateStatus(Users $account)
+    public static function updateStatus(User $account)
     {
         $info = self::find()
                     ->andWhere(['openid' => $account->openid])

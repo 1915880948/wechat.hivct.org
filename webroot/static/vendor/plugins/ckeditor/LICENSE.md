@@ -1209,7 +1209,7 @@ Version 1.1
      software" and "commercial computer software documentation," as such
      terms are used in 48 C.F.R. 12.212 (Sept. 1995). Consistent with 48
      C.F.R. 12.212 and 48 C.F.R. 227.7202-1 through 227.7202-4 (June 1995),
-     all U.S. Government End Users acquire Covered Code with only those
+     all U.S. Government End User acquire Covered Code with only those
      rights set forth herein.
 
 11. MISCELLANEOUS.

@@ -2,9 +2,8 @@
 
 namespace application\models\base;
 
-use application\models\db\TblUsers;
+use application\models\db\TblUser;
 use EasyWeChat\Foundation\Application;
-use Overtrue\Socialite\User;
 use qiqi\helper\log\FileLogHelper;
 use wechat\Weixin;
 use yii\helpers\ArrayHelper;
@@ -12,17 +11,17 @@ use yii\helpers\Json;
 
 /**
  * This is the model class for tableClass "TblUsers".
- * className Users
+ * className User
  * @package application\models\base
  */
-class Users extends TblUsers
+class User extends TblUser
 {
     /**
-     * @param User $weUser
+     * @param \Overtrue\Socialite\User $weUser
      * @param null $userDetail
-     * @return Users
+     * @return User
      */
-    public static function createByWechat(User $weUser, $userDetail = null)
+    public static function createByWechat(\Overtrue\Socialite\User $weUser, $userDetail = null)
     {
         $model = new static;
         $original = $weUser->getOriginal();
@@ -40,6 +39,11 @@ class Users extends TblUsers
         $model->tags = Json::encode(isset($userDetail->tagid_list) ? $userDetail->tagid_list : []);
         $model->save();
         return $model;
+    }
+
+    public static function isVip($openId)
+    {
+        return true;
     }
 
     public function getTags()
@@ -81,7 +85,7 @@ class Users extends TblUsers
         return;
     }
 
-    public function updateByWechat(User $user, Users $wUser)
+    public function updateByWechat(\Overtrue\Socialite\User $user, User $wUser)
     {
         $original = $user->getOriginal();
         $weAttr = $user->getAttributes();
@@ -107,10 +111,5 @@ class Users extends TblUsers
             $this->subscribe_time = $user->get('subscribe_time');
         }
         return $this->is_subscribe;
-    }
-
-    public static function isVip($openId)
-    {
-        return true;
     }
 }

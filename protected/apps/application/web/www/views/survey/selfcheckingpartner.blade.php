@@ -39,10 +39,10 @@
         </div>
       </div>
       <div class="weui-btn-area">
-        {{--      <a class="weui-btn weui-btn_primary" href="{{yUrl(['/survey/selfcheckingfollowup'])}}" id="showTooltips">继续 转介及后续服务</a>--}}
+        <input type="hidden" name="eventId" value="{{$request->get('eventId')}}"/> <input type="hidden" name="step" value="{{$request->get('step')}}"/>
         {!! yLink('继续 转介及后续服务','javascript:;',['class'=>'weui-btn weui-btn_primary','id'=>'next-btn','data'=>[
-          'next'=>yUrl(['/survey/selfcheckingfollowup']),
-          'post'=>yUrl(['/survey/save','type'=>'partner'])
+        'next'=>yUrl($surveyUrl['next']),
+        'post'=>yUrl($surveyUrl['post'])
         ]]) !!}
       </div>
     </form>
@@ -80,7 +80,7 @@
               var self = $(this);
               $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
                   if (result.status) {
-                      location.href = $(self).data('next') + '?id=' + result.items.id;
+                      location.href = $(self).data('next');
                       return;
                   }
                   $.alert(result.items[0]);

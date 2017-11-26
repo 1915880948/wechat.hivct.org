@@ -22,6 +22,8 @@ class CodeAction extends WwwBaseAction
         try{
             /** @var \Overtrue\Socialite\User $user */
             $user = $app->oauth->user();
+            var_dump($user);
+            exit;
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'oauth');
             GSession::set('login_failed', 1);

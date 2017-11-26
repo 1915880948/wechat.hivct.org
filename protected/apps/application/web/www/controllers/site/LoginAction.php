@@ -10,6 +10,7 @@ namespace application\web\www\controllers\site;
 
 use application\web\www\components\WwwBaseAction;
 use application\web\www\WwwUser;
+use qiqi\helper\log\FileLogHelper;
 use wechat\Weixin;
 use yii\helpers\Url;
 
@@ -29,7 +30,7 @@ class LoginAction extends WwwBaseAction
             \Yii::$app->user->login(WwwUser::findByPk(1));
             return $this->controller->redirect(['/site/index']);
         }
-
+        FileLogHelper::xlog($this->account,'oauth');
         return $this->controller->redirect(['/oauth/index']);
         if(yUser()->getIsGuest()){
             $app = Weixin::getApp();

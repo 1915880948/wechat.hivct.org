@@ -57,7 +57,7 @@ class CodeAction extends WwwBaseAction
             FileLogHelper::xlog('登录成功','oauth');
             FileLogHelper::xlog(serialize([$_SESSION,$_COOKIE]),'oauth');
             //明明登录成功了。为什么还要死循环？
-            return $this->controller->redirect(['/user/recv']);
+            return $this->controller->redirect(['/site/index']);
         }
         FileLogHelper::xlog(['loginstatus' => $loginStatus], 'oauth-login');
         return $this->controller->redirect(['/site/login']);

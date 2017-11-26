@@ -29,12 +29,12 @@ class CodeAction extends WwwBaseAction
         }
         $openId = $user->getOriginal()['openid'];
         $member = WwwUser::findIdentityByAccessToken($openId);
-        $useDtail = $app->user->get($user->getId());
+        $userDetail = $app->user->get($user->getId());
         if(!$member){
             /**
              * 这时候拿不到用户信息
              */
-            $member = WwwUser::createByWechat($user, $useDtail);
+            $member = WwwUser::createByWechat($user, $userDetail);
             if($errors = $member->getErrors()){
                 FileLogHelper::xlog($errors, 'oauth-login');
                 return $this->controller->redirect(['site/login']);

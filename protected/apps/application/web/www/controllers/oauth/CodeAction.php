@@ -44,7 +44,6 @@ class CodeAction extends WwwBaseAction
                 $member->updateByWechat($user, $member);
             }
         }
-        dd($member);
         $loginStatus = \Yii::$app->getUser()
                                  ->login($member, 86400);
         if($loginStatus){

@@ -10,6 +10,7 @@ namespace application\web\www\controllers\oauth;
 
 use application\web\www\components\WwwBaseAction;
 use application\web\www\WwwUser;
+use qiqi\helper\FileHelper;
 use qiqi\helper\log\FileLogHelper;
 use wechat\Weixin;
 
@@ -20,7 +21,6 @@ class CodeAction extends WwwBaseAction
         $app = Weixin::getApp();
         $oauth = $app->oauth;
         try{
-
             /** @var \Overtrue\Socialite\User $user */
             $user = $oauth->user();
         } catch(\Exception $e){
@@ -34,7 +34,6 @@ class CodeAction extends WwwBaseAction
         FileLogHelper::xlog('能够进入这一步', 'oauth');
         $userDetail = $app->user->get($user->getId());
         if(!$member){
-
             /**
              * 这时候拿不到用户信息
              */
@@ -43,7 +42,9 @@ class CodeAction extends WwwBaseAction
                 FileLogHelper::xlog($errors, 'oauth-login');
                 return $this->controller->redirect(['site/login']);
             }
+            FileLogHelper::xlog('创建用户没有出错','oauth');
         }
+        FileLogHelper::xlog($member,'oauth');
         // else{
         //     if((time() - strtotime($member->updated_at)) > env('WECHAT_USER_TAGS_UPDATE_TIME')){//如果超过一天就更新吧
         //         $member->updateByWechat($user, $member);
@@ -52,6 +53,7 @@ class CodeAction extends WwwBaseAction
         $loginStatus = \Yii::$app->getUser()
                                  ->login($member, 86400);
         if($loginStatus){
+            FileLogHelper::xlog('登录成功','oauth');
             return $this->controller->redirect(['/site/index']);
         }
         FileLogHelper::xlog(['loginstatus' => $loginStatus], 'oauth-login');

@@ -25,7 +25,7 @@ class CodeAction extends WwwBaseAction
             FileLogHelper::xlog($e->getMessage(), 'oauth');
             return $this->controller->redirect(['site/login']);
         } finally{
-            FileLogHelper::xlog($user, 'oauth');
+            //FileLogHelper::xlog($user, 'oauth');
         }
         $openId = $user->getOriginal()['openid'];
         $member = WwwUser::findIdentityByAccessToken($openId);

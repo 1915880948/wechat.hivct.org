@@ -61,10 +61,7 @@ class CodeAction extends Action
                                      ->getIdentity()
             ], 'oauth');
             //明明登录成功了。为什么还要死循环？
-            //return $this->controller->redirect(['/site/index']);
-            echo 1;
-            exit("xxxx");
-            \Yii::$app->end();
+            return $this->controller->redirect(['/site/index']);
         }
         FileLogHelper::xlog(['loginstatus' => $loginStatus], 'oauth-login');
         exit("yyyy");

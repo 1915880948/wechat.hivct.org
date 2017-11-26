@@ -10,7 +10,6 @@ namespace application\web\www\controllers\oauth;
 
 use application\web\www\components\WwwBaseAction;
 use application\web\www\WwwUser;
-use qiqi\helper\FileHelper;
 use qiqi\helper\log\FileLogHelper;
 use wechat\Weixin;
 
@@ -30,9 +29,9 @@ class CodeAction extends WwwBaseAction
             FileLogHelper::xlog($oauth, 'oauth');
         }
         $openId = $user->getOriginal()['openid'];
-        FileLogHelper::xlog(['openid'=>$openId], 'oauth');
+        FileLogHelper::xlog(['openid' => $openId], 'oauth');
         $member = WwwUser::findIdentityByAccessToken($openId);
-        FileLogHelper::xlog(['member'=>$member], 'oauth');
+        FileLogHelper::xlog(['member' => $member], 'oauth');
         // $userDetail = $app->user->get($user->getId());
         $userDetail = [];
         if(!$member){
@@ -44,9 +43,9 @@ class CodeAction extends WwwBaseAction
                 FileLogHelper::xlog($errors, 'oauth-login');
                 return $this->controller->redirect(['site/login']);
             }
-            FileLogHelper::xlog('创建用户没有出错','oauth');
+            FileLogHelper::xlog('创建用户没有出错', 'oauth');
         }
-        FileLogHelper::xlog($member,'oauth');
+        FileLogHelper::xlog($member, 'oauth');
         // else{
         //     if((time() - strtotime($member->updated_at)) > env('WECHAT_USER_TAGS_UPDATE_TIME')){//如果超过一天就更新吧
         //         $member->updateByWechat($user, $member);
@@ -56,8 +55,11 @@ class CodeAction extends WwwBaseAction
         $loginStatus = \Yii::$app->getUser()
                                  ->login($member, 86400);
         if($loginStatus){
-            FileLogHelper::xlog('登录成功','oauth');
-            FileLogHelper::xlog(\Yii::$app->getUser()->getIdentity(),'oauth');
+            FileLogHelper::xlog('登录成功', 'oauth');
+            FileLogHelper::xlog([
+                'login' => \Yii::$app->getUser()
+                                     ->getIdentity()
+            ], 'oauth');
             //明明登录成功了。为什么还要死循环？
             return $this->controller->redirect(['/site/index']);
         }

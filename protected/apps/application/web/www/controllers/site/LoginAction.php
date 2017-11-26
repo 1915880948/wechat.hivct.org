@@ -29,6 +29,7 @@ class LoginAction extends WwwBaseAction
             \Yii::$app->user->login(WwwUser::findByPk(1));
             return $this->controller->redirect(['/site/index']);
         }
+
         return $this->controller->redirect(['/oauth/index']);
         if(yUser()->getIsGuest()){
             $app = Weixin::getApp();

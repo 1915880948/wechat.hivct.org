@@ -14,8 +14,7 @@ class LogoutAction extends WwwBaseAction
 {
     public function run()
     {
-        $d= \Yii::$app->getUser()->logout();
-        dd($d);
+        \Yii::$app->getUser()->logout();
         return $this->controller->redirect(['/site/index']);
     }
 }

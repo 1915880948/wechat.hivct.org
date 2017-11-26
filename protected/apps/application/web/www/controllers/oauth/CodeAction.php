@@ -28,8 +28,10 @@ class CodeAction extends WwwBaseAction
         }
         $openId = $user->getOriginal()['openid'];
         $member = WwwUser::findIdentityByAccessToken($openId);
+        FileLogHelper::xlog('能够进入这一步','oauth');
         $userDetail = $app->user->get($user->getId());
         if(!$member){
+
             /**
              * 这时候拿不到用户信息
              */

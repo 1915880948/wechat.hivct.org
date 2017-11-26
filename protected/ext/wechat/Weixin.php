@@ -40,7 +40,7 @@ class Weixin
             $weixin = new Application(self::getOptions());
         }
 
-        if(!($wxToken = \Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY)) && (time() > $wxToken['expires_in'])){//获取
+        if(!($wxToken = \Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY)) || (time() > $wxToken['expires_in'])){//获取
             $token = $weixin->access_token->getTokenFromServer();
             $token['expires_in'] = time() + $token['expires_in'] - 1200;
             \Yii::$app->rediscache->set(self::WECHAT_TOKEN_CACHE_KEY, Json::encode($token));

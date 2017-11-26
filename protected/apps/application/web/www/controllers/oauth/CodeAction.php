@@ -10,7 +10,6 @@ namespace application\web\www\controllers\oauth;
 
 use application\web\www\components\WwwBaseAction;
 use application\web\www\WwwUser;
-use common\core\session\GSession;
 use qiqi\helper\log\FileLogHelper;
 use wechat\Weixin;
 
@@ -25,10 +24,12 @@ class CodeAction extends WwwBaseAction
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'oauth');
             return $this->controller->redirect(['site/login']);
+        } finally{
+            FileLogHelper::xlog($user, 'oauth');
         }
         $openId = $user->getOriginal()['openid'];
         $member = WwwUser::findIdentityByAccessToken($openId);
-        FileLogHelper::xlog('能够进入这一步','oauth');
+        FileLogHelper::xlog('能够进入这一步', 'oauth');
         $userDetail = $app->user->get($user->getId());
         if(!$member){
 

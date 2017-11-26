@@ -18,6 +18,9 @@ class CodeAction extends WwwBaseAction
 {
     public function run($code)
     {
+        echo "<pre>";
+        print_r($_SERVER);
+        echo "</pre>";
         dd($code);
         $app = Weixin::getApp();
         try{

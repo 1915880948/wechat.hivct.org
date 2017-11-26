@@ -40,8 +40,6 @@ class Weixin
             $weixin = new Application(self::getOptions());
         }
 
-        var_dump(\Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY));exit;
-
         if(!$wxToken = \Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY)){//获取
             $token = $weixin->access_token->getTokenFromServer();
             \Yii::$app->rediscache->set(self::WECHAT_TOKEN_CACHE_KEY, Json::encode($token));

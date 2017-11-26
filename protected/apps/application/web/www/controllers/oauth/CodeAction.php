@@ -8,12 +8,12 @@
 
 namespace application\web\www\controllers\oauth;
 
-use application\web\www\components\WwwBaseAction;
 use application\web\www\WwwUser;
 use qiqi\helper\log\FileLogHelper;
 use wechat\Weixin;
+use yii\base\Action;
 
-class CodeAction extends WwwBaseAction
+class CodeAction extends Action
 {
     public function run()
     {
@@ -45,13 +45,12 @@ class CodeAction extends WwwBaseAction
             }
             FileLogHelper::xlog('创建用户没有出错', 'oauth');
         }
-        FileLogHelper::xlog(var_export(($member instanceof WwwUser),true), 'oauth');
+        FileLogHelper::xlog(var_export(($member instanceof WwwUser), true), 'oauth');
         // else{
         //     if((time() - strtotime($member->updated_at)) > env('WECHAT_USER_TAGS_UPDATE_TIME')){//如果超过一天就更新吧
         //         $member->updateByWechat($user, $member);
         //     }
         // }
-
 
         $loginStatus = \Yii::$app->getUser()
                                  ->login($member, 86400);

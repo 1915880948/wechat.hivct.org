@@ -9,17 +9,17 @@
 namespace application\web\www\controllers\oauth;
 
 use application\models\base\UserOnline;
-use application\web\www\components\WwwBaseAction;
 use application\web\www\WwwUser;
 use Overtrue\Socialite\User;
 use qiqi\helper\log\FileLogHelper;
 use wechat\Weixin;
+use yii\base\Action;
 
 /**
  * Class CallbackAction
  * @package application\web\www\controllers\site
  */
-class CallbackAction extends WwwBaseAction
+class CallbackAction extends Action
 {
     /**
      * @param        $code

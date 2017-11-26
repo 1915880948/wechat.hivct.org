@@ -55,6 +55,8 @@ class CodeAction extends WwwBaseAction
                                  ->login($member, 86400);
         if($loginStatus){
             FileLogHelper::xlog('登录成功','oauth');
+            FileLogHelper::xlog('full','oauth');
+            //明明登录成功了。为什么还要死循环？
             return $this->controller->redirect(['/site/index']);
         }
         FileLogHelper::xlog(['loginstatus' => $loginStatus], 'oauth-login');

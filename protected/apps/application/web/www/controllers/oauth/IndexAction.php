@@ -15,11 +15,9 @@ class IndexAction extends WwwBaseAction
 {
     public function run()
     {
-        dd($this->account);
         if(!$this->account){
             return $this->controller->redirect("http://hivct.open.nisinfo.com/oauth/redirect?url=" . Url::to(['/oauth/code'], true));
         }
-        dd($this->account);
         return $this->controller->redirect(['/site/index']);
     }
 }

@@ -24,7 +24,6 @@ class CodeAction extends WwwBaseAction
             $user = $app->oauth->user();
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'oauth');
-            GSession::set('login_failed', 1);
             return $this->controller->redirect(['site/login']);
         }
         $openId = $user->getOriginal()['openid'];

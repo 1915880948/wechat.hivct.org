@@ -9,19 +9,47 @@
 namespace wechat;
 
 use EasyWeChat\Foundation\Application;
+use yii\helpers\Json;
 
 /**
  * Class Weixin
+ * 与开放平台共用accesstoken
  * @package wechat
  */
 class Weixin
 {
+    const WECHAT_TOKEN_CACHE_KEY = 'cache:wechat_token';
+
     /**
      * @return Application
      */
     public static function getApp()
     {
-        return new Application(self::getOptions());
+        $weixin = new Application(self::getOptions());
+        self::getAccessToken($weixin);
+        return $weixin;
+    }
+
+    /**
+     * @param Application|null $weixin
+     * @return string
+     */
+    public static function getAccessToken(Application $weixin = null)
+    {
+        if($weixin === null || !($weixin instanceof Application)){
+            $weixin = new Application(self::getOptions());
+        }
+
+        var_dump(\Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY));exit;
+
+        if(!$wxToken = \Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY)){//获取
+            $token = $weixin->access_token->getTokenFromServer();
+            \Yii::$app->rediscache->set(self::WECHAT_TOKEN_CACHE_KEY, Json::encode($token));
+        } else{
+            $token = Json::decode($wxToken);
+        }
+        $weixin->access_token->setToken($token['access_token']);
+        return $token['access_token'];
     }
 
     protected static function getOptions()

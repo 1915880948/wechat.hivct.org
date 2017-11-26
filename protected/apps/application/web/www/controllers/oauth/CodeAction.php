@@ -22,8 +22,6 @@ class CodeAction extends WwwBaseAction
         try{
             /** @var \Overtrue\Socialite\User $user */
             $user = $app->oauth->user();
-            var_dump($user);
-            exit;
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'oauth');
             GSession::set('login_failed', 1);
@@ -38,19 +36,21 @@ class CodeAction extends WwwBaseAction
              */
             $member = WwwUser::createByWechat($user, $useDtail);
             if($errors = $member->getErrors()){
-                print_r($errors);
-                return;
-            }
-        } else{
-            if((time() - strtotime($member->updated_at)) > env('WECHAT_USER_TAGS_UPDATE_TIME')){//如果超过一天就更新吧
-                $member->updateByWechat($user, $member);
+                FileLogHelper::xlog($errors, 'oauth-login');
+                return $this->controller->redirect(['site/login']);
             }
         }
+        // else{
+        //     if((time() - strtotime($member->updated_at)) > env('WECHAT_USER_TAGS_UPDATE_TIME')){//如果超过一天就更新吧
+        //         $member->updateByWechat($user, $member);
+        //     }
+        // }
         $loginStatus = \Yii::$app->getUser()
                                  ->login($member, 86400);
         if($loginStatus){
             return $this->controller->redirect(['/site/index']);
         }
+        FileLogHelper::xlog(['loginstatus' => $loginStatus], 'oauth-login');
         return $this->controller->redirect(['/site/login']);
     }
 }

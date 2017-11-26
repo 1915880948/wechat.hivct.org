@@ -9,7 +9,6 @@
 namespace wechat;
 
 use EasyWeChat\Foundation\Application;
-use yii\helpers\Json;
 
 /**
  * Class Weixin
@@ -40,16 +39,14 @@ class Weixin
             $weixin = new Application(self::getOptions());
         }
 
-        $wxToken = Json::decode(\Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY));
+        $wxToken = \Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY);
         if(!$wxToken || (time() > $wxToken['expires_in'])){//获取
             $wxToken = $weixin->access_token->getTokenFromServer();
             $wxToken['expires_in'] = time() + $wxToken['expires_in'] - 1200;
-            \Yii::$app->rediscache->set(self::WECHAT_TOKEN_CACHE_KEY, Json::encode($wxToken));
+            \Yii::$app->rediscache->set(self::WECHAT_TOKEN_CACHE_KEY, $wxToken);
         }
         $weixin->access_token->setToken($wxToken['access_token']);
         return $wxToken['access_token'];
-        n($token['access_token']);
-        return $token['access_token'];
     }
 
     protected static function getOptions()

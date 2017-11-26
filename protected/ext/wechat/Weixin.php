@@ -40,8 +40,9 @@ class Weixin
             $weixin = new Application(self::getOptions());
         }
 
-        if(!$wxToken = \Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY)){//获取
+        if(!($wxToken = \Yii::$app->rediscache->get(self::WECHAT_TOKEN_CACHE_KEY)) && (time() > $wxToken['expires_in'])){//获取
             $token = $weixin->access_token->getTokenFromServer();
+            $token['expires_in'] = time() + $token['expires_in'] - 1200;
             \Yii::$app->rediscache->set(self::WECHAT_TOKEN_CACHE_KEY, Json::encode($token));
         } else{
             $token = Json::decode($wxToken);
@@ -53,15 +54,19 @@ class Weixin
     protected static function getOptions()
     {
         return [
-            'debug'   => env('WECHAT_DEBUG'),
-            'app_id'  => env('WECHAT_APP_KEY'),
-            'secret'  => env('WECHAT_APP_SECRET'),
-            'token'   => env('WECHAT_APP_TOKEN'),
-            'aes_key' => env('WECHAT_AES_KEY'), // 可选
-            'log'     => [
+            'debug'       => env('WECHAT_DEBUG'),
+            'app_id'      => env('WECHAT_APP_KEY'),
+            'secret'      => env('WECHAT_APP_SECRET'),
+            'token'       => env('WECHAT_APP_TOKEN'),
+            'aes_key'     => env('WECHAT_AES_KEY'), // 可选
+            'log'         => [
                 'level' => 'debug',
-                'file'  => sys_get_temp_dir() . '/easywechat.log', // XXX: 绝对路径！！！！
+                'file'  => sys_get_temp_dir() . '/easywechat_survey.hivct.org.log', // XXX: 绝对路径！！！！
             ],
+            'guzzle'      => [
+                'timeout' => 30,
+            ],
+            'max_retries' => 3
 
         ];
     }

@@ -16,12 +16,8 @@ use wechat\Weixin;
 
 class CodeAction extends WwwBaseAction
 {
-    public function run($code)
+    public function run()
     {
-        echo "<pre>";
-        print_r($_SERVER);
-        echo "</pre>";
-        dd($code);
         $app = Weixin::getApp();
         try{
             /** @var \Overtrue\Socialite\User $user */

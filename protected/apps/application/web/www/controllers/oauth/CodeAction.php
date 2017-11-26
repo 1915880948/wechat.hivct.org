@@ -18,14 +18,16 @@ class CodeAction extends WwwBaseAction
     public function run()
     {
         $app = Weixin::getApp();
+        $oauth = $app->oauth;
         try{
+
             /** @var \Overtrue\Socialite\User $user */
-            $user = $app->oauth->user();
+            $user = $oauth->user();
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'oauth');
             return $this->controller->redirect(['site/login']);
         } finally{
-            //FileLogHelper::xlog($user, 'oauth');
+            FileLogHelper::xlog($oauth, 'oauth');
         }
         $openId = $user->getOriginal()['openid'];
         $member = WwwUser::findIdentityByAccessToken($openId);

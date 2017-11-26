@@ -30,8 +30,9 @@ class CodeAction extends WwwBaseAction
             FileLogHelper::xlog($oauth, 'oauth');
         }
         $openId = $user->getOriginal()['openid'];
+        FileLogHelper::xlog(['openid'=>$openId], 'oauth');
         $member = WwwUser::findIdentityByAccessToken($openId);
-        FileLogHelper::xlog('能够进入这一步', 'oauth');
+        FileLogHelper::xlog(['member'=>$member], 'oauth');
         // $userDetail = $app->user->get($user->getId());
         $userDetail = [];
         if(!$member){
@@ -45,12 +46,13 @@ class CodeAction extends WwwBaseAction
             }
             FileLogHelper::xlog('创建用户没有出错','oauth');
         }
-        FileLogHelper::xlog(var_export($member,true),'oauth');
+        FileLogHelper::xlog($member,'oauth');
         // else{
         //     if((time() - strtotime($member->updated_at)) > env('WECHAT_USER_TAGS_UPDATE_TIME')){//如果超过一天就更新吧
         //         $member->updateByWechat($user, $member);
         //     }
         // }
+
         $loginStatus = \Yii::$app->getUser()
                                  ->login($member, 86400);
         if($loginStatus){

@@ -27,7 +27,7 @@ class SiteController extends WwwBaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'province', 'test', 'upload'],
+                        'actions' => ['login', 'logout', 'province', 'test', 'upload'],
                         'allow'   => true,
                         'roles'   => ['?'],
                     ],

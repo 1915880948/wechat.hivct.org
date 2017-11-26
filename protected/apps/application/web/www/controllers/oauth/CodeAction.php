@@ -18,6 +18,7 @@ class CodeAction extends WwwBaseAction
 {
     public function run($code)
     {
+        dd($code);
         $app = Weixin::getApp();
         try{
             /** @var \Overtrue\Socialite\User $user */

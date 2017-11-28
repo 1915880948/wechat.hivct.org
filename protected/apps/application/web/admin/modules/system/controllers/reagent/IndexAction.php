@@ -8,11 +8,12 @@
 
 namespace application\web\admin\modules\system\controllers\reagent;
 
+use application\models\base\Logistics;
 use application\models\base\Reagent;
+use application\models\base\RelationReagentLogistics;
 use application\web\admin\components\AdminBaseAction;
 use common\core\session\GSession;
 use qiqi\helper\MessageHelper;
-use yii\helpers\Url;
 
 class IndexAction extends AdminBaseAction
 {
@@ -27,15 +28,32 @@ class IndexAction extends AdminBaseAction
         if($this->request->getIsPost()){
 
             if($model->create($this->request->post())){
+                //处理relation
+                $relations = $this->request->post('relation');
+                if($relations){
+                    if($id){
+                        RelationReagentLogistics::deleteAll(['reagent_id'=>$id]);
+                    }
+                    foreach($relations as $relation){
+                        $m = RelationReagentLogistics::create($id,$relation);
+                    }
+                }
                 // return $this->controller->redirect(Url::current());
-                return MessageHelper::success(($id ? "编辑 " : "新增" ). "成功", gUrl($this->getUniqueId()));
+                return MessageHelper::success(($id ? "编辑 " : "新增") . "成功", gUrl($this->getUniqueId()));
             }
 
             GSession::setDbError($model);
         }
         $reagents = Reagent::getInstance();
         $provider = $reagents->search([]);
+        $logistics = Logistics::getInstance()
+                              ->getAllActivateLogistics();
 
-        return $this->render(compact('provider', 'model'));
+        $logi_related = [];
+        if($id > 0){
+            $logi_related = RelationReagentLogistics::getLogisticsByReagentId($id);
+        }
+
+        return $this->render(compact('provider', 'model', 'logistics','logi_related'));
     }
 }

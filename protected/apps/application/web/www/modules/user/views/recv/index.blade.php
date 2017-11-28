@@ -12,42 +12,44 @@
           <input class="weui-input" type="text" name="logistics" id="logistics" placeholder="请选择发货地" onfocus="this.blur()">
         </div>
       </div>
-      @foreach($products as $type => $_products)
-        <div class="weui-cells__title">{{$model->getTypeName($type)}}</div>
-        @if($type == 'free')
-          <div class="weui-cells weui-cells_radio">
-            <label class="weui-cell weui-check__label" for="xx0">
-              <div class="weui-cell__bd">
-                <p>不选择任何试剂</p>
-              </div>
-              <div class="weui-cell__ft">
-                <input type="radio" class="weui-check" name="product[{{$type}}]" value="0" id="xx0"> <span class="weui-icon-checked"></span>
-              </div>
-            </label>
-            @foreach($_products as $product)
-              <label class="weui-cell weui-check__label" for="xx{{$product['id']}}">
+      <div class="products">
+        @foreach($products as $type => $_products)
+          <div class="weui-cells__title">{{$model->getTypeName($type)}}</div>
+          @if($type == 'free')
+            <div class="weui-cells weui-cells_radio">
+              <label class="weui-cell weui-check__label" for="xx0">
                 <div class="weui-cell__bd">
-                  <p>{{$product['name']}}</p>
+                  <p>不选择任何试剂</p>
                 </div>
                 <div class="weui-cell__ft">
-                  <input type="radio" class="weui-check" name="product[{{$type}}]" value="{{$product['id']}}" id="xx{{$product['id']}}">
-                  <span class="weui-icon-checked"></span>
+                  <input type="radio" class="weui-check" name="product[{{$type}}]" value="0" id="xx0"> <span class="weui-icon-checked"></span>
                 </div>
               </label>
-            @endforeach
-          </div>
-        @else
-          @foreach($_products as $product)
-            <div class="weui-cell weui-cell_switch">
-              <div class="weui-cell__bd">{{$product['name']}} @if($product['price']>0) ({{$product['price']}}) @endif</div>
-              <div class="weui-cell__ft">
-                <input id="xx{{$product['id']}}" name="product[{{$type}}][{{$product['id']}}]" class="weui-switch" type="checkbox" data-price="{{$product['price']}}">
-              </div>
+              @foreach($_products as $product)
+                <label class="weui-cell weui-check__label" for="xx{{$product['id']}}">
+                  <div class="weui-cell__bd">
+                    <p>{{$product['name']}}</p>
+                  </div>
+                  <div class="weui-cell__ft">
+                    <input type="radio" class="weui-check" name="product[{{$type}}]" value="{{$product['id']}}" id="xx{{$product['id']}}" @if(isset($rel[$product['id']])) data-rel="{{json_encode($rel[$product['id']])}} @endif">
+                    <span class="weui-icon-checked"></span>
+                  </div>
+                </label>
+              @endforeach
             </div>
-          @endforeach
-        @endif
+          @else
+            @foreach($_products as $product)
+              <div class="weui-cell weui-cell_switch">
+                <div class="weui-cell__bd">{{$product['name']}} @if($product['price']>0) ({{$product['price']}}) @endif</div>
+                <div class="weui-cell__ft">
+                  <input id="xx{{$product['id']}}" name="product[{{$type}}][{{$product['id']}}]" class="weui-switch" type="checkbox" @if(isset($rel[$product['id']])) data-rel="{{json_encode($rel[$product['id']])}}" @endif data-price="{{$product['price']}}">
+                </div>
+              </div>
+            @endforeach
+          @endif
 
-      @endforeach
+        @endforeach
+      </div>
       <input type="hidden" name="address_uuid" value="{{$address->uuid}}">
       <div class="weui-cells__title">请填写您的收货信息：</div>
       <div class="weui-cell">
@@ -129,6 +131,15 @@
           $("#logistics").select({
               title: "选择发货地",
               items: {!! $logistics !!}
+          }).on('change', function () {
+              $('.products input').attr('disabled', false);
+              var id = parseInt($(this).data('values'));
+              console.log(id);
+              $('input[data-rel]').each(function () {
+                  if ($.inArray(id, $(this).data('rel')) === -1) {
+                      $(this).attr('disabled', true);
+                  }
+              });
           });
           $('#next-btn').on('click', function () {
 

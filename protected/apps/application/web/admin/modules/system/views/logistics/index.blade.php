@@ -103,7 +103,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                     </div>
                   </div>
                   <div class="form-group field-logistics-weeks" id="field-logistics-sign_name">
-                    <label class="control-label" for="logistics-subname">商品简写</label>
+                    <label class="control-label" for="logistics-subname">发货地简写</label>
                     <div>
                       <div class="input-group spinner">
                         <input type="text" class="form-control " name="Logistics[sign_name]" value="{{ $model->sign_name }}" id="logistics-sign_name">

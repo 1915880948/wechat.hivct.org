@@ -151,7 +151,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                     <label class="control-label" for="reagent-subname">商品类型</label>
                     <div>
                       <div class="input-group ">
-                        {!! ySelect('Reagent[type]',$model->type,gArrayHelper()->merge([0=>'请选择商品类型'],$model->getTypes())) !!}
+                        {!! ySelect('Reagent[type]',$model->type,gArrayHelper()->merge([0=>'请选择商品类型'],$model->getTypes()),['class'=>'form-control select2']) !!}
                       </div>
                       <p class="help-block help-block-error"></p>
                       <p class="help-block "></p>
@@ -167,6 +167,17 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                       <a class="preview_reagent-image btn btn-primary btn-xs middle" href="#preview-reagent_image" style="margin-left:5px;" data-toggle="modal">预览</a>
                       <p class="help-block help-block-error"></p>
                       <p class="help-block " id="imagefsUploadProgress"></p>
+                    </div>
+                  </div>
+                  <div class="form-group field-reagent-image" id="field-reagent-image">
+                    <label class="control-label" for="reagent-image">请选择与该商品相关的发货地</label>
+                    <div>
+                      <select id="multiple" class="form-control select2-multiple select2" aria-hidden="true" name="relation[]" multiple size="1">
+                        @foreach($logistics as $logistic)
+                          <option value="{{$logistic['id']}}" @if(in_array($logistic['id'],array_keys($logi_related))) selected="selected" @endif>{{$logistic['title']}}</option>
+                        @endforeach
+                      </select>
+                      <p class="help-block ">不选，代表所有发货地都能发货</p>
                     </div>
                   </div>
                   <div class="form-group field-reagent-write_image" id="field-reagent-write_image">
@@ -215,15 +226,17 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
 @stop
 
 @push('head-style')
-
+  <link href="{{yStatic('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{yStatic('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
 @endpush
 
 @push('foot-script')
-  <script src="{{yStatic('vendor/plugins/qiniu/plupload.min.js')}}" defer></script>
-  <script src="{{yStatic('vendor/plugins/plupload/i18n/zh_CN.js')}}" defer></script>
-  <script src="{{yStatic('vendor/plugins/qiniu/qiniu.min.js')}}" defer></script>
-  <script src="{{yStatic('vendor/plugins/qiniu/progress.js')}}" defer></script>
-  <script src="{{yStatic('vendor/plugins/datepicker/bootstrap-datepicker.js')}}" defer></script>
+  <script src="{{gStatic('vendor/plugins/qiniu/plupload.min.js')}}" defer></script>
+  <script src="{{gStatic('vendor/plugins/plupload/i18n/zh_CN.js')}}" defer></script>
+  <script src="{{gStatic('vendor/plugins/qiniu/qiniu.min.js')}}" defer></script>
+  <script src="{{gStatic('vendor/plugins/qiniu/progress.js')}}" defer></script>
+  <script src="{{gStatic('vendor/plugins/datepicker/bootstrap-datepicker.js')}}" defer></script>
+  <script src="{{yStatic('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
   <script type="text/javascript" defer>
       function uploader(id) {
           return Qiniu.uploader({
@@ -274,6 +287,9 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
       }
 
       $(function () {
+          $.fn.select2.defaults.set("theme","bootstrap");
+          $(".select2me").select2({placeholder:"Select",width:"auto",allowClear:!0});
+          $('.select2').select2({});
           var filename = "";
           $('a[href="#preview-reagent"]').on('click', function () {
               var cdnPrefix = '';

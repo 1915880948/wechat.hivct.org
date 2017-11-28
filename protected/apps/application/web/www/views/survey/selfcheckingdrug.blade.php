@@ -30,26 +30,27 @@
         <div class="weui-cell ">
           <div class="weui-cell__hd">您目前主要使用哪种毒品?</div>
           <div class="weui-cell__bd">
-            <input class="weui-input" type="text" name="drug_type" id="drug_type" placeholder="请选择毒品类型">
+            <input class="weui-input" type="text" name="drug_type" id="drug_type" placeholder="请选择毒品类型" value="{{$survey['drug_type']}}">
           </div>
         </div>
         <div class="weui-cell ">
           <div class="weui-cell__hd">您使用毒品的频率?</div>
           <div class="weui-cell__bd">
-            <input class="weui-input" type="text" name="drug_rate" id="drug_rate" placeholder="请选择毒品使用频率">
+            <input class="weui-input" type="text" name="drug_rate" id="drug_rate" placeholder="请选择毒品使用频率" value="{{$survey['drug_rate']}}">
           </div>
         </div>
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">最近一个月,您使用过毒品吗?</div>
           <div class="weui-cell__ft">
-            <input id="is_use_drug_near_month" name="is_use_drug_near_month" class="weui-switch" type="checkbox">
+            <input id="is_use_drug_near_month" name="is_use_drug_near_month" class="weui-switch" type="checkbox" value="{{$survey['is_use_drug_near_month']}}">
           </div>
         </div>
         <div id="drug_near_month" class="app-hide">
           <div class="weui-cell ">
             <div class="weui-cell__hd">最近一个月,您使用毒品的频率?</div>
             <div class="weui-cell__bd">
-              <input class="weui-input" type="text" name="drug_near_month_num" id="drug_near_month_num" placeholder="请输入"></div>
+              <input class="weui-input" type="text" name="drug_near_month_num" id="drug_near_month_num" placeholder="请输入" value="{{$survey['drug_near_month_num']}}">
+            </div>
             <div class="weui-cell__ft">
               <h3 class="" style="width:1.5rem;">次/月</h3>
             </div>
@@ -58,21 +59,22 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">你曾经注射过毒品吗?</div>
           <div class="weui-cell__ft">
-            <input id="is_use_inject" name="is_use_inject" class="weui-switch" type="checkbox">
+            <input id="is_use_inject" name="is_use_inject" class="weui-switch" type="checkbox" value="{{$survey['is_use_inject']}}">
           </div>
         </div>
         <div id="inject_cond" class="app-hide">
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">最近一个月，您注射过毒品吗?</div>
             <div class="weui-cell__ft">
-              <input id="is_use_inject_near_month" name="is_use_inject_near_month" class="weui-switch" type="checkbox">
+              <input id="is_use_inject_near_month" name="is_use_inject_near_month" value="{{$survey['is_use_inject_near_month']}}" class="weui-switch" type="checkbox">
             </div>
           </div>
           <div id="inject_near_month_cond" class="app-hide">
             <div class="weui-cell ">
               <div class="weui-cell__hd">最近一个月,您注射毒品的频率？</div>
               <div class="weui-cell__bd">
-                <input class="weui-input" type="text" name="inject_near_month_num" id="inject_near_month_num" placeholder="请输入"></div>
+                <input class="weui-input" type="text" name="inject_near_month_num" value="{{$survey['inject_near_month_num']}}" id="inject_near_month_num" placeholder="请输入">
+              </div>
               <div class="weui-cell__ft">
                 <p class="" style="width:1.5rem;">次/月</p>
               </div>
@@ -81,19 +83,20 @@
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">您曾经与别人共用过针具吗？</div>
             <div class="weui-cell__ft">
-              <input id="is_use_pinhead" name="is_use_pinhead" class="weui-switch" type="checkbox">
+              <input id="is_use_pinhead" name="is_use_pinhead" class="weui-switch" value="{{$survey['is_use_pinhead']}}" type="checkbox">
             </div>
           </div>
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">最近一个月，您注射毒品时与别人共用过针具吗?</div>
             <div class="weui-cell__ft">
-              <input id="is_use_pinhead_near_month" name="is_use_pinhead_near_month" class="weui-switch" type="checkbox">
+              <input id="is_use_pinhead_near_month" name="is_use_pinhead_near_month" value="{{$survey['is_use_pinhead_near_month']}}" class="weui-switch" type="checkbox">
             </div>
           </div>
           <div class="weui-cell ">
             <div class="weui-cell__hd">最近一个月注射毒品时，与别人共用针具的频率如何？</div>
             <div class="weui-cell__bd">
-              <input class="weui-input" type="text" name="pinhead_near_month_num" id="pinhead_near_month_num" placeholder="请选择"></div>
+              <input class="weui-input" type="text" name="pinhead_near_month_num" value="{{$survey['pinhead_near_month_num']}}" id="pinhead_near_month_num" placeholder="请选择">
+            </div>
             {{--<div class="weui-cell__ft">--}}
             {{--次/月--}}
             {{--</div>--}}

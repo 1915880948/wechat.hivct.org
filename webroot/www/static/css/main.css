@@ -19,7 +19,7 @@ input ,select ,textarea ,button { border:0; -webkit-appearance:none; border-radi
 .app-content-padded{ padding:15px; }
 .app-second-title{ text-align:center; font-size:24px; color:#3CC51F; font-weight:400; margin:0 15%; }
 .app-hide{ display:none; }
-
+.hide{ display:none; }
 
 /** footer */
 footer{ text-align:center; font-size:14px; padding:20px; }

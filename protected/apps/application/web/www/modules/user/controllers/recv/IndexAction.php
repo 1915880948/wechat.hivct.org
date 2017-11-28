@@ -10,6 +10,7 @@ namespace application\web\www\modules\user\controllers\recv;
 
 use application\models\base\Logistics;
 use application\models\base\Reagent;
+use application\models\base\RelationReagentLogistics;
 use application\models\base\UserAddress;
 use application\web\www\components\WwwBaseAction;
 use yii\helpers\Json;
@@ -25,8 +26,14 @@ class IndexAction extends WwwBaseAction
         foreach($reagents as $reagent){
             $products[$reagent['type']][] = $reagent;
         }
+        $relations = RelationReagentLogistics::find()->all();
+        $rel = [];
+        foreach($relations as $relation){
+            $rel[$relation['reagent_id']][] = $relation['logistics_id'];
+        }
         $alllogistics = Logistics::getInstance()
                                  ->getAllActivateLogistics();
+        $logistics = [];
         foreach($alllogistics as $v){
             $logistics[] = [
                 'title' => $v['title'],
@@ -42,7 +49,7 @@ class IndexAction extends WwwBaseAction
 
         $targetUrl = $this->getTargetUrl($event_type);
 
-        return $this->render(compact('products', 'model', 'logistics', 'targetUrl', 'use_address', 'hasDefaultAddress', 'address','event_type'));
+        return $this->render(compact('products', 'model', 'logistics', 'targetUrl', 'use_address', 'hasDefaultAddress', 'address','event_type','rel'));
     }
 
     protected function getTargetUrl($type)

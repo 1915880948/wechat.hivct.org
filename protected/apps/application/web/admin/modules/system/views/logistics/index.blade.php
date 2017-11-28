@@ -59,12 +59,24 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                             'headerOptions'  => ['class' => 'center'],
                             'contentOptions' => ['class' => 'col-sm-2 center'],
                             'class'          => 'yii\grid\ActionColumn',
-                            'template'       => '{edit} {add} <br> {picture} {extend} <br> {class}',
+                            'template'       => '{edit} {delete} ',
                             'buttons'        => [
-                                'edit' => function($url, $model) use ($selfurl) {
+                                'edit'   => function($url, $model) use ($selfurl) {
                                     return Html::a('编辑', [$selfurl, 'id' => $model['id']], []);
                                 },
-
+                                'delete' => function($url, $model) use ($selfurl) {
+                                    // [$selfurl, 'id' => $model['id']]
+                                    //                                     return Html::a('删除','javascript:;', ['data'=>['method'=>'post','confirm'=>'您确认要删除吗？']]);
+                                    return Html::a('删除', ['/system/logistics/delete', 'id' => $model['id']], [
+                                        'data' => [
+                                            'method'  => 'post',
+                                            'confirm' => '您确认要删除吗？',
+                                            'params'  => [
+                                                'id' => $model['id']
+                                            ]
+                                        ]
+                                    ]);
+                                },
                             ],
                         ],
                         /** @var yii\grid\ActionColumn */

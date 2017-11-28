@@ -90,13 +90,23 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                             'headerOptions'  => ['class' => 'center'],
                             'contentOptions' => ['class' => 'col-sm-2 center'],
                             'class'          => 'yii\grid\ActionColumn',
-                            'template'       => '{edit} {add} <br> {picture} {extend} <br> {class}',
+                            'template'       => '{edit} {delete} ',
                             'buttons'        => [
-                                'edit' => function($url, $model) use ($selfurl) {
+                                'edit'   => function($url, $model) use ($selfurl) {
                                     return Html::a('编辑', [$selfurl, 'id' => $model['id']], []);
                                 },
-                                'del'  => function($url, $model) use ($selfurl) {
-                                    return Html::a('禁用', 'javascript:;', []);
+                                'delete' => function($url, $model) use ($selfurl) {
+                                    // [$selfurl, 'id' => $model['id']]
+                                    //                                     return Html::a('删除','javascript:;', ['data'=>['method'=>'post','confirm'=>'您确认要删除吗？']]);
+                                    return Html::a('删除', ['/system/logistics/delete', 'id' => $model['id']], [
+                                        'data' => [
+                                            'method'  => 'post',
+                                            'confirm' => '您确认要删除吗？',
+                                            'params'  => [
+                                                'id' => $model['id']
+                                            ]
+                                        ]
+                                    ]);
                                 },
 
                             ],
@@ -226,8 +236,8 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
 @stop
 
 @push('head-style')
-  <link href="{{yStatic('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-  <link href="{{yStatic('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{yStatic('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 @endpush
 
 @push('foot-script')
@@ -287,8 +297,8 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
       }
 
       $(function () {
-          $.fn.select2.defaults.set("theme","bootstrap");
-          $(".select2me").select2({placeholder:"Select",width:"auto",allowClear:!0});
+          $.fn.select2.defaults.set("theme", "bootstrap");
+          $(".select2me").select2({placeholder: "Select", width: "auto", allowClear: !0});
           $('.select2').select2({});
           var filename = "";
           $('a[href="#preview-reagent"]').on('click', function () {

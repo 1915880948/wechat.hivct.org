@@ -80,6 +80,7 @@
   <script src="{{yStatic('assets/layouts/layout4/scripts/demo.min.js')}}" type="text/javascript"></script>
   <script src="{{gStatic('vendor/layer/layer.js')}}" type="text/javascript"></script>
   <script src="//cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
+  <script src="{{gStatic('vendor/yii/yii.js')}}"></script>
   {{--<script src="{{gStatic('app.js')}}" type="text/javascript"></script>--}}
   <script>
       $(function () {

@@ -24,6 +24,7 @@ class SubmitOrderAction extends WwwBaseAction
         echo "<pre>";
         print_r($this->request->post());
         echo "</pre>";
+        var_dump($this->request->getIsPost());
         exit;
         $payinfo = $this->request->post('payinfo');
         try{

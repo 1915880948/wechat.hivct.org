@@ -27,6 +27,14 @@ class Reagent extends TblReagent
         self::TYPE_CHARGE => '付费试剂',
     ];
 
+    public static function getByOrder($ids)
+    {
+        return self::find()
+                   ->andWhere(['id' => $ids])
+                   ->orderBy('type')
+                   ->all();
+    }
+
     /**
      * 返回所有的ReAgent
      * @return array|\yii\db\ActiveRecord[]|Reagent[]

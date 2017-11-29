@@ -12,7 +12,7 @@ use Yii;
  * @property string $order_uuid
  * @property string $goods_uuid
  * @property string $goods_title
- * @property integer $goods_price
+ * @property string $goods_price
  * @property string $order_time
  * @property integer $is_shipped
  * @property string $ship_type
@@ -37,8 +37,9 @@ class TblOrderDetail extends \application\common\db\ApplicationActiveRecord
     public function rules()
     {
         return [
-            [['goods_price', 'is_shipped'], 'integer'],
+            [['goods_price'], 'number'],
             [['order_time', 'ship_time', 'created_at', 'updated_at'], 'safe'],
+            [['is_shipped'], 'integer'],
             [['uuid', 'order_uuid', 'goods_uuid'], 'string', 'max' => 36],
             [['goods_title', 'ship_type', 'ship_code'], 'string', 'max' => 50],
             [['uuid'], 'unique']

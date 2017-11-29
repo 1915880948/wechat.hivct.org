@@ -12,10 +12,15 @@ use Ramsey\Uuid\Uuid;
 use yii\behaviors\AttributeBehavior;
 use yii\db\BaseActiveRecord;
 
+/**
+ * 更样的的时候如果有值就不再覆盖
+ * Class CommonUUIDBehavior
+ * @package common\core\db\behaviors
+ */
 class CommonUUIDBehavior extends AttributeBehavior
 {
-    use SafeAttributeBehavior;
     public $createdByAttribute = 'uuid';
+    use UnSafeAttributeBehavior;
 
     /**
      * @inheritdoc
@@ -27,6 +32,7 @@ class CommonUUIDBehavior extends AttributeBehavior
         if(empty($this->attributes)){
             $this->attributes = [
                 BaseActiveRecord::EVENT_BEFORE_INSERT => [$this->createdByAttribute],
+                BaseActiveRecord::EVENT_BEFORE_UPDATE => $this->createdByAttribute,
             ];
         }
     }
@@ -38,9 +44,9 @@ class CommonUUIDBehavior extends AttributeBehavior
     protected function getValue($event)
     {
         if($this->value === null){
-            return Uuid::uuid1()->toString();
+            return Uuid::uuid1()
+                       ->toString();
         }
-
         return parent::getValue($event);
     }
 }

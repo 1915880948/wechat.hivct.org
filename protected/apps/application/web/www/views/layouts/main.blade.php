@@ -155,6 +155,7 @@
 <script src="{{gStatic('vendor/jquery/jquery.hammer.js')}}"></script>
 <script src="{{gStatic('vendor/progress/nprogress.js')}}"></script>
 <script src="{{yStatic('js/app.js')}}"></script>
+<script src="{{gStatic('vendor/yii/yii.js')}}"></script>
 <script>
     $(function () {
 //        FastClick.attach(document.body);

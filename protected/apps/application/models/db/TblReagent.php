@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "{{%reagent}}".
  *
  * @property integer $id
+ * @property string $uuid
  * @property string $name
  * @property string $subname
  * @property string $description
@@ -37,6 +38,7 @@ class TblReagent extends \application\common\db\ApplicationActiveRecord
             [['type'], 'required'],
             [['price'], 'number'],
             [['status', 'stock'], 'integer'],
+            [['uuid'], 'string', 'max' => 36],
             [['name'], 'string', 'max' => 30],
             [['subname'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 500],
@@ -54,6 +56,7 @@ class TblReagent extends \application\common\db\ApplicationActiveRecord
     {
         return [
             'id' => 'ID',
+            'uuid' => 'Uuid',
             'name' => '试剂名称',
             'subname' => '附加名称',
             'description' => '说明',

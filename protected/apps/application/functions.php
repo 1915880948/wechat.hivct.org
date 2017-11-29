@@ -49,5 +49,14 @@ function gArrayHelper()
 function gUrl($url, $schema = false)
 {
     $url = "/" . Url::to($url);
-    return Url::to($url,$schema);
+    return Url::to($url, $schema);
+}
+
+/**
+ * 返回全局首页
+ * @return string
+ */
+function gHomeUrl()
+{
+    return '/site/index';
 }

@@ -17,7 +17,7 @@ use yii\helpers\Json;
 
 class SubmitOrderAction extends WwwBaseAction
 {
-    public $method = 'post';
+    // public $method = 'post';
 
     public function run()
     {

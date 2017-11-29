@@ -35,7 +35,8 @@
     <div class="weui-form-preview" style="width:100%">
       <div class="weui-form-preview__ft">
         <a class="weui-form-preview__btn weui-form-preview__btn_default" href="{{yUrl(['/site/index'])}}">放弃获取试剂</a>
-        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="{{yUrl(['/user/recv/submitorder'])}}" data-method="post" data-confirm="您确认要提交吗？" data-params='{"payinfo":"{{$payinfo}}"}'>确认@if($totalPrice>0)并付款@endif</a>
+        {{--data-confirm="您确认要提交吗？"--}}
+        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="{{yUrl(['/user/recv/submitorder'])}}" data-method="post"  data-params='{"payinfo":"{{$payinfo}}"}'>确认@if($totalPrice>0)并付款@endif</a>
       </div>
     </div>
   </div>

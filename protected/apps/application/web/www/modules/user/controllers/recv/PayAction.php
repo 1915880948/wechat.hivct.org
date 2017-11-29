@@ -68,22 +68,22 @@ class PayAction extends WwwBaseAction
             'source_type'  => 'survey',
             'source_uuid'  => $eventId
         ]), 'ENCODE', env('WECHAT_APP_KEY'));
-        echo "<pre>";
-        print_r([
-            'trade_type'   => 'JSAPI',
-            'body'         => "互联网+艾滋病快速自检试剂发放",
-            'detail'       => join(",", $details),
-            'out_trade_no' => $tradeno,
-            'total_fee'    => $totalPrice, //目前是0
-            'openid'       => $this->account->openid,
-            'notify_url'   => Url::to(['/oauth/notify'], true),
-            'logistcis'    => $logistcisInfo !== null ? $logistcisInfo->attributes : [],
-            'uid'          => $this->account->uid,
-            'goods_list'   => Json::encode($products),
-            'source_type'  => 'survey',
-            'source_uuid'  => $eventId
-        ]);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r([
+        //     'trade_type'   => 'JSAPI',
+        //     'body'         => "互联网+艾滋病快速自检试剂发放",
+        //     'detail'       => join(",", $details),
+        //     'out_trade_no' => $tradeno,
+        //     'total_fee'    => $totalPrice, //目前是0
+        //     'openid'       => $this->account->openid,
+        //     'notify_url'   => Url::to(['/oauth/notify'], true),
+        //     'logistcis'    => $logistcisInfo !== null ? $logistcisInfo->attributes : [],
+        //     'uid'          => $this->account->uid,
+        //     'goods_list'   => Json::encode($products),
+        //     'source_type'  => 'survey',
+        //     'source_uuid'  => $eventId
+        // ]);
+        // echo "</pre>";
         return $this->render(compact('products', 'logistcisInfo', 'totalPrice', 'payinfo'));
     }
 }

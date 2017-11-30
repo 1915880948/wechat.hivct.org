@@ -21,6 +21,9 @@ class SubmitOrderAction extends WwwBaseAction
 
     public function run()
     {
+        echo "<pre>";
+        print_r($this->request->post());
+        echo "</pre>";
         $payinfo = $this->request->post('payinfo');
         echo $payinfo;
         try{

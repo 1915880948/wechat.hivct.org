@@ -163,11 +163,11 @@
             console.log($(this).data('info'));
             alert($(this).data('info'));
         });
-        $(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container', {
-            timeout: 8000,
-            fragment: '#pjax-container'
-        });
-        $(document).on('pjax:start', NProgress.start).on('pjax:end', NProgress.done);
+//        $(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container', {
+//            timeout: 8000,
+//            fragment: '#pjax-container'
+//        });
+//        $(document).on('pjax:start', NProgress.start).on('pjax:end', NProgress.done);
     })
 </script>
 </body>

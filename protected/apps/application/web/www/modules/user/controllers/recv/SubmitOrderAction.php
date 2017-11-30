@@ -13,32 +13,36 @@ use application\web\www\components\WwwBaseAction;
 use qiqi\helper\CryptHelper;
 use qiqi\helper\log\FileLogHelper;
 use qiqi\helper\MessageHelper;
-use yii\base\Action;
 use yii\helpers\Json;
 
-class SubmitOrderAction extends Action
+class SubmitOrderAction extends WwwBaseAction
 {
     // public $method = 'post';
 
     public function run()
     {
         echo "<pre>";
-        print_r(\Yii::$app->request->post());
+        print_r($this->request->post());
         echo "</pre>";
-        $payinfo = \Yii::$app->request->post('payinfo');
+        $payinfo = $this->request->post('payinfo');
         echo $payinfo;
         try{
             $postdata = Json::decode(CryptHelper::authcode($payinfo, 'DECODE', env('WECHAT_APP_KEY')));
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'payment');
+        } finally{
+            if(!$postdata){
+                $postdata = [
+                    'uid' => -1
+                ];
+            }
         }
         echo "<pre>";
         print_r($postdata);
         echo "</pre>";
         echo "<pre>";
-        print_r(\Yii::$app->getUser()->getIdentity());
+        print_r($this->account);
         echo "</pre>";
-        \Yii::$app->end();
         exit;
         if($postdata['uid'] != $this->account['uid']){
             return MessageHelper::error('对不起，您提交的订单不是由您自己创建的', [gHomeUrl()]);

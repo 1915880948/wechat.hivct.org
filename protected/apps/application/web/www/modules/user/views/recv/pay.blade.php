@@ -39,7 +39,7 @@
       <div class="weui-form-preview__ft">
         <a class="weui-form-preview__btn weui-form-preview__btn_default" href="{{yUrl(['/site/index'])}}">放弃获取试剂</a>
         {{--<input class="weui-form-preview__btn weui-form-preview__btn_primary" type="submit"  data-pjax=0 data-method="post" data-confirm="您确认要提交吗？" data-params='{"payinfo":"{{$payinfo}}"}'>确认@if($totalPrice>0)并付款@endif</input>--}}
-        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:;" id="_dosubmit">确认@if($totalPrice>0)并付款@endif</a>
+        <button class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:void(0);" id="_dosubmit">确认@if($totalPrice>0)并付款@endif</button>
       </div>
     </div>
   </div>
@@ -50,7 +50,6 @@
       $(function () {
         {{--var payinfo = '{{$payinfo}}';--}}
         $('#_dosubmit').on('click', function (e) {
-            e.preventDefault();
             $('#submit_order').submit();
         });
       });

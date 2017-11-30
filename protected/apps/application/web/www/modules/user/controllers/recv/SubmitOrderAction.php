@@ -30,12 +30,6 @@ class SubmitOrderAction extends WwwBaseAction
             $postdata = Json::decode(CryptHelper::authcode($payinfo, 'DECODE', env('WECHAT_APP_KEY')));
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'payment');
-        } finally{
-            if(!$postdata){
-                $postdata = [
-                    'uid' => -1
-                ];
-            }
         }
         echo "<pre>";
         print_r($postdata);

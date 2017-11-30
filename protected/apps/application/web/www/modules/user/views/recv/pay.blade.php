@@ -50,6 +50,7 @@
       $(function () {
         {{--var payinfo = '{{$payinfo}}';--}}
         $('#_dosubmit').hammer().on('tap', function (e) {
+            $(this).off();
             $('#submit_order').submit();
         });
       });

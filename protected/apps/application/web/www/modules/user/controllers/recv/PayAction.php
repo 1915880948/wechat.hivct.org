@@ -34,6 +34,9 @@ class PayAction extends WwwBaseAction
         $logistcis = $orderTemporary['logistics'];
         $ids = [];
         $totalPrice = 0;
+        echo "<pre>";
+        print_r($products);
+        echo "</pre>";
         foreach($products as $type => $product){
             $pid = array_keys($product);
             $ids = ArrayHelper::merge($ids, $pid);

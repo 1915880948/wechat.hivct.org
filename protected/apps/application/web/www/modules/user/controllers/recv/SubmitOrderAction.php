@@ -22,6 +22,7 @@ class SubmitOrderAction extends WwwBaseAction
     public function run()
     {
         $payinfo = $this->request->post('payinfo');
+        echo $payinfo;
         try{
             $postdata = Json::decode(CryptHelper::authcode($payinfo, 'DECODE', env('WECHAT_APP_KEY')));
         } catch(\Exception $e){

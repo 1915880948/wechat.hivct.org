@@ -33,16 +33,15 @@
   </div>
   <div class="weui-tabbar">
     <form method="post" action="{{yUrl(['/user/recv/submitorder'])}}" id="submit_order" style="width:100%">
-      <input type="text" name="_csrf" value="{{yRequest()->getCsrfToken()}}"/>
-      <input type="text" name="payinfo" value="{{$payinfo}}"/>
-      <div class="weui-form-preview" style="width:100%">
-        <div class="weui-form-preview__ft">
-          <a class="weui-form-preview__btn weui-form-preview__btn_default" href="{{yUrl(['/site/index'])}}">放弃获取试剂</a>
-          {{--<input class="weui-form-preview__btn weui-form-preview__btn_primary" type="submit"  data-pjax=0 data-method="post" data-confirm="您确认要提交吗？" data-params='{"payinfo":"{{$payinfo}}"}'>确认@if($totalPrice>0)并付款@endif</input>--}}
-          <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:;" id="_dosubmit" >确认@if($totalPrice>0)并付款@endif</a>
-        </div>
-      </div>
+      <input type="text" name="_csrf" value="{{yRequest()->getCsrfToken()}}"/> <input type="text" name="payinfo" value="{{$payinfo}}"/>
     </form>
+    <div class="weui-form-preview" style="width:100%">
+      <div class="weui-form-preview__ft">
+        <a class="weui-form-preview__btn weui-form-preview__btn_default" href="{{yUrl(['/site/index'])}}">放弃获取试剂</a>
+        {{--<input class="weui-form-preview__btn weui-form-preview__btn_primary" type="submit"  data-pjax=0 data-method="post" data-confirm="您确认要提交吗？" data-params='{"payinfo":"{{$payinfo}}"}'>确认@if($totalPrice>0)并付款@endif</input>--}}
+        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:;" id="_dosubmit">确认@if($totalPrice>0)并付款@endif</a>
+      </div>
+    </div>
   </div>
 @stop
 
@@ -54,7 +53,7 @@
             e.preventDefault();
             $.confirm('您确认要提交订单吗？', '确认', function () {
                 $('#submit_order').submit();
-                return ;
+                return;
             })
         });
       });

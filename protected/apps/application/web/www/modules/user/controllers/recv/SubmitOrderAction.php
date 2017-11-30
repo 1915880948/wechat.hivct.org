@@ -33,7 +33,7 @@ class SubmitOrderAction extends WwwBaseAction
                 ];
             }
         }
-        if($postdata['uid'] != $this->account->uid){
+        if($postdata['uid'] != $this->account['uid']){
             return MessageHelper::error('对不起，您提交的订单不是由您自己创建的', [gHomeUrl()]);
         }
 

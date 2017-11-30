@@ -13,18 +13,19 @@ use application\web\www\components\WwwBaseAction;
 use qiqi\helper\CryptHelper;
 use qiqi\helper\log\FileLogHelper;
 use qiqi\helper\MessageHelper;
+use yii\base\Action;
 use yii\helpers\Json;
 
-class SubmitOrderAction extends WwwBaseAction
+class SubmitOrderAction extends Action
 {
     // public $method = 'post';
 
     public function run()
     {
         echo "<pre>";
-        print_r($this->request->post());
+        print_r(\Yii::$app->request->post());
         echo "</pre>";
-        $payinfo = $this->request->post('payinfo');
+        $payinfo = \Yii::$app->request->post('payinfo');
         echo $payinfo;
         try{
             $postdata = Json::decode(CryptHelper::authcode($payinfo, 'DECODE', env('WECHAT_APP_KEY')));
@@ -35,7 +36,7 @@ class SubmitOrderAction extends WwwBaseAction
         print_r($postdata);
         echo "</pre>";
         echo "<pre>";
-        print_r($this->account);
+        print_r(\Yii::$app->getUser()->getIdentity());
         echo "</pre>";
         \Yii::$app->end();
         exit;

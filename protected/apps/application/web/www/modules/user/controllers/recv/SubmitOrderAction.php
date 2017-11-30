@@ -43,6 +43,7 @@ class SubmitOrderAction extends WwwBaseAction
         echo "<pre>";
         print_r($this->account);
         echo "</pre>";
+        \Yii::$app->end();
         exit;
         if($postdata['uid'] != $this->account['uid']){
             return MessageHelper::error('对不起，您提交的订单不是由您自己创建的', [gHomeUrl()]);

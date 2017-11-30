@@ -50,9 +50,11 @@
   <script>
       $(function () {
         {{--var payinfo = '{{$payinfo}}';--}}
-        $('#_dosubmit').on('click', function () {
+        $('#_dosubmit').on('click', function (e) {
+            e.preventDefault();
             $.confirm('您确认要提交订单吗？', '确认', function () {
                 $('#submit_order').submit();
+                return ;
             })
         });
       });

@@ -32,26 +32,28 @@
     </div>
   </div>
   <div class="weui-tabbar">
-    <div class="weui-form-preview" style="width:100%">
-      <div class="weui-form-preview__ft">
-        <a class="weui-form-preview__btn weui-form-preview__btn_default" href="{{yUrl(['/site/index'])}}">放弃获取试剂</a>
-        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="{{yUrl(['/user/recv/submitorder'])}}" data-pjax=0 data-method="post" data-confirm="您确认要提交吗？" data-params='{"payinfo":"{{$payinfo}}"}'>确认@if($totalPrice>0)并付款@endif</a>
+    <form method="post" action="{{yUrl(['/user/recv/submitorder'])}}" id="submit_order">
+      <input type="hidden" name="_csrf" value="{{yRequest()->getCsrfToken()}}"/> <input type="hidden" name="payinfo" value="{{$payinfo}}"/>
+      <div class="weui-form-preview" style="width:100%">
+        <div class="weui-form-preview__ft">
+          <a class="weui-form-preview__btn weui-form-preview__btn_default" href="{{yUrl(['/site/index'])}}">放弃获取试剂</a>
+          {{--<input class="weui-form-preview__btn weui-form-preview__btn_primary" type="submit"  data-pjax=0 data-method="post" data-confirm="您确认要提交吗？" data-params='{"payinfo":"{{$payinfo}}"}'>确认@if($totalPrice>0)并付款@endif</input>--}}
+          <input class="weui-form-preview__btn weui-form-preview__btn_primary" type="submit" id="_dosubmit">确认@if($totalPrice>0)并付款@endif</input>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 @stop
 
 @push('foot-script')
   <script>
       $(function () {
-          var payinfo = '{{$payinfo}}';
-          console.log(payinfo);
-          {{--$('.weui-form-preview__btn_primary').on('click', function () {--}}
-              {{--$.jsonPost('{{yUrl(['/user/recv/submitorder'])}}', {data: payinfo}, function (result) {--}}
-                  {{--console.log();--}}
-              {{--})--}}
-          {{--});--}}
-
+        {{--var payinfo = '{{$payinfo}}';--}}
+        $('_dosubmit').on('click', function () {
+            $.confirm('您确认要提交订单吗？', '确认', function () {
+                $('submit_order').submit();
+            })
+        });
       });
   </script>
 @endpush

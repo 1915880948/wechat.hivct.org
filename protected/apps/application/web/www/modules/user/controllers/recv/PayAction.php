@@ -36,7 +36,7 @@ class PayAction extends WwwBaseAction
         $totalPrice = 0;
         foreach($products as $type => $product){
             if(is_string($product)){
-                $pid = $product;
+                $pid[] = $product;
             } else{
                 $pid = array_keys($product);
             }

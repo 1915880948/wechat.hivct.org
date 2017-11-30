@@ -49,7 +49,7 @@
   <script>
       $(function () {
         {{--var payinfo = '{{$payinfo}}';--}}
-        $('#_dosubmit').on('click', function (e) {
+        $('#_dosubmit').hammer().on('tap', function (e) {
             $('#submit_order').submit();
         });
       });

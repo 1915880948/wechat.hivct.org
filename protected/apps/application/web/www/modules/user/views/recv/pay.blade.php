@@ -51,11 +51,9 @@
         {{--var payinfo = '{{$payinfo}}';--}}
         $('#_dosubmit').on('click', function (e) {
             e.preventDefault();
-//            $.confirm('您确认要提交订单吗？', '确认', function (e) {
-
-                $('#submit_order').submit();
-//                return;
-//            })
+            $.confirm('您确认要提交订单吗？', '确认', function (e) {
+                return $('#submit_order').submit();
+            })
         });
       });
   </script>

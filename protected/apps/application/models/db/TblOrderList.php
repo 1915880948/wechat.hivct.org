@@ -55,6 +55,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             [['ship_name'], 'string', 'max' => 20],
             [['ship_code'], 'string', 'max' => 30],
             [['source_type'], 'string', 'max' => 10],
+            [['out_trade_no'], 'unique'],
             [['uuid'], 'unique']
         ];
     }
@@ -75,7 +76,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'total_price' => 'Total Price',
             'wx_transaction_id' => '微信订单号',
             'pay_status' => '支付状态，0待支付，1已支付，-1支付失败',
-            'order_status' => '订单状态：0未处理，1处理中，2已发货，3已收货，11申请退款，12退款中，13退款完成，99已结束',
+            'order_status' => '订单状态：0未处理，1处理中，2已支付，3已发货，4已收货，11申请退款，12退款中，13退款完成，99已完成',
             'order_updated_at' => '订单更新时间',
             'ship_name' => 'Ship Name',
             'ship_code' => '快递单号',

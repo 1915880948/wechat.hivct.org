@@ -14,4 +14,5 @@ use common\core\base\controller\ActionsTrait;
 class OauthController extends BaseController
 {
     use ActionsTrait;
+    public $enableCsrfValidation=false;
 }

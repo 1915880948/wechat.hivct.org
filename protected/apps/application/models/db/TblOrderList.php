@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $uuid
+ * @property string $out_trade_no
  * @property integer $uid
  * @property string $info
  * @property string $description
@@ -43,16 +44,18 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
     public function rules()
     {
         return [
+            [['out_trade_no'], 'required'],
             [['uid', 'pay_status', 'order_status', 'ship_status'], 'integer'],
             [['total_price'], 'number'],
             [['order_updated_at', 'created_at', 'updated_at'], 'safe'],
-            [['uuid', 'wx_transaction_id', 'ship_uuid', 'source_uuid'], 'string', 'max' => 36],
+            [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid'], 'string', 'max' => 36],
             [['info'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 250],
             [['memo'], 'string', 'max' => 100],
             [['ship_name'], 'string', 'max' => 20],
             [['ship_code'], 'string', 'max' => 30],
-            [['source_type'], 'string', 'max' => 10]
+            [['source_type'], 'string', 'max' => 10],
+            [['uuid'], 'unique']
         ];
     }
 
@@ -64,6 +67,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
         return [
             'id' => 'ID',
             'uuid' => 'Uuid',
+            'out_trade_no' => '内部流水号',
             'uid' => 'Uid',
             'info' => '订单标题',
             'description' => '订单说明',

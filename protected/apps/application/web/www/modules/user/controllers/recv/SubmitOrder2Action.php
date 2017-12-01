@@ -44,24 +44,24 @@ class SubmitOrder2Action extends WwwBaseAction
             // return Schema::FailureNotify('订单已成功提交，请不要重复提交');
             // return MessageHelper::error('订单已成功提交，请不要重复提交');
         }
-
+        $trans = \Yii::$app->db->beginTransaction();
+        $order = OrderList::create($postdata);
+        if($order->hasErrors()){
+            FileLogHelper::xlog(['order' => $postdata, 'order-error' => $order->getErrors()], 'payment/error');
+            $trans->rollBack();
+            return Schema::FailureNotify('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
+            // return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
+        }
+        $detailErrors = OrderList::createOrderDetail($order['uuid'], Json::decode($postdata['goods_list']));
+        if($detailErrors){
+            $trans->rollBack();
+            FileLogHelper::xlog(['order' => $postdata, 'order-detail-error' => $detailErrors], 'payment/error');
+            return Schema::FailureNotify('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
+            // return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
+        }
+        $trans->commit();
         if($postdata['total_fee'] <= 0){//代表全是免费的，直接入库
-            $trans = \Yii::$app->db->beginTransaction();
-            $order = OrderList::create($postdata);
-            if($order->hasErrors()){
-                FileLogHelper::xlog(['order' => $postdata, 'order-error' => $order->getErrors()], 'payment/error');
-                $trans->rollBack();
-                return Schema::FailureNotify('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
-                // return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
-            }
-            $detailErrors = OrderList::createOrderDetail($order['uuid'], Json::decode($postdata['goods_list']));
-            if($detailErrors){
-                $trans->rollBack();
-                FileLogHelper::xlog(['order' => $postdata, 'order-detail-error' => $detailErrors], 'payment/error');
-                return Schema::FailureNotify('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
-                // return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
-            }
-            $trans->commit();
+            $order->updateOrderStatus();
             return MessageHelper::error('订单提交成功');
             // return MessageHelper::success('订单提交成功', [gHomeUrl()]);
         }

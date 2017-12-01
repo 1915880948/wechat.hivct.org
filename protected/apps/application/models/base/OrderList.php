@@ -12,6 +12,52 @@ use yii\helpers\ArrayHelper;
  */
 class OrderList extends TblOrderList
 {
+    const ORDER_STATUS_WAIT_FOR_PAY = 0;
+    const ORDER_STATUS_CANCEL = 1; //该字段可能无效，可以用来审核。目前无效
+    const ORDER_STATUS_PAID = 2;
+    const ORDER_STATUS_SHIP = 21;
+    const ORDER_STATUS_SHIP_USER_RECEIVED = 22;
+    const ORDER_STATUS_SHIP_USER_NOT_EXISTS = 23;
+    const ORDER_STATUS_SHIP_FINISHED = 29;
+    const ORDER_STATUS_APPLY_FOR_REFUND = 11;
+    const ORDER_STATUS_REFUND_REVIEW = 12;
+    const ORDER_STATUS_REFUND_REVIEW_SUCCESS = 13;
+    const ORDER_STATUS_REFUND_REVIEW_FAILED = 14;
+    const ORDER_STATUS_REFUND_PROCESS = 18;
+    const ORDER_STATUS_REFUND_FINISHED = 19;
+    const ORDER_STATUS_FINISHED = 99;
+    /** 未知状态 */
+    const UNKNOWN_STATUS = 100;
+    /**
+     * @var array 支付状态
+     */
+    public static $payStatus = [
+        self::ORDER_STATUS_CANCEL,
+        self::ORDER_STATUS_PAID,
+        self::ORDER_STATUS_FINISHED,
+    ];
+    /**
+     * 派送状态
+     * @var array
+     */
+    public static $shipStatus = [
+        self::ORDER_STATUS_SHIP,
+        self::ORDER_STATUS_SHIP_USER_RECEIVED,
+        self::ORDER_STATUS_SHIP_USER_NOT_EXISTS,
+        self::ORDER_STATUS_SHIP_FINISHED,
+    ];
+    /**
+     * @var array 退款状态
+     */
+    public static $refundStatus = [
+        self::ORDER_STATUS_APPLY_FOR_REFUND,
+        self::ORDER_STATUS_REFUND_REVIEW,
+        self::ORDER_STATUS_REFUND_REVIEW_SUCCESS,
+        self::ORDER_STATUS_REFUND_REVIEW_FAILED,
+        self::ORDER_STATUS_REFUND_PROCESS,
+        self::ORDER_STATUS_REFUND_FINISHED
+    ];
+
     /**
      * @param $datas
      */
@@ -19,6 +65,7 @@ class OrderList extends TblOrderList
     {
         $model = new self;
         $model->uid = $datas['uid'];
+        $model->out_trade_no = $datas['out_trade_no'];
         $model->info = $datas['body'];
         $model->description = $datas['detail'];
         $model->memo = '';
@@ -66,6 +113,21 @@ class OrderList extends TblOrderList
                    ->one();
     }
 
+    /**
+     * @param $outTradeNo
+     * @return OrderList|array|null|\yii\db\ActiveRecord
+     */
+    public static function findByOurtradeNo($outTradeNo)
+    {
+        return self::find()
+                   ->andWhere(['out_trade_no' => $outTradeNo])
+                   ->one();
+    }
+
+    /**
+     * @param $transactionId
+     * @param $status
+     */
     public function updateWechatPaymentInfo($transactionId, $status)
     {
         $this->wx_transaction_id = $transactionId;
@@ -91,5 +153,13 @@ class OrderList extends TblOrderList
     {
         $this->ship_status = $status;
         $this->save();
+    }
+
+    public static function getValidStatus($status)
+    {
+        if(in_array($status, self::$payStatus)){
+            return $status;
+        }
+        return self::UNKNOWN_STATUS;
     }
 }

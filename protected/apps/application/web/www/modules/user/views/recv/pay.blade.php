@@ -54,7 +54,7 @@
               e.preventDefault();
               $.confirm('您确认要提交订单吗？', '确认', function (e) {
                   if (totalPrice <= 0) {
-                      $.jsonPost('{{yUrl(['/user/recv/submitorder2'])}}', {payinfo: '{{$payinfo}}'}, function (result) {
+                      $.jsonPost('{{yUrl(['/user/recv/submitorder2'])}}', {order_uuid: '{{$order['uuid']}}'}, function (result) {
                           $.alert(result.info);
                       })
                   } else {

@@ -14,6 +14,8 @@ use application\models\base\Reagent;
 use application\models\base\UserEvent;
 use application\web\www\components\WwwBaseAction;
 use qiqi\helper\CryptHelper;
+use qiqi\helper\log\FileLogHelper;
+use qiqi\helper\MessageHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -59,7 +61,7 @@ class PayAction extends WwwBaseAction
          * $payinfo
          */
         $tradeno = "SUR" . date("Ymdhis") . str_pad($eventInfo['id'], 10, '0', STR_PAD_LEFT);
-        $postData = [
+        $postdata = [
             'trade_type'   => 'JSAPI',
             'body'         => "互联网+艾滋病快速自检试剂发放",
             'detail'       => join(",", $details),
@@ -74,7 +76,7 @@ class PayAction extends WwwBaseAction
             'source_type'  => 'survey',
             'source_uuid'  => $eventId
         ];
-        $payinfo = CryptHelper::authcode(Json::encode($postData), 'ENCODE', env('WECHAT_APP_KEY'));
+        $payinfo = CryptHelper::authcode(Json::encode($postdata), 'ENCODE', env('WECHAT_APP_KEY'));
         // echo "<pre>";
         // print_r([
         //     'trade_type'   => 'JSAPI',
@@ -96,8 +98,23 @@ class PayAction extends WwwBaseAction
                 //
             }
         } else{
-            $order = OrderList::create($postData);
+            $order = OrderList::create($postdata);
         }
+        $trans = \Yii::$app->db->beginTransaction();
+        if($order->hasErrors()){
+            FileLogHelper::xlog(['order' => $postdata, 'order-error' => $order->getErrors()], 'payment/error');
+            $trans->rollBack();
+            // return Schema::FailureNotify('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
+            return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
+        }
+        $detailErrors = OrderList::createOrderDetail($order['uuid'], Json::decode($postdata['goods_list']));
+        if($detailErrors){
+            $trans->rollBack();
+            FileLogHelper::xlog(['order' => $postdata, 'order-detail-error' => $detailErrors], 'payment/error');
+            // return Schema::FailureNotify('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
+            return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
+        }
+        $trans->commit();
         return $this->render(compact('products', 'logistcisInfo', 'totalPrice', 'payinfo', 'order'));
     }
 }

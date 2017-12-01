@@ -23,24 +23,28 @@ class SubmitOrder2Action extends WwwBaseAction
 
     public function run()
     {
-        $payinfo = $this->request->post('payinfo');
-        try{
-            $postdata = Json::decode(CryptHelper::authcode($payinfo, 'DECODE', env('WECHAT_APP_KEY')));
-        } catch(\Exception $e){
-            FileLogHelper::xlog($e->getMessage(), 'payment');
-        } finally{
-            if(!$postdata){
-                $postdata = [
-                    'uid' => -1
-                ];
-            }
-        }
 
-        if($postdata['uid'] != $this->account['uid']){
+        $order = OrderList::findByUuid($this->request->post('uuid'));
+        if($order['uid'] != $this->account['uid']){
             return Schema::FailureNotify('对不起，您提交的订单不是由您自己创建的');
         }
+        // $payinfo = $this->request->post('payinfo');
+        // try{
+        //     $postdata = Json::decode(CryptHelper::authcode($payinfo, 'DECODE', env('WECHAT_APP_KEY')));
+        // } catch(\Exception $e){
+        //     FileLogHelper::xlog($e->getMessage(), 'payment');
+        // } finally{
+        //     if(!$postdata){
+        //         $postdata = [
+        //             'uid' => -1
+        //         ];
+        //     }
+        // }
+        //
+        // if($postdata['uid'] != $this->account['uid']){
+        //     return Schema::FailureNotify('对不起，您提交的订单不是由您自己创建的');
+        // }
 
-        $trans = \Yii::$app->db->beginTransaction();
         if($order = OrderList::findBySource($postdata['source_type'], $postdata['source_uuid'])){
             // return Schema::FailureNotify('订单已成功提交，请不要重复提交');
             // return MessageHelper::error('订单已成功提交，请不要重复提交');
@@ -50,20 +54,7 @@ class SubmitOrder2Action extends WwwBaseAction
         }
 
 
-        if($order->hasErrors()){
-            FileLogHelper::xlog(['order' => $postdata, 'order-error' => $order->getErrors()], 'payment/error');
-            $trans->rollBack();
-            return Schema::FailureNotify('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
-            // return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
-        }
-        $detailErrors = OrderList::createOrderDetail($order['uuid'], Json::decode($postdata['goods_list']));
-        if($detailErrors){
-            $trans->rollBack();
-            FileLogHelper::xlog(['order' => $postdata, 'order-detail-error' => $detailErrors], 'payment/error');
-            return Schema::FailureNotify('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
-            // return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
-        }
-        $trans->commit();
+
         if($postdata['total_fee'] <= 0){//代表全是免费的，直接入库
             $order->updateOrderStatus(OrderList::ORDER_STATUS_PAID);
             return MessageHelper::error('订单提交成功');

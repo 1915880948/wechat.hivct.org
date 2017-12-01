@@ -11,6 +11,7 @@ namespace application\web\www\controllers\oauth;
 use application\models\base\OrderList;
 use application\web\www\components\WwwBaseAction;
 use common\core\base\Schema;
+use qiqi\helper\log\FileLogHelper;
 
 class PayCallbackAction extends WwwBaseAction
 {
@@ -19,6 +20,7 @@ class PayCallbackAction extends WwwBaseAction
 
     public function run()
     {
+        FileLogHelper::xlog($this->request->post(),'oauth/payment');
         $outTradeNo = $this->request->post('out_trade_no');
         $payStatus = $this->request->post('pay_status');
 

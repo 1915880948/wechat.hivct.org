@@ -63,7 +63,8 @@ class PayAction extends WwwBaseAction
             'body'         => "互联网+艾滋病快速自检试剂发放",
             'detail'       => join(",", $details),
             'out_trade_no' => $tradeno,
-            'total_fee'    => $totalPrice, //目前是0
+            // 'total_fee'    => $totalPrice, //目前是0
+            'total_fee'    => 1, //目前是1分钱
             'openid'       => $this->account->openid,
             'notify_url'   => Url::to(['/oauth/notify'], true),
             'logistcis'    => $logistcisInfo !== null ? $logistcisInfo->attributes : [],

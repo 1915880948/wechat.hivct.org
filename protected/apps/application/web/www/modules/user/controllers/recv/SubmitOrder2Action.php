@@ -61,7 +61,7 @@ class SubmitOrder2Action extends WwwBaseAction
         }
         $trans->commit();
         if($postdata['total_fee'] <= 0){//代表全是免费的，直接入库
-            $order->updateOrderStatus();
+            $order->updateOrderStatus(OrderList::ORDER_STATUS_PAID);
             return MessageHelper::error('订单提交成功');
             // return MessageHelper::success('订单提交成功', [gHomeUrl()]);
         }

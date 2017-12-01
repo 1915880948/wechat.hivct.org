@@ -9,6 +9,7 @@
 namespace application\web\www\modules\user\controllers\recv;
 
 use application\models\base\Logistics;
+use application\models\base\OrderList;
 use application\models\base\Reagent;
 use application\models\base\UserEvent;
 use application\web\www\components\WwwBaseAction;
@@ -58,7 +59,7 @@ class PayAction extends WwwBaseAction
          * $payinfo
          */
         $tradeno = "SUR" . date("Ymdhis") . str_pad($eventInfo['id'], 10, '0', STR_PAD_LEFT);
-        $payinfo = CryptHelper::authcode(Json::encode([
+        $postData = [
             'trade_type'   => 'JSAPI',
             'body'         => "互联网+艾滋病快速自检试剂发放",
             'detail'       => join(",", $details),
@@ -72,7 +73,8 @@ class PayAction extends WwwBaseAction
             'goods_list'   => Json::encode($products),
             'source_type'  => 'survey',
             'source_uuid'  => $eventId
-        ]), 'ENCODE', env('WECHAT_APP_KEY'));
+        ];
+        $payinfo = CryptHelper::authcode(Json::encode($postData), 'ENCODE', env('WECHAT_APP_KEY'));
         // echo "<pre>";
         // print_r([
         //     'trade_type'   => 'JSAPI',
@@ -88,7 +90,14 @@ class PayAction extends WwwBaseAction
         //     'source_type'  => 'survey',
         //     'source_uuid'  => $eventId
         // ]);
-        // echo "</pre>";
-        return $this->render(compact('products', 'logistcisInfo', 'totalPrice', 'payinfo'));
+        //
+        if($order = OrderList::findBySource('survey', $eventId)){
+            if($order->pay_status == OrderList::ORDER_STATUS_PAID){
+                //
+            }
+        } else{
+            $order = OrderList::create($postData);
+        }
+        return $this->render(compact('products', 'logistcisInfo', 'totalPrice', 'payinfo', 'order'));
     }
 }

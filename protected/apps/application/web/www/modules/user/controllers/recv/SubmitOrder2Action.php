@@ -40,12 +40,16 @@ class SubmitOrder2Action extends WwwBaseAction
             return Schema::FailureNotify('对不起，您提交的订单不是由您自己创建的');
         }
 
-        if(OrderList::findBySource($postdata['source_type'], $postdata['source_uuid'])){
+        $trans = \Yii::$app->db->beginTransaction();
+        if($order = OrderList::findBySource($postdata['source_type'], $postdata['source_uuid'])){
             // return Schema::FailureNotify('订单已成功提交，请不要重复提交');
             // return MessageHelper::error('订单已成功提交，请不要重复提交');
+
+        }else{
+            $order = OrderList::create($postdata);
         }
-        $trans = \Yii::$app->db->beginTransaction();
-        $order = OrderList::create($postdata);
+
+
         if($order->hasErrors()){
             FileLogHelper::xlog(['order' => $postdata, 'order-error' => $order->getErrors()], 'payment/error');
             $trans->rollBack();

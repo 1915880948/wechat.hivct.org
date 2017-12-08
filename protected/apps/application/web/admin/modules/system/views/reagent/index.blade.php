@@ -98,7 +98,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                 'delete' => function($url, $model) use ($selfurl) {
                                     // [$selfurl, 'id' => $model['id']]
                                     //                                     return Html::a('删除','javascript:;', ['data'=>['method'=>'post','confirm'=>'您确认要删除吗？']]);
-                                    return Html::a('删除', ['/system/logistics/delete', 'id' => $model['id']], [
+                                    return Html::a('删除', ['/system/reagent/delete', 'id' => $model['id']], [
                                         'data' => [
                                             'method'  => 'post',
                                             'confirm' => '您确认要删除吗？',

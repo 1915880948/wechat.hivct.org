@@ -25,6 +25,6 @@ class DeleteAction extends AdminBaseAction
         if($logi){
             $logi->delete();
         }
-        return MessageHelper::success('删除成功', ['/system/logistics']);
+        return MessageHelper::success('删除成功', ['/system/reagent']);
     }
 }

@@ -14,7 +14,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
 
         <div class="col-xs-4">
 
-            <div class="col-xs-12"><h4>【{{$data['name']}}】基本信息</h4> </div>
+            <div class="col-xs-12"><h4>基本信息</h4> </div>
             <div class="col-xs-3"><span>姓名：       </span> {{ $data['name'] }}</div>
             <div class="col-xs-3"><span>民族：       </span> {{ $data['nation'] }}</div>
             <div class="col-xs-3"><span>填表日期：    </span> {{ $data['create_time'] }}</div>
@@ -101,11 +101,11 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
 
             <div class="col-xs-12"><h4>HIV快速检测</h4> </div>
             <div class="col-xs-12"><h5>你知道本地哪里可以检测HIV：</h5> </div>
-            <div class="col-xs-3"><span>医院 ：    </span> {{ $data['detect_hospital']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>疾控中心 ： </span> {{ $data['detect_jk_center']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>社区小组 ：    </span> {{ $data['detect_community']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>药店 ：    </span> {{ $data['detect_drugstore']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>个体诊所：    </span> {{ $data['detect_clinic']==1?'是':'否' }}</div>
+            <div class="col-xs-3"><span>医院 ：    </span> {{ $data['detect_hospital']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>疾控中心 ： </span> {{ $data['detect_jk_center']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>社区小组 ：    </span> {{ $data['detect_community']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>药店 ：    </span> {{ $data['detect_drugstore']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>个体诊所：    </span> {{ $data['detect_clinic']==1?'&#10003;':'' }}</div>
             <div class="col-xs-3"><span>其他：    </span> {{ $data['detect_other'] }}</div>
             <div class="col-xs-12"><h5>是否接受过HIV检测：</h5> </div>
             <div class="col-xs-3"><span>是否接受过HIV检测：    </span> {{ $data['is_accept_detect_hiv']==1?'是':'否' }}</div>
@@ -124,11 +124,11 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
             <div class="col-xs-3"><span>HIV检测的其他顾虑是什么：    </span> {{ $data['hiv_check_care_other'] }}</div>
 
             <div class="col-xs-12"><h5>你期望获得HIV检测的渠道：</h5> </div>
-            <div class="col-xs-3"><span>医院：    </span> {{ $data['detect_channel_hospital']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>疾控中心：    </span> {{ $data['detect_channel_jk_center']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>社区小组：    </span> {{ $data['detect_channel_community']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>药店：    </span> {{ $data['detect_channel_drugstore']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>个体诊所：    </span> {{ $data['detect_channel_clinic']==1?'是':'否' }}</div>
+            <div class="col-xs-3"><span>医院：    </span> {{ $data['detect_channel_hospital']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>疾控中心：    </span> {{ $data['detect_channel_jk_center']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>社区小组：    </span> {{ $data['detect_channel_community']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>药店：    </span> {{ $data['detect_channel_drugstore']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>个体诊所：    </span> {{ $data['detect_channel_clinic']==1?'&#10003;':'' }}</div>
             <div class="col-xs-3"><span>其他：    </span> {{ $data['detect_channel_other'] }}</div>
             <div class="col-xs-3"><span>是否愿意获自费购买HIV检测试剂：    </span> {{ $data['detect_by_self']==1?'是':'否' }}</div>
             <div class="col-xs-3"><span>再次申请获得一次项目邮寄免费检测试剂：    </span> {{ $data['hiv_check_time'] }}</div>
@@ -156,12 +156,12 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
             <div class="col-xs-3"><span>其他服务：    </span> {{ $data['org_other'] }}</div>
 
             <div class="col-xs-12"><h5>你对感染HIV后是否需要接受治疗的看法是：</h5> </div>
-            <div class="col-xs-3"><span>积极接受治疗：    </span> {{ $data['active_treatment']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>担心药物副作用，暂不接受：    </span> {{ $data['unaccept_medical']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>未到治疗标准就不用治疗：    </span> {{ $data['treatment_until_standard']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>担心很快耐药：    </span> {{ $data['resistant_care']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>担心吃药后被人发现：    </span> {{ $data['explore_care']==1?'是':'否' }}</div>
-            <div class="col-xs-3"><span>认为无法治愈，不治疗，任其自然：    </span> {{ $data['not_treatment']==1?'是':'否' }}</div>
+            <div class="col-xs-3"><span>积极接受治疗：    </span> {{ $data['active_treatment']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>担心药物副作用，暂不接受：    </span> {{ $data['unaccept_medical']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>未到治疗标准就不用治疗：    </span> {{ $data['treatment_until_standard']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>担心很快耐药：    </span> {{ $data['resistant_care']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>担心吃药后被人发现：    </span> {{ $data['explore_care']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-3"><span>认为无法治愈，不治疗，任其自然：    </span> {{ $data['not_treatment']==1?'&#10003;':'' }}</div>
             <div class="col-xs-3"><span>其他看法：    </span> {{ $data['treatment_other'] }}</div>
         </div>
         </div>
@@ -193,7 +193,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
 @push('foot-script')
     <script>
         $(function () {
-//            $('.col-xs-12 .col-xs-3').removeClass('col-xs-3').addClass('col-xs-6');
+            $('.col-xs-12 .col-xs-3').removeClass('col-xs-3').addClass('col-xs-6');
         });
     </script>
 @endpush

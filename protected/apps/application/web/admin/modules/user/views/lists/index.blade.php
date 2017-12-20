@@ -2,12 +2,14 @@
 use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\ActiveForm;
 /** @var $view View */
 ?>
-@extends('layouts.main')@section('title','调查问卷列表')
+@extends('layouts.main')
+@section('title','用户列表')
+
 @section('breadcrumb')
-  @include('global.breadcrumb',['title'=>'调查问卷列表','subtitle'=>'所有调查问卷都在这里','breads'=>[[
-      'label' => '调查问卷 ',
-      'url'   => yRoute($selfurl),
-  ]]])
+    @include('global.breadcrumb',['title'=>'用户列表','subtitle'=>'用户列表','breads'=>[[
+        'label' => '用户列表 ',
+        'url'   => $selfurl,
+    ]]])
 @stop
 @section('content')
     <div class="row">
@@ -15,6 +17,16 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
             <div class="row">
                 <div class="col-sm-12">
                     <div class="portlet light portlet-fit portlet-form bordered">
+                        {{--<div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject font-red sbold uppercase">用户列表</span>
+                            </div>
+                            <div class="actions">
+                                <div class="input-group input-group-sm" style="width: 30px;">
+                                    <a href="{{yUrl([$selfurl])}}" class="btn grey-mint">新增</a>
+                                </div>
+                            </div>
+                        </div>--}}
                         <div class="portlet-body">
                             <?php
                             /**  */
@@ -23,62 +35,60 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                 'columns'      => [
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'id',
-                                        'label'          => 'ID',
+                                        'attribute'      => 'nickname',
+                                        'label'          => '微信昵称',
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'name',
-                                        'label'          => '姓名',
+                                        'attribute'      => 'realname',
+                                        'label'          => '真实姓名',
+                                    ],
+                                    [
+                                        'contentOptions' => ['class' => 'col-sm-1'],
+                                        'attribute'      => 'gender',
+                                        'label'          => '性别',
+                                        'value'          => function($model, $key, $index, $column) {
+                                            return $model->gender==2? '女':'男';
+                                        }
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
                                         'attribute'      => 'nation',
                                         'label'          => '民族',
 
-                                    ],                                    [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'gender',
-                                        'label'          => '性别',
                                     ],
-
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'education',
-                                        'label'          => '文化程度',
+                                        'attribute'      => 'province',
+                                        'label'          => '省份',
 
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'marriage',
-                                        'label'          => '婚姻状况',
+                                        'attribute'      => 'city',
+                                        'label'          => '城市',
 
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'job',
-                                        'label'          => '职业',
+                                        'attribute'      => 'age',
+                                        'label'          => '年龄',
 
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'income',
-                                        'label'          => '收入',
+                                        'attribute'      => 'telephone',
+                                        'label'          => '手机',
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'livecity',
-                                        'label'          => '居住城市',
+                                        'attribute'      => 'email',
+                                        'label'          => '邮箱',
                                     ],
                                     [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'livetime',
-                                        'label'          => '居住时间',
-                                    ],
-                                    [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'created_at',
-                                        'label'          => '填写时间',
+                                        'contentOptions' => ['class' => 'col-sm-2'],
+                                        'attribute'      => 'updated_at',
+                                        'label'          => '更新时间',
                                     ],
 
                                     [
@@ -87,11 +97,23 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         'headerOptions'  => ['class' => 'center'],
                                         'contentOptions' => ['class' => 'col-sm-1 center'],
                                         'class'          => 'yii\grid\ActionColumn',
-                                        'template'       => '{detail} ',
+                                        'template'       => '{delete} ',
                                         'buttons'        => [
-                                            'detail'   => function($url, $model) use ($selfurl) {
-                                                return Html::a('详情', ['site/detail', 'id' => $model['id']], []);
+                                            'edit'   => function($url, $model) use ($selfurl) {
+                                                return Html::a('编辑', [$selfurl, 'id' => $model['uid']], []);
                                             },
+                                            'delete' => function($url, $model) use ($selfurl) {
+                                                return Html::a('删除', ['/user/lists/delete', 'id' => $model['uid']], [
+                                                    'data' => [
+                                                        'method'  => 'post',
+                                                        'confirm' => '您确认要删除吗？',
+                                                        'params'  => [
+                                                            'id' => $model['uid']
+                                                        ]
+                                                    ]
+                                                ]);
+                                            },
+
                                         ],
                                     ],
                                     /** @var yii\grid\ActionColumn */
@@ -108,16 +130,4 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
             </div>
         </div>
     </div>
-
-@stop
-
-@push('head-style')
-@endpush
-
-@push('foot-script')
-  <script>
-      $(function () {
-
-      });
-  </script>
-@endpush
+@endsection

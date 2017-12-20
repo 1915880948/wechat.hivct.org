@@ -12,15 +12,11 @@ use application\models\base\SurveyList;
 use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\DataProviderHelper;
 
-class IndexAction extends AdminBaseAction
+class DetailAction extends AdminBaseAction
 {
-    public function run()
+    public function run($id)
     {
-        $model = new SurveyList();
-        $query = $model::find();
-//            ->orderBy(['created_at'=>SORT_DESC]);
-        $provider = DataProviderHelper::create($query,5);
-
-        return $this->render(compact('model','provider'));
+        $data = SurveyList::find()->andWhere(['id'=>$id])->asArray()->one();
+        return $this->render(compact('data'));
     }
 }

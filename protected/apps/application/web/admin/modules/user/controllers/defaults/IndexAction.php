@@ -6,7 +6,7 @@
  * @since
  */
 
-namespace application\web\admin\modules\system\controllers\defaults;
+namespace application\web\admin\modules\user\controllers\defaults;
 
 use application\web\admin\components\AdminBaseAction;
 
@@ -14,6 +14,6 @@ class IndexAction extends AdminBaseAction
 {
     public function run()
     {
-        echo "System";
+        echo "User";
     }
 }

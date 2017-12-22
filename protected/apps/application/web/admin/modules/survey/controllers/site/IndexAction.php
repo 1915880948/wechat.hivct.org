@@ -14,13 +14,16 @@ use qiqi\helper\DataProviderHelper;
 
 class IndexAction extends AdminBaseAction
 {
-    public function run()
+    public function run($name='')
     {
-        $model = new SurveyList();
-        $query = $model::find();
-//            ->orderBy(['created_at'=>SORT_DESC]);
+        if($name){
+            $query = SurveyList::find()->andWhere(['like','name',$name]);
+        }else {
+            $query = SurveyList::find();
+        }
         $provider = DataProviderHelper::create($query,5);
+        $provider->setSort(['defaultOrder'=>['id'=>SORT_DESC]]);
 
-        return $this->render(compact('model','provider'));
+        return $this->render(compact('provider'));
     }
 }

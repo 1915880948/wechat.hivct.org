@@ -8,15 +8,17 @@
 
 namespace application\web\admin\modules\survey\controllers\site;
 
+use application\models\base\OrderList;
 use application\models\base\SurveyList;
 use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\DataProviderHelper;
 
 class DetailAction extends AdminBaseAction
 {
-    public function run($id)
+    public function run($uuid)
     {
-        $data = SurveyList::find()->andWhere(['id'=>$id])->asArray()->one();
-        return $this->render(compact('data'));
+        $data = SurveyList::find()->andWhere(['uuid'=>$uuid])->asArray()->one();
+        $order_data = OrderList::find()->andWhere(['uuid'=>$uuid])->asArray()->one();
+        return $this->render(compact('data','order_data'));
     }
 }

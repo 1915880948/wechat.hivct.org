@@ -1,5 +1,9 @@
 <?php
-use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\web\View;
+use common\assets\ace\InlineForm;
+use yii\helpers\ArrayHelper;
 /** @var $view View */
 ?>
 @extends('layouts.main')
@@ -10,29 +14,34 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
         'label' => '用户列表 ',
         'url'   => $selfurl,
     ]]])
+
 @stop
 @section('content')
+    <div style="float: right;">
+        <?php
+        /** @var InlineForm $form */
+        $form = InlineForm::begin(['action' => yUrl(['lists/index'])]);
+        echo $form->label("真实姓名", Html::textInput("realname", ArrayHelper::getValue($_GET, 'realname', '')));
+        echo $form->submitInput();
+        $form->end();
+        ?>
+    </div>
     <div class="row">
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="portlet light portlet-fit portlet-form bordered">
-                        {{--<div class="portlet-title">
-                            <div class="caption">
-                                <span class="caption-subject font-red sbold uppercase">用户列表</span>
-                            </div>
-                            <div class="actions">
-                                <div class="input-group input-group-sm" style="width: 30px;">
-                                    <a href="{{yUrl([$selfurl])}}" class="btn grey-mint">新增</a>
-                                </div>
-                            </div>
-                        </div>--}}
                         <div class="portlet-body">
                             <?php
                             /**  */
                             echo GridView::widget([
                                 'dataProvider' => $provider,
                                 'columns'      => [
+//                                    [
+//                                        'contentOptions' => ['class' => 'col-sm-1'],
+//                                        'attribute'      => 'uid',
+//                                        'label'          => 'ID',
+//                                    ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
                                         'attribute'      => 'nickname',
@@ -97,10 +106,10 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         'headerOptions'  => ['class' => 'center'],
                                         'contentOptions' => ['class' => 'col-sm-1 center'],
                                         'class'          => 'yii\grid\ActionColumn',
-                                        'template'       => '{delete} ',
+                                        'template'       => '{address} {delete} ',
                                         'buttons'        => [
-                                            'edit'   => function($url, $model) use ($selfurl) {
-                                                return Html::a('编辑', [$selfurl, 'id' => $model['uid']], []);
+                                            'address'   => function($url, $model) use ($selfurl) {
+                                                return Html::a('地址', ['/user/lists/address', 'uid' => $model['uid']], []);
                                             },
                                             'delete' => function($url, $model) use ($selfurl) {
                                                 return Html::a('删除', ['/user/lists/delete', 'id' => $model['uid']], [
@@ -131,3 +140,11 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
         </div>
     </div>
 @endsection
+@push('head-style')
+<style type="text/css">
+    .btn.btn-sm{
+        background: #3fd5c0;
+        color: #fff;
+    }
+</style>
+@endpush

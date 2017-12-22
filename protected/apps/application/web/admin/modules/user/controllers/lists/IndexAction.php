@@ -6,12 +6,17 @@ use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\DataProviderHelper;
 
 class IndexAction extends AdminBaseAction{
-    public function run()
+    public function run($realname='')
     {
-        $query = User::find()
-            ->orderBy(['created_at'=>SORT_DESC]);
-        $provider = DataProviderHelper::create($query,1);
-
+        if( $realname ){
+            $query = User::find()->andWhere(['like','realname',$realname]);
+        }else {
+            $query = User::find();
+        }
+//        $sql = $query->createCommand()->getRawSql();
+//        print_r( $sql );// die;
+        $provider = DataProviderHelper::create($query);
+        $provider->setSort(['defaultOrder'=>['uid'=>SORT_DESC]]);
         return $this->render(compact('provider'));
     }
 }

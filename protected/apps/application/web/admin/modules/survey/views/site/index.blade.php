@@ -1,5 +1,7 @@
 <?php
 use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\ActiveForm;
+use common\assets\ace\InlineForm;
+use yii\helpers\ArrayHelper;
 /** @var $view View */
 ?>
 @extends('layouts.main')@section('title','调查问卷列表')
@@ -10,6 +12,15 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
   ]]])
 @stop
 @section('content')
+    <div style="float: right;">
+        <?php
+        /** @var InlineForm $form */
+        $form = InlineForm::begin(['action' => yUrl(['site/index'])]);
+        echo $form->label("姓名", Html::textInput("name", ArrayHelper::getValue($_GET, 'name', '')));
+        echo $form->submitInput();
+        $form->end();
+        ?>
+    </div>
     <div class="row">
         <div class="col-xs-12">
             <div class="row">
@@ -67,16 +78,6 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'livecity',
-                                        'label'          => '居住城市',
-                                    ],
-                                    [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute'      => 'livetime',
-                                        'label'          => '居住时间',
-                                    ],
-                                    [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
                                         'attribute'      => 'created_at',
                                         'label'          => '填写时间',
                                     ],
@@ -90,7 +91,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         'template'       => '{detail} ',
                                         'buttons'        => [
                                             'detail'   => function($url, $model) use ($selfurl) {
-                                                return Html::a('详情', ['site/detail', 'id' => $model['id']], []);
+                                                return Html::a('详情', ['site/detail', 'uuid' => $model['uuid']], []);
                                             },
                                         ],
                                     ],
@@ -112,6 +113,12 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
 @stop
 
 @push('head-style')
+    <style type="text/css">
+        .btn.btn-sm{
+            background: #3fd5c0;
+            color: #fff;
+        }
+    </style>
 @endpush
 
 @push('foot-script')

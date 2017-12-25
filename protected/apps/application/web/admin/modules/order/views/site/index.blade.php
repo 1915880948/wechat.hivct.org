@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
         <?php
         /** @var InlineForm $form */
         $form = InlineForm::begin(['action' => yUrl(['site/index']), 'method' => 'get']);
-        echo $form->label("快递公司", Html::dropDownList("express", ArrayHelper::getValue($_GET, 'express', ''),$expressArr));
+        echo $form->label("快递公司", Html::dropDownList("ship_uuid", ArrayHelper::getValue($_GET, 'ship_uuid', ''),$expressArr));
         echo $form->label("支付状态", Html::dropDownList("pay_status", ArrayHelper::getValue($_GET, 'pay_status', ''),
             [
                 '-99' => '全部',
@@ -28,15 +28,15 @@ use yii\helpers\ArrayHelper;
         echo $form->label("订单状态", Html::dropDownList("order_status", ArrayHelper::getValue($_GET, 'order_status', ''),
             [
                 '-99' => '全部',
-                '0' => '未处理',
-                '1' => '处理中',
-                '2' => '已支付',
-                '3' => '已发货',
-                '4' => '已收货',
-                '11' => '申请退款',
-                '12' => '退款中',
-                '13' => '退款完成',
-                '99' => '已完成'
+                '0'   => '未处理',
+                '1'   => '处理中',
+                '2'   => '已支付',
+                '3'   => '已发货',
+                '4'   => '已收货',
+                '11'  => '申请退款',
+                '12'  => '退款中',
+                '13'  => '退款完成',
+                '99'  => '已完成'
             ]));
         echo $form->label("微信订单号", Html::textInput("wx_transaction_id", ArrayHelper::getValue($_GET, 'wx_transaction_id', '')));
         echo $form->label("快递单号", Html::textInput("ship_code", ArrayHelper::getValue($_GET, 'ship_code', '')));

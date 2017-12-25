@@ -17,16 +17,17 @@ use yii\widgets\ActiveForm;
 @section('content')
     <div>
         <div class="col-xs-2">收货人： {{$data['name']}} </div>
+        <div class="col-xs-3">订单标题： {{ $order_data['info'] }} </div>
         <div class="col-xs-2">支付状态： {{ payStatus($order_data['pay_status']) }} </div>
         <div class="col-xs-2">订单状态： {{ orderStatus($order_data['order_status']) }}</div>
-        <div class="col-xs-2">
+        <div class="col-xs-2">订单标题： {{ $order_data['total_price'] }} </div>
+        <div class="col-xs-1">
             @if($order_data['source_type']== 'survey')
-                <a href="{{yRoute('/order/site/detail')}}?uuid={{$order_data['uuid']}}">订单详情</a><br>
+                <a href="{{yRoute('/order/site/detail')}}?uuid={{$order_data['uuid']}}&uid={{$order_data['uid']}}">订单详情</a>
                 @if( $order_data['pay_status']== 1 && $order_data['order_status'] == 2 && $order_data['ship_status'] != 1 )
-                    <button type="button" class="btn green ship" data-id="{{$order_data['uuid']}}">发货</button>
+                    <button type="button" class="btn green ship" data-id="{{$order_data['uuid']}}">发 货</button>
                 @endif
             @endif
-                {{--<a href="{{yRoute('/order/site/detail')}}?uuid={{$order_data['source_uuid']}}">发货</a><br>--}}
         </div>
     </div>
 
@@ -197,6 +198,25 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
+    <div id="ship-content" style="display:none">
+        <div class="form-group">
+            <label class="col-md-3 control-label">快递公司</label>
+            <div class="col-md-9">
+                <select class="form-control input-inline input-medium ship_name">
+                    @foreach( $ship as $k=>$v)
+                        <option value="{{ $k }}">{{$v}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">快递单号</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control input-inline input-medium ship_code" placeholder="快递单号">
+            </div>
+        </div>
+    </div>
+
 @stop
 
 @push('head-style')
@@ -221,12 +241,55 @@ use yii\widgets\ActiveForm;
         .col-xs-6 {
             margin-bottom: 10px;
         }
+
+        #ship-content .form-group{
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 @endpush
 
 @push('foot-script')
     <script>
         $(function () {
+            $(function () {
+                var _this;
+                $(".ship").click(function (i) {
+                    _this = $(this);
+                    var uuid = _this.data('id');
+                    layer.open({
+                        type: 1,
+                        title: '填写发货单',
+                        shadeClose: true,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['420px', '240px'], //宽高
+                        content: $('#ship-content'),
+                        btn:['发货','取消'],
+                        yes:function () {
+                            if( $(".ship_name").val() && $(".ship_code").val()){
+                                $.post("{{yUrl('/admin/order/site/ship')}}",
+                                    {
+                                        'uuid':uuid,
+                                        'back_url':"{{$selfurl}}",
+                                        'ship_id': $(".ship_name").val(),
+                                        'ship_code': $(".ship_code").val()
+                                    },function (res) {
+                                        if(res.code == 200 ){
+                                            layer.msg('发货成功！！',{'icon':1,time:1200},function () {
+                                                layer.closeAll();
+                                                location.reload();
+                                            });
+                                        }
+                                    }
+                                );
+                            }else {
+                                $("#ship-content .form-group").addClass("has-error");
+                            }
+                        }
+                    });
+                });
+
+            });
 
         });
     </script>

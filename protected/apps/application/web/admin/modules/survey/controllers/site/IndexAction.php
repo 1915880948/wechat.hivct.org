@@ -21,7 +21,7 @@ class IndexAction extends AdminBaseAction
         }else {
             $query = SurveyList::find();
         }
-        $provider = DataProviderHelper::create($query,5);
+        $provider = DataProviderHelper::create($query,20);
         $provider->setSort(['defaultOrder'=>['id'=>SORT_DESC]]);
 
         return $this->render(compact('provider'));

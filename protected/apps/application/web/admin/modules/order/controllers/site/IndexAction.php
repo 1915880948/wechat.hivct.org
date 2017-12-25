@@ -36,12 +36,11 @@ class IndexAction extends AdminBaseAction
         if( $wx_transaction_id ){
             $query = $query->andWhere(['like','wx_transaction_id', $wx_transaction_id]);
         }
-        $provider = DataProviderHelper::create($query, 3);
+        $provider = DataProviderHelper::create($query, 20);
         $provider->setSort(['defaultOrder' => ['id' => SORT_DESC]]);
 
 
         $expressArr = ['-99'=>'全部'];
-        $ship = [];
         foreach ( $express as $key=>$v ){
             $ship[$v['id']] = $v['name'];
             $expressArr[$v['id']] = $v['name'];

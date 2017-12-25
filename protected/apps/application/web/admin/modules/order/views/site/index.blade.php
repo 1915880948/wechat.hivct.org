@@ -123,7 +123,7 @@ use yii\helpers\ArrayHelper;
                                                 }
                                             },
                                             'detail' => function ($url, $model) use ($selfurl) {
-                                                return Html::a('详情', ['/order/site/detail', 'uuid' => $model['uuid']], []);
+                                                return Html::a('详情', ['/order/site/detail', 'uuid' => $model['uuid'],'uid'=>$model['uid']], []);
                                             },
                                             'delete' => function ($url, $model) use ($selfurl) {
                                                 return Html::a('删除', ['/order/site/delete', 'id' => $model['id']], [

@@ -73,8 +73,9 @@ class PayAction extends WwwBaseAction
             'logistcis'    => $logistcisInfo !== null ? $logistcisInfo->attributes : [],
             'uid'          => $this->account->uid,
             'goods_list'   => Json::encode($products),
-            'source_type'  => 'survey',
-            'source_uuid'  => $eventId
+
+            'source_type' => $eventInfo->event_type,
+            'source_uuid' => $eventInfo->event_type_uuid
         ];
         $payinfo = CryptHelper::authcode(Json::encode($postdata), 'ENCODE', env('WECHAT_APP_KEY'));
         // echo "<pre>";

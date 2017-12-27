@@ -13,5 +13,6 @@ use common\core\base\controller\ActionsTrait;
 
 class SiteController extends OrderBaseController
 {
+    public $enableCsrfValidation = false;
     use ActionsTrait;
 }

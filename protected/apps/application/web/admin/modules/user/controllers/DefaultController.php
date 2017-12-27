@@ -6,9 +6,9 @@
  * @since
  */
 
-namespace application\web\admin\modules\system\controllers;
+namespace application\web\admin\modules\user\controllers;
 
-use application\web\admin\modules\system\components\UserBaseController;
+use application\web\admin\modules\user\components\UserBaseController;
 use common\core\base\controller\ActionKeywordsTrait;
 
 class DefaultController extends UserBaseController

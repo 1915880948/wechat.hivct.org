@@ -6,7 +6,7 @@
  * @since
  */
 
-namespace application\web\admin\modules\system\components;
+namespace application\web\admin\modules\user\components;
 
 use application\web\admin\components\AdminBaseController;
 

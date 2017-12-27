@@ -8,17 +8,21 @@
 
 namespace application\web\admin\modules\survey\controllers\site;
 
-use application\common\db\ApplicationSearchActiveRecord;
 use application\models\base\SurveyList;
 use application\web\admin\components\AdminBaseAction;
+use qiqi\helper\DataProviderHelper;
 
 class IndexAction extends AdminBaseAction
 {
-    public function run($district = null)
+    public function run($name='')
     {
-        $search = new ApplicationSearchActiveRecord();
-        $search->setModel(new SurveyList());
-        $provider = $search->search([['district' => $district]]);
+        if($name){
+            $query = SurveyList::find()->andWhere(['like','name',$name]);
+        }else {
+            $query = SurveyList::find();
+        }
+        $provider = DataProviderHelper::create($query,20);
+        $provider->setSort(['defaultOrder'=>['id'=>SORT_DESC]]);
 
         return $this->render(compact('provider'));
     }

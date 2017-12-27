@@ -29,6 +29,7 @@ class PayCallbackAction extends WwwBaseAction
             return Schema::FailureNotify('订单不存在');
         }
         $status = OrderList::getValidStatus($payStatus);
+        $orderList->updatePayStatus(OrderList::PAY_STATUS_SUCCESS);
         $orderList->updateOrderStatus($status);
         if(OrderList::ORDER_STATUS_PAID == $status){
             return Schema::SuccessNotify('更新订单成功');

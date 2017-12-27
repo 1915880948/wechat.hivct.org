@@ -12,5 +12,5 @@ use yii\base\Module;
 
 class OrderModule extends Module
 {
-    public $defaultRoute = 'site';
+//    public $defaultRoute = 'site';
 }

@@ -3,6 +3,7 @@
 namespace application\models\base;
 
 use application\models\db\TblOrderList;
+use EasyWeChat\Payment\Order;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -12,6 +13,10 @@ use yii\helpers\ArrayHelper;
  */
 class OrderList extends TblOrderList
 {
+    const PAY_STATUS_FAILED = -1;
+    const PAY_STATUS_DEFAULT = 0;
+    const PAY_STATUS_SUCCESS = 1;
+
     const ORDER_STATUS_WAIT_FOR_PAY = 0;
     const ORDER_STATUS_CANCEL = 1; //该字段可能无效，可以用来审核。目前无效
     const ORDER_STATUS_PAID = 2;
@@ -32,10 +37,18 @@ class OrderList extends TblOrderList
      * @var array 支付状态
      */
     public static $payStatus = [
+        self::PAY_STATUS_FAILED,
+        self::PAY_STATUS_DEFAULT,
+        self::PAY_STATUS_SUCCESS,
+    ];
+
+    public static $orderStatus = [
+        self::ORDER_STATUS_WAIT_FOR_PAY,
         self::ORDER_STATUS_CANCEL,
         self::ORDER_STATUS_PAID,
         self::ORDER_STATUS_FINISHED,
     ];
+
     /**
      * 派送状态
      * @var array
@@ -79,21 +92,21 @@ class OrderList extends TblOrderList
 
     public static function createOrderDetail($orderUuid, $goodsLists)
     {
-        if(!is_array($goodsLists)){
+        if (!is_array($goodsLists)) {
             return false;
         }
 
         $results = [];
-        foreach($goodsLists as $goodsList){
+        foreach ($goodsLists as $goodsList) {
             $detail = [
-                'order_uuid'  => $orderUuid,
-                'goods_uuid'  => $goodsList['uuid'],
+                'order_uuid' => $orderUuid,
+                'goods_uuid' => $goodsList['uuid'],
                 'goods_title' => $goodsList['name'],
                 'goods_price' => $goodsList['price'],
-                'order_time'  => date("Y-m-d H:i:s")
+                'order_time' => date("Y-m-d H:i:s")
             ];
             $res = OrderDetail::create($detail);
-            if($res->hasErrors()){
+            if ($res->hasErrors()) {
                 $results = ArrayHelper::merge($results, $res->getErrors());
             }
         }
@@ -108,9 +121,9 @@ class OrderList extends TblOrderList
     public static function findBySource($sourceType, $sourceUuid)
     {
         return self::find()
-                   ->andWhere(['source_type' => $sourceType])
-                   ->andWhere(['source_uuid' => $sourceUuid])
-                   ->one();
+            ->andWhere(['source_type' => $sourceType])
+            ->andWhere(['source_uuid' => $sourceUuid])
+            ->one();
     }
 
     /**
@@ -120,10 +133,16 @@ class OrderList extends TblOrderList
     public static function findByOurtradeNo($outTradeNo)
     {
         return self::find()
-                   ->andWhere(['out_trade_no' => $outTradeNo])
-                   ->one();
+            ->andWhere(['out_trade_no' => $outTradeNo])
+            ->one();
     }
 
+
+    public function updatePayStatus($status)
+    {
+        $this->pay_status = $status;
+        $this->save();
+    }
     /**
      * @param $transactionId
      * @param $status
@@ -133,6 +152,12 @@ class OrderList extends TblOrderList
         $this->wx_transaction_id = $transactionId;
         $this->pay_status = $status;
         $this->save();
+    }
+
+    public function updatePayZeroStatus()
+    {
+        $this->updatePayStatus(OrderList::PAY_STATUS_SUCCESS);
+        $this->updateOrderStatus(OrderList::ORDER_STATUS_PAID);
     }
 
     public function updateOrderStatus($orderStatus)
@@ -157,7 +182,7 @@ class OrderList extends TblOrderList
 
     public static function getValidStatus($status)
     {
-        if(in_array($status, self::$payStatus)){
+        if (in_array($status, self::$orderStatus)) {
             return $status;
         }
         return self::UNKNOWN_STATUS;

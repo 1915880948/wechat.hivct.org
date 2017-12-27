@@ -96,7 +96,7 @@ class PayAction extends WwwBaseAction
         //
         if($order = OrderList::findBySource('survey', $eventId)){
             if($order->pay_status == OrderList::ORDER_STATUS_PAID){
-                //
+                //...
             }
         } else{
             $order = OrderList::create($postdata);

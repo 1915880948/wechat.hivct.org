@@ -108,6 +108,7 @@
 @push('foot-script')
   <script src="{{yStatic('js/city-picker.js')}}"></script>
   <script>
+    console.log(BASE_OPTION.nation);
       $(function () {
           $('#birthday').calendar({
               value: ['1990-01-01'],
@@ -115,23 +116,23 @@
           });
           $("#nation").select({
               title: "选择民族",
-              items: ["汉族", "壮族", "满族", "回族", "苗族", "维吾尔族", "土家族", "彝族", "蒙古族", "藏族", "布依族", "侗族", "瑶族", "朝鲜族", "白族", "哈尼族", "哈萨克族", "黎族", "傣族", "畲族", "傈僳族", "仡佬族", "东乡族", "高山族", "拉祜族", "水族", "佤族", "纳西族", "羌族", "土族", "仫佬族", "锡伯族", "柯尔克孜族", "达斡尔族", "景颇族", "毛南族", "撒拉族", "布朗族", "塔吉克族", "阿昌族", "普米族", "鄂温克族", "怒族", "京族", "基诺族", "德昂族", "保安族", "俄罗斯族", "裕固族", "乌孜别克族", "门巴族", "鄂伦春族", "独龙族", "塔塔尔族", "赫哲族", "珞巴族"]
+              items: BASE_OPTION.nation
           });
           $("#gender").select({
               title: "选择性别 ",
-              items: ["男", "女"]
+              items: BASE_OPTION.gender
           });
           $('#education').select({
               title: "请选择您的教育程度",
-              items: ["文盲", "小学", "初中", "高中/中专", "大专/大学", "研究生及以上"]
+              items: BASE_OPTION.education
           });
           $('#marriage').select({
               title: "请选择婚姻状况",
-              items: ["未婚", "已婚", "同居", "离异或丧偶", "保密"]
+              items: BASE_OPTION.marriage
           });
           $('#job').select({
               title: "请选择婚职业",
-              items: ["学生", "餐饮食品业", "商业服务业", "医务人员", "自由职业", "离退休人员", "待业", "其他"]
+              items: BASE_OPTION.job
           }).on('change', function () {
               if ($(this).val() == "其他") {
                   $('#otherjob').removeClass('app-hide');
@@ -141,15 +142,15 @@
           });
           $('#income').select({
               title: "请选择月平均收入",
-              items: ["无收入", "0-1000元", "1001-2999元", "3000-4999元", "5000-9999元", "10000-19999元", "2万元以上"]
+              items: BASE_OPTION.income
           });
           $('#household').select({
               title: "请选择户籍所在地",
-              items: ['本市', '本省外市', '外省', '外籍']
+              items: BASE_OPTION.household
           });
           $('#livetime').select({
               title: "请选择当地居住时长",
-              items: ['<3月', '3-6月', '6月-1年', '1-5年', '5年以上']
+              items: BASE_OPTION.livetime
           });
           $("#livecity").cityPicker({
               showDistrict: false

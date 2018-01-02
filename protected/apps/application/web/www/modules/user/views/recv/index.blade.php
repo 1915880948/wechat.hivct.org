@@ -13,11 +13,13 @@
         </div>
       </div>
       <div class="products">
+        {{--{{print_r($products)}}--}}
         @foreach($products as $type => $_products)
-          <div class="weui-cells__title">{{$model->getTypeName($type)}}</div>
+          @if(!$type) @continue @endif
+          <div class="weui-cells__title f-black ">{{$model->getTypeName($type)}}</div>
           @if($type == 'free')
             <div class="weui-cells weui-cells_radio">
-              <label class="weui-cell weui-check__label" for="xx0">
+              <label class="weui-cell weui-check__label f-888" for="xx0">
                 <div class="weui-cell__bd">
                   <p>不选择任何试剂</p>
                 </div>
@@ -26,7 +28,7 @@
                 </div>
               </label>
               @foreach($_products as $product)
-                <label class="weui-cell weui-check__label" for="xx{{$product['id']}}">
+                <label class="weui-cell weui-check__label f-888" for="xx{{$product['id']}}">
                   <div class="weui-cell__bd">
                     <p>{{$product['name']}}</p>
                   </div>
@@ -39,7 +41,7 @@
             </div>
           @else
             @foreach($_products as $product)
-              <div class="weui-cell weui-cell_switch">
+              <div class="weui-cell weui-cell_switch f-888">
                 <div class="weui-cell__bd">{{$product['name']}} @if($product['price']>0) ({{$product['price']}}) @endif</div>
                 <div class="weui-cell__ft">
                   <input id="xx{{$product['id']}}" name="product[{{$type}}][{{$product['id']}}]" class="weui-switch" type="checkbox" @if(isset($rel[$product['id']])) data-rel="{{json_encode($rel[$product['id']])}}" @endif data-price="{{$product['price']}}">

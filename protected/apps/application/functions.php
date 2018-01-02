@@ -8,6 +8,7 @@
 
 use common\core\session\GSession;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\helpers\Url;
 
 /**
@@ -24,6 +25,13 @@ function gHasError()
 {
     return \Yii::$app->getSession()
                      ->hasFlash('error');
+}
+
+function gJsonEncode($data,$options = 320){
+    return Json::encode($data,$options);
+}
+function gJsonDecode($data){
+    return Json::decode($data);
 }
 
 function gGetError()

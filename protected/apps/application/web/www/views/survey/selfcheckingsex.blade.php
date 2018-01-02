@@ -240,7 +240,7 @@
               }
           });
           $('#condom_percent,#anal_sex_percent').select({
-              title: "请选择没有例程使用的比例",
+              title: "请选择没有全程使用的比例",
               items: ["100%", "80-99%", "60-79%", "40-59%", "20-39%", '1-19%', '0%']
           });
           $('#condom_near,#anal_sex_near').select({

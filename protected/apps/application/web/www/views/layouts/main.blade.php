@@ -129,6 +129,7 @@
           }
 
       })(window, window['lib'] || (window['lib'] = {}));
+      var BASE_OPTION = {!! gJsonEncode(app('application\models\service\BaseService')->options) !!};
   </script>
   <link rel="stylesheet" href="{{yStatic('weui/lib/weui.min.css')}}">
   <link rel="stylesheet" href="{{yStatic('weui/css/jquery-weui.min.css')}}">

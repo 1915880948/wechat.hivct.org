@@ -101,6 +101,20 @@ class SaveAction extends WwwBaseAction
         if(!$model->sex_direction){
             $model->addError('name', '性取向不能为空');
         }
+        if($model->sex_direction == '异性'){
+            if($model->has_sex_3month){
+                if(!$model->hetero_partner_num){
+                    $model->addError('name', '近3个月内您有多少个异性伙伴');
+                }
+            }
+        }else if($model->anal_sex){
+            if(!$model->anal_sex_role){
+                $model->addError('name', '肛交性角色不能为空');
+            }
+            if(!$model->anal_sex_partner_num){
+                $model->addError('name', '近3个月内您有多少个同性伙伴不能为空');
+            }
+        }
 
         return $this->saveAndReturn($model);
     }
@@ -196,6 +210,12 @@ class SaveAction extends WwwBaseAction
         }
         if(!$model->detect_num){
             $model->addError('name', '请输入 接受过HIV检测次数');
+        }
+        if(!$model->detect_num_near_1year){
+            $model->addError('name', '请选择 最近一年内接受过几次HIV检测');
+        }
+        if(!$model->detect_num_near_6month){
+            $model->addError('name', '请选择 最近6个月内接受过几次HIV检测');
         }
         if(!$model->last_hiv_checkdate){
             $model->addError('name', '请选择 最近一次参加HIV检测日期');

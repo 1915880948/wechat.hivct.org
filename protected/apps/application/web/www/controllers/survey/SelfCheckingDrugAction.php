@@ -26,6 +26,7 @@ class SelfCheckingDrugAction extends WwwBaseAction
         $survey = $this->getSurvey($eventId);
         $step = $survey->getStepByName($this->id);
         $surveyUrl = $this->getSurveyUrl($eventId, $step);
+        return $this->controller->redirect(array('selfcheckinghiv','eventId'=>$eventId,'step'=>$step+1));
 
         return $this->render(compact('model', 'survey', 'surveyUrl'));
     }

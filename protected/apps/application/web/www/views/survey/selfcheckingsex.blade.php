@@ -94,7 +94,7 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd paddingleft">你近3个月内有过性行为吗？</div>
           <div class="weui-cell__ft">
-            <input id="has_sex_3month" class="weui-switch" type="checkbox">
+            <input id="has_sex_3month" name="has_sex_3month" class="weui-switch" type="checkbox">
           </div>
         </div>
         <div class="app-hide" id="sex_3month">

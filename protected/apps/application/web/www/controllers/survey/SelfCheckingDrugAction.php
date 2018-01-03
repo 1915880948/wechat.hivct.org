@@ -8,9 +8,9 @@
 
 namespace application\web\www\controllers\survey;
 
-use application\models\base\SurveyList;
 use application\web\www\components\suvey\SurveyTrait;
 use application\web\www\components\WwwBaseAction;
+use yii\helpers\Url;
 
 class SelfCheckingDrugAction extends WwwBaseAction
 {
@@ -26,8 +26,8 @@ class SelfCheckingDrugAction extends WwwBaseAction
         $survey = $this->getSurvey($eventId);
         $step = $survey->getStepByName($this->id);
         $surveyUrl = $this->getSurveyUrl($eventId, $step);
-        return $this->controller->redirect(array('selfcheckinghiv','eventId'=>$eventId,'step'=>$step+1));
 
+        // return $this->controller->redirect(Url::to($surveyUrl['next']));
         return $this->render(compact('model', 'survey', 'surveyUrl'));
     }
 }

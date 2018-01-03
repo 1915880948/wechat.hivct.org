@@ -67,7 +67,7 @@
           <div class="weui-cell__hd">接受过几次HIV检测？</div>
           <div class="weui-cell__bd">
             <input class="weui-input" type="text" name="detect_num" id="detect_num" placeholder="请输入"></div>
-          <div class="weui-cell__ft">
+          <div class="weui-cell__ft f12">
             <h3 class="" style="width:1rem;">次</h3>
           </div>
         </div>
@@ -75,7 +75,7 @@
           <div class="weui-cell__hd">最近一年内接受过几次HIV检测？</div>
           <div class="weui-cell__bd">
             <input class="weui-input" type="text" name="detect_num_near_1year" id="detect_num_near_1year" placeholder="请输入"></div>
-          <div class="weui-cell__ft">
+          <div class="weui-cell__ft f12">
             <h3 class="" style="width:1rem;">次</h3>
           </div>
         </div>
@@ -83,8 +83,8 @@
           <div class="weui-cell__hd">最近6个月内接受过几次HIV检测？</div>
           <div class="weui-cell__bd">
             <input class="weui-input" type="text" name="detect_num_near_6month" id="detect_num_near_6month" placeholder="请输入"></div>
-          <div class="weui-cell__ft">
-            <button class="" style="width:1rem;">次</button>
+          <div class="weui-cell__ft f12">
+            <h3 class="" style="width:1rem;">次</h3>
           </div>
         </div>
         <div class="weui-cell">

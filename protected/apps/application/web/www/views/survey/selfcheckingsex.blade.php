@@ -19,6 +19,7 @@
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd paddingleft">你曾经有过性行为吗？</div>
         <div class="weui-cell__ft">
+          <input name="has_sex"  type="hidden" value="0">
           <input id="has_sex" name="has_sex" class="weui-switch" type="checkbox" value="{{$survey['has_sex']}}">
         </div>
       </div>
@@ -39,24 +40,28 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd paddingleft">互联网（社交软件等）</div>
           <div class="weui-cell__ft">
+              <input name="partner_sns"  type="hidden" value="0">
             <input id="partner_sns" name="partner_sns" class="weui-switch" type="checkbox" value="{{$survey['partner_sns']}}">
           </div>
         </div>
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">酒吧</div>
           <div class="weui-cell__ft">
+              <input name="partner_bar"  type="hidden" value="0">
             <input class="weui-switch" type="checkbox" id="partner_bar" name="partner_bar" value="{{$survey['partner_bar']}}">
           </div>
         </div>
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">KTV</div>
           <div class="weui-cell__ft">
+              <input name="partner_ktv"  type="hidden" value="0">
             <input id="partner_ktv" name="partner_ktv" class="weui-switch" type="checkbox" value="{{$survey['partner_ktv']}}">
           </div>
         </div>
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">公园</div>
           <div class="weui-cell__ft">
+              <input name="partner_park"  type="hidden" value="0">
             <input id="partner_park" name="partner_park" class="weui-switch" type="checkbox" value="{{$survey['partner_park']}}">
           </div>
         </div>
@@ -94,6 +99,7 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd paddingleft">你近3个月内有过性行为吗？</div>
           <div class="weui-cell__ft">
+              <input name="has_sex_3month"  type="hidden" value="0">
             <input id="has_sex_3month" name="has_sex_3month" class="weui-switch" type="checkbox">
           </div>
         </div>
@@ -108,6 +114,7 @@
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">最近3个月内，每次与异性发生性行为时，是否全程使用安全套：</div>
             <div class="weui-cell__ft">
+                <input name="condom_full_use"  type="hidden" value="0">
               <input id="condom_full_use" name="condom_full_use" class="weui-switch" type="checkbox">
             </div>
           </div>
@@ -126,6 +133,7 @@
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">与异性发生性行为出现过未全程使用安全套(如在性行为发生一段时间才使用安全套)：</div>
             <div class="weui-cell__ft">
+                <input name="condom_full_use_not"  type="hidden" value="0">
               <input id="condom_full_use_not" name="condom_full_use_not" class="weui-switch" type="checkbox">
             </div>
           </div>
@@ -136,7 +144,8 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">您曾有肛交行为吗：</div>
           <div class="weui-cell__ft">
-            <input id="anal_sex" name="anal_sex" class="weui-switch" type="checkbox">
+              <input name="anal_sex"  type="hidden" value="0">
+            <input id="anal_sex" name="anal_sex" class="weui-switch" type="checkbox" value="0">
           </div>
         </div>
         <div class="app-hide" id="sex_same">
@@ -155,6 +164,7 @@
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">最近3个月内，每次与同性发生性行为时，是否全程使用安全套：</div>
             <div class="weui-cell__ft">
+                <input name="anal_sex_full_use"  type="hidden" value="0">
               <input id="anal_sex_full_use" name="anal_sex_full_use" class="weui-switch" type="checkbox">
             </div>
           </div>
@@ -173,6 +183,7 @@
           <div class="weui-cell weui-cell_switch">
             <div class="weui-cell__bd">与同性发生性行为出现过未全程使用安全套(在肛交发生一段时间才使用安全套，如射精前阶段)：</div>
             <div class="weui-cell__ft">
+                <input name="anal_sex_full_use_not"  type="hidden" value="0">
               <input id="anal_sex_full_use_not" name="anal_sex_full_use_not" class="weui-switch" type="checkbox">
             </div>
           </div>
@@ -258,6 +269,9 @@
 
         $('#next-btn').on('click', function () {
             var self = $(this);
+            if( $('#has_sex:checked') === false){
+                $('#_form')[0].reset();
+            }
             $.jsonPost($(self).data('post'), $('#_form').serializeArray(), function (result) {
                 if (result.status) {
                     location.href = $(self).data('next');

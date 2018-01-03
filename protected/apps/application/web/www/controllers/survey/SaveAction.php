@@ -26,6 +26,7 @@ class SaveAction extends WwwBaseAction
     public function run($type)
     {
         $posts = $this->request->post();
+//        print_r(array_keys($posts));exit;
         $eventId = ArrayHelper::getValue($posts, 'eventId');
         $step = ArrayHelper::getValue($posts, 'step');
         if(!$eventId){
@@ -90,9 +91,11 @@ class SaveAction extends WwwBaseAction
 
     protected function trySex($datas)
     {
+//        $datas['has_sex'] = ArrayHelper::getValue($datas,'has_sex',0);
         $model = $this->getSurvey($datas['eventId']);
         $model->setAttributes($datas);
         if(!$model->has_sex){
+//            $this->clearSexModel($model, 'all');
             return $this->saveAndReturn($model);
         }
         if(!$model->sex_age){
@@ -107,15 +110,18 @@ class SaveAction extends WwwBaseAction
                     $model->addError('name', '近3个月内您有多少个异性伙伴');
                 }
             }
-        }else if($model->anal_sex){
+        }elseif($model->anal_sex){
             if(!$model->anal_sex_role){
                 $model->addError('name', '肛交性角色不能为空');
             }
             if(!$model->anal_sex_partner_num){
                 $model->addError('name', '近3个月内您有多少个同性伙伴不能为空');
             }
+            if(!$model->anal_sex_full_use && !$model->anal_sex_percent){
+                $model->addError('name', '在最近3个月没有全程使用安全套的比例不能为空');
+            }
         }
-
+        $model->addError('name', $model->anal_sex_full_use);
         return $this->saveAndReturn($model);
     }
 
@@ -284,5 +290,35 @@ class SaveAction extends WwwBaseAction
             return $model->id;
         }
         return array_values($model->getFirstErrors());
+    }
+
+    public function clearSexModel($model,$type){
+        if( $type == 'all'){
+            $model->has_sex = '';
+            $model->sex_age = '';
+            $model->partner = '';
+            $model->partner_sns = '';
+            $model->partner_bar = '';
+            $model->partner_ktv = '';
+            $model->partner_park = '';
+            $model->partner_other = '';
+            $model->sex_type = '';
+            $model-> sex_type_other = '';
+            $model-> sex_direction = '';
+            $model-> has_sex_3month = '';
+            $model-> hetero_partner_num = '';
+            $model-> condom_full_use = '';
+            $model-> condom_percent = '';
+            $model-> condom_near = '';
+            $model-> condom_full_use_not = '';
+            $model-> anal_sex = '';
+            $model-> anal_sex_role = '';
+            $model-> anal_sex_partner_num = '';
+            $model-> anal_sex_full_use = '';
+            $model-> anal_sex_percent = '';
+            $model-> anal_sex_near = '';
+            $model-> anal_sex_full_use_not = '';
+        }
+
     }
 }

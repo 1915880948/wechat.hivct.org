@@ -109,6 +109,9 @@ class SaveAction extends WwwBaseAction
                 if(!$model->hetero_partner_num){
                     $model->addError('name', '近3个月内您有多少个异性伙伴');
                 }
+                if(!$model->condom_full_use && !$model->condom_percent){
+                    $model->addError('name', '在最近3个月没有全程使用安全套的比例不能为空');
+                }
             }
         }elseif($model->anal_sex){
             if(!$model->anal_sex_role){
@@ -121,7 +124,6 @@ class SaveAction extends WwwBaseAction
                 $model->addError('name', '在最近3个月没有全程使用安全套的比例不能为空');
             }
         }
-        $model->addError('name', $model->anal_sex_full_use);
         return $this->saveAndReturn($model);
     }
 
@@ -218,10 +220,10 @@ class SaveAction extends WwwBaseAction
             $model->addError('name', '请输入 接受过HIV检测次数');
         }
         if(!$model->detect_num_near_1year){
-            $model->addError('name', '请选择 最近一年内接受过几次HIV检测');
+            $model->addError('name', '最近一年内接受过几次HIV检测');
         }
         if(!$model->detect_num_near_6month){
-            $model->addError('name', '请选择 最近6个月内接受过几次HIV检测');
+            $model->addError('name', '最近6个月内接受过几次HIV检测');
         }
         if(!$model->last_hiv_checkdate){
             $model->addError('name', '请选择 最近一次参加HIV检测日期');

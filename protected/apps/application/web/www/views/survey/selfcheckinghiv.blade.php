@@ -21,30 +21,35 @@
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd ">医院</div>
         <div class="weui-cell__ft">
+          <input type="hidden" name="detect_hospital" value="0">
           <input id="detect_hospital" name="detect_hospital" class="weui-switch" type="checkbox">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">疾控中心</div>
         <div class="weui-cell__ft">
+          <input type="hidden" name="detect_jk_center" value="0">
           <input class="weui-switch" type="checkbox" id="detect_jk_center" name="detect_jk_center">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">社区小组</div>
         <div class="weui-cell__ft">
+          <input type="hidden" name="detect_community" value="0">
           <input class="weui-switch" type="checkbox" id="detect_community" name="detect_community">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">药店</div>
         <div class="weui-cell__ft">
+          <input type="hidden" name="detect_drugstore" value="0">
           <input class="weui-switch" type="checkbox" id="detect_drugstore" name="detect_drugstore">
         </div>
       </div>
       <div class="weui-cell weui-cell_switch">
         <div class="weui-cell__bd">个体诊所</div>
         <div class="weui-cell__ft">
+          <input type="hidden" name="detect_clinic" value="0">
           <input class="weui-switch" type="checkbox" id="detect_clinic" name="detect_clinic">
         </div>
       </div>
@@ -165,30 +170,35 @@
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd ">医院</div>
           <div class="weui-cell__ft">
+            <input type="hidden" name="detect_channel_hospital" value="0"/>
             <input id="detect_channel_hospital" name="detect_channel_hospital" class="weui-switch" type="checkbox">
           </div>
         </div>
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">疾控中心</div>
           <div class="weui-cell__ft">
+            <input type="hidden" name="detect_channel_jk_center" value="0"/>
             <input class="weui-switch" type="checkbox" id="detect_channel_jk_center" name="detect_channel_jk_center">
           </div>
         </div>
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">社区小组</div>
           <div class="weui-cell__ft">
+            <input type="hidden" name="detect_channel_community" value="0"/>
             <input class="weui-switch" type="checkbox" id="detect_channel_community" name="detect_channel_community">
           </div>
         </div>
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">药店</div>
           <div class="weui-cell__ft">
+            <input type="hidden" name="detect_channel_drugstore" value="0"/>
             <input class="weui-switch" type="checkbox" id="detect_channel_drugstore" name="detect_channel_drugstore">
           </div>
         </div>
         <div class="weui-cell weui-cell_switch">
           <div class="weui-cell__bd">个体诊所</div>
           <div class="weui-cell__ft">
+            <input type="hidden" name="detect_channel_clinic" value="0"/>
             <input class="weui-switch" type="checkbox" id="detect_channel_clinic" name="detect_channel_clinic">
           </div>
         </div>

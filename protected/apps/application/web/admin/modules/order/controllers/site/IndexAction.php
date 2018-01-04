@@ -41,11 +41,11 @@ class IndexAction extends AdminBaseAction
 
 
         $expressArr = ['-99'=>'全部'];
+        $ship = [];
         foreach ( $express as $key=>$v ){
             $ship[$v['id']] = $v['name'];
             $expressArr[$v['id']] = $v['name'];
         }
-//        print_r( $expressArr ); die;
         return $this->render(compact('expressArr','ship','provider'));
     }
 //    use Render;

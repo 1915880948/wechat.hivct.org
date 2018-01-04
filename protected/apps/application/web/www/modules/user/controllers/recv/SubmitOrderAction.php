@@ -21,11 +21,8 @@ class SubmitOrderAction extends WwwBaseAction
 
     public function run()
     {
-        echo "<pre>";
-        print_r($this->request->post());
-        echo "</pre>";
         $payinfo = $this->request->post('payinfo');
-        echo $payinfo;
+
         try{
             $postdata = Json::decode(CryptHelper::authcode($payinfo, 'DECODE', env('WECHAT_APP_KEY')));
         } catch(\Exception $e){
@@ -37,13 +34,7 @@ class SubmitOrderAction extends WwwBaseAction
                 ];
             }
         }
-        echo "<pre>";
-        print_r($postdata);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($this->account);
-        echo "</pre>";
-        exit;
+
         if($postdata['uid'] != $this->account['uid']){
             return MessageHelper::error('对不起，您提交的订单不是由您自己创建的', [gHomeUrl()]);
         }

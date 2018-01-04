@@ -19,14 +19,14 @@
           <div class="weui-cells__title f-black ">{{$model->getTypeName($type)}}</div>
           @if($type == 'free')
             <div class="weui-cells weui-cells_radio">
-              <label class="weui-cell weui-check__label f-888" for="xx0">
-                <div class="weui-cell__bd">
-                  <p>不选择任何试剂</p>
-                </div>
-                <div class="weui-cell__ft">
-                  <input type="radio" class="weui-check" name="product[{{$type}}]" value="0" id="xx0"> <span class="weui-icon-checked"></span>
-                </div>
-              </label>
+              {{--<label class="weui-cell weui-check__label f-888" for="xx0">--}}
+                {{--<div class="weui-cell__bd">--}}
+                  {{--<p>不选择任何试剂</p>--}}
+                {{--</div>--}}
+                {{--<div class="weui-cell__ft">--}}
+                  {{--<input type="radio" class="weui-check" name="product[{{$type}}]" value="0" id="xx0"> <span class="weui-icon-checked"></span>--}}
+                {{--</div>--}}
+              {{--</label>--}}
               @foreach($_products as $product)
                 <label class="weui-cell weui-check__label f-888" for="xx{{$product['id']}}">
                   <div class="weui-cell__bd">

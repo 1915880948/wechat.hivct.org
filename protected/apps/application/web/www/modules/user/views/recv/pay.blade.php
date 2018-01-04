@@ -29,11 +29,20 @@
           </div>
         </div>
       </div>
+      <div class="weui-cells__title">保证金：</div>
+      <div class="weui-cells">
+        <div class="weui-cell ">
+          <div class="weui-cell__bd">
+            <p style="margin-left:15px;">保证金<span class="f-red">30</span>元，等你上传完毕后，我们将会原路返回到您的微信账号里</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="weui-tabbar">
     <form method="post" action="{{yUrl(['/user/recv/submitorder'])}}" id="submit_order" style="width:100%">
-      <input type="text" name="_csrf" value="{{yRequest()->getCsrfToken()}}"/> <input type="text" name="payinfo" value="{{$payinfo}}"/>
+      <input type="text" name="_csrf" value="{{yRequest()->getCsrfToken()}}"/>
+      <input type="text" name="payinfo" value="{{$payinfo}}"/>
     </form>
     <div class="weui-form-preview" style="width:100%">
       <div class="weui-form-preview__ft">

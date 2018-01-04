@@ -87,7 +87,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'ship_name' => '快递名称',
             'ship_code' => '快递单号',
             'ship_uuid' => '快递公司UUID',
-            'ship_status' => '配送状态',
+            'ship_status' => '配送状态: 1:已发货',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'source_type' => '来源',

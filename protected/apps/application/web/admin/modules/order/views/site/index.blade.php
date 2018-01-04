@@ -13,10 +13,22 @@ use yii\helpers\ArrayHelper;
     ]]])
 @stop
 @section('content')
+
     <div style="float: right;">
-        <?php
+        {{--<div class="btn-group">--}}
+            {{--<a href="#" class="btn bg-yellow btn-default">全部</a>--}}
+            {{--@foreach( $logArr as $k=>$v)--}}
+                {{--<a href="#" class="btn  btn-default ">{{ explode('-',$v['title'])[0] }} -{{$v['id']}}</a>--}}
+            {{--@endforeach--}}
+            {{--@foreach(gUnits() as $tree)--}}
+            {{--<a href="{{yUrl(['','units'=>str_pad($tree['name'],2,'0',STR_PAD_LEFT)."0000"])}}" class="btn @if(gCourseCate()->getUnitNum($tree['level'])== gUnit()[0]) bg-yellow  @endif btn-default ">UNIT {{$tree['name']}}</a>--}}
+            {{--@endforeach--}}
+        {{--</div>--}}
+
+    <?php
         /** @var InlineForm $form */
         $form = InlineForm::begin(['action' => yUrl(['site/index']), 'method' => 'get']);
+        echo $form->label("发货地", Html::dropDownList("logistics_id", ArrayHelper::getValue($_GET, 'logistics_id', ''),$logArr));
         echo $form->label("快递公司", Html::dropDownList("ship_uuid", ArrayHelper::getValue($_GET, 'ship_uuid', ''),$expressArr));
         echo $form->label("支付状态", Html::dropDownList("pay_status", ArrayHelper::getValue($_GET, 'pay_status', ''),
             [
@@ -41,6 +53,7 @@ use yii\helpers\ArrayHelper;
         echo $form->label("微信订单号", Html::textInput("wx_transaction_id", ArrayHelper::getValue($_GET, 'wx_transaction_id', '')));
         echo $form->label("快递单号", Html::textInput("ship_code", ArrayHelper::getValue($_GET, 'ship_code', '')));
         echo $form->submitInput();
+        echo $form->buttonInput('导出',['class'=>'input-group-btn btn btn-default btn-sm input-small export']);
         $form->end();
         ?>
     </div>
@@ -62,13 +75,26 @@ use yii\helpers\ArrayHelper;
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute' => 'info',
-                                        'label' => '订单标题'
+                                        'attribute' => 'address_contact',
+                                        'label' => '收货人'
+                                    ],
+                                    [
+                                        'contentOptions' => ['class' => 'col-sm-1'],
+                                        'attribute' => 'address_mobile',
+                                        'label' => '电话'
+                                    ],
+                                    [
+                                        'contentOptions' => ['class' => 'col-sm-1'],
+                                        'attribute' => 'address_detail',
+                                        'label' => '详细地址'
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
                                         'attribute' => 'total_price',
                                         'label' => '总价',
+                                        'value' =>function($model){
+                                            return $model->total_price/100;
+                                        }
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
@@ -91,11 +117,11 @@ use yii\helpers\ArrayHelper;
                                             return orderStatus($model->order_status);
                                         }
                                     ],
-                                    [
-                                        'contentOptions' => ['class' => 'col-sm-2'],
-                                        'attribute' => 'ship_name',
-                                        'label' => '快递公司',
-                                    ],
+//                                    [
+//                                        'contentOptions' => ['class' => 'col-sm-2'],
+//                                        'attribute' => 'ship_name',
+//                                        'label' => '快递公司',
+//                                    ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
                                         'attribute' => 'ship_code',
@@ -224,6 +250,14 @@ use yii\helpers\ArrayHelper;
                 });
             });
 
+            $(".export").click(function () {
+                var url = location.href.split("?");
+                if( url[1] ){
+                    location.href = "{{yUrl(['site/export'])}}"+"?"+url[1];
+                }else{
+                    location.href = "{{yUrl(['site/export'])}}";
+                }
+            })
         });
     </script>
 @endpush

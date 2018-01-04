@@ -48,6 +48,11 @@ class InlineForm extends ActiveForm
                 'onclick' => 'location.href=this.form.action'
             ]));
     }
+
+    public function buttonInput($string = "按钮",$options = [])
+    {
+        return Html::label("&nbsp;" . Html::buttonInput($string, $options));
+    }
 }
 
 

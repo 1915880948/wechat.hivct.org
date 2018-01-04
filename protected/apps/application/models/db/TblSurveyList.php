@@ -187,7 +187,10 @@ class TblSurveyList extends \application\common\db\ApplicationActiveRecord
             'partner' => '寻找其他性伴侣的方式',
             'partner_sns' => '互联网（社交软件等）',
             'partner_bar' => '酒吧',
-            'partner_ktv' => 'KTV',
+            'partner_ktv' => 'KTV
+KTV
+KTV
+KTV',
             'partner_park' => '公园',
             'partner_other' => '其他',
             'sex_type' => '常用性行为方式',
@@ -239,10 +242,16 @@ class TblSurveyList extends \application\common\db\ApplicationActiveRecord
             'is_hepatitis_c' => '最近是否做过丙肝检测',
             'hepatitis_c_result' => '丙肝检测结果',
             'detect_hospital' => '医院',
-            'detect_jk_center' => '疾控中心',
+            'detect_jk_center' => '疾控中心
+疾控中心疾控中心疾控中心
+疾控中心
+疾控中心
+疾控中心
+疾控中心',
             'detect_community' => '社区小组',
             'detect_drugstore' => '药店',
-            'detect_clinic' => '个体诊所',
+            'detect_clinic' => '个体诊所
+个体诊所',
             'detect_other' => '其他',
             'is_accept_detect_hiv' => '您是否接受过HIV检测',
             'detect_num' => '接受过几次HIV检测',
@@ -281,7 +290,8 @@ class TblSurveyList extends \application\common\db\ApplicationActiveRecord
             'org_phthisis' => '提供结核诊断治疗机构信息',
             'org_other' => '其他服务',
             'active_treatment' => '积极接受治疗',
-            'unaccept_medical' => '担心药物副作用，暂不接受',
+            'unaccept_medical' => '担心药物副作用，暂不接受
+担心药物副作用，暂不接受',
             'treatment_until_standard' => '未到治疗标准就不用治疗',
             'resistant_care' => '担心很快耐药',
             'explore_care' => '担心吃药后被人发现',

@@ -11,6 +11,7 @@ namespace application\web\www\modules\user\controllers\recv;
 use application\models\base\Logistics;
 use application\models\base\OrderList;
 use application\models\base\Reagent;
+use application\models\base\UserAddress;
 use application\models\base\UserEvent;
 use application\web\www\components\WwwBaseAction;
 use qiqi\helper\CryptHelper;
@@ -77,29 +78,19 @@ class PayAction extends WwwBaseAction
             'source_type' => $eventInfo->event_type,
             'source_uuid' => $eventInfo->event_type_uuid
         ];
-        $payinfo = CryptHelper::authcode(Json::encode($postdata), 'ENCODE', env('WECHAT_APP_KEY'));
-        // echo "<pre>";
-        // print_r([
-        //     'trade_type'   => 'JSAPI',
-        //     'body'         => "互联网+艾滋病快速自检试剂发放",
-        //     'detail'       => join(",", $details),
-        //     'out_trade_no' => $tradeno,
-        //     'total_fee'    => $totalPrice, //目前是0
-        //     'openid'       => $this->account->openid,
-        //     'notify_url'   => Url::to(['/oauth/notify'], true),
-        //     'logistcis'    => $logistcisInfo !== null ? $logistcisInfo->attributes : [],
-        //     'uid'          => $this->account->uid,
-        //     'goods_list'   => Json::encode($products),
-        //     'source_type'  => 'survey',
-        //     'source_uuid'  => $eventId
-        // ]);
-        //
+        $payinfo = CryptHelper::authcode(Json::encode($postdata), 'ENCODE', env('WECHAT_APP_KEY'));//
         if($order = OrderList::findBySource('survey', $eventId)){
             if($order->pay_status == OrderList::ORDER_STATUS_PAID){
                 //...
             }
         } else{
             $order = OrderList::create($postdata);
+            $order->updateLogitics($logistcis);
+            /**
+             * 补充地址信息
+             */
+            $addressInfo = UserAddress::findByUuid($eventInfo->user_address_uuid);
+            $order->updateAddressInfo($addressInfo);
         }
         $trans = \Yii::$app->db->beginTransaction();
         if($order->hasErrors()){
@@ -108,6 +99,8 @@ class PayAction extends WwwBaseAction
             // return Schema::FailureNotify('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
             return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
         }
+
+
         $detailErrors = OrderList::createOrderDetail($order['uuid'], Json::decode($postdata['goods_list']));
         if($detailErrors){
             $trans->rollBack();

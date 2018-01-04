@@ -27,6 +27,11 @@ use Yii;
  * @property string $updated_at
  * @property string $source_type
  * @property string $source_uuid
+ * @property integer $logistic_id
+ * @property string $address_uuid
+ * @property string $address_contact
+ * @property string $address_mobile
+ * @property string $address_detail
  */
 class TblOrderList extends \application\common\db\ApplicationActiveRecord
 {
@@ -45,16 +50,17 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
     {
         return [
             [['out_trade_no'], 'required'],
-            [['uid', 'pay_status', 'order_status', 'ship_status'], 'integer'],
+            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id'], 'integer'],
             [['total_price'], 'number'],
             [['order_updated_at', 'created_at', 'updated_at'], 'safe'],
-            [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid'], 'string', 'max' => 36],
-            [['info'], 'string', 'max' => 50],
+            [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
+            [['info', 'address_contact'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 250],
             [['memo'], 'string', 'max' => 100],
-            [['ship_name'], 'string', 'max' => 20],
+            [['ship_name', 'address_mobile'], 'string', 'max' => 20],
             [['ship_code'], 'string', 'max' => 30],
             [['source_type'], 'string', 'max' => 10],
+            [['address_detail'], 'string', 'max' => 200],
             [['out_trade_no'], 'unique'],
             [['uuid'], 'unique']
         ];
@@ -78,14 +84,19 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'pay_status' => '支付状态，0待支付，1已支付，-1支付失败',
             'order_status' => '订单状态：0未处理，1处理中，2已支付，3已发货，4已收货，11申请退款，12退款中，13退款完成，99已完成',
             'order_updated_at' => '订单更新时间',
-            'ship_name' => 'Ship Name',
+            'ship_name' => '快递名称',
             'ship_code' => '快递单号',
             'ship_uuid' => '快递公司UUID',
-            'ship_status' => '配送状态: 1:已发货',
+            'ship_status' => '配送状态',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-            'source_type' => 'Source Type',
-            'source_uuid' => 'Source Uuid',
+            'source_type' => '来源',
+            'source_uuid' => '来源ID',
+            'logistic_id' => '发货地ID',
+            'address_uuid' => 'Address Uuid',
+            'address_contact' => 'Address Contact',
+            'address_mobile' => 'Address Mobile',
+            'address_detail' => 'Address Detail',
         ];
     }
 }

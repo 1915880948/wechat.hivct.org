@@ -44,7 +44,8 @@ class TblReagent extends \application\common\db\ApplicationActiveRecord
             [['description'], 'string', 'max' => 500],
             [['type'], 'string', 'max' => 10],
             [['comment'], 'string', 'max' => 255],
-            [['image'], 'string', 'max' => 200]
+            [['image'], 'string', 'max' => 200],
+            [['name'], 'unique']
         ];
     }
 

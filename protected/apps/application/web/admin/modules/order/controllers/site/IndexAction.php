@@ -23,13 +23,6 @@ class IndexAction extends AdminBaseAction
         $express = Express::find()->andWhere(['status'=>1])->asArray()->all();
         $query = OrderList::find();
 
-        $logArr = ['-99'=>'全部'];
-        foreach ( $logistics as $k=>$v){
-            $logArr[$v['id']] = $v['title'];
-        }
-//        $logArr = array_unique($logArr);
-//print_r( $logArr );exit;
-
         if( $logistics_id != '-99' ){
             $query = $query->andWhere(['logistic_id'=>$logistics_id]);
         }
@@ -58,9 +51,21 @@ class IndexAction extends AdminBaseAction
             $ship[$v['id']] = $v['name'];
             $expressArr[$v['id']] = $v['name'];
         }
-        return $this->render(compact('logArr','expressArr','ship','provider'));
+
+        $logArr = ['-99'=>'全部'];
+        foreach ( $logistics as $k=>$v){
+            $logArr[$v['id']] = $v['title'];
+        }
+//        $logArr = array_unique($logArr);
+//        print_r( $logArr );
+        $payArr = [
+            '-99' => '全部',
+            '0'   => '待支付',
+            '1'   => '已支付',
+            '-1'  => '支付失败'
+        ];
+
+        return $this->render(compact('payArr','logArr','expressArr','ship','provider'));
     }
 //    use Render;
-//  e761c7dc-f13c-11e7-a4e1-0c4de9c9a8d8
-//  e761c7dc-f13c-11e7-a4e1-0c4de9c9a8d8
 }

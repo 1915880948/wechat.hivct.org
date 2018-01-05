@@ -19,10 +19,10 @@ use yii\helpers\ArrayHelper;
             {{--<a href="#" class="btn bg-yellow btn-default">全部</a>--}}
             @foreach( $payArr as $k=>$v)
                 <a href="{{yUrl(['',
-                'logistics_id'      => \yii\helpers\ArrayHelper::getValue($_GET, 'logistics_id', ''),
-                'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', ''),
+                'logistics_id'      => \yii\helpers\ArrayHelper::getValue($_GET, 'logistics_id', '-99'),
+                'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', '-99'),
                 'pay_status'        => $k,
-                'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', ''),
+                'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', '-99'),
                 'wx_transaction_id' => \yii\helpers\ArrayHelper::getValue($_GET, 'wx_transaction_id', ''),
                 'ship_code'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_code', '')
                 ])}}" title="{{ $v }}-{{$k}}" class="btn btn-default {{ $k==\yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', '-99')?'bg-yellow':'' }} ">{{ $v }}</a>
@@ -35,9 +35,9 @@ use yii\helpers\ArrayHelper;
             @foreach( $logArr as $k=>$v)
                 <a href="{{yUrl(['',
                 'logistics_id'      => $k,
-                'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', ''),
-                'pay_status'        => \yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', ''),
-                'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', ''),
+                'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', '-99'),
+                'pay_status'        => \yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', '-99'),
+                'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', '-99'),
                 'wx_transaction_id' => \yii\helpers\ArrayHelper::getValue($_GET, 'wx_transaction_id', ''),
                 'ship_code'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_code', '')
                 ])}}" title="{{ $v }}" class="btn btn-default {{ $k==\yii\helpers\ArrayHelper::getValue($_GET, 'logistics_id', '-99')?'bg-yellow':'' }} ">{{ explode('-',$v)[0] }}</a>
@@ -50,13 +50,6 @@ use yii\helpers\ArrayHelper;
         echo $form->label("", Html::input('hidden',"pay_status", ArrayHelper::getValue($_GET, 'pay_status', '-99')));
         echo $form->label("", Html::input('hidden',"logistics_id", ArrayHelper::getValue($_GET, 'logistics_id', '-99')));
         echo $form->label("快递公司", Html::dropDownList("ship_uuid", ArrayHelper::getValue($_GET, 'ship_uuid', ''),$expressArr));
-//        echo $form->label("支付状态", Html::dropDownList("pay_status", ArrayHelper::getValue($_GET, 'pay_status', ''),
-//            [
-//                '-99' => '全部',
-//                '0' => '待支付',
-//                '1' => '已支付',
-//                '-1' => '支付失败'
-//            ]));
         echo $form->label("订单状态", Html::dropDownList("order_status", ArrayHelper::getValue($_GET, 'order_status', ''),
             [
                 '-99' => '全部',

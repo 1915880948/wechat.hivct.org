@@ -119,7 +119,7 @@ use yii\helpers\ArrayHelper;
                                         'attribute' => 'pay_status',
                                         'label' => '支付状态',
                                         'value' => function ($model) {
-                                            return payStatus($model->pay_status);
+                                            return gPayStatus($model->pay_status);
                                         }
                                     ],
                                     [
@@ -127,7 +127,7 @@ use yii\helpers\ArrayHelper;
                                         'attribute' => 'order_status',
                                         'label' => '订单状态',
                                         'value' => function ($model) {
-                                            return orderStatus($model->order_status);
+                                            return gOrderStatus($model->order_status);
                                         }
                                     ],
 //                                    [

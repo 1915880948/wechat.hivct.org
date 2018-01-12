@@ -419,24 +419,3 @@ function app($name, $params = [])
     return Yii::createObject($name, $params);
 }
 
-function orderStatus($id){
-    switch ( $id){
-        case 0 : return '未处理';  break;
-        case 1 : return '处理中';  break;
-        case 2 : return '已支付';  break;
-        case 3 : return '已发货';  break;
-        case 4 : return '已收货';  break;
-        case 11: return '申请退款';break;
-        case 12: return '退款中';  break;
-        case 13: return '退款完成';break;
-        case 99: return '已完成';  break;
-        default: return '--';
-    }
-}
-function payStatus($id){
-    switch ($id){
-        case 0 : return '待支付'; break;
-        case 1 : return '已支付'; break;
-        default: return '支付失败';
-    }
-}

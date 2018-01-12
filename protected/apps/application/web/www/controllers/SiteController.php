@@ -18,6 +18,7 @@ use yii\filters\AccessControl;
  */
 class SiteController extends WwwBaseController
 {
+    public $enableCsrfValidation = false;
     use ActionsTrait;
 
     public function behaviors()

@@ -140,7 +140,7 @@
   {{--<script src="{{gStatic('vendor/jquery/jquery.1.11.2.min.js')}}"></script>--}}
 </head>
 <body ontouchstart>
-<div data-pjax id="pjax-container" class="weui-tab  ">
+<div data-pjax id="pjax-container" class="weui-tab">
   @stack('head-style')
   @stack('head-script')
   @yield('content')

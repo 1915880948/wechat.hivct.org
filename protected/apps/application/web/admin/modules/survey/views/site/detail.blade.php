@@ -18,8 +18,8 @@ use yii\widgets\ActiveForm;
     <div>
         <div class="col-xs-2">收货人： {{$data['name']}} </div>
         <div class="col-xs-3">订单标题： {{ $order_data['info'] }} </div>
-        <div class="col-xs-2">支付状态： {{ payStatus($order_data['pay_status']) }} </div>
-        <div class="col-xs-2">订单状态： {{ orderStatus($order_data['order_status']) }}</div>
+        <div class="col-xs-2">支付状态： {{ gPayStatus($order_data['pay_status']) }} </div>
+        <div class="col-xs-2">订单状态： {{ gOrderStatus($order_data['order_status']) }}</div>
         <div class="col-xs-2">订单标题： {{ $order_data['total_price'] }} </div>
         <div class="col-xs-1">
             @if($order_data['source_type']== 'survey')
@@ -65,13 +65,13 @@ use yii\widgets\ActiveForm;
             <div class="col-xs-12"><span>常用性行为方式：    </span> {{ $data['sex_type'] }}</div>
 
             @if( $data['sex_type'] == '其他')
-                <div class="col-xs-12"><span>其他职业：       </span> {{ $data['sex_type_other'] }}</div>
+                <div class="col-xs-12"><span>其他方式：       </span> {{ $data['sex_type_other'] }}</div>
             @endif
             <div class="col-xs-12"><span>性取向：    </span> {{ $data['sex_direction'] }}</div>
-            <div class="col-xs-12"><span>你近3个月内有过性行为吗：    </span> {{ $data['hetero_partner_num'] }}</div>
-            <div class="col-xs-12"><span>近3个月内您有多少个异性伙伴：    </span> {{ $data['hetero_partner_num'] }}</div>
+            <div class="col-xs-12"><span>你近三个月内有过性行为吗：    </span> {{ $data['hetero_partner_num'] }}</div>
+            <div class="col-xs-12"><span>近三个月内您有多少个异性伙伴：    </span> {{ $data['hetero_partner_num'] }}</div>
             <div class="col-xs-12"><span>是否全程使用安全套：    </span> {{ $data['condom_full_use']==1?'是':'否' }}</div>
-            <div class="col-xs-12"><span>在最近3个月没有全程使用安全套的比例：    </span> {{ $data['condom_percent'] }}</div>
+            <div class="col-xs-12"><span>在最近三个月没有全程使用安全套的比例：    </span> {{ $data['condom_percent'] }}</div>
             <div class="col-xs-12"><span>最近一次与异性发生性行为是否使用安全套：    </span> {{ $data['condom_near']==1?'是':'否' }}</div>
             <div class="col-xs-12"><span>最近一次是否未全程使用安全套：    </span> {{ $data['condom_full_use_not'] }}</div>
             <div class="col-xs-12"><span>是否有肛交行为：    </span> {{ $data['anal_sex']==1?'是':'否' }}</div>
@@ -85,22 +85,20 @@ use yii\widgets\ActiveForm;
             <div class="col-xs-12"><span>注射过毒品：    </span> {{ $data['is_use_inject']==1?'是':'否' }}</div>
             <div class="col-xs-12"><span>最近一个月是否注射过毒品：    </span> {{ $data['is_use_inject_near_month']==1?'是':'否' }}
             </div>
-            <div class="col-xs-12"><span>最近一个月注射毒品的频率：    </span> {{ $data['inject_near_month_num']==1?'是':'否' }}</div>
+            <div class="col-xs-12"><span>最近一个月注射毒品的频率：    </span> {{ $data['inject_near_month_num'] }}</div>
             <div class="col-xs-12"><span>曾经与别人是否共用过针具：    </span> {{ $data['is_use_pinhead']==1?'是':'否' }}</div>
             <div class="col-xs-12">
                 <span>最近一个月，注射毒品时是否与别人共用过针具：    </span> {{ $data['is_use_pinhead_near_month']==1?'是':'否' }}</div>
             <div class="col-xs-12"><span>最近一个月注射毒品时，与别人共用针具的频率如何：    </span> {{ $data['pinhead_near_month_num'] }}</div>
             <div class="col-xs-12">
-                <span>最近3个月,是否有过吸食毒品后发生性行为：    </span> {{ $data['is_sex_after_drug_3month']==1?'是':'否' }}</div>
-            <div class="col-xs-12"><span>在最近3个月与多少人是在吸食毒品后发生的性行为：    </span> {{ $data['sex_after_drug_3month_num'] }}
+                <span>最近三个月,是否有过吸食毒品后发生性行为：    </span> {{ $data['is_sex_after_drug_3month']==1?'是':'否' }}</div>
+            <div class="col-xs-12"><span>在最近三个月与多少人是在吸食毒品后发生的性行为：    </span> {{ $data['sex_after_drug_3month_num'] }}
             </div>
             <div class="col-xs-12">
-                <span>最近1个月,是否有过吸食毒品后发生性行为：    </span> {{ $data['is_sex_after_drug_1month']==1?'是':'否' }}</div>
+                <span>最近一个月,是否有过吸食毒品后发生性行为：    </span> {{ $data['is_sex_after_drug_1month']==1?'是':'否' }}</div>
             <div class="col-xs-12">
-                <span>最近1个月,最近1个月与多少人是在吸食毒品后发生的性行为：    </span> {{ $data['is_sex_after_drug_1month'] }}
+                <span>最近一个月,与多少人是在吸食毒品后发生的性行为：    </span> {{ $data['sex_after_drug_1month_num'] }}
             </div>
-            <div class="col-xs-12">
-                <span>最近1个月,是否有过吸食毒品后发生性行为：    </span> {{ $data['is_sex_after_drug_1month']==1?'是':'否' }}</div>
 
         </div>
         <div class="col-xs-4">

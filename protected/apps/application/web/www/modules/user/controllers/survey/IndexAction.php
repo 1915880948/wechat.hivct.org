@@ -9,6 +9,7 @@
 namespace application\web\www\modules\user\controllers\survey;
 
 use application\models\base\SurveyList;
+use application\models\base\UserEvent;
 use application\web\www\components\WwwBaseAction;
 
 /**
@@ -18,9 +19,22 @@ use application\web\www\components\WwwBaseAction;
  */
 class IndexAction extends WwwBaseAction
 {
+    public $select = "  survey.uuid,
+                        survey.name,
+                        survey.create_time,
+                        event.event_type_uuid,
+                        event.event_type_step_total,
+                        event.event_type_step_current";
     public function run()
     {
-        $provider = SurveyList::getInstance()->search();
+        $provider = SurveyList::find()
+            ->select( $this->select )
+            ->from( SurveyList::tableName().' as survey ')
+            ->innerJoin(UserEvent::tableName().' as event ','survey.uuid=event.event_type_uuid')
+            ->andWhere(['survey.uid'=>$this->account['uid']])
+            ->orderBy(['survey.id'=>SORT_DESC])
+            ->asArray()
+            ->all();
 
         return $this->render(compact('provider'));
     }

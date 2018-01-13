@@ -14,8 +14,8 @@
     <div>
         <div class="col-xs-2">真实姓名：{{ $userdata['realname'] }}</div>
         <div class="col-xs-3">订单标题：{{ $order_data['info'] }}</div>
-        <div class="col-xs-2">支付状态：{{ payStatus($order_data['pay_status']) }}</div>
-        <div class="col-xs-2">订单状态：{{ orderStatus($order_data['order_status']) }}</div>
+        <div class="col-xs-2">支付状态：{{ gPayStatus($order_data['pay_status']) }}</div>
+        <div class="col-xs-2">订单状态：{{ gOrderStatus($order_data['order_status']) }}</div>
         <div class="col-xs-2">发货状态：{{ ($order_data['ship_status']==1?'已发货':'未发货') }}</div>
         <div class="col-xs-1">
             @if( $order_data['pay_status']== 1 && $order_data['order_status'] == 2 && $order_data['ship_status'] != 1 )

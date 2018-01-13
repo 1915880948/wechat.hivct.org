@@ -32,6 +32,7 @@ use Yii;
  * @property string $address_contact
  * @property string $address_mobile
  * @property string $address_detail
+ * @property string $alipay
  */
 class TblOrderList extends \application\common\db\ApplicationActiveRecord
 {
@@ -54,7 +55,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             [['total_price'], 'number'],
             [['order_updated_at', 'created_at', 'updated_at'], 'safe'],
             [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
-            [['info', 'address_contact'], 'string', 'max' => 50],
+            [['info', 'address_contact', 'alipay'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 250],
             [['memo'], 'string', 'max' => 100],
             [['ship_name', 'address_mobile'], 'string', 'max' => 20],
@@ -97,6 +98,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'address_contact' => 'Address Contact',
             'address_mobile' => 'Address Mobile',
             'address_detail' => 'Address Detail',
+            'alipay' => '支付宝 和pay_images的支付宝一致',
         ];
     }
 }

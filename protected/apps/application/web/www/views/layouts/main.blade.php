@@ -5,8 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>@yield('title',Yii::t('www','你好志愿者网'))</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="renderer" content="webkit">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="email=no" />
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
   {!! yCsrfTag() !!}
   <script>
@@ -135,11 +138,15 @@
   <link rel="stylesheet" href="{{yStatic('weui/css/jquery-weui.min.css')}}">
   <link rel="stylesheet" href="{{gStatic('vendor/progress/nprogress.css')}}">
   <link rel="stylesheet" href="{{yStatic('css/main.css')}}">
+  <link rel="stylesheet" href="{{yStatic('css/common.css')}}">
   <link rel="stylesheet" href="//at.alicdn.com/t/font_477728_56x7ojdx9rx80k9.css">
   <script src="{{gStatic('vendor/jquery/jquery-2.2.3.min.js')}}"></script>
   {{--<script src="{{gStatic('vendor/jquery/jquery.1.11.2.min.js')}}"></script>--}}
 </head>
 <body ontouchstart>
+<header class="m-header">
+	<a href="#"><img class="m-header__logo" src="{{yStatic('images/logo.png')}}"></a>
+</header>
 <div data-pjax id="pjax-container" class="weui-tab  ">
   @stack('head-style')
   @stack('head-script')

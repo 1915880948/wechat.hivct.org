@@ -14,7 +14,7 @@
 
   <div class="card-menu">
     <ul class="card-menu_area">
-      <li class="card-menu__item"><a class="menu1" href="{{yUrl(['/user/recv'])}}">免费申请试剂</a></li>
+      <li class="card-menu__item"><a class="menu1" href="{{yUrl(['/site/flow'])}}">免费申请试剂</a></li>
       <li class="card-menu__item"><a class="menu2" href="javascript:$.alert('请先参与调研')">试剂邮寄进展</a></li>
     </ul>
     <ul class="card-menu_area">

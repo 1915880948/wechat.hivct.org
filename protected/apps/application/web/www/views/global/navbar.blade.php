@@ -2,7 +2,7 @@
 <footer class="m-footerbar">
   <div class="ui-fixed__bottom m-footerbar__main">
     <a class="m-footerbar__item  @if(in_array(yRequest()->getPathInfo(),['','site','site/index','site/'])) is-active @endif" href="{{yUrl(['/'])}}">
-      <i class="m-footerbar__icon icon1"></i> <label class="m-footerbar_label">首页{{yRequest()->getPathInfo()}}</label> </a>
+      <i class="m-footerbar__icon icon1"></i> <label class="m-footerbar_label">首页</label> </a>
     <a class="m-footerbar__item  @if(yRequest()->getPathInfo()=="site/flow") is-active @endif" href="{{yUrl(['/site/flow'])}}">
       <i class="m-footerbar__icon icon2"></i> <label class="m-footerbar_label">自检流程</label> </a>
     <a class="m-footerbar__item @if(yRequest()->getPathInfo()=="site/cover") is-active @endif" href="{{yUrl(['site/cover'])}}">

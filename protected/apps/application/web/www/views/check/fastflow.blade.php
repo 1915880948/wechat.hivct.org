@@ -92,6 +92,8 @@
       </div>
     </div>
   </div>
+  @include('global.navbar')
+
 @stop
 
 @push('foot-script')

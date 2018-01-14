@@ -1,5 +1,5 @@
 /** 
-* jQuery WeUI V1.1.1 
+* jQuery WeUI V1.2.0
 * By 言川
 * http://lihongxun945.github.io/jquery-weui/
  */
@@ -642,8 +642,8 @@ body {
   -webkit-transition-duration: .2s;
           transition-duration: .2s;
   opacity: 0;
-  -webkit-transform: scale(0.9) translate(-50%, -50%);
-          transform: scale(0.9) translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   -webkit-transform-origin: 0 0;
           transform-origin: 0 0;
   visibility: hidden;
@@ -680,8 +680,6 @@ body {
 .weui-toast.weui-toast--visible {
   opacity: 1;
   visibility: visible;
-  -webkit-transform: scale(1) translate(-50%, -50%);
-          transform: scale(1) translate(-50%, -50%);
 }
 .weui-toast_forbidden {
   color: #F76260;
@@ -1508,15 +1506,15 @@ i.icon.icon-prev {
 /**
  * Swiper 3.3.1
  * Most modern mobile touch slider and framework with hardware accelerated transitions
- * 
+ *
  * http://www.idangero.us/swiper/
- * 
+ *
  * Copyright 2016, Vladimir Kharlampidi
  * The iDangero.us
  * http://www.idangero.us/
- * 
+ *
  * Licensed under MIT
- * 
+ *
  * Released on: February 7, 2016
  */
 .swiper-container {
@@ -2067,7 +2065,7 @@ button.swiper-pagination-bullet {
   overflow: auto;
   box-sizing: border-box;
 }
-.weui-popup__container--visible .weui-popup-overlay {
+.weui-popup__container--visible .weui-popup__overlay {
   opacity: 1;
 }
 .weui-popup__container--visible .weui-popup__modal {
@@ -2289,4 +2287,59 @@ button.swiper-pagination-bullet {
 }
 .weui-toast--text .weui-icon_toast {
   display: none;
+}
+.weui-count {
+  display: inline-block;
+  height: 25px;
+  line-height: 25px;
+}
+.weui-count .weui-count__btn {
+  height: 21px;
+  width: 21px;
+  line-height: 21px;
+  display: inline-block;
+  position: relative;
+  border: 1px solid #04BE02;
+  border-radius: 50%;
+  vertical-align: -6px;
+}
+.weui-count .weui-count__btn:after,
+.weui-count .weui-count__btn:before {
+  content: " ";
+  position: absolute;
+  height: 1px;
+  width: 11px;
+  background-color: #04BE02;
+  left: 50%;
+  top: 50%;
+  margin-left: -5.5px;
+}
+.weui-count .weui-count__btn:after {
+  height: 11px;
+  width: 1px;
+  margin-top: -5.5px;
+  margin-left: -1px;
+}
+.weui-count .weui-count__decrease:after {
+  display: none;
+}
+.weui-count .weui-count__increase {
+  background-color: #04BE02;
+}
+.weui-count .weui-count__increase:after,
+.weui-count .weui-count__increase:before {
+  background-color: white;
+}
+.weui-count .weui-count__number {
+  background-color: transparent;
+  font-size: .8rem;
+  border: 0;
+  width: 1.3rem;
+  text-align: center;
+  color: #5f646e;
+}
+.weui-panel .weui-media-box__title-after {
+  color: #9b9b9b;
+  font-size: .65rem;
+  float: right;
 }

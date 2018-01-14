@@ -119,4 +119,17 @@ i.icon.icon-next, i.icon.icon-prev{width:.5rem;height:.5rem;}
 .user strong,.user small{display: block;color: #fff;}
 .user strong{font-weight: normal;font-size: 0.5rem;margin-bottom: 0.1rem;}
 .user small{color: #f5d770;}
-
+/*时间线*/
+.timeline{padding:1rem}
+.timeline p{color:#888;font-size:.8rem}
+.timeline h4{color:#666;font-weight:400}
+.timeline .recent{color:#18B4ED}
+.timeline ul li{list-style:outside none none}
+.timeline-item{position:relative}
+.timeline-item-content{padding:0 0 1.5rem 1.2rem}
+.timeline-item-head, .timeline-item-head-first{border-radius:99px;content:"";position:absolute;z-index:99;background-color:#04BE02}
+.timeline-item-head{height:10px;left:1px;top:4px;width:10px}
+.timeline-item-head-first{height:20px;left:-4px;top:5px;width:20px}
+.timeline-item-tail{content:"";background-color:#04BE02;height:100%;left:5px;position:absolute;top:5px;width:2px}
+.timeline-item-checked{left:0;position:absolute;top:45%;transform:translateY(-50%);width:100%}
+.timeline-item-checked::before{color:#FFF;font-size:12px;width:20px}

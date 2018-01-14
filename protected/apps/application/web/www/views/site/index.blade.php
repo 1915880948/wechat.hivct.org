@@ -5,8 +5,9 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide"><img src="{{yStatic('images/banner.png')}}"></div>
-      <div class="swiper-slide"><img src="{{yStatic('images/banner.png')}}"></div>
-      <div class="swiper-slide"><img src="{{yStatic('images/banner.png')}}"></div>
+      <div class="swiper-slide"><img src="{{yStatic('images/x.png')}}"></div>
+      <div class="swiper-slide"><img src="{{yStatic('images/y.png')}}"></div>
+      <div class="swiper-slide"><img src="{{yStatic('images/z.png')}}"></div>
     </div>
     <div class="swiper-pagination"></div>
   </div>
@@ -14,7 +15,7 @@
   <div class="card-menu">
     <ul class="card-menu_area">
       <li class="card-menu__item"><a class="menu1" href="#">免费申请试剂</a></li>
-      <li class="card-menu__item"><a class="menu2" href="#">试剂邮寄进展</a></li>
+      <li class="card-menu__item"><a class="menu2" href="{{yUrl(['/user/order/ship'])}}">试剂邮寄进展</a></li>
     </ul>
     <ul class="card-menu_area">
       <li class="card-menu__item"><a class="menu3" href="#">保证金退还</a></li>

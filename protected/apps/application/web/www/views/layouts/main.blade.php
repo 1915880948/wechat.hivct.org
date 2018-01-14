@@ -145,7 +145,7 @@
 </head>
 <body ontouchstart>
 <header class="m-header">
-	<a href="#"><img class="m-header__logo" src="{{yStatic('images/logo.png')}}"></a>
+	<a href="{{yUrl(['/'])}}"><img class="m-header__logo" src="{{yStatic('images/logo.png')}}"></a>
 </header>
 <div data-pjax id="pjax-container" class="weui-tab  ">
   @stack('head-style')

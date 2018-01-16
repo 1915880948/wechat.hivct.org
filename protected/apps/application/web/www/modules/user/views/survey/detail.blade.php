@@ -288,47 +288,14 @@
                 <div class="weui-cell__hd"><label class="weui-label">你知道本地哪里可以检测HIV：</label></div>
                 <div class="weui-cell__bd"></div>
             </div>
+            <div class="weui-cell">
+                <?php echo $data['detect_hospital']==1?'医院</br>':'';?>
+                <?php echo $data['detect_jk_center']==1?'疾控中心</br>':'';?>
+                <?php echo $data['detect_community']==1?'社区小组</br>':'';?>
+                <?php echo $data['detect_drugstore']==1?'药店</br>':'';?>
+                <?php echo $data['detect_clinic']==1?'个体诊所</br>':'';?>
+            </div>
             <div class="weui-cells weui-cells_checkbox">
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="detect_checkbox"
-                               {{ $data['detect_hospital']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 医院</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="detect_checkbox"
-                               {{ $data['detect_jk_center']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 疾控中心</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="detect_checkbox"
-                               {{ $data['detect_community']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 社区小组</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="detect_checkbox"
-                               {{ $data['detect_drugstore']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 药店</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="detect_checkbox"
-                               {{ $data['detect_clinic']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 个体诊所</div>
-                </label>
                 <label class="weui-cell weui-check__label">
                     <div class="weui-cell__hd"> 其他:</div>
                     <div class="weui-cell__bd"> {{ $data['detect_other'] }} </div>
@@ -391,47 +358,14 @@
                 <div class="weui-cell__hd"><label class="weui-label">你期望获得HIV检测的渠道：</label></div>
                 <div class="weui-cell__bd"></div>
             </div>
+            <div class="weui-cell">
+                <?php echo $data['detect_channel_hospital']==1?'医院</br>':'';  ?>
+                <?php echo $data['detect_channel_jk_center']==1?'疾控中心</br>':'';  ?>
+                <?php echo $data['detect_channel_community']==1?'社区小组</br>':'';  ?>
+                <?php echo $data['detect_channel_drugstore']==1?'药店</br>':'';  ?>
+                <?php echo $data['detect_channel_clinic']==1?'个体诊所</br>':'';  ?>
+            </div>
             <div class="weui-cells weui-cells_checkbox">
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check"  onfocus="onblur();" name="detect_channel_checkbox"
-                               {{ $data['detect_channel_hospital']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 医院</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="detect_channel_checkbox"
-                               {{ $data['detect_channel_jk_center']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 疾控中心</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="detect_channel_checkbox"
-                               {{ $data['detect_channel_community']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 社区小组</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="detect_channel_checkbox"
-                               {{ $data['detect_channel_drugstore']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 药店</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="detect_channel_checkbox"
-                               {{ $data['detect_channel_clinic']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 个体诊所</div>
-                </label>
                 <label class="weui-cell weui-check__label">
                     <div class="weui-cell__hd"> 其他:</div>
                     <div class="weui-cell__bd"> {{ $data['detect_channel_other'] }} </div>
@@ -512,57 +446,17 @@
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">你对感染HIV后是否需要接受治疗的看法是：</label></div>
-                <div class="weui-cell__bd"></div>
+                <div class="weui-cell__bd"> </div>
+            </div>
+            <div class="weui-cell">
+                <?php echo ($data['active_treatment']==1?'积极接受治疗</br>':''); ?>
+                <?php echo $data['unaccept_medical']==1?'担心药物副作用，暂不接受</br>':''; ?>
+                <?php echo $data['treatment_until_standard']==1?'未到治疗标准就不用治疗</br>':''; ?>
+                <?php echo $data['resistant_care']==1?'担心很快耐药</br>':''; ?>
+                <?php echo $data['explore_care']==1?'担心吃药后被人发现</br>':''; ?>
+                <?php echo $data['not_treatment']==1?'认为无法治愈，不治疗，任其自然</br>':''; ?>
             </div>
             <div class="weui-cells weui-cells_checkbox">
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="checkbox1"
-                               {{ $data['active_treatment']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 积极接受治疗</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="checkbox1"
-                               {{ $data['unaccept_medical']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 担心药物副作用，暂不接受</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="checkbox1"
-                               {{ $data['treatment_until_standard']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 未到治疗标准就不用治疗</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="checkbox1"
-                               {{ $data['resistant_care']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 担心很快耐药</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="checkbox1"
-                               {{ $data['explore_care']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 担心吃药后被人发现</div>
-                </label>
-                <label class="weui-cell weui-check__label">
-                    <div class="weui-cell__hd">
-                        <input type="checkbox" class="weui-check" onfocus="onblur();" name="checkbox1"
-                               {{ $data['not_treatment']==1?'checked':'' }} disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd"> 认为无法治愈，不治疗，任其自然</div>
-                </label>
                 <label class="weui-cell weui-check__label">
                     <div class="weui-cell__hd"> 其他看法:</div>
                     <div class="weui-cell__bd"> {{ $data['treatment_other'] }} </div>

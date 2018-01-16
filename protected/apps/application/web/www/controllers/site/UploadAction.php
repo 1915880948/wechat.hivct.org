@@ -20,17 +20,25 @@ class UploadAction extends WwwBaseAction
 {
     public function run()
     {
+        $file = \Yii::$app->request->post('file');
         $up = new UploadManager();
         $auth = new Auth(env('QINIU_SecretKey'), env('QINIU_AccessKey'));
         $token = $auth->uploadToken(env('QINIU_BUCKET'));
+//        $fileData = explode(':', $file);
+
+//        print_r( base64_decode($file) ); die;
         $filePath = \Yii::getAlias('@root/app.sh');
-        $key = basename($filePath);
-        list($ret, $err) = $up->putFile($token, $key, $filePath);
+        $key = basename($filePath,'app.sh');
+
+        print_r( $_FILES['file']['name'] ); die;
+
+        list($ret, $err) = $up->putFile($token, $key,  $filePath  );
         echo "\n====> putFile result: \n";
         if($err !== null){
             var_dump($err);
         } else{
             var_dump($ret);
+            return['code'=>200];
         }
     }
 }

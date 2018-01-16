@@ -12,7 +12,7 @@ class IndexAction extends WwwBaseAction{
 
             $orderModel = OrderList::find()
                 ->andWhere(['uuid'=>$postData['order_uuid']])
-            ->one();
+                ->one();
 
             $orderModel->order_status = OrderList::ORDER_STATUS_APPLY_FOR_REFUND;
             $orderModel->alipay = $postData['alipay'];

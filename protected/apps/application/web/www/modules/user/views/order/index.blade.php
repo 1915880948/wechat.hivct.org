@@ -43,15 +43,13 @@
                 </div>
             </div>
             <div class="weui-form-preview__ft">
-                @if( gOrderStatus($item['pay_status']) !== '已发货' )
+                @if( gOrderStatus($item['pay_status']) == '已发货' )
                 <button class="weui-form-preview__btn weui-form-preview__btn_primary confirm_receipt" id="{{$item['uuid']}}" >确认收货</button>
                 @endif
                 <a class="weui-form-preview__btn weui-form-preview__btn_default" href="{{yUrl(['order/detail','uuid'=>$item['uuid']])}}">查看详情</a>
             </div>
         </div>
-
     @endforeach
-
 @else
     <div class="weui-loadmore weui-loadmore_line">
         <span class="weui-loadmore__tips">您暂时还没有订单～</span>

@@ -133,3 +133,6 @@ i.icon.icon-next, i.icon.icon-prev{width:.5rem;height:.5rem;}
 .timeline-item-tail{content:"";background-color:#04BE02;height:100%;left:5px;position:absolute;top:5px;width:2px}
 .timeline-item-checked{left:0;position:absolute;top:45%;transform:translateY(-50%);width:100%}
 .timeline-item-checked::before{color:#FFF;font-size:12px;width:20px}
+
+
+.weui-uploader__file-content img{width:80px;height:80px}

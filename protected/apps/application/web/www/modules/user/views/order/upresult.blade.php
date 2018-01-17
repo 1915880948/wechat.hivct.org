@@ -100,12 +100,12 @@
                         {title: "image files", extensions: "jpg,png,jpeg"}
                     ]
                 },
-//                resize: {
-//                    width: 1024,
-//                    height: 1024,
-//                    crop: true,
-//                    preserve_headers: false
-//                },
+               resize: {
+                   width: 1024,
+                   height: 1024,
+                   crop: true,
+                   preserve_headers: false
+               },
                 init: {
                     'FilesAdded': function (up, files) {
                         plupload.each(files, function (file) {

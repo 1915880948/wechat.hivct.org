@@ -170,7 +170,7 @@ use yii\helpers\ArrayHelper;
                                             'deal' => function ($url, $model) {
                                                 $order_arr = array(11,12,13,14,18,19);
                                                 if ( in_array($model->order_status,$order_arr )) {
-                                                    return Html::a('处理', 'javascript:void(0);', ['data-id' => $model['uuid'], 'class' => 'deal']);
+                                                    return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'],'uid'=>$model['uid']], []);
                                                 }
                                             },
                                             'detail' => function ($url, $model) use ($selfurl) {
@@ -223,21 +223,6 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
     </div>
-    <div id="deal-content" style="display:none">
-        <div class="form-group">
-            <label class="col-md-3 control-label">操作状态</label>
-            <div class="col-md-9">
-                <select class="form-control input-inline input-medium deal_name">
-                        <option value="12">退款审核</option>
-                        <option value="13">退款成功</option>
-                        <option value="14">退款失败</option>
-                        <option value="18">退款处理中</option>
-                        <option value="19">退款完成</option>
-                        <option value="99">订单完成</option>
-                </select>
-            </div>
-        </div>
-    </div>
 @endsection
 @push('head-style')
     <style type="text/css">
@@ -245,7 +230,7 @@ use yii\helpers\ArrayHelper;
             background: #3fd5c0;
             color: #fff;
         }
-        #ship-content .form-group,#deal-content .form-group{
+        #ship-content .form-group{
             text-align: center;
             padding: 20px;
         }
@@ -285,40 +270,6 @@ use yii\helpers\ArrayHelper;
                             );
                         }else {
                             $("#ship-content .form-group").addClass("has-error");
-                        }
-                    }
-                });
-            });
-
-            $(".deal").click(function (i) {
-                _this = $(this);
-                var uuid = _this.data('id');
-                layer.open({
-                    type: 1,
-                    title: '订单处理',
-                    shadeClose: true,
-                    skin: 'layui-layer-rim', //加上边框
-                    area: ['420px', '240px'], //宽高
-                    content: $('#deal-content'),
-                    btn:['处理','取消'],
-                    yes:function () {
-                        if( $(".deal_name").val() ){
-                            $.post("{{yUrl(['site/deal'])}}",
-                                {
-                                    'uuid':uuid,
-                                    'back_url':"{{$selfurl}}",
-                                    'order_status': $(".deal_name").val()
-                                },function (res) {
-                                    if(res.code == 200 ){
-                                        layer.msg('操作成功！！',{'icon':1,time:1200},function () {
-                                            layer.closeAll();
-                                            location.reload();
-                                        });
-                                    }
-                                }
-                            );
-                        }else {
-                            $("#deal-content .form-group").addClass("has-error");
                         }
                     }
                 });

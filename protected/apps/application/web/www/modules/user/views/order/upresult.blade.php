@@ -90,7 +90,7 @@
           max_file_size: '100mb',             // 最大文件体积限制
           max_retries: 3,                     // 上传失败最大重试次数
           dragdrop: false,                    // 开启可拖曳上传
-          chunk_size: '1mb',                  // 分块上传时，每块的体积
+          chunk_size: '4mb',                  // 分块上传时，每块的体积
           auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
           multi_selection: false,
           filters: {
@@ -98,12 +98,12 @@
                   {title: "image files", extensions: "jpg,png,jpeg"}
               ]
           },
-          resize: {
-              width: 800,
-              height: 800,
-              crop: true,
-              preserve_headers: false
-          },
+          // resize: {
+          //     width: 800,
+          //     height: 800,
+          //     crop: true,
+          //     preserve_headers: false
+          // },
           init: {
               'FilesAdded': function (up, files) {
                   plupload.each(files, function (file) {

@@ -36,7 +36,7 @@
               <form id="file_form" enctype="multipart/form-data">
                 <input type="hidden" name="token">
               </form>
-              <span class="weui-uploader__input uploader" id="uploader" ></span>
+              <input class="weui-uploader__input uploader" id="uploader" type="file" accept="image/*" />
             </div>
           </div>
         </div>
@@ -96,8 +96,9 @@
               multi_selection: false,
               filters: {
                   mime_types: [ //只允许上传文件格式
-                      // { title : "Image files", extensions : "jpg,gif,png" }
-                  ]
+                       // { title : "Image files", extensions : "jpg,gif,png" }
+                  ],
+                  prevent_duplicates: true
               },
               resize: {
                   width: 800,

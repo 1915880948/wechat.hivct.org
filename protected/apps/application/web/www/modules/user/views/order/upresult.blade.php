@@ -36,9 +36,9 @@
           <div class="weui-uploader__bd">
             <ul class="weui-uploader__files" id="uploaderFiles"></ul>
             <div class="weui-uploader__input-box" id="fileArr">
-              <form id="file_form" enctype="multipart/form-data">
-                <input type="hidden" name="token">
-              </form>
+              {{--<form id="file_form" enctype="multipart/form-data">--}}
+                {{--<input type="hidden" name="token">--}}
+              {{--</form>--}}
               <input class="weui-uploader__input uploader" id="uploader" type="file" accept="image/*">
             </div>
           </div>

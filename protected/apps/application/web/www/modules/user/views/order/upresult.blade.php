@@ -36,9 +36,10 @@
               <form id="file_form" enctype="multipart/form-data">
                 <input type="hidden" name="token">
               </form>
-              <input class="weui-uploader__input uploader" id="uploader" type="file" accept="image/*">
+              {{--<span class="weui-uploader__input uploader" id="uploader" type="file" accept="image/*">--}}
             </div>
           </div>
+          <span class="weui-uploader__input uploader" id="uploader" type="file" accept="image/*">
         </div>
       </div>
     </div>

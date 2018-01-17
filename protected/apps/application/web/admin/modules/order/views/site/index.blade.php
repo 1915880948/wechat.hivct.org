@@ -160,11 +160,17 @@ use yii\helpers\ArrayHelper;
                                         'headerOptions' => ['class' => 'center'],
                                         'contentOptions' => ['class' => 'col-sm-1 center'],
                                         'class' => 'yii\grid\ActionColumn',
-                                        'template' => '{ship} {detail} {delete} ',
+                                        'template' => '{ship} {deal} {detail} {delete} ',
                                         'buttons' => [
                                             'ship' => function ($url, $model) {
                                                 if ($model->pay_status == 1 && $model->order_status == 2) {
                                                     return Html::a('发货', 'javascript:void(0);', ['data-id' => $model['uuid'], 'class' => 'ship']);
+                                                }
+                                            },
+                                            'deal' => function ($url, $model) {
+                                                $order_arr = array(11,12,13,14,18,19);
+                                                if ( in_array($model->order_status,$order_arr )) {
+                                                    return Html::a('处理', 'javascript:void(0);', ['data-id' => $model['uuid'], 'class' => 'deal']);
                                                 }
                                             },
                                             'detail' => function ($url, $model) use ($selfurl) {
@@ -200,22 +206,37 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <div id="ship-content" style="display:none">
-            <div class="form-group">
-                <label class="col-md-3 control-label">快递公司</label>
-                <div class="col-md-9">
-                    <select class="form-control input-inline input-medium ship_name">
-                        @foreach( $ship as $k=>$v)
-                            <option value="{{ $k }}">{{$v}}</option>
-                        @endforeach
-                    </select>
-                </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">快递公司</label>
+            <div class="col-md-9">
+                <select class="form-control input-inline input-medium ship_name">
+                    @foreach( $ship as $k=>$v)
+                        <option value="{{ $k }}">{{$v}}</option>
+                    @endforeach
+                </select>
             </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">快递单号</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control input-inline input-medium ship_code" placeholder="快递单号">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">快递单号</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control input-inline input-medium ship_code" placeholder="快递单号">
             </div>
+        </div>
+    </div>
+    <div id="deal-content" style="display:none">
+        <div class="form-group">
+            <label class="col-md-3 control-label">操作状态</label>
+            <div class="col-md-9">
+                <select class="form-control input-inline input-medium deal_name">
+                        <option value="12">退款审核</option>
+                        <option value="13">退款成功</option>
+                        <option value="14">退款失败</option>
+                        <option value="18">退款处理中</option>
+                        <option value="19">退款完成</option>
+                        <option value="99">订单完成</option>
+                </select>
+            </div>
+        </div>
     </div>
 @endsection
 @push('head-style')
@@ -224,7 +245,7 @@ use yii\helpers\ArrayHelper;
             background: #3fd5c0;
             color: #fff;
         }
-        #ship-content .form-group{
+        #ship-content .form-group,#deal-content .form-group{
             text-align: center;
             padding: 20px;
         }
@@ -247,7 +268,7 @@ use yii\helpers\ArrayHelper;
                     btn:['发货','取消'],
                     yes:function () {
                         if( $(".ship_name").val() && $(".ship_code").val()){
-                            $.post("{{yUrl('site/ship')}}",
+                            $.post("{{yUrl(['site/ship'])}}",
                                 {
                                     'uuid':uuid,
                                     'back_url':"{{$selfurl}}",
@@ -264,6 +285,40 @@ use yii\helpers\ArrayHelper;
                             );
                         }else {
                             $("#ship-content .form-group").addClass("has-error");
+                        }
+                    }
+                });
+            });
+
+            $(".deal").click(function (i) {
+                _this = $(this);
+                var uuid = _this.data('id');
+                layer.open({
+                    type: 1,
+                    title: '订单处理',
+                    shadeClose: true,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['420px', '240px'], //宽高
+                    content: $('#deal-content'),
+                    btn:['处理','取消'],
+                    yes:function () {
+                        if( $(".deal_name").val() ){
+                            $.post("{{yUrl(['site/deal'])}}",
+                                {
+                                    'uuid':uuid,
+                                    'back_url':"{{$selfurl}}",
+                                    'order_status': $(".deal_name").val()
+                                },function (res) {
+                                    if(res.code == 200 ){
+                                        layer.msg('操作成功！！',{'icon':1,time:1200},function () {
+                                            layer.closeAll();
+                                            location.reload();
+                                        });
+                                    }
+                                }
+                            );
+                        }else {
+                            $("#deal-content .form-group").addClass("has-error");
                         }
                     }
                 });

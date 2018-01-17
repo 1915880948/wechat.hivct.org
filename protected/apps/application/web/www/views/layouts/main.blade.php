@@ -133,7 +133,7 @@
   </script>
   <link rel="stylesheet" href="{{yStatic('weui/lib/weui.min.css')}}">
   <link rel="stylesheet" href="{{yStatic('weui/css/jquery-weui.min.css')}}">
-  {{--<link rel="stylesheet" href="{{gStatic('vendor/progress/nprogress.css')}}">--}}
+  <link rel="stylesheet" href="{{gStatic('vendor/progress/nprogress.css')}}">
   <link rel="stylesheet" href="{{yStatic('css/main.css')}}">
   <link rel="stylesheet" href="{{yStatic('css/common.css')}}">
   <link rel="stylesheet" href="//at.alicdn.com/t/font_477728_56x7ojdx9rx80k9.css">
@@ -156,7 +156,7 @@
 {{--<script src="{{gStatic('vendor/fastclick/fastclick.min.js')}}"></script>--}}
 <script src="{{gStatic('vendor/hammer.min.js')}}"></script>
 <script src="{{gStatic('vendor/jquery/jquery.hammer.js')}}"></script>
-{{--<script src="{{gStatic('vendor/progress/nprogress.js')}}"></script>--}}
+<script src="{{gStatic('vendor/progress/nprogress.js')}}"></script>
 <script src="{{yStatic('js/app.js')}}"></script>
 <script src="{{gStatic('vendor/yii/yii.js')}}"></script>
 {{--<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>--}}

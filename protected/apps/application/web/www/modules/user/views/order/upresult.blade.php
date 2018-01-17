@@ -93,15 +93,15 @@
               multi_selection: false,
               filters: {
                   mime_types: [ //只允许上传文件格式
-                      {title: "image files", extensions: "jpg,png,jpeg"}
+                      {title: "image files", extensions: "jpg,png,jpeg,gif"}
                   ]
               },
-              // resize: {
-              //     width: 800,
-              //     height: 800,
-              //     crop: true,
-              //     preserve_headers: false
-              // },
+              resize: {
+                  width: 800,
+                  height: 800,
+                  crop: true,
+                  preserve_headers: false
+              },
               init: {
                   'FilesAdded': function (up, files) {
                       plupload.each(files, function (file) {
@@ -112,9 +112,10 @@
                       // 每个文件上传前，处理相关的事情
                   },
                   'UploadProgress': function (up, file) {
-                      // 每个文件上传时，处理相关的事情
+                      NProgress.start();
                   },
                   'FileUploaded': function (up, file, info) {
+                      NProgress.done();
                       layer.msg('上传成功', {time: 1200}, function () {
                       });
                       var res = JSON.parse(info);

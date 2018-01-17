@@ -79,6 +79,9 @@
           //构建uploader实例
 
       });
+      $('#uploader').on('click',function () {
+        console.log('click');
+      });
       var uploader = Qiniu.uploader({
           runtimes: 'html5,flash,html4',      // 上传模式，依次退化
           browse_button: 'uploader',          // 上传选择的点选按钮，必需
@@ -90,8 +93,8 @@
           max_file_size: '50mb',             // 最大文件体积限制
           max_retries: 3,                     // 上传失败最大重试次数
           dragdrop: false,                    // 开启可拖曳上传
-          chunk_size: '1mb',                  // 分块上传时，每块的体积
-          auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
+          chunk_size: '0mb',                  // 分块上传时，每块的体积
+          auto_start: false,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
           multi_selection: false,
           filters: {
               mime_types: [ //只允许上传文件格式

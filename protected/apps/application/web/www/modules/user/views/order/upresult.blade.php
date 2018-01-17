@@ -90,6 +90,7 @@
               dragdrop: false,                    // 开启可拖曳上传
               chunk_size: '4mb',                  // 分块上传时，每块的体积
               auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
+              container:'fileArr',                //难道因为这？
               multi_selection: false,
               filters: {
                   mime_types: [ //只允许上传文件格式

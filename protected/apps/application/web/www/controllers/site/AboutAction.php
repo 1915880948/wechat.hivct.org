@@ -9,9 +9,9 @@
 namespace application\web\www\controllers\site;
 
 use application\web\www\components\WwwBaseAction;
-use qiqi\traits\Render;
+use qiqi\traits\RenderTrait;
 
 class AboutAction extends WwwBaseAction
 {
-    use Render;
+    use RenderTrait;
 }

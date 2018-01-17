@@ -9,9 +9,9 @@
 namespace application\web\www\controllers\subscribe;
 
 use application\web\www\components\WwwBaseAction;
-use qiqi\traits\Render;
+use qiqi\traits\RenderTrait;
 
 class IndexAction extends WwwBaseAction
 {
-    use Render;
+    use RenderTrait;
 }

@@ -120,6 +120,7 @@
                       NProgress.done();
                       layer.msg('上传成功', {time: 1200}, function () {
                       });
+                      console.log(info);
                       var res = JSON.parse(info);
                       // 查看简单反馈
                       var domain = up.getOption('domain');

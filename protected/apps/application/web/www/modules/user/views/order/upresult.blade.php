@@ -96,7 +96,7 @@
               multi_selection: false,
               filters: {
                   mime_types: [ //只允许上传文件格式
-                      {title: "image files", extensions: "jpg,png,jpeg,gif"}
+                      // {title: "image files", extensions: "jpg,png,jpeg,gif"}
                   ]
               },
               resize: {

@@ -84,7 +84,7 @@
               localId: [],
               serverId: []
           };
-          $(document).on('#uploader', 'click', function () {
+          $('#uploade').on('click', function () {
               alert(1);
               wx.chooseImage({
                   // count: 1,

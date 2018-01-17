@@ -80,7 +80,7 @@
               })
           });
           uploader = Qiniu.uploader({
-              runtimes: 'html5,html4',      // 上传模式，依次退化
+              runtimes: 'html5,flash,html4',      // 上传模式，依次退化
               browse_button: 'uploader',          // 上传选择的点选按钮，必需
               uptoken_url: "{{yUrl(['/site/uptoken'],true)}}",         // Ajax请求uptoken的Url，强烈建议设置（服务端提供）
               unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
@@ -92,11 +92,11 @@
               dragdrop: false,                    // 开启可拖曳上传
               chunk_size: '4mb',                  // 分块上传时，每块的体积
               auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
-              // container: 'fileArr',                //难道因为这？
+              container: 'fileArr',                //难道因为这？
               multi_selection: false,
               filters: {
                   mime_types: [ //只允许上传文件格式
-                      { title : "Image files", extensions : "jpg,gif,png" }
+                      // { title : "Image files", extensions : "jpg,gif,png" }
                   ]
               },
               resize: {

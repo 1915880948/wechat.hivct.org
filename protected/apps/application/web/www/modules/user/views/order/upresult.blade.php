@@ -106,14 +106,8 @@
                   preserve_headers: false
               },
               init: {
-                  'FilesAdded': function (up, files) {
-                      plupload.each(files, function (file) {
-                          // 文件添加进队列后，处理相关的事情
-                      });
-                  },
-                  'BeforeUpload': function (up, file) {
-                      // 每个文件上传前，处理相关的事情
-                  },
+                  'FilesAdded': function (up, files) {},
+                  'BeforeUpload': function (up, file) {},
                   'UploadProgress': function (up, file) {
                       NProgress.start();
                   },

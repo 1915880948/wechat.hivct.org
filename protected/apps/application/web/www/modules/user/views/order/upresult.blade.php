@@ -49,7 +49,7 @@
 @stop
 
 @push('foot-script')
-  <script src="{{yStatic('qiniu/moxie.dev.js')}}"></script>
+  {{--<script src="{{yStatic('qiniu/moxie.dev.js')}}"></script>--}}
   <script src="{{yStatic('qiniu/plupload.dev.js')}}"></script>
   <script src="{{yStatic('qiniu/qiniu2.min.js') }}"></script>
   {{--<script src="{{yStatic('qiniu/progress.js')}}"></script>--}}
@@ -123,11 +123,11 @@
                       if (typeof info !== "object") {
                           var res = JSON.parse(info);
                       } else {
-                          var res = info;
+                          var res = JSON.parse(info.response);
                       }
-                      // 查看简单反馈
-                      var domain = up.getOption('domain');
-                      var sourceLink = domain + "/" + res.key; //获取上传成功后的文件的Url
+                      var sourceLink = "{{env('QINIU_DOMAIN')}}/" + res.key; //获取上传成功后的文件的Url
+                      console.log(sourceLink);
+
                       var imgLink = Qiniu.imageView2({
                           mode: 0,  // 缩略模式，共6种[0-5]
                           w: 150,   // 具体含义由缩略模式决定
@@ -139,7 +139,7 @@
                       var html_file = '<li class="weui-uploader__file weui-uploader__file_status" >\n' +
                           '                        <div class="weui-uploader__file-content"><img src="' + imgLink + '"></div>\n' +
                           '                        </li>';
-                      var input_file = ' <input type="hidden" name="images[]" value="' + sourceLink + '">';
+                      var input_file = ' <input type="hidden" name="images[]" value="' + res.key + '">';
                       if ($('#uploaderFiles li').length > 5) {
                           $.toast('最多上传4张图片！')
                       } else {

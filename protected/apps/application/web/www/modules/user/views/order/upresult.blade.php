@@ -96,13 +96,13 @@
               multi_selection: false,
               filters: {
                   mime_types: [ //只允许上传文件格式
-                      // {title: "image files", extensions: "jpg,png,jpeg,gif"}
+                      { title : "Image files", extensions : "jpg,gif,png" }
                   ]
               },
               resize: {
                   width: 800,
                   height: 800,
-                  crop: true,
+                  // crop: true,
                   preserve_headers: false
               },
               init: {

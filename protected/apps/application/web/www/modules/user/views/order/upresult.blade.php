@@ -109,16 +109,15 @@
                       localId: images.localId[i],
                       success: function (res) {
                           i++;
-                          //alert('已上传：' + i + '/' + length);
                           console.log(res);
                           images.serverId.push(res.serverId);
-                          var url = "<?php echo base_url('vote/home/fetch_url_to_qiniu'); ?>";
-                          $.get(url, {'media_id': res.serverId, 'memo': $('.weui_textarea').val()}, function (response) {
+                          var url = "{{yUrl(['/site/qiniu'])}}";
+                          $.getJSON(url, {'media_id': res.serverId, 'memo': 'memomomomomo'}, function (response) {
                               $.hideLoading();
-                              var data = $.parseJSON(response);
+                              var data = response;
                               if (data.ret == 0) {
                                   $.toast(data.msg);
-                                  window.location.href = "<?php echo base_url('vote/home/vote_list'); ?>";
+                                  window.location.href = "{{yUrl(['/site/index'])}}";
                               } else {
                                   $.toast("操作失败", "forbidden");
                                   $.noti({

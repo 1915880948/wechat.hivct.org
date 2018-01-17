@@ -164,6 +164,10 @@
 <script src="{{gStatic('vendor/progress/nprogress.js')}}"></script>
 <script src="{{yStatic('js/app.js')}}"></script>
 <script src="{{gStatic('vendor/yii/yii.js')}}"></script>
+@if( !yUser()->getIsGuest() && in_array($account['id'],[1,6,18]) )
+  <script src="//res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/3.0.0/vconsole.min.js"></script>
+  <script>var vConsole = new VConsole();</script>
+@endif
 <script>
     $(function () {
 //        FastClick.attach(document.body);

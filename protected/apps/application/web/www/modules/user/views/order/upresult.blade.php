@@ -49,9 +49,10 @@
 @stop
 
 @push('foot-script')
-  <script src="{{yStatic('qiniu/plupload.min.js')}}"></script>
+  <script src="{{yStatic('qiniu/moxie.dev.js')}}"></script>
+  <script src="{{yStatic('qiniu/plupload.dev.js')}}"></script>
   <script src="{{yStatic('qiniu/qiniu.min.js') }}"></script>
-  <script src="{{yStatic('qiniu/progress.js')}}"></script>
+  {{--<script src="{{yStatic('qiniu/progress.js')}}"></script>--}}
   <script>
       var uploader;
       $(function () {
@@ -149,7 +150,7 @@
                   'UploadComplete': function () {
                       //队列文件处理完毕后，处理相关的事情
 
-                  },
+                  }
                   // 'Key': function (up, file) {
                   //     // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
                   //     // 该配置必须要在unique_names: false，save_key: false时才生效

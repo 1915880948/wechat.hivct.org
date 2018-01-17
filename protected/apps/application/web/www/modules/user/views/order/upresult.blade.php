@@ -51,7 +51,7 @@
 @push('foot-script')
   <script src="{{yStatic('qiniu/moxie.dev.js')}}"></script>
   <script src="{{yStatic('qiniu/plupload.dev.js')}}"></script>
-  <script src="{{yStatic('qiniu/qiniu.min.js') }}"></script>
+  <script src="{{yStatic('qiniu/qiniu2.min.js') }}"></script>
   {{--<script src="{{yStatic('qiniu/progress.js')}}"></script>--}}
   <script>
       var uploader;

@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="renderer" content="webkit">
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="format-detection" content="email=no" />
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="format-detection" content="email=no"/>
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
   {!! yCsrfTag() !!}
   <script>
@@ -110,10 +110,7 @@
                   doc.body.style.fontSize = 12 * dpr + 'px';
               }, false);
           }
-
-
           refreshRem();
-
           flexible.dpr = win.dpr = dpr;
           flexible.refreshRem = refreshRem;
           flexible.rem2px = function (d) {
@@ -136,38 +133,40 @@
   </script>
   <link rel="stylesheet" href="{{yStatic('weui/lib/weui.min.css')}}">
   <link rel="stylesheet" href="{{yStatic('weui/css/jquery-weui.min.css')}}">
-  <link rel="stylesheet" href="{{gStatic('vendor/progress/nprogress.css')}}">
+  {{--<link rel="stylesheet" href="{{gStatic('vendor/progress/nprogress.css')}}">--}}
   <link rel="stylesheet" href="{{yStatic('css/main.css')}}">
   <link rel="stylesheet" href="{{yStatic('css/common.css')}}">
   <link rel="stylesheet" href="//at.alicdn.com/t/font_477728_56x7ojdx9rx80k9.css">
   <script src="{{gStatic('vendor/jquery/jquery-2.2.3.min.js')}}"></script>
-  {{--<script src="{{gStatic('vendor/jquery/jquery.1.11.2.min.js')}}"></script>--}}
+  @stack('head-style')
+  @stack('head-script')
 </head>
 <body ontouchstart>
 <header class="m-header">
-	<a href="{{yUrl(['/'])}}"><img class="m-header__logo" src="{{yStatic('images/logo.png')}}"></a>
+  <a href="{{yUrl(['/'])}}"><img class="m-header__logo" src="{{yStatic('images/logo.png')}}"></a>
 </header>
 <div data-pjax id="pjax-container" class="weui-tab  ">
-  @stack('head-style')
-  @stack('head-script')
   @yield('content')
   @stack('global.footer')
-  @stack('foot-script')
 </div>
 {{--<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>--}}
 <script src="{{yStatic('weui/js/jquery-weui.min.js')}}"></script>
-<script src="{{gStatic('vendor/jquery/pjax.js')}}"></script>
+{{--<script src="{{gStatic('vendor/jquery/pjax.js')}}"></script>--}}
 <script src="{{gStatic('vendor/plugins/layer/layer.js')}}"></script>
 {{--<script src="{{gStatic('vendor/fastclick/fastclick.min.js')}}"></script>--}}
 <script src="{{gStatic('vendor/hammer.min.js')}}"></script>
 <script src="{{gStatic('vendor/jquery/jquery.hammer.js')}}"></script>
-<script src="{{gStatic('vendor/progress/nprogress.js')}}"></script>
+{{--<script src="{{gStatic('vendor/progress/nprogress.js')}}"></script>--}}
 <script src="{{yStatic('js/app.js')}}"></script>
 <script src="{{gStatic('vendor/yii/yii.js')}}"></script>
-@if( !yUser()->getIsGuest() && in_array($account['id'],[1,6,18]) )
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript" charset="utf-8">
+    wx.config({!! jssdk()->config(['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','menuItem:profile','menuItem:addContact','menuItem:share:appMessage','menuItem:share:timeline','chooseImage','downloadImage','uploadImage','getLocalImgData']) !!});
+</script>@if( !yUser()->getIsGuest() && in_array($account['id'],[1,6,18]) )
   <script src="//res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/3.0.0/vconsole.min.js"></script>
   <script>var vConsole = new VConsole();</script>
 @endif
+@stack('foot-script')
 <script>
     $(function () {
 //        FastClick.attach(document.body);

@@ -10,6 +10,7 @@ namespace application\web\www\components;
 
 use application\web\www\WwwUser;
 use common\core\base\BaseAction;
+use qiqi\helper\WechatHelper;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -38,7 +39,8 @@ class WwwBaseAction extends BaseAction
     public function render($params = [])
     {
         return $this->renderPage($this->id, ArrayHelper::merge($params, [
-            'account' => $this->account
+            'account' => $this->account,
+            // 'wechat'=>WechatHelper::getApp()
         ]));
     }
 }

@@ -25,7 +25,7 @@ class UptokenAction extends WwwBaseAction
 //        return [env('ASSET_VERSION'),env('QINIU_ACCESSKEY'), env('WECHAT_USER_TAGS_UPDATE_TIME')];
         $auth = new Auth(env('QINIU_APP_KEY'), env('QINIU_APP_SECRET'));
 
-        $token = $auth->uploadToken(env('QINIU_BUCKET'));
+        $token = $auth->uploadToken(env('QINIU_BUCKET'),null,3600,['mimeLimit'=>'image/*']);
         return ['uptoken' => $token];
 
     }

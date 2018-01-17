@@ -40,10 +40,10 @@
     </div>
   </div>
   <div class="weui-tabbar">
-    <form method="post" action="{{yUrl(['/user/recv/submitorder'])}}" id="submit_order" style="width:100%">
-      <input type="text" name="_csrf" value="{{yRequest()->getCsrfToken()}}"/>
-      <input type="text" name="payinfo" value="{{$payinfo}}"/>
-    </form>
+    {{--<form method="post" action="{{yUrl(['/user/recv/submitorder'])}}" id="submit_order" style="width:100%">--}}
+      {{--<input type="text" name="_csrf" value="{{yRequest()->getCsrfToken()}}"/>--}}
+      {{--<input type="text" name="payinfo" value="{{$payinfo}}"/>--}}
+    {{--</form>--}}
     <div class="weui-form-preview" style="width:100%">
       <div class="weui-form-preview__ft">
         <a class="weui-form-preview__btn weui-form-preview__btn_default" href="{{yUrl(['/site/index'])}}">放弃获取试剂</a>

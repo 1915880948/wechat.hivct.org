@@ -85,6 +85,7 @@
               serverId: []
           };
           $(document).on('#uploader', 'click', function () {
+              alert(1);
               wx.chooseImage({
                   // count: 1,
                   success: function (res) {

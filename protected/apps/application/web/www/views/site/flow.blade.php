@@ -23,7 +23,7 @@
         　　加样后10-15分钟内观察结果。<br> 　　1、试纸上只出现一条红线（对照线C）为阴性结果。<br> 　　2、试纸上出现两条红线（对照线C和检测线T）为阳性结果。<br> 　　3、试纸上未出现红线，表示测试实验失败，请另取卡重新检测。 </p>
       <p><img src="{{yStatic('images/temp_img3.png')}}"></p>
       <p>&nbsp;</p>
-      <p><a href="{{yUrl(['/user/recv'])}}" class="weui-btn weui-btn_warn ">参与调查领试剂</a></p>
+      <p><a href="javascript:;" class="weui-btn weui-btn_warn join_in ">参与调查领试剂</a></p>
     </div>
   </div>
   @include('global.navbar')
@@ -32,7 +32,14 @@
 @push('foot-script')
   <script>
       $(function () {
-
+          $('.join_in').click(function () {
+              var tag = "{{$is_allow}}";
+              if( tag ){
+                  $.toast('近一个月您有申请记录');
+              }else{
+                  location.href = "{{yUrl(['/user/recv'])}}";
+              }
+          });
       });
   </script>
 @endpush

@@ -44,7 +44,8 @@
     </div>
   </div>
   {{--    @if( gPayStatus($orderData['pay_status']) == '已支付' && (gOrderStatus($orderData['pay_status'])=='已发货' || gOrderStatus($orderData['pay_status'])=='已收货') )--}}
-  <a href="javascript:;" class="weui-btn weui-btn_primary apply_back">保存</a>
+  <a href="javascript:;" class="weui-btn weui-btn_primary apply_back" style="width:50%">保存</a>
+  <a href="javascript:;" class="weui-btn weui-btn_primary up">上传</a>
   {{--@endif--}}
 @stop
 
@@ -79,6 +80,9 @@
           //构建uploader实例
 
       });
+      $('#up').on('click',function () {
+          uploader.start();
+      })
       $('#uploader').on('click',function () {
         console.log('click');
       });

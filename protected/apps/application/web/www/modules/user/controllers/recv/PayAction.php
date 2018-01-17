@@ -58,6 +58,7 @@ class PayAction extends WwwBaseAction
             $details[] = $product['name'];
         }
 
+        $totalPrice+=30;
         /**
          * $payinfo
          */
@@ -68,7 +69,7 @@ class PayAction extends WwwBaseAction
             'detail'       => join(",", $details),
             'out_trade_no' => $tradeno,
             // 'total_fee'    => $totalPrice, //目前是0
-            'total_fee'    => ($totalPrice+30)*100, //目前是1分钱
+            'total_fee'    => $totalPrice*100, //目前是1分钱
             'openid'       => $this->account->openid,
             'notify_url'   => Url::to(['/oauth/notify'], true),
             'logistcis'    => $logistcisInfo !== null ? $logistcisInfo->attributes : [],

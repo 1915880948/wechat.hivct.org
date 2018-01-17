@@ -5,5 +5,6 @@ use common\core\base\controller\ActionKeywordsTrait;
 
 class OrderController extends UserBaseController
 {
+    public $enableCsrfValidation = false;
     use ActionKeywordsTrait;
 }

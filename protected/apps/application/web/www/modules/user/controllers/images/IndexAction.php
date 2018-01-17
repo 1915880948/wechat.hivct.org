@@ -10,28 +10,16 @@ class IndexAction extends WwwBaseAction{
             \Yii::$app->response->format = 'json';
             $postData = \Yii::$app->request->post();
 
-            $orderModel = OrderList::find()
-                ->andWhere(['uuid'=>$postData['order_uuid']])
-                ->one();
-
-            $orderModel->order_status = OrderList::ORDER_STATUS_APPLY_FOR_REFUND;
-            $orderModel->alipay = $postData['alipay'];
-            $orderModel->order_updated_at = date('Y-m-d H:i:s');
-
             $imageArr  = explode(',',trim($postData['images'],','));
-//            print_r( $imageArr ); die;
             foreach ( $imageArr as $k=>$v ){
                 $imageModel = new PayImage();
                 $imageModel->user_id = $this->account['uid'];
                 $imageModel->order_uuid = $postData['order_uuid'];
                 $imageModel->image = $v;
-                $imageModel->alipay = $postData['alipay'];
                 $imageModel->created_at = date('Y-m-d H:i:s');
                 $imageModel->save();
             }
-            if( $orderModel->save() ){
-                return ['code'=>200];
-            }
+            return ['code'=>200];
         }
         return $this->render(compact(''));
     }

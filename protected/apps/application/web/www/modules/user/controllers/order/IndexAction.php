@@ -18,9 +18,12 @@ class IndexAction extends WwwBaseAction{
         }
         $orderList  = OrderList::find()
             ->andWhere(['uid'=>$this->account['uid'],'pay_status'=>1])
+            ->andWhere(['>','created_at',date("Y-m-d H:i:s",time()-86400*30)])
             ->orderBy(['id'=>SORT_DESC])
             ->asArray()
             ->all();
+//        $sql = $orderList->createCommand()->getRawSql();
+//        dd( $sql );
         return $this->render(compact('orderList'));
     }
 }

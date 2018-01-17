@@ -15,11 +15,11 @@
   <div class="card-menu">
     <ul class="card-menu_area">
       <li class="card-menu__item"><a class="menu1" href="{{yUrl(['/site/flow'])}}">免费申请试剂</a></li>
-      <li class="card-menu__item"><a class="menu2" href="javascript:$.alert('请先参与调研')">试剂邮寄进展</a></li>
+      <li class="card-menu__item"><a class="menu2" href="{{yUrl(['/user/order']) }}">试剂邮寄进展</a></li>
     </ul>
     <ul class="card-menu_area">
-      <li class="card-menu__item"><a class="menu3" href="javascript:$.alert('只有已经参与过调查问题，并且上传过自检结果，方可退还保证金');" >保证金退还</a></li>
-      <li class="card-menu__item"><a class="menu4" href="javascript:$.alert('请先参与调研，再上传相应的检测结果')">自检结果上传</a></li>
+      <li class="card-menu__item"><a class="menu3" href="{{yUrl(['/user/order/payback'])}}" >保证金退还</a></li>
+      <li class="card-menu__item"><a class="menu4" href="{{yUrl(['/user/order/upresult'])}}">自检结果上传</a></li>
     </ul>
   </div>
   {{--<div class="wrapper" id="_form">--}}

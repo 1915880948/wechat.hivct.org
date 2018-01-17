@@ -56,12 +56,18 @@ use yii\helpers\ArrayHelper;
                 '0'   => '未处理',
                 '1'   => '处理中',
                 '2'   => '已支付',
-                '3'   => '已发货',
-                '4'   => '已收货',
+                '21'   => '已发货',
+                '22'   => '已收货',
+                '23'   => '用户不存在',
+                '29'   => '发货完成',
                 '11'  => '申请退款',
-                '12'  => '退款中',
-                '13'  => '退款完成',
-                '99'  => '已完成'
+                '12'  => '退款审核',
+                '13'  => '退款成功',
+                '14'  => '退款失败',
+                '18'  => '退款处理中',
+                '19'  => '退款完成',
+                '99'  => '订单完成',
+                '100'  => '未知状态'
             ]));
         echo $form->label("微信订单号", Html::textInput("wx_transaction_id", ArrayHelper::getValue($_GET, 'wx_transaction_id', '')));
         echo $form->label("快递单号", Html::textInput("ship_code", ArrayHelper::getValue($_GET, 'ship_code', '')));

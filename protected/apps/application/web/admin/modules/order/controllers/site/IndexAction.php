@@ -56,8 +56,7 @@ class IndexAction extends AdminBaseAction
         foreach ( $logistics as $k=>$v){
             $logArr[$v['id']] = $v['title'];
         }
-//        $logArr = array_unique($logArr);
-//        print_r( $logArr );
+
         $payArr = [
             '-99' => '全部',
             '0'   => '待支付',
@@ -67,5 +66,4 @@ class IndexAction extends AdminBaseAction
 
         return $this->render(compact('payArr','logArr','expressArr','ship','provider'));
     }
-//    use Render;
 }

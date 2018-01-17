@@ -35,7 +35,11 @@
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">订单状态</label>
-                    <span class="weui-form-preview__value">{{ gOrderStatus($item['order_status']) }}</span>
+                    <span class="weui-form-preview__value" style="color: red; font-size: 0.8rem;">{{ gOrderStatus($item['order_status']) }}</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">微信订单号</label>
+                    <span class="weui-form-preview__value">{{ $item['wx_transaction_id'] }}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">订单时间</label>

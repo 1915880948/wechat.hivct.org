@@ -16,7 +16,6 @@ class ShipAction extends WwwBaseAction
     {
         $userId = $this->account['id'];
 
-
         return $this->render();
     }
 }

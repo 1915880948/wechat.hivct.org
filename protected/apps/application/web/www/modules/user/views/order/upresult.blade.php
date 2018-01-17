@@ -57,7 +57,7 @@
   <script src="{{yStatic('qiniu/progress.js')}}"></script>
   <script>
       $(function () {
-          order_list();
+          // order_list();
           $(".apply_back").click(function () {
               var images = '';
               $('input[name="images[]"]').each(function () {
@@ -83,7 +83,7 @@
 
       });
       var uploader = Qiniu.uploader({
-          runtimes: 'html5,flash,html4',      // 上传模式，依次退化
+          runtimes: 'html5,html4',      // 上传模式，依次退化
           browse_button: 'uploader',          // 上传选择的点选按钮，必需
           uptoken_url: "{{yUrl(['/site/uptoken'])}}",         // Ajax请求uptoken的Url，强烈建议设置（服务端提供）
           unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。

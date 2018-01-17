@@ -28,18 +28,15 @@
       </div>
     </div>
     <div class="weui-cell">
-      <div class="weui-cell__bd " id="progress"></div>
-    </div>
-    <div class="weui-cell">
       <div class="weui-cell__bd">
         <div class="weui-uploader">
           <div class="weui-uploader__bd">
             <ul class="weui-uploader__files" id="uploaderFiles"></ul>
             <div class="weui-uploader__input-box" id="fileArr">
-              {{--<form id="file_form" enctype="multipart/form-data">--}}
-                {{--<input type="hidden" name="token">--}}
-              {{--</form>--}}
-              <input class="weui-uploader__input uploader" id="uploader" type="file" accept="image/*">
+              <form id="file_form" enctype="multipart/form-data">
+                <input type="hidden" name="token">
+              </form>
+              <input class="weui-uploader__input uploader" id="uploader" type="file" accept="image/*"  >
             </div>
           </div>
         </div>
@@ -93,20 +90,20 @@
               // flash_swf_url: 'path/of/plupload/Moxie.swf',  //引入flash，相对路径
               max_retries: 3,                     // 上传失败最大重试次数
               dragdrop: false,                    // 开启可拖曳上传
-              chunk_size: '1mb',                  // 分块上传时，每块的体积
+              chunk_size: '4mb',                  // 分块上传时，每块的体积
               auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
               multi_selection: false,
               filters: {
                   mime_types: [ //只允许上传文件格式
-                      {title: "image files", extensions: "jpg,png,jpeg,gif"}
+                      {title: "image files", extensions: "jpg,png,jpeg"}
                   ]
               },
-              resize: {
-                  width: 800,
-                  height: 800,
-                  crop: true,
-                  preserve_headers: false
-              },
+              // resize: {
+              //     width: 800,
+              //     height: 800,
+              //     crop: true,
+              //     preserve_headers: false
+              // },
               init: {
                   'FilesAdded': function (up, files) {
                       plupload.each(files, function (file) {
@@ -118,13 +115,8 @@
                   },
                   'UploadProgress': function (up, file) {
                       // 每个文件上传时，处理相关的事情
-                      $('#progress').html('<div class="progress" data-percent="' + file.percent + '%"><div class="progress-bar" style="width:' + file.percent + '%;border:1px solid red;"></div></div>');
-
                   },
                   'FileUploaded': function (up, file, info) {
-                      layer.msg('上传成功', {time: 1200}, function () {
-                      });
-                      return false;
                       layer.msg('上传成功', {time: 1200}, function () {
                       });
                       var res = JSON.parse(info);

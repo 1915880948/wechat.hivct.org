@@ -18,12 +18,17 @@
         "illuminate/events":"~5",
         "overtrue/wechat":"~3.1",
         "yiisoft/yii2-queue":"~2.0",
-        "ramsey/uuid": "^3.0@dev",
-        "yiisoft/yii2-redis": "2.0.6",
-        "phpoffice/phpexcel": "dev-master",
-        "qiniu/php-sdk": "dev-master"
+        "ramsey/uuid":"^3.0@dev",
+        "yiisoft/yii2-redis":"2.0.6",
+        "phpoffice/phpexcel":"dev-master",
+        "qiniu/php-sdk":"dev-master",
+        "yzhan/qiqi":"master"
     },
     "repositories":[
+        {
+            "type":"vcs",
+            "url":"http://git:123456@git.yzhan.com/yzhan/qiqi.git"
+        }
     ],
     "require-dev":{
     },

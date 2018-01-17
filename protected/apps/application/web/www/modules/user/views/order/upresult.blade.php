@@ -120,7 +120,7 @@
                       NProgress.done();
                       layer.msg('上传成功', {time: 1200}, function () {
                       });
-                      if (typeof info !== "Object") {
+                      if (typeof info !== "object") {
                           var res = JSON.parse(info);
                       } else {
                           var res = info;

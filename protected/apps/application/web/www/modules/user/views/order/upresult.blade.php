@@ -91,7 +91,7 @@
               dragdrop: false,                    // 开启可拖曳上传
               chunk_size: '4mb',                  // 分块上传时，每块的体积
               auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
-              container:'fileArr',                //难道因为这？
+              container: 'fileArr',                //难道因为这？
               multi_selection: false,
               filters: {
                   mime_types: [ //只允许上传文件格式
@@ -120,8 +120,11 @@
                       NProgress.done();
                       layer.msg('上传成功', {time: 1200}, function () {
                       });
-                      console.log(info);
-                      var res = JSON.parse(info);
+                      if (typeof info !== "Object") {
+                          var res = JSON.parse(info);
+                      } else {
+                          var res = info;
+                      }
                       // 查看简单反馈
                       var domain = up.getOption('domain');
                       var sourceLink = domain + "/" + res.key; //获取上传成功后的文件的Url

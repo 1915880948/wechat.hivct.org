@@ -14,15 +14,18 @@ use qiqi\helper\DataProviderHelper;
 
 class IndexAction extends AdminBaseAction
 {
-    public function run($name='')
+    public function run($name = '')
     {
         if($name){
-            $query = SurveyList::find()->andWhere(['like','name',$name]);
-        }else {
+            $query = SurveyList::find()
+                               ->andWhere(['like', 'name', $name]);
+        } else{
             $query = SurveyList::find();
         }
-        $provider = DataProviderHelper::create($query,20);
-        $provider->setSort(['defaultOrder'=>['id'=>SORT_DESC]]);
+        $query->with('events');
+        $provider = DataProviderHelper::create($query, 20);
+        $provider->setSort(['defaultOrder' => ["id" => SORT_DESC]]);
+
 
         return $this->render(compact('provider'));
     }

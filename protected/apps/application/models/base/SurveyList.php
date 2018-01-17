@@ -17,6 +17,12 @@ class SurveyList extends TblSurveyList
 {
     use InstanceTrait;
 
+    public function getEvents()
+    {
+        return $this->hasOne(UserEvent::className(), ['event_type_uuid' => 'uuid'])
+                    ->andWhere(['event_type' => 'survey']);
+    }
+
     public function getTotalStepCount()
     {
         return count($this->getStepNames());

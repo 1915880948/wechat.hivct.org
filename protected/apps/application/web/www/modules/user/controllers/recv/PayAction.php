@@ -87,6 +87,8 @@ class PayAction extends WwwBaseAction
         } else{
             $order = OrderList::create($postdata);
             $order->updateLogitics($logistcis);
+            //更新回Event。。。
+            $eventInfo->updateAttributes(['order_uuid'=>$order->uuid,'order_is_paid'=>OrderList::ORDER_STATUS_WAIT_FOR_PAY]);
             /**
              * 补充地址信息
              */
@@ -101,7 +103,7 @@ class PayAction extends WwwBaseAction
             return MessageHelper::error('订单提交失败，请检查后重新提交，如多次失败，请联系管理员');
         }
 
-
+        //建订单成功
         $detailErrors = OrderList::createOrderDetail($order['uuid'], Json::decode($postdata['goods_list']));
         if($detailErrors){
             $trans->rollBack();

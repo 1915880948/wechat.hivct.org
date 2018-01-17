@@ -87,7 +87,7 @@
           // save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
           get_new_uptoken: true,              // 设置上传文件的时候是否每次都重新获取新的uptoken
           domain: "{{env('QINIU_DOMAIN')}}",     // bucket域名，下载资源时用到，必需
-          max_file_size: '100mb',             // 最大文件体积限制
+          max_file_size: '50mb',             // 最大文件体积限制
           max_retries: 3,                     // 上传失败最大重试次数
           dragdrop: false,                    // 开启可拖曳上传
           chunk_size: '1mb',                  // 分块上传时，每块的体积
@@ -98,23 +98,24 @@
                   {title: "image files", extensions: "jpg,png,jpeg"}
               ]
           },
-          resize: {
-              width: 800,
-              height: 800,
-              crop: true,
-              preserve_headers: false
-          },
+          // resize: {
+          //     width: 800,
+          //     height: 800,
+          //     crop: true,
+          //     preserve_headers: false
+          // },
           init: {
               'FilesAdded': function (up, files) {
+                  console.log('files add');
                   // plupload.each(files, function (file) {
                   //     // 文件添加进队列后，处理相关的事情
                   // });
               },
               'BeforeUpload': function (up, file) {
-                  // 每个文件上传前，处理相关的事情
+                  console.log('before up');
               },
               'UploadProgress': function (up, file) {
-                  // 每个文件上传时，处理相关的事情
+                  console.log('up progress');
               },
               'FileUploaded': function (up, file, info) {
                   alert(info);
@@ -146,12 +147,14 @@
               },
               'Error': function (up, err, errTip) {
                   //上传出错时，处理相关的事情
+                  console.log(err);
               },
               'UploadComplete': function () {
-                  //队列文件处理完毕后，处理相关的事情
+                  console.log('complete')
 
               },
               'Key': function (up, file) {
+                  console.log(file);
                   return file.name;
                   // // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
                   // // 该配置必须要在unique_names: false，save_key: false时才生效

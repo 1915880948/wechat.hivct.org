@@ -25,7 +25,7 @@
                 <label for="name" class="weui-label">选择订单</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" id="order" type="text"  onfocus="this.blur()">>
+                <input class="weui-input" id="order" type="text"  onfocus="this.blur()">
             </div>
         </div>
         <div class="weui-cell">

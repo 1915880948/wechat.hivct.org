@@ -73,8 +73,7 @@
             </div>
         </div>
     </div>
-{{--    @if( gPayStatus($orderData['pay_status']) == '已支付' && (gOrderStatus($orderData['pay_status'])=='已发货' || gOrderStatus($orderData['pay_status'])=='已收货') )--}}
-    @IF(1)
+    @if( gPayStatus($orderData['pay_status']) == '已支付' && (gOrderStatus($orderData['pay_status'])=='已发货' || gOrderStatus($orderData['pay_status'])=='已收货') )
         <a href="{{yUrl(['order/upresult','uuid'=>$orderData['uuid']])}}" class="weui-btn weui-btn_primary">上传自检结果</a>
     @endif
 @stop

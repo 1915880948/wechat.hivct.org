@@ -13,7 +13,6 @@ use application\models\base\OrderList;
 use application\models\base\SurveyList;
 use application\models\base\UserEvent;
 use application\web\admin\components\AdminBaseAction;
-use qiqi\helper\DataProviderHelper;
 
 class DetailAction extends AdminBaseAction
 {
@@ -21,15 +20,28 @@ class DetailAction extends AdminBaseAction
     {
         $express = Express::find()->andWhere(['status'=>1])->asArray()->all();
         $data = SurveyList::find()->andWhere(['uuid'=>$uuid])->asArray()->one();
+
+
+
         $order_data = OrderList::find()
             ->from(OrderList::tableName().' as ol')
-            ->leftJoin(UserEvent::tableName().' as ue','ol.source_uuid=ue.uuid')
-            ->leftJoin(SurveyList::tableName().' as sl','ue.event_type_uuid=sl.uuid')
+            ->leftJoin(SurveyList::tableName().' as sl','ol.source_uuid=sl.uuid')
             ->andWhere(['sl.uuid'=>$uuid])
             ->asArray()
             ->one();
+        $eventInfo = UserEvent::find()
+                              ->andWhere(['event_type' => 'survey'])
+                              ->andWhere(['event_type_uuid' => $uuid])
+                              ->one();
+        if($eventInfo && $order_data){
+            if(!$eventInfo['order_uuid'] && $order_data['uuid']){
+                $eventInfo['order_uuid'] = $order_data['uuid'];
+                $eventInfo['order_is_paid'] = $order_data['pay_status'];
+                $eventInfo->save();
+            }
+        }
+
         $ship = array_column($express,'name','id');
-//print_r( $order_data );die;
         return $this->render(compact('ship','data','order_data'));
     }
 }

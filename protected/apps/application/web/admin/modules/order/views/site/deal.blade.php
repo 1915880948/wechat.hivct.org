@@ -10,10 +10,11 @@
     <hr/>
 
     <div class="col-xs-12" style="margin-bottom: 20px;">
-        <div class="col-xs-12">
+        <label class="col-md-3 control-label">自检结果：</label>
+        <div class="col-xs-9">
             @foreach($images as $item )
                 <div class="col-xs-3">
-                    <img src="{{$item['image']}}" width="180">
+                    <img src="{{$item['image']}}" width="200">
                 </div>
             @endforeach
         </div>

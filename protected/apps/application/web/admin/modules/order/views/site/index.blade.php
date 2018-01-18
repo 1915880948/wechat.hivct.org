@@ -167,9 +167,8 @@ use yii\helpers\ArrayHelper;
                                                     return Html::a('发货', 'javascript:void(0);', ['data-id' => $model['uuid'], 'class' => 'ship']);
                                                 }
                                             },
-                                            'deal' => function ($url, $model) {
-                                                $order_arr = array(11,12,13,14,18,19);
-                                                if ( in_array($model->order_status,$order_arr )) {
+                                            'deal' => function ($url, $model) use($dealArr) {
+                                                if ( in_array($model->order_status,$dealArr )) {
                                                     return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'],'uid'=>$model['uid']], []);
                                                 }
                                             },

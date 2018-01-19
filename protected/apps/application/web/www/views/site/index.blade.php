@@ -6,7 +6,7 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide"><img src="{{yStatic('images/banner.png')}}"></div>
       <div class="swiper-slide"><img src="{{yStatic('images/x.png')}}"></div>
-      <div class="swiper-slide"><img src="{{yStatic('images/y.png')}}"></div>
+      {{--<div class="swiper-slide"><img src="{{yStatic('images/y.png')}}"></div>--}}
       <div class="swiper-slide"><img src="{{yStatic('images/z.png')}}"></div>
     </div>
     <div class="swiper-pagination"></div>

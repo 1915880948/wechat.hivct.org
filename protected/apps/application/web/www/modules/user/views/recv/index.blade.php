@@ -69,7 +69,7 @@
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">收货城市：</label></div>
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" name="recv_province" id="recv_province" placeholder="请选择" onfocus="this.blur()" value="{{$address->city}}">
+          <input class="weui-input" type="text" name="recv_province" id="recv_province" placeholder="请选择" onfocus="this.blur()" value="{{$address->city}}" data-code="{{$address->city_code}}">
         </div>
       </div>
       <div class="weui-cell">
@@ -127,9 +127,7 @@
               })
           });
           $('#sign_date').calendar();
-          $("#recv_province").cityPicker({
-              showDistrict: true
-          });
+          $("#recv_province").cityPicker();
           $("#logistics").select({
               title: "选择发货地",
               items: {!! $logistics !!}
@@ -147,7 +145,8 @@
 
               var self = $(this);
               var post = $('#_form').serializeArray();
-              post.push({name: "recv_province_code", value: $('#recv_province').data('value')});
+              // post.push({name: "recv_province_name", value: $('#recv_province').data('value')});
+              post.push({name: "recv_province_code", value: $('#recv_province').data('code')});
               post.push({name: "logistics", value: $('#logistics').data('values')});
 //              if (post.recv_province_code == ''){
 //                  $.alert('收货城市不能为空');

@@ -43,4 +43,13 @@ class UserAddress extends TblUserAddress
             ['!=', 'uuid', $addressUuid]
         ]);
     }
+
+    /**
+     * @param $addressUuid
+     * @return array|\common\core\db\base\QActiveRecord|null|\yii\db\ActiveRecord|static
+     */
+    public static function getAddressInfo($addressUuid)
+    {
+        return self::findByUuid($addressUuid);
+    }
 }

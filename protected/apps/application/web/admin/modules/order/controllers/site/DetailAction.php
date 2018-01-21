@@ -6,6 +6,7 @@ use application\models\base\Logistics;
 use application\models\base\OrderDetail;
 use application\models\base\OrderList;
 use application\models\base\User;
+use application\models\base\UserAddress;
 use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\DataProviderHelper;
 
@@ -22,10 +23,14 @@ class DetailAction extends AdminBaseAction{
         $userdata = User::find()->andWhere(['uid'=>$uid])->asArray()->one();
         $ship = array_column($express,'name','id');
 
-        $logisticsInfo = [];
+        $logisticsInfo = $address = [];
         if($order_data['logistic_id']>0){
             $logisticsInfo = Logistics::getLogisitcsInfo($order_data['logistic_id']);
         }
-        return $this->render(compact('ship','userdata','provider','order_data','logisticsInfo'));
+        if($order_data['address_uuid']){
+            $address = UserAddress::getAddressInfo($order_data['address_uuid']);
+
+        }
+        return $this->render(compact('ship','userdata','provider','order_data','logisticsInfo','address'));
     }
 }

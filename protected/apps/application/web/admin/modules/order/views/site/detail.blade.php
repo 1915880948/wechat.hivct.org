@@ -28,7 +28,11 @@
     </div>
     <div class="row">
       <div class="col-xs-12">发货地：@if($logisticsInfo!=null) {{$logisticsInfo['title']}} @endif</div>
-      <div class="col-xs-12">收件人：{{$order_data['address_contact']}} , 手机：{{$order_data['address_mobile'] or ''}}，地址：{{$order_data['address_detail']}}</div>
+      <div class="col-xs-12">
+        @if($address)
+        地区：{{$address['city']}}
+        @endif
+        收件人：{{$order_data['address_contact']}} , 手机：{{$order_data['address_mobile'] or ''}}，地址：{{$order_data['address_detail']}}</div>
     </div>
     <div class="row">
       <div class="col-xs-12">

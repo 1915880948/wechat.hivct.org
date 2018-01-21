@@ -23,8 +23,14 @@ class SaveAction extends WwwBaseAction
     public function run()
     {
         $post = $this->request->post();
+        echo "<pre>";
+        print_r($post);
+        echo "</pre>";
+
         $products = ArrayHelper::getValue($post, 'product');
         $logistics = ArrayHelper::getValue($post, 'logistics');
+
+        exit;
 
         $event = new UserEvent();
         if(!$logistics){
@@ -49,6 +55,7 @@ class SaveAction extends WwwBaseAction
         if(!$city){
             $event->addError('uuid', '收件人所在城市不能为空');
         }
+        // $city_name = ArrayHelper::getValue($post, 'recv_province_name');
         $city_code = ArrayHelper::getValue($post, 'recv_province_code');
         $address = ArrayHelper::getValue($post, 'address');
         if(!$address){
@@ -78,6 +85,7 @@ class SaveAction extends WwwBaseAction
                 'mobile'     => $mobile,
                 'city'       => $city,
                 'city_code'  => $city_code,
+                // 'city_name'  => $city_name,
                 'address'    => $address,
                 'is_default' => (int) $address_default
             ]);

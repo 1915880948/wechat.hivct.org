@@ -24,9 +24,32 @@
         <label for="name" class="weui-label">选择订单</label>
       </div>
       <div class="weui-cell__bd">
-        <input class="weui-input" id="order" type="text" value="" data-values="" onfocus="this.blur()">
+        {{--<input class="weui-input" id="order" type="text" value="" data-values="" onfocus="this.blur()">--}}
+        {{--<input class="weui-input" id="order" type="text" value="" data-values="" onfocus="this.blur()">--}}
+      </div>
+      <div class="weui-cells weui-cells_radio">
+        {{--<label class="weui-cell weui-check__label f-888" for="xx0">--}}
+          {{--<div class="weui-cell__bd">--}}
+            {{--<p>不选择任何试剂</p>--}}
+          {{--</div>--}}
+          {{--<div class="weui-cell__ft">--}}
+            {{--<input type="radio" class="weui-check" name="product[{{$type}}]" value="0" id="xx0"> <span class="weui-icon-checked"></span>--}}
+          {{--</div>--}}
+        {{--</label>--}}
+        @foreach($_products as $product)
+          <label class="weui-cell weui-check__label f-888" for="xx{{$product['id']}}">
+            <div class="weui-cell__bd">
+              <p>{{$product['name']}}</p>
+            </div>
+            <div class="weui-cell__ft">
+              <input type="radio" class="weui-check" name="product[{{$type}}]" value="{{$product['id']}}" id="xx{{$product['id']}}" @if(isset($rel[$product['id']])) data-rel="{{json_encode($rel[$product['id']])}} @endif">
+              <span class="weui-icon-checked"></span>
+            </div>
+          </label>
+        @endforeach
       </div>
     </div>
+
     <div class="weui-cell">
       <div class="weui-cell__bd">
         <div class="weui-uploader">

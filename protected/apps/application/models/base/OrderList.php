@@ -141,6 +141,21 @@ class OrderList extends TblOrderList
         return self::UNKNOWN_STATUS;
     }
 
+    /**
+     * @param     $userId
+     * @param int $payStatus
+     * @param int $isUpResult
+     * @return OrderList[]|array|\yii\db\ActiveRecord[]
+     */
+    public static function getLastMonthOrder($userId, $payStatus = 1, $isUpResult = 0)
+    {
+        return OrderList::find()
+                        ->andWhere(['uid' => $userId, 'pay_status' => $payStatus, 'is_up_result' => $isUpResult])
+                        ->andWhere(['>', 'created_at', date("Y-m-d H:i:s", time() - 86400 * 30)])
+                        ->asArray()
+                        ->all();
+    }
+
     public function updatePayStatus($status)
     {
         $this->pay_status = $status;

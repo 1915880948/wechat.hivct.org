@@ -33,6 +33,7 @@ use Yii;
  * @property string $address_mobile
  * @property string $address_detail
  * @property string $alipay
+ * @property integer $is_up_result
  */
 class TblOrderList extends \application\common\db\ApplicationActiveRecord
 {
@@ -51,7 +52,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
     {
         return [
             [['out_trade_no'], 'required'],
-            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id'], 'integer'],
+            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result'], 'integer'],
             [['total_price'], 'number'],
             [['order_updated_at', 'created_at', 'updated_at'], 'safe'],
             [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
@@ -99,6 +100,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'address_mobile' => 'Address Mobile',
             'address_detail' => 'Address Detail',
             'alipay' => '支付宝 和pay_images的支付宝一致',
+            'is_up_result' => '是否上传自检结果：1:是，0:否',
         ];
     }
 }

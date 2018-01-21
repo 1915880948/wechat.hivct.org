@@ -45,4 +45,13 @@ class Logistics extends TblLogistics
             $this->addError('title', '发货地不能为空');
         }
     }
+
+    /**
+     * @param $id
+     * @return Logistics|array|null|\yii\db\ActiveRecord
+     */
+    public static function getLogisitcsInfo($id)
+    {
+        return self::find()->andWhere(['id'=>$id])->asArray()->one();
+    }
 }

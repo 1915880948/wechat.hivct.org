@@ -2,6 +2,7 @@
 namespace application\web\admin\modules\order\controllers\site;
 
 use application\models\base\Express;
+use application\models\base\Logistics;
 use application\models\base\OrderDetail;
 use application\models\base\OrderList;
 use application\models\base\User;
@@ -20,9 +21,11 @@ class DetailAction extends AdminBaseAction{
                     ->one();
         $userdata = User::find()->andWhere(['uid'=>$uid])->asArray()->one();
         $ship = array_column($express,'name','id');
-//        foreach ( $express as $k=>$v){
-//            $ship[$v['id']] = $v['name'];
-//        }
-        return $this->render(compact('ship','userdata','provider','order_data'));
+
+        $logisticsInfo = [];
+        if($order_data['logistic_id']>0){
+            $logisticsInfo = Logistics::getLogisitcsInfo($order_data['logistic_id']);
+        }
+        return $this->render(compact('ship','userdata','provider','order_data','logisticsInfo'));
     }
 }

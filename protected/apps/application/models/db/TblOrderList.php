@@ -34,6 +34,10 @@ use Yii;
  * @property string $address_detail
  * @property string $alipay
  * @property integer $is_up_result
+ * @property integer $adis_result
+ * @property integer $syphilis_result
+ * @property integer $hepatitis_b_result
+ * @property integer $hepatitis_c_result
  */
 class TblOrderList extends \application\common\db\ApplicationActiveRecord
 {
@@ -52,7 +56,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
     {
         return [
             [['out_trade_no'], 'required'],
-            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result'], 'integer'],
+            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result'], 'integer'],
             [['total_price'], 'number'],
             [['order_updated_at', 'created_at', 'updated_at'], 'safe'],
             [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
@@ -84,7 +88,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'total_price' => 'Total Price',
             'wx_transaction_id' => '微信订单号',
             'pay_status' => '支付状态，0待支付，1已支付，-1支付失败',
-            'order_status' => '订单状态：0未处理，1处理中，2已支付，3已发货，4已收货，11申请退款，12退款中，13退款完成，99已完成',
+            'order_status' => '订单状态：0未处理，1处理中，2已支付，21已发货，22已收货，23用户不存在，29发货完成，11申请退款，12退款审核，13退款成功，14退款失败，18退款处理中，19退款完成，99订单完成，100未知状态',
             'order_updated_at' => '订单更新时间',
             'ship_name' => '快递名称',
             'ship_code' => '快递单号',
@@ -101,6 +105,10 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'address_detail' => 'Address Detail',
             'alipay' => '支付宝 和pay_images的支付宝一致',
             'is_up_result' => '是否上传自检结果：1:是，0:否',
+            'adis_result' => '艾滋病检测结果:1阴性，2：阳性',
+            'syphilis_result' => '梅毒检测结果:1阴性，2：阳性',
+            'hepatitis_b_result' => '乙肝检测结果:1阴性，2：阳性',
+            'hepatitis_c_result' => '丙肝检测结果:1阴性，2：阳性',
         ];
     }
 }

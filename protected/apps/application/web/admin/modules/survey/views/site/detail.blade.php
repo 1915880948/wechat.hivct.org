@@ -68,7 +68,7 @@ use yii\widgets\ActiveForm;
                 <div class="col-xs-12"><span>其他方式：       </span> {{ $data['sex_type_other'] }}</div>
             @endif
             <div class="col-xs-12"><span>性取向：    </span> {{ $data['sex_direction'] }}</div>
-            <div class="col-xs-12"><span>你近三个月内有过性行为吗：    </span> {{ $data['hetero_partner_num'] }}</div>
+            <div class="col-xs-12"><span>你近三个月内有过性行为吗：    </span> {{ $data['has_sex_3month'] }}</div>
             <div class="col-xs-12"><span>近三个月内您有多少个异性伙伴：    </span> {{ $data['hetero_partner_num'] }}</div>
             <div class="col-xs-12"><span>是否全程使用安全套：    </span> {{ $data['condom_full_use']==1?'是':'否' }}</div>
             <div class="col-xs-12"><span>在最近三个月没有全程使用安全套的比例：    </span> {{ $data['condom_percent'] }}</div>
@@ -166,7 +166,7 @@ use yii\widgets\ActiveForm;
         <div class="col-xs-4">
             <div class="col-xs-12"><h4>配偶/性伴及其他检测</h4></div>
 
-            <div class="col-xs-12"><span>配偶/性伴是否检测过HIV：    </span> {{ $data['apply_for_free'] }}</div>
+            <div class="col-xs-12"><span>配偶/性伴是否检测过HIV：    </span> {{ $data['partner_is_check_hiv'] }}</div>
             <div class="col-xs-12"><span>配偶/性伴的检测结果：    </span> {{ $data['partner_check_result'] }}</div>
             <div class="col-xs-12"><span>是否愿意动员配偶/性伴进行HIV检测：    </span> {{ $data['partner_mobilize']==1?'是':'否' }}</div>
 

@@ -17,7 +17,7 @@ use qiqi\traits\Render;
 
 class IndexAction extends AdminBaseAction
 {
-    public function run($logistics_id = '-99', $ship_uuid = '-99', $pay_status = '-99', $order_status = '-99', $ship_code = '', $wx_transaction_id = '')
+    public function run($logistics_id='-99',$ship_uuid='-99',$pay_status='-99',$order_status='-99',$adis_result='-99',$syphilis_result='-99',$hepatitis_b_result='-99',$hepatitis_c_result='-99',$ship_code='',$wx_transaction_id='',$address_contact='',$address_mobile='')
     {
         $logistics = Logistics::find()->andWhere(['status' => 1])->asArray()->all();
         $express = Express::find()->andWhere(['status' => 1])->asArray()->all();
@@ -35,11 +35,29 @@ class IndexAction extends AdminBaseAction
         if ($order_status != '-99') {
             $query = $query->andWhere(['order_status' => $order_status]);
         }
+        if ($adis_result != '-99') {
+            $query = $query->andWhere(['adis_result' => $adis_result]);
+        }
+        if ($syphilis_result != '-99') {
+            $query = $query->andWhere(['syphilis_result' => $syphilis_result]);
+        }
+        if ($hepatitis_b_result != '-99') {
+            $query = $query->andWhere(['hepatitis_b_result' => $hepatitis_b_result]);
+        }
+        if ($hepatitis_c_result != '-99') {
+            $query = $query->andWhere(['hepatitis_c_result' => $hepatitis_c_result]);
+        }
         if ($ship_code) {
             $query = $query->andWhere(['like', 'ship_code', $ship_code]);
         }
         if ($wx_transaction_id) {
             $query = $query->andWhere(['like', 'wx_transaction_id', $wx_transaction_id]);
+        }
+        if ($address_contact) {
+            $query = $query->andWhere(['like', 'address_contact', $address_contact]);
+        }
+        if ($address_mobile) {
+            $query = $query->andWhere(['like', 'address_mobile', $address_mobile]);
         }
         $provider = DataProviderHelper::create($query, 20);
         $provider->setSort(['defaultOrder' => ['id' => SORT_DESC]]);

@@ -38,7 +38,10 @@
         </div>
     </div>
     {{--    @if( gPayStatus($orderData['pay_status']) == '已支付' && (gOrderStatus($orderData['pay_status'])=='已发货' || gOrderStatus($orderData['pay_status'])=='已收货') )--}}
-    <a href="javascript:;" class="weui-btn weui-btn_primary apply_back">申请退回保证金</a>
+
+            <a href="javascript:;" class="weui-btn weui-btn_primary apply_back" style="margin-top:1rem;">申请退回保证金</a>
+
+
     {{--@endif--}}
 @stop
 

@@ -67,7 +67,7 @@
     </div>
   </div>
   {{--    @if( gPayStatus($orderData['pay_status']) == '已支付' && (gOrderStatus($orderData['pay_status'])=='已发货' || gOrderStatus($orderData['pay_status'])=='已收货') )--}}
-  <a href="javascript:;" class="weui-btn weui-btn_primary apply_back">保存</a>
+  <a href="javascript:;" class="weui-btn weui-btn_primary apply_back" style="margin-top:1rem;">保存</a>
   {{--@endif--}}
 @stop
 
@@ -119,7 +119,7 @@
               multi_selection: false,
               filters: {
                   mime_types: [ //只允许上传文件格式
-                       // { title : "Image files", extensions : "jpg,gif,png" }
+                      // { title : "Image files", extensions : "jpg,gif,png" }
                   ],
                   prevent_duplicates: true
               },
@@ -160,7 +160,7 @@
                           '                        </li>';
                       var input_file = ' <input type="hidden" name="images[]" value="' + res.key + '">';
                       if ($('#uploaderFiles li').length > 5) {
-                          $.toast('最多上传4张图片！')
+                          $.toast('最多上传4张图片！');
                       } else {
                           $('#uploaderFiles').append(html_file);
                           $("#file_form").append(input_file);
@@ -174,13 +174,6 @@
                       //队列文件处理完毕后，处理相关的事情
 
                   }
-                  // 'Key': function (up, file) {
-                  //     // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
-                  //     // 该配置必须要在unique_names: false，save_key: false时才生效
-                  //     var key = file.name;
-                  //     // do something with key here
-                  //     return key;
-                  // }
               }
           });
 

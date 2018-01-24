@@ -86,10 +86,13 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                             'headerOptions'  => ['class' => 'center'],
                             'contentOptions' => ['class' => 'col-sm-1 center'],
                             'class'          => 'yii\grid\ActionColumn',
-                            'template'       => '{detail} {order}',
+                            'template'       => '{detail} {edit} {order}',
                             'buttons'        => [
                                 'detail' => function($url, $model) use ($selfurl) {
                                     return Html::a('详情', ['site/detail', 'uuid' => $model['uuid']], []);
+                                },
+                                'edit' => function($url, $model) use ($selfurl) {
+                                    return Html::a('修改', ['site/edit', 'uuid' => $model['uuid']], []);
                                 },
                                 'order'  => function($url, $model) use ($selfurl) {
                                     if(isset($model->events->order_uuid)){

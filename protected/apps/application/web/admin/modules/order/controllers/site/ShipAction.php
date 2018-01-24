@@ -22,9 +22,11 @@ class ShipAction extends AdminBaseAction{
             $order->ship_code = $ship_code;
             $order->ship_uuid = $ship_id;
             $order->ship_status = 1;
-            $order->order_status = 3;
+            $order->order_status = OrderList::ORDER_STATUS_SHIP;
             if( $order->save() ){
                 return ['code'=>200];
+            }else{
+                return ['code'=>500, 'error'=>$order->getErrors()];
             }
         }
     }

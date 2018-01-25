@@ -18,7 +18,7 @@
         </li>
       @else
         <li class="nav-item">
-          <a href="{{yUrl([$menu['action']])}}"> <i class="fa fa-th"></i> <span>{{$menu['name']}}{{$userinfo['account']}}</span> </a>
+          <a href="{{yUrl([$menu['action']])}}"> <i class="fa fa-th"></i> <span>{{$menu['name']}}</span> </a>
         </li>
       @endif
     @endforeach

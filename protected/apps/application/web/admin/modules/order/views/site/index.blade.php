@@ -50,7 +50,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             {{--<a href="#" class="btn bg-yellow btn-default">全部</a>--}}
             @foreach( $logArr as $k=>$v)
                 <a href="{{yUrl(['',
-                'logistics_id'      => $k,
+                'logistics_id'      => $userinfo['account']=='admin'?$k:$userinfo['logistic_id'],
                 'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', '-99'),
                 'pay_status'        => \yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', '-99'),
                 'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', '-99'),

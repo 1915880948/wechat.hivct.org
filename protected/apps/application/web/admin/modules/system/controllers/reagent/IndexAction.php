@@ -19,6 +19,9 @@ class IndexAction extends AdminBaseAction
 {
     public function run($id = 0)
     {
+        if($this->userinfo['account'] !== 'admin'){
+            return MessageHelper::success('对不起，您没有权限！');
+        }
 
         $model = Reagent::findByPk($id);
         if(!$model){

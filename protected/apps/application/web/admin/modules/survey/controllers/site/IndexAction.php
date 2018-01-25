@@ -11,11 +11,16 @@ namespace application\web\admin\modules\survey\controllers\site;
 use application\models\base\SurveyList;
 use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\DataProviderHelper;
+use qiqi\helper\MessageHelper;
 
 class IndexAction extends AdminBaseAction
 {
     public function run($name = '')
     {
+        if($this->userinfo['account'] !== 'admin'){
+            return MessageHelper::success('对不起，您没有权限！');
+        }
+
         if($name){
             $query = SurveyList::find()
                                ->andWhere(['like', 'name', $name]);

@@ -4,6 +4,7 @@ namespace application\web\admin\modules\order\controllers\site;
 use application\models\base\OrderList;
 use application\models\base\PayImage;
 use application\web\admin\components\AdminBaseAction;
+use qiqi\helper\MessageHelper;
 
 class DealAction extends AdminBaseAction{
     public function run($uuid=''){
@@ -26,6 +27,9 @@ class DealAction extends AdminBaseAction{
             }
         }
 
+        if( $this->userinfo['account'] !== 'admin' ){
+            return MessageHelper::success('对不起，您没有权限！');
+        }
         $images = PayImage::find()
             ->andWhere(['order_uuid'=>$uuid])
             ->asArray()

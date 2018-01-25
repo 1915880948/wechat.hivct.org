@@ -19,6 +19,10 @@ class IndexAction extends AdminBaseAction
 {
     public function run($id = 0, $del = 0, $status = null)
     {
+        if($this->userinfo['account'] !== 'admin'){
+            return MessageHelper::success('对不起，您没有权限！');
+        }
+
         $request = \Yii::$app->request;
         if($id){
             $model = SystemMenu::find()

@@ -17,6 +17,9 @@ class ShipAction extends AdminBaseAction{
             $order = OrderList::find()
                 ->andWhere(['uuid'=>$uuid])
                 ->one();
+            if( $order['logistic_id'] !== $this->userinfo['logistic_id'] && $this->userinfo['account'] !== 'admin'){
+                return ['code'=>5000,'error'=>'您不是该发货地的管理员'];
+            }
             $express = Express::find()->andWhere(['id'=>$ship_id])->asArray()->one();
             $order->ship_name = $express['name'];
             $order->ship_code = $ship_code;

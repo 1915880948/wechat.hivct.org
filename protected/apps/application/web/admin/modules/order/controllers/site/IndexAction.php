@@ -23,6 +23,10 @@ class IndexAction extends AdminBaseAction
         $express = Express::find()->andWhere(['status' => 1])->asArray()->all();
         $query = OrderList::find();
 
+        if($this->userinfo['account'] !== 'admin'){
+            $logistics_id = $this->userinfo['logistic_id'];
+//            dd(  $this->userinfo['logistic_id'] );
+        }
         if ($logistics_id != '-99') {
             $query = $query->andWhere(['logistic_id' => $logistics_id]);
         }

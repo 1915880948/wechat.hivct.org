@@ -21,7 +21,8 @@ class FlowAction extends WwwBaseAction
             ->asArray()
             ->all();
 
-            $is_allow = count($orderList)>0?'1':'0';
+//            $is_allow = count($orderList)>0?'1':'0';
+            $is_allow = 1;
         return $this->render(compact('is_allow'));
     }
 }

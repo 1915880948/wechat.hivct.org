@@ -34,7 +34,7 @@
       $(function () {
           $('.join_in').click(function () {
               var tag = "{{$is_allow}}";
-              if( tag ){
+              if( tag == "0" ){
                   $.toast('近一个月您有申请记录');
               }else{
                   location.href = "{{yUrl(['/user/recv'])}}";

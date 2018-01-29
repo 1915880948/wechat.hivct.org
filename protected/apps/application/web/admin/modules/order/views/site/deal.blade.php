@@ -39,8 +39,8 @@
       <div class="col-md-6">
           <select class="form-control input-inline input-medium adis_result">
               <option value="0">未检测</option>
-              <option value="1">阴性</option>
-              <option value="2">阳性</option>
+              <option value="1" {{$orderData['adis_result']==1?'selected':''}}>阴性</option>
+              <option value="2" {{$orderData['adis_result']==2?'selected':''}}>阳性</option>
           </select>
       </div>
   </div>
@@ -49,8 +49,8 @@
       <div class="col-md-6">
           <select class="form-control input-inline input-medium syphilis_result">
               <option value="0">未检测</option>
-              <option value="1">阴性</option>
-              <option value="2">阳性</option>
+              <option value="1" {{$orderData['syphilis_result']==1?'selected':''}}>阴性</option>
+              <option value="2" {{$orderData['syphilis_result']==2?'selected':''}}>阳性</option>
           </select>
       </div>
   </div>
@@ -59,8 +59,8 @@
       <div class="col-md-6">
           <select class="form-control input-inline input-medium hepatitis_b_result">
               <option value="0">未检测</option>
-              <option value="1">阴性</option>
-              <option value="2">阳性</option>
+              <option value="1" {{$orderData['hepatitis_b_result']==1?'selected':''}}>阴性</option>
+              <option value="2" {{$orderData['hepatitis_b_result']==2?'selected':''}}>阳性</option>
           </select>
       </div>
   </div>
@@ -69,8 +69,8 @@
       <div class="col-md-6">
           <select class="form-control input-inline input-medium hepatitis_c_result">
               <option value="0">未检测</option>
-              <option value="1">阴性</option>
-              <option value="2">阳性</option>
+              <option value="1" {{$orderData['hepatitis_c_result']==1?'selected':''}}>阴性</option>
+              <option value="2" {{$orderData['hepatitis_c_result']==2?'selected':''}}>阳性</option>
           </select>
       </div>
   </div>
@@ -108,6 +108,10 @@
                       {
                           'uuid': "{{ $orderData['uuid'] }}",
                           'back_url': "{{$selfurl}}",
+                          'adis_result': $(".adis_result").val(),
+                          'syphilis_result': $(".syphilis_result").val(),
+                          'hepatitis_b_result': $(".hepatitis_b_result").val(),
+                          'hepatitis_c_result': $(".hepatitis_c_result").val(),
                           'order_status': $(".deal_name").val()
                       }, function (res) {
                           if (res.code == 200) {

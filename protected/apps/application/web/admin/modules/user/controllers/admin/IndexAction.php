@@ -29,6 +29,10 @@ class IndexAction extends AdminBaseAction
         }
         if ($this->request->getIsPost()) {
             $postData = $this->request->post();
+            $is_exist = AdminUser::find()->andWhere(['account'=>$postData['account']])->one();
+            if( $is_exist ){
+                return MessageHelper::error("您添加的账户已经存在！！");
+            }
             if( trim($postData['password'],' ') ) {
                 $hash = \Yii::$app->getSecurity()->generatePasswordHash( trim($postData['password'],' '));
                 $model->password = $hash;

@@ -48,9 +48,10 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
     <div style="">
         <div class="btn-group">
             {{--<a href="#" class="btn bg-yellow btn-default">全部</a>--}}
+            @if( $userinfo['account']=='admin')
             @foreach( $logArr as $k=>$v)
                 <a href="{{yUrl(['',
-                'logistics_id'      => $userinfo['account']=='admin'?$k:$userinfo['logistic_id'],
+                'logistics_id'      => \yii\helpers\ArrayHelper::getValue($_GET, 'logistic_id', '-99'),
                 'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', '-99'),
                 'pay_status'        => \yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', '-99'),
                 'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', '-99'),
@@ -59,6 +60,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                 ])}}" title="{{ $v }}"
                    class="btn btn-default {{ $k==\yii\helpers\ArrayHelper::getValue($_GET, 'logistics_id', '-99')?'bg-yellow':'' }} ">{{ explode('-',$v)[0] }}</a>
             @endforeach
+                @endif
         </div>
         <?php
         /** @var InlineForm $form */
@@ -201,8 +203,8 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                                 return Html::a('发货', 'javascript:;', ['data-id' => $model['uuid'], 'class' => 'ship'], []);
                                             }
                                         },
-                                        'deal' => function ($url, $model) use ($dealArr) {
-                                            if (in_array($model->order_status, $dealArr)) {
+                                        'deal' => function ($url, $model) use ($dealArr,$userinfo) {
+                                            if (in_array($model->order_status, $dealArr) && $userinfo['account']=='admin' ) {
                                                 return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'deal']);
                                             }
                                         },

@@ -102,7 +102,7 @@
         <div class="col-md-9">
           <select class="form-control input-inline input-medium ship_name">
             @foreach( $ship as $k=>$v)
-              <option value="{{ $k }}">{{$v}}</option>
+              <option value="{{ $k }}" {{$order_data['ship_uuid']== $k?'selected':''}}>{{$v}}</option>
             @endforeach
           </select>
         </div>
@@ -110,7 +110,7 @@
       <div class="form-group">
         <label class="col-md-3 control-label">快递单号</label>
         <div class="col-md-9">
-          <input type="text" class="form-control input-inline input-medium ship_code" placeholder="快递单号">
+          <input type="text" class="form-control input-inline input-medium ship_code" value="{{$order_data['ship_code']}}" placeholder="快递单号">
         </div>
       </div>
     </div>

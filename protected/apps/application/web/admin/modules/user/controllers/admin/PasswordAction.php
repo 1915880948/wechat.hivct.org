@@ -5,21 +5,18 @@
  * @created 16/4/30 13:01
  * @since
  */
-
-namespace application\web\admin\controllers\site;
+namespace application\web\admin\modules\user\controllers\admin;
 
 use application\models\base\Logistics;
 use application\web\admin\AdminUser;
 use application\web\admin\components\AdminBaseAction;
-use application\web\admin\models\AdminUserLoginForm;
-use common\core\session\GSession;
 use qiqi\helper\MessageHelper;
 
 /**
  * Class LoginAction
  * @package admin\controllers\site
  */
-class EditAction extends AdminBaseAction
+class PasswordAction extends AdminBaseAction
 {
     public function run()
     {

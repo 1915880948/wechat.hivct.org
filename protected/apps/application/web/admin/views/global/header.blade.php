@@ -412,7 +412,7 @@
             <img alt="" class="img-circle" src="{{yStatic('assets/layouts/layout4/img/avatar9.jpg')}}"/> </a>
           <ul class="dropdown-menu dropdown-menu-default">
             <li>
-              <a href="{{yUrl(['/user/setting/password'])}}"> <i class="icon-user"></i> 修改密码 </a>
+              <a href="{{yUrl(['/user/admin/password'])}}"> <i class="icon-user"></i> 修改密码 </a>
             </li>
             <li>
               <a href="{{yUrl(['/user/project/index'])}}"> <i class="icon-calendar"></i> 我的项目 </a>

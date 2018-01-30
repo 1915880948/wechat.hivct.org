@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-<div class="col-sm-6">
+    <div class="col-sm-6">
     <div class="portlet light bordered">
         <div class="portlet-title">
             <div class="caption">
@@ -81,7 +81,6 @@
     </div>
 </div>
 
-
 @endsection
 @push('foot-script')
     <script>
@@ -90,4 +89,3 @@
         });
     </script>
 @endpush
-

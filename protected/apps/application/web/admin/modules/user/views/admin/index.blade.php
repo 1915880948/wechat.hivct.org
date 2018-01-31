@@ -161,7 +161,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                             <p class="help-block ">请输入密码</p>
                                         </div>
                                     </div>
-                                    <div class="form-group">˚
+                                    <div class="form-group">
                                         <label class="control-label">昵称</label>
                                         <div>
                                             <div class="input-group spinner">

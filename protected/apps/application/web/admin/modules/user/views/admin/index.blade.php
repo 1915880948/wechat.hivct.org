@@ -52,6 +52,9 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         'contentOptions' => ['class' => 'col-sm-1'],
                                         'attribute' => 'login_time',
                                         'label' => '登录时间',
+                                        'value' =>function($model){
+                                            return date('Y-m-d H:i:s',$model->login_time);
+                                        }
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
@@ -72,8 +75,8 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         'attribute' => 'is_admin',
                                         'label' => '是否为admin',
                                         'format' => 'raw',
-                                        'value' => function ($model, $key, $index, $column){
-                                            return $model->is_admin==1? '是' : '否';
+                                        'value' => function ($model, $key, $index, $column) {
+                                            return $model->is_admin == 1 ? '是' : '否';
                                         }
                                     ],
                                     [
@@ -82,6 +85,9 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         'label' => '发货地管理员',
                                         'format' => 'raw',
                                         'value' => function ($model, $key, $index, $column) use ($logistic) {
+                                            if ($model->is_admin == 1) {
+                                                return '超级管理员';
+                                            }
                                             foreach ($logistic as $item) {
                                                 if ($item['id'] == $model->logistic_id) {
                                                     return $item['title'];
@@ -133,7 +139,8 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-settings font-green-sharp"></i>
-                                <span class="caption-subject font-green-sharp bold uppercase">{{yRequest()->get('id')?"编辑" : "新增"}}管理员</span>
+                                <span class="caption-subject font-green-sharp bold uppercase">{{yRequest()->get('id')?"编辑" : "新增"}}
+                                    管理员</span>
                             </div>
                         </div>
                         <div class="portlet-body util-btn-margin-bottom-5">
@@ -145,8 +152,10 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                     <div class="form-group">
                                         <label class="control-label">账号</label>
                                         <div class="input-group spinner">
-                                            <input type="hidden" class="form-control " name="id" value="{{ $model->aid }}">
-                                            <input type="text" class="form-control " name="account" value="{{ $model->account }}" required>
+                                            <input type="hidden" class="form-control " name="id"
+                                                   value="{{ $model->aid }}">
+                                            <input type="text" class="form-control " name="account"
+                                                   value="{{ $model->account }}" required>
                                             <p class="help-block help-block-error"></p>
                                             <p class="help-block ">请输入账号</p>
                                         </div>
@@ -213,19 +222,20 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
 @endpush
 
 @push('foot-script')
-<script>
-    $(function () {
-        isShowLogistic();
-        $('#is_admin').change(function () {
+    <script>
+        $(function () {
             isShowLogistic();
+            $('#is_admin').change(function () {
+                isShowLogistic();
+            });
         });
-    });
-    function isShowLogistic() {
-        if( $("#is_admin").val() == 1 ){
-            document.getElementById('logistic_id').style.display = 'none';
-        }else{
-            document.getElementById('logistic_id').style.display = 'block';
+
+        function isShowLogistic() {
+            if ($("#is_admin").val() == 1) {
+                document.getElementById('logistic_id').style.display = 'none';
+            } else {
+                document.getElementById('logistic_id').style.display = 'block';
+            }
         }
-    }
-</script>
+    </script>
 @endpush

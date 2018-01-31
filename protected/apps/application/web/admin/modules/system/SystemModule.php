@@ -19,7 +19,7 @@ class SystemModule extends Module
         $user = \Yii::$app->getUser()
                           ->getIdentity();
         if(!$user->isSuperAdmin()){
-            return \Yii::$app->createControllerByID('site')
+            return \Yii::$app->createControllerByID('defaults')
                              ->redirect(['/site/index']);
         }
         parent::init();

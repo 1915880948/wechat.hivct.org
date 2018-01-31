@@ -15,6 +15,7 @@ use Yii;
  * @property string $login_ip
  * @property integer $is_super
  * @property integer $logistic_id
+ * @property integer $is_admin
  */
 class TblAdmins extends \application\common\db\ApplicationActiveRecord
 {
@@ -32,7 +33,7 @@ class TblAdmins extends \application\common\db\ApplicationActiveRecord
     public function rules()
     {
         return [
-            [['login_time', 'is_super', 'logistic_id'], 'integer'],
+            [['login_time', 'is_super', 'logistic_id', 'is_admin'], 'integer'],
             [['logistic_id'], 'required'],
             [['account', 'nickname'], 'string', 'max' => 100],
             [['password'], 'string', 'max' => 255],
@@ -55,6 +56,7 @@ class TblAdmins extends \application\common\db\ApplicationActiveRecord
             'login_ip' => '最后登录IP',
             'is_super' => 'Is Super',
             'logistic_id' => '发货地管理员',
+            'is_admin' => '是否admin ：1:是。0:不是（默认）',
         ];
     }
 }

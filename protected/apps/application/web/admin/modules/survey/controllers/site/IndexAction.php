@@ -17,7 +17,7 @@ class IndexAction extends AdminBaseAction
 {
     public function run($name = '')
     {
-        if($this->userinfo['account'] !== 'admin'){
+        if( !$this->userinfo['is_admin'] ){
             return MessageHelper::success('对不起，您没有权限！');
         }
 

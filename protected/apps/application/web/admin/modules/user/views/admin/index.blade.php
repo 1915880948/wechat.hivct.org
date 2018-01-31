@@ -15,7 +15,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
     <div class="row">
         <div class="col-xs-12">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <div class="portlet light portlet-fit portlet-form bordered">
                         <div class="portlet-title">
                             <div class="caption">
@@ -68,6 +68,15 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         }
                                     ],
                                     [
+                                        'contentOptions' => ['class' => 'col-sm-1'],
+                                        'attribute' => 'is_admin',
+                                        'label' => '是否为admin',
+                                        'format' => 'raw',
+                                        'value' => function ($model, $key, $index, $column){
+                                            return $model->is_admin==1? '是' : '否';
+                                        }
+                                    ],
+                                    [
                                         'contentOptions' => ['class' => 'col-sm-3'],
                                         'attribute' => 'logistic_id',
                                         'label' => '发货地管理员',
@@ -78,7 +87,6 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                                     return $item['title'];
                                                 }
                                             }
-                                            return '还没有分配';
                                         }
                                     ],
                                     [
@@ -120,7 +128,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
@@ -137,14 +145,14 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                     <div class="form-group">
                                         <label class="control-label">账号</label>
                                         <div class="input-group spinner">
-                                            <input type="text" class="form-control " name="account"
-                                                   value="{{ $model->account }}">
+                                            <input type="hidden" class="form-control " name="id" value="{{ $model->aid }}">
+                                            <input type="text" class="form-control " name="account" value="{{ $model->account }}" required>
                                             <p class="help-block help-block-error"></p>
                                             <p class="help-block ">请输入账号</p>
                                         </div>
                                     </div>
                                     <div class="form-group ">
-                                        <label class="control-label">密码</label>
+                                        <label class="control-label">密码 {{isset($_GET['id'])?'--不修改密码，设置为空':''}}</label>
                                         <div>
                                             <div class="input-group spinner">
                                                 <input type="text" class="form-control " name="password" value="">
@@ -153,7 +161,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                             <p class="help-block ">请输入密码</p>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group">˚
                                         <label class="control-label">昵称</label>
                                         <div>
                                             <div class="input-group spinner">
@@ -165,6 +173,17 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label">是否为admin</label>
+                                        <div>
+                                            <div class="input-group spinner">
+                                                <select name="is_admin" id="is_admin">
+                                                    <option value="0" {{ $model->is_admin==0?'selected':'' }}>否</option>
+                                                    <option value="1" {{ $model->is_admin==1?'selected':'' }}>是</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="logistic_id">
                                         <label class="control-label">所属发货地管理</label>
                                         <div>
                                             <div class="input-group spinner">
@@ -194,5 +213,19 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
 @endpush
 
 @push('foot-script')
-
+<script>
+    $(function () {
+        isShowLogistic();
+        $('#is_admin').change(function () {
+            isShowLogistic();
+        });
+    });
+    function isShowLogistic() {
+        if( $("#is_admin").val() == 1 ){
+            document.getElementById('logistic_id').style.display = 'none';
+        }else{
+            document.getElementById('logistic_id').style.display = 'block';
+        }
+    }
+</script>
 @endpush

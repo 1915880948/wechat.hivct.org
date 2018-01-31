@@ -27,7 +27,7 @@ class IndexAction extends AdminBaseAction
      */
     public function run($id = 0)
     {
-        if($this->userinfo['account'] !== 'admin'){
+        if( !$this->userinfo['is_admin'] ){
             return MessageHelper::success('对不起，您没有权限！');
         }
         $model = Logistics::findByPk($id);
@@ -38,7 +38,6 @@ class IndexAction extends AdminBaseAction
         if($this->request->getIsPost()){
 
             if($model->create($this->request->post())){
-                // return $this->controller->redirect(Url::current());
                 return MessageHelper::success(($id ? "编辑 " : "新增") . "成功", gUrl($this->getUniqueId()));
             }
 

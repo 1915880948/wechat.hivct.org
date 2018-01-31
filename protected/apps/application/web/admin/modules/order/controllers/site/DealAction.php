@@ -27,7 +27,7 @@ class DealAction extends AdminBaseAction{
             }
         }
 
-        if( $this->userinfo['account'] !== 'admin' ){
+        if( !$this->userinfo['is_admin'] ){
             return MessageHelper::success('对不起，您没有权限！');
         }
         $images = PayImage::find()

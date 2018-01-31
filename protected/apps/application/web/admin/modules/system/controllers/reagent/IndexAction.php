@@ -19,7 +19,7 @@ class IndexAction extends AdminBaseAction
 {
     public function run($id = 0)
     {
-        if($this->userinfo['account'] !== 'admin'){
+        if( !$this->userinfo['is_admin'] ){
             return MessageHelper::success('对不起，您没有权限！');
         }
 
@@ -41,7 +41,6 @@ class IndexAction extends AdminBaseAction
                         $m = RelationReagentLogistics::create($id,$relation);
                     }
                 }
-                // return $this->controller->redirect(Url::current());
                 return MessageHelper::success(($id ? "编辑 " : "新增") . "成功", gUrl($this->getUniqueId()));
             }
 

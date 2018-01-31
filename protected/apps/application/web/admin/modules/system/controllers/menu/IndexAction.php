@@ -19,7 +19,7 @@ class IndexAction extends AdminBaseAction
 {
     public function run($id = 0, $del = 0, $status = null)
     {
-        if($this->userinfo['account'] !== 'admin'){
+        if( !$this->userinfo['is_admin'] ){
             return MessageHelper::success('对不起，您没有权限！');
         }
 
@@ -53,9 +53,6 @@ class IndexAction extends AdminBaseAction
             $query->andFilterWhere(['status' => $status]);
         }
         if($request->getIsPost()){//存储
-            /**
-             * 存储
-             */
             $model->load($request->post());
             if(!$model->pid){
                 $model->pid = 0;

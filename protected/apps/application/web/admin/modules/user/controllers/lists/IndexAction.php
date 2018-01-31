@@ -15,8 +15,6 @@ class IndexAction extends AdminBaseAction{
         }else {
             $query = User::find();
         }
-//        $sql = $query->createCommand()->getRawSql();
-//        print_r( $sql );    die;
         $provider = DataProviderHelper::create($query);
         $provider->setSort(['defaultOrder'=>['uid'=>SORT_DESC]]);
         return $this->render(compact('provider'));

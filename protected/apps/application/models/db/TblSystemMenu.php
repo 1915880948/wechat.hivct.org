@@ -14,6 +14,7 @@ use Yii;
  * @property string $icon
  * @property integer $ordinal
  * @property integer $status
+ * @property integer $is_power
  */
 class TblSystemMenu extends \application\common\db\ApplicationActiveRecord
 {
@@ -31,7 +32,7 @@ class TblSystemMenu extends \application\common\db\ApplicationActiveRecord
     public function rules()
     {
         return [
-            [['pid', 'ordinal', 'status'], 'integer'],
+            [['pid', 'ordinal', 'status', 'is_power'], 'integer'],
             [['name'], 'string', 'max' => 30],
             [['action'], 'string', 'max' => 50],
             [['icon'], 'string', 'max' => 20]
@@ -51,6 +52,7 @@ class TblSystemMenu extends \application\common\db\ApplicationActiveRecord
             'icon' => 'Icon',
             'ordinal' => '排序',
             'status' => '状态,是否禁用',
+            'is_power' => '是否有权限：1是（默认），0:否',
         ];
     }
 }

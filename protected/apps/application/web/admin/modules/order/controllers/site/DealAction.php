@@ -7,7 +7,7 @@ use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\MessageHelper;
 
 class DealAction extends AdminBaseAction{
-    public function run($uuid=''){
+    public function run($uuid='',$uid=''){
         if( \Yii::$app->request->isPost){
             \Yii::$app->response->format = 'json';
             $postData = \Yii::$app->request->post();
@@ -31,11 +31,11 @@ class DealAction extends AdminBaseAction{
             return MessageHelper::success('对不起，您没有权限！');
         }
         $images = PayImage::find()
-            ->andWhere(['order_uuid'=>$uuid])
+            ->andWhere(['user_id'=>$uid,'order_uuid'=>$uuid])
             ->asArray()
             ->all();
         $orderData = OrderList::find()
-            ->andWhere(['uuid'=>$uuid])
+            ->andWhere(['uid'=>$uid,'uuid'=>$uuid])
             ->asArray()
             ->one();
         $orderStatus = [

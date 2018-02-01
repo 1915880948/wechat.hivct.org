@@ -13,15 +13,15 @@ use yii\base\Module;
 
 class SystemModule extends Module
 {
-    public function init()
-    {
-        /** @var AdminUser $user */
-        $user = \Yii::$app->getUser()
-                          ->getIdentity();
-        if(!$user->isSuperAdmin()){
-            return \Yii::$app->createControllerByID('defaults')
-                             ->redirect(['/site/index']);
-        }
-        parent::init();
-    }
+//    public function init()
+//    {
+//        /** @var AdminUser $user */
+////        $user = \Yii::$app->getUser()
+////                          ->getIdentity();
+////        if(!$user->isSuperAdmin()){
+////            return \Yii::$app->createControllerByID('defaults')
+////                             ->redirect(['/site/index']);
+////        }
+////        parent::init();
+//    }
 }

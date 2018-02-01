@@ -8,24 +8,24 @@
 
 namespace application\web\admin\modules\survey\controllers\site;
 
+use application\models\base\OrderList;
 use application\models\base\SurveyList;
+use application\models\base\UserEvent;
 use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\DataProviderHelper;
-use qiqi\helper\MessageHelper;
 
 class IndexAction extends AdminBaseAction
 {
     public function run($name = '')
     {
+        $query = SurveyList::find();
         if( !$this->userinfo['is_admin'] ){
-            return MessageHelper::success('对不起，您没有权限！');
+            $query = $query->leftJoin(UserEvent::tableName(),UserEvent::tableName().'.event_type_uuid='.SurveyList::tableName().'.uuid')
+                ->leftJoin(OrderList::tableName(),OrderList::tableName().'.uuid='.UserEvent::tableName().'.order_uuid')
+                ->andWhere([OrderList::tableName().'.logistic_id'=>$this->userinfo['logistic_id']]);
         }
-
         if($name){
-            $query = SurveyList::find()
-                               ->andWhere(['like', 'name', $name]);
-        } else{
-            $query = SurveyList::find();
+            $query = $query->andWhere(['like', 'name', $name]);
         }
         $query->with('events');
         $provider = DataProviderHelper::create($query, 20);

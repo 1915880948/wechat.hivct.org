@@ -100,11 +100,11 @@
       <div class="form-group">
         <label class="col-md-3 control-label">快递公司</label>
         <div class="col-md-9">
-          <select class="form-control input-inline input-medium ship_name">
-            @foreach( $ship as $k=>$v)
-              <option value="{{ $k }}" {{$order_data['ship_uuid']== $k?'selected':''}}>{{$v}}</option>
-            @endforeach
-          </select>
+            <select class="form-control js-express-tags input-medium ship_name" id="ship_name">
+                @foreach( $ship as $k=>$v)
+                    <option value="{{ $k }}" {{ $k==$order_data['ship_uuid']?"selected":''}} {{ $v=='自取'?"data-values=".$v:'' }}>{{$v}}</option>
+                @endforeach
+            </select>
         </div>
       </div>
       <div class="form-group">
@@ -122,11 +122,17 @@
       text-align:center;
       padding:20px;
     }
+    .select2-dropdown {
+        z-index: 20000000000; }
   </style>
 @endpush
 @push('foot-script')
   <script>
       $(function () {
+          $(".js-express-tags").select2({
+              tags: true
+          });
+
           var _this;
           $(".ship").click(function () {
               _this = $(this);
@@ -140,7 +146,9 @@
                   content: $('#ship-content'),
                   btn: ['发货', '取消'],
                   yes: function () {
-                      if ($(".ship_name").val() && $(".ship_code").val()) {
+                      var select_index = document.getElementById("ship_name").selectedIndex;
+                      var object = $(".ship_name option")[select_index];
+                      if ( ($(".ship_name").val() && $(".ship_code").val()) || object.text=='自取'  ) {
                           $.post("{{yUrl('ship')}}",
                               {
                                   'uuid': uuid,

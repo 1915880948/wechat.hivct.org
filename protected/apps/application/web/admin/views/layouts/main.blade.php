@@ -26,6 +26,7 @@
   <link href="{{yStatic('assets/layouts/layout/css/themes/light2.min.css')}}" rel="stylesheet" type="text/css" id="style_color"/>
   <link href="{{yStatic('assets/layouts/layout/css/custom.min.css')}}" rel="stylesheet" type="text/css"/>
   <link href="{{yStatic('css/css.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{yStatic('select2/select2.min.css')}}" rel="stylesheet" type="text/css"/>
   <!-- END THEME LAYOUT STYLES -->
   <link rel="shortcut icon" href="favicon.ico"/>
   <!--[if lt IE 9]>
@@ -79,6 +80,7 @@
   <script src="{{yStatic('assets/layouts/layout4/scripts/layout.min.js')}}" type="text/javascript"></script>
   <script src="{{yStatic('assets/layouts/layout4/scripts/demo.min.js')}}" type="text/javascript"></script>
   <script src="{{gStatic('vendor/layer/layer.js')}}" type="text/javascript"></script>
+  <script src="{{yStatic('select2/select2.min.js')}}" type="text/javascript"></script>
   <script src="//cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
   <script src="{{gStatic('vendor/yii/yii.js')}}"></script>
   {{--<script src="{{gStatic('app.js')}}" type="text/javascript"></script>--}}

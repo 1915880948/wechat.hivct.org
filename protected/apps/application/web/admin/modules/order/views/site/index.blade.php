@@ -19,6 +19,8 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
         #export {
             color: #3fd5c0;
         }
+        .select2-dropdown {
+            z-index: 20000000000; }
     </style>
 @endpush
 @section('breadcrumb')
@@ -48,10 +50,10 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
     <div style="">
         <div class="btn-group">
             {{--<a href="#" class="btn bg-yellow btn-default">全部</a>--}}
-            @if( $userinfo['account']=='admin')
+            @if( $userinfo['is_admin']== 1)
             @foreach( $logArr as $k=>$v)
                 <a href="{{yUrl(['',
-                'logistics_id'      => \yii\helpers\ArrayHelper::getValue($_GET, 'logistic_id', '-99'),
+                'logistics_id'      => $k,
                 'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', '-99'),
                 'pay_status'        => \yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', '-99'),
                 'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', '-99'),
@@ -204,7 +206,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                             }
                                         },
                                         'deal' => function ($url, $model) use ($dealArr,$userinfo) {
-                                            if (in_array($model->order_status, $dealArr) && $userinfo['account']=='admin' ) {
+                                            if (in_array($model->order_status, $dealArr) && $userinfo['is_admin']==1 ) {
                                                 return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'deal']);
                                             }
                                         },
@@ -259,9 +261,9 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
         <div class="form-group">
             <label class="col-md-3 control-label">快递公司</label>
             <div class="col-md-9">
-                <select class="form-control input-inline input-medium ship_name">
+                <select class="form-control js-express-tags input-medium ship_name" id="ship_name">
                     @foreach( $ship as $k=>$v)
-                        <option value="{{ $k }}">{{$v}}</option>
+                        <option value="{{ $k }}" {{ $v=='自取'?"data-values=".$v:'' }}>{{$v}}</option>
                     @endforeach
                 </select>
             </div>
@@ -290,6 +292,10 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
 @push('foot-script')
     <script>
         $(function () {
+            $(".js-express-tags").select2({
+                tags: true
+            });
+
             var _this;
             $(".ship").click(function (i) {
                 _this = $(this);
@@ -303,7 +309,9 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                     content: $('#ship-content'),
                     btn: ['发货', '取消'],
                     yes: function () {
-                        if ($(".ship_name").val() && $(".ship_code").val()) {
+                        var select_index = document.getElementById("ship_name").selectedIndex;
+                        var object = $(".ship_name option")[select_index];
+                        if ( ($(".ship_name").val() && $(".ship_code").val()) || object.text=='自取'  ) {
                             $.post("{{yUrl(['site/ship'])}}",
                                 {
                                     'uuid': uuid,

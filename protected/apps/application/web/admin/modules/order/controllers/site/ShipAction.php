@@ -21,9 +21,18 @@ class ShipAction extends AdminBaseAction{
                 return ['code'=>5000,'error'=>'您不是该发货地的管理员'];
             }
             $express = Express::find()->andWhere(['id'=>$ship_id])->asArray()->one();
-            $order->ship_name = $express['name'];
-            $order->ship_code = $ship_code;
-            $order->ship_uuid = $ship_id;
+            if ( !$express ){
+                $express = new Express();
+                $express->name = $ship_id;
+                $order->ship_name = $ship_id;
+                $express->save();
+                $expressId = Express::find()->orderBy(['id'=>SORT_DESC])->asArray()->one();
+                $order->ship_uuid = $expressId['id'];
+            }else{
+                $order->ship_name = $express['name'];
+                $order->ship_uuid = $ship_id;
+                $order->ship_code = $ship_code;
+            }
             $order->ship_status = 1;
             $order->order_status = OrderList::ORDER_STATUS_SHIP;
             if( $order->save() ){

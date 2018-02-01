@@ -87,6 +87,12 @@
                                     0  => '待发布',
                                     1  => '已发布',
                                 ]);
+                      echo $form->field($model, 'is_power')
+                                ->label('普通管理员是否有权限')
+                                ->radioList([
+                                    0  => '无权限',
+                                    1  => '有权限',
+                                ]);
                       ?>
                       <input type="submit" value="提交">
 

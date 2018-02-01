@@ -78,12 +78,9 @@
       <label class="col-md-3 control-label">操作状态</label>
       <div class="col-md-6">
           <select class="form-control input-inline input-medium deal_name">
-              <option value="12">退款审核</option>
-              <option value="13">退款成功</option>
-              <option value="14">退款失败</option>
-              <option value="18">退款处理中</option>
-              <option value="19">退款完成</option>
-              <option value="99">订单完成</option>
+              @foreach($orderStatus as $k=>$v)
+              <option value="{{$k}}" {{ $orderData['order_status']==$k?'selected':'' }}>{{$v}}</option>
+              @endforeach
           </select>
       </div>
       <label class="col-md-3 control-label">

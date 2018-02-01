@@ -49,18 +49,18 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         'label' => '昵称',
                                     ],
                                     [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
+                                        'contentOptions' => ['class' => 'col-sm-2'],
                                         'attribute' => 'login_time',
                                         'label' => '登录时间',
                                         'value' =>function($model){
                                             return date('Y-m-d H:i:s',$model->login_time);
                                         }
                                     ],
-                                    [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute' => 'login_ip',
-                                        'label' => '登录IP',
-                                    ],
+                                    // [
+                                    //     'contentOptions' => ['class' => 'col-sm-1'],
+                                    //     'attribute' => 'login_ip',
+                                    //     'label' => '登录IP',
+                                    // ],
                                     // [
                                     //     'contentOptions' => ['class' => 'col-sm-1'],
                                     //     'attribute' => 'is_super',

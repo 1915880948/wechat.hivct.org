@@ -23,14 +23,9 @@ class SaveAction extends WwwBaseAction
     public function run()
     {
         $post = $this->request->post();
-        echo "<pre>";
-        print_r($post);
-        echo "</pre>";
 
         $products = ArrayHelper::getValue($post, 'product');
         $logistics = ArrayHelper::getValue($post, 'logistics');
-
-        exit;
 
         $event = new UserEvent();
         if(!$logistics){

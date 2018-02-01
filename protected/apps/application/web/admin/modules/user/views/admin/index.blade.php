@@ -49,29 +49,29 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         'label' => '昵称',
                                     ],
                                     [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
+                                        'contentOptions' => ['class' => 'col-sm-2'],
                                         'attribute' => 'login_time',
                                         'label' => '登录时间',
                                         'value' =>function($model){
                                             return date('Y-m-d H:i:s',$model->login_time);
                                         }
                                     ],
+                                    // [
+                                    //     'contentOptions' => ['class' => 'col-sm-1'],
+                                    //     'attribute' => 'login_ip',
+                                    //     'label' => '登录IP',
+                                    // ],
+                                    // [
+                                    //     'contentOptions' => ['class' => 'col-sm-1'],
+                                    //     'attribute' => 'is_super',
+                                    //     'label' => '状态',
+                                    //     'format' => 'raw',
+                                    //     'value' => function ($model, $key, $index, $column) {
+                                    //         return $model->is_super ? '在线' : '下线';
+                                    //     }
+                                    // ],
                                     [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute' => 'login_ip',
-                                        'label' => '登录IP',
-                                    ],
-                                    [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute' => 'is_super',
-                                        'label' => '状态',
-                                        'format' => 'raw',
-                                        'value' => function ($model, $key, $index, $column) {
-                                            return $model->is_super ? '在线' : '下线';
-                                        }
-                                    ],
-                                    [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
+                                        'contentOptions' => ['class' => 'col-sm-2'],
                                         'attribute' => 'is_admin',
                                         'label' => '是否为admin',
                                         'format' => 'raw',
@@ -82,7 +82,7 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                     [
                                         'contentOptions' => ['class' => 'col-sm-3'],
                                         'attribute' => 'logistic_id',
-                                        'label' => '发货地管理员',
+                                        'label' => '发货地',
                                         'format' => 'raw',
                                         'value' => function ($model, $key, $index, $column) use ($logistic) {
                                             if ($model->is_admin == 1) {

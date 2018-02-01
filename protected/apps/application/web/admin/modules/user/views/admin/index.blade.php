@@ -61,15 +61,15 @@ use yii\grid\GridView;use yii\helpers\Html;use yii\web\View;use yii\widgets\Acti
                                         'attribute' => 'login_ip',
                                         'label' => '登录IP',
                                     ],
-                                    [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
-                                        'attribute' => 'is_super',
-                                        'label' => '状态',
-                                        'format' => 'raw',
-                                        'value' => function ($model, $key, $index, $column) {
-                                            return $model->is_super ? '在线' : '下线';
-                                        }
-                                    ],
+                                    // [
+                                    //     'contentOptions' => ['class' => 'col-sm-1'],
+                                    //     'attribute' => 'is_super',
+                                    //     'label' => '状态',
+                                    //     'format' => 'raw',
+                                    //     'value' => function ($model, $key, $index, $column) {
+                                    //         return $model->is_super ? '在线' : '下线';
+                                    //     }
+                                    // ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
                                         'attribute' => 'is_admin',

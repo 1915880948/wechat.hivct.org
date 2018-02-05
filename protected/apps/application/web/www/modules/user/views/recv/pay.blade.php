@@ -33,7 +33,7 @@
       <div class="weui-cells">
         <div class="weui-cell ">
           <div class="weui-cell__bd">
-            <p style="margin-left:15px;">保证金<span class="f-red">30</span>元，等你上传完毕后，我们将会原路返回到您的微信账号里</p>
+            <p style="margin-left:15px;">保证金<span class="f-red">30.15(0.15为手续费不退回)</span>元，等你上传完毕后，我们将会原路返回到您的微信账号里</p>
           </div>
         </div>
       </div>

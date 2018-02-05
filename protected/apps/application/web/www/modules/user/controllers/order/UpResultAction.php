@@ -19,6 +19,7 @@ class UpResultAction extends WwwBaseAction
                                  ->asArray()
                                  ->all();
         $orderList = OrderList::getLastMonthOrder($this->account['uid']);
+//        dd($orderList);
         return $this->render(compact('orderData', 'detailData', 'orderList'));
     }
 }

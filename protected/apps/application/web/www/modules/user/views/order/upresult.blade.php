@@ -36,17 +36,17 @@
             {{--<input type="radio" class="weui-check" name="product[{{$type}}]" value="0" id="xx0"> <span class="weui-icon-checked"></span>--}}
           {{--</div>--}}
         {{--</label>--}}
-        @foreach($_products as $product)
-          <label class="weui-cell weui-check__label f-888" for="xx{{$product['id']}}">
-            <div class="weui-cell__bd">
-              <p>{{$product['name']}}</p>
-            </div>
-            <div class="weui-cell__ft">
-              <input type="radio" class="weui-check" name="product[{{$type}}]" value="{{$product['id']}}" id="xx{{$product['id']}}" @if(isset($rel[$product['id']])) data-rel="{{json_encode($rel[$product['id']])}} @endif">
-              <span class="weui-icon-checked"></span>
-            </div>
-          </label>
-        @endforeach
+        {{--@foreach($orderList as $product)--}}
+          {{--<label class="weui-cell weui-check__label f-888" for="xx{{$product['id']}}">--}}
+            {{--<div class="weui-cell__bd">--}}
+              {{--<p>{{$product['name']}}</p>--}}
+            {{--</div>--}}
+            {{--<div class="weui-cell__ft">--}}
+              {{--<input type="radio" class="weui-check" name="product[{{$type}}]" value="{{$product['id']}}" id="xx{{$product['id']}}" @if(isset($rel[$product['id']])) data-rel="{{json_encode($rel[$product['id']])}} @endif">--}}
+              {{--<span class="weui-icon-checked"></span>--}}
+            {{--</div>--}}
+          {{--</label>--}}
+        {{--@endforeach--}}
       </div>
     </div>
 

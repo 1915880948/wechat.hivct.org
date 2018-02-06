@@ -153,8 +153,9 @@
                             '                        <div class="weui-uploader__file-content"><img src="' + imgLink + '"></div>\n' +
                             '                        </li>';
                         var input_file = ' <input type="hidden" name="images[]" value="' + res.key + '">';
-                        if ($('#uploaderFiles li').length > 5) {
+                        if ($('#uploaderFiles li').length > 3) {
                             $.toast('最多上传4张图片！');
+                            $("#uploader").remove();
                         } else {
                             $('#uploaderFiles').append(html_file);
                             $("#file_form").append(input_file);

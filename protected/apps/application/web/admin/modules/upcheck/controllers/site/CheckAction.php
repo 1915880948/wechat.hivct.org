@@ -19,6 +19,7 @@ class CheckAction extends AdminBaseAction{
             $checkResult->hepatitis_c_result = $postData['hepatitis_c_result'];
             $checkResult->check_doctor = $postData['check_doctor'];
             $checkResult->check_desc = $postData['check_desc'];
+            $checkResult->is_check = 1;
             if( $checkResult->save() ){
                 return ['code'=>200];
             }else{

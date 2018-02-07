@@ -207,11 +207,11 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                         },
                                         'deal' => function ($url, $model) use ($dealArr,$userinfo) {
                                             if (in_array($model->order_status, $dealArr) && $userinfo['is_admin']==1 ) {
-                                                return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'deal']);
+                                                return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'deal','target'=>'_blank']);
                                             }
                                         },
                                         'detail' => function ($url, $model) {
-                                            return Html::a('详情', ['/order/site/detail', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'detail']);
+                                            return Html::a('详情', ['/order/site/detail', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'detail','target'=>'_blank']);
                                         },
                                         'export' => function ($url, $model) {
                                             return Html::a('导出', ['/order/site/export', 'uuid' => $model['uuid']], [

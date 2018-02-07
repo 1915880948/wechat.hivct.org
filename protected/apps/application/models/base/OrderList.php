@@ -159,6 +159,7 @@ class OrderList extends TblOrderList
     public function updatePayStatus($status)
     {
         $this->pay_status = $status;
+        $this->pay_time  = date("Y-m-d H:i:s");
         $this->save();
     }
 

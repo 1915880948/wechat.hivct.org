@@ -21,10 +21,7 @@
       <li class="card-menu__item"><a class="menu3" href="{{yUrl(['/user/order/payback'])}}" >保证金退还</a></li>
       <li class="card-menu__item"><a class="menu4" href="{{yUrl(['/user/order/upresult'])}}">自检结果上传</a></li>
     </ul>
-    {{--<ul class="card-menu_area">--}}
-      {{--<li class="card-menu__item"><a class="menu4" href="{{yUrl(['/user/up-check/index'])}}">其他上传（未申请试剂）</a></li>--}}
-      {{--<li class="card-menu__item"><a  href="javascript:;"></a></li>--}}
-    {{--</ul>--}}
+
   </div>
   {{--<div class="wrapper" id="_form">--}}
   {{--<header><a href="/" class="logo">你好志愿者网（www.hivct.org）</a></header>--}}

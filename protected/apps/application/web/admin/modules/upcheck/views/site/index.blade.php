@@ -91,7 +91,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                     'template' => '{detail} {delete}',
                                     'buttons' => [
                                         'detail' => function ($url, $model) {
-                                            return Html::a('详情', ['/upcheck/site/detail', 'id' => $model['id'], 'uid' => $model['uid']], ['class' => 'detail']);
+                                            return Html::a('详情', ['/upcheck/site/detail', 'id' => $model['id'], 'uid' => $model['uid']], ['class' => 'detail','target'=>'_blank']);
                                         },
                                         'delete' => function ($url, $model) use ($selfurl) {
                                             return Html::a('删除', ['/upcheck/site/delete', 'id' => $model['id']], [

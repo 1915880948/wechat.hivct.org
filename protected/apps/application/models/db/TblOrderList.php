@@ -18,7 +18,7 @@ use Yii;
  * @property string $wx_transaction_id
  * @property integer $pay_status
  * @property integer $order_status
- * @property string $pay_time
+ * @property integer $pay_time
  * @property string $order_updated_at
  * @property string $ship_name
  * @property string $ship_code
@@ -57,9 +57,9 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
     {
         return [
             [['out_trade_no'], 'required'],
-            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result'], 'integer'],
+            [['uid', 'pay_status', 'order_status', 'pay_time', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result'], 'integer'],
             [['total_price'], 'number'],
-            [['pay_time', 'order_updated_at', 'created_at', 'updated_at'], 'safe'],
+            [['order_updated_at', 'created_at', 'updated_at'], 'safe'],
             [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
             [['info', 'address_contact', 'alipay'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 250],
@@ -89,7 +89,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'total_price' => 'Total Price',
             'wx_transaction_id' => '微信订单号',
             'pay_status' => '支付状态，0待支付，1已支付，-1支付失败',
-            'order_status' => '订单状态：0未处理，1处理中，2已支付，21已发货，22已收货，23用户不存在，29发货完成，11申请退款，12退款审核，13退款成功，14退款失败，18退款处理中，19退款完成，99订单完成，100未知状态',
+            'order_status' => '订单状态：0未处理，1处理中，2已支付，3已发货，4已收货，11申请退款，12退款中，13退款完成，99已完成',
             'pay_time' => '支付时间',
             'order_updated_at' => '订单更新时间',
             'ship_name' => '快递名称',

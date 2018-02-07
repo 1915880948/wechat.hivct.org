@@ -106,8 +106,11 @@ use yii\helpers\ArrayHelper;
                                         'headerOptions'  => ['class' => 'center'],
                                         'contentOptions' => ['class' => 'col-sm-1 center'],
                                         'class'          => 'yii\grid\ActionColumn',
-                                        'template'       => '{address} {delete} ',
+                                        'template'       => '{detail} {address} {delete} ',
                                         'buttons'        => [
+                                            'detail'    => function($url,$model){
+                                                return Html::a('详情', ['/user/lists/detail', 'uid' => $model['uid']], ['target'=>'_black']);
+                                            },
                                             'address'   => function($url, $model) use ($selfurl) {
                                                 return Html::a('地址', ['/user/lists/address', 'uid' => $model['uid']], []);
                                             },

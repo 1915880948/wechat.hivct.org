@@ -222,4 +222,21 @@ class OrderList extends TblOrderList
         $this->address_detail = $addressInfo->address;
         $this->save();
     }
+
+    /**
+     * {"appid":"wx6ae2594ba50776b1","bank_type":"CFT","cash_fee":"3000","fee_type":"CNY","is_subscribe":"Y",
+     * "mch_id":"1290330301","nonce_str":"5a792015377d0","openid":"oVP2NjnrQlCDCYEM1uveeFg13kdU",
+     * "out_trade_no":"SUR201802061124540000000087","result_code":"SUCCESS",
+     * "return_code":"SUCCESS","sign":"9899F502AD0EDB940BA06DE52834DDD7",
+     * "time_end":"20180206112521",
+     * "total_fee":"3000","trade_type":"JSAPI","transaction_id":"4200000079201802068015847775"}
+     * @param $payInfo
+     */
+    public function updateOrderInfo($payInfo)
+    {
+        $this->wx_transaction_id = $payInfo['transaction_id'];
+        //支付时间居然是这玩意
+        $this->pay_time = $payInfo['time_end'];
+        $this->save();
+    }
 }

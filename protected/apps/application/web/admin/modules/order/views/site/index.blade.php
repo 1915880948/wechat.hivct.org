@@ -88,6 +88,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             '99' => '订单完成',
             '100' => '未知状态'
         ]));
+        echo "<br />";
         echo $form->label("艾滋病检测结果", Html::dropDownList("adis_result", ArrayHelper::getValue($_GET, 'adis_result', ''), [
             '-99' => '全部',
             '1' => '阴性',
@@ -108,6 +109,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             '1' => '阴性',
             '2' => '阳性'
         ]));
+        echo "<br />";
         echo $form->label("微信订单号", Html::textInput("wx_transaction_id", ArrayHelper::getValue($_GET, 'wx_transaction_id', '')));
         echo $form->label("快递单号", Html::textInput("ship_code", ArrayHelper::getValue($_GET, 'ship_code', '')));
         echo $form->label("收货人", Html::textInput("address_contact", ArrayHelper::getValue($_GET, 'address_contact', '')));

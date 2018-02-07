@@ -18,7 +18,7 @@ use Yii;
  * @property string $wx_transaction_id
  * @property integer $pay_status
  * @property integer $order_status
- * @property integer $pay_time
+ * @property string $pay_time
  * @property string $order_updated_at
  * @property string $ship_name
  * @property string $ship_code
@@ -57,13 +57,14 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
     {
         return [
             [['out_trade_no'], 'required'],
-            [['uid', 'pay_status', 'order_status', 'pay_time', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result'], 'integer'],
+            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result'], 'integer'],
             [['total_price'], 'number'],
             [['order_updated_at', 'created_at', 'updated_at'], 'safe'],
             [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
             [['info', 'address_contact', 'alipay'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 250],
             [['memo'], 'string', 'max' => 100],
+            [['pay_time'], 'string', 'max' => 14],
             [['ship_name', 'address_mobile'], 'string', 'max' => 20],
             [['ship_code'], 'string', 'max' => 30],
             [['source_type'], 'string', 'max' => 10],

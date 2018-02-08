@@ -83,8 +83,24 @@
               @endforeach
           </select>
       </div>
+  </div>
+  <div class="col-xs-12">
+      <label class="col-md-3 control-label">检测医生</label>
+      <div class="col-md-6">
+          <input class="form-control " type="text" name="check_doctor" id="check_doctor"
+                 value="{{$orderData['check_doctor']}}" placeholder="检测医生">
+      </div>
+  </div>
+
+  <div class="col-xs-12">
+      <label class="col-md-3 control-label">检测描述</label>
+      <div class="col-md-6">
+          <textarea class="form-control " cols="9" rel="3" id="check_desc">{{$orderData['check_desc']}}</textarea>
+      </div>
       <label class="col-md-3 control-label">
-          <input type="button" class="input-group-btn btn btn-default btn-sm input-small save" value="保存" style="background: #3fd5c0;color: #ffffff;"> </label>
+          <input type="button" class="input-group-btn btn btn-default btn-sm input-small save" value="保存"
+                 style="background: #3fd5c0;color: #ffffff;">
+      </label>
   </div>
 
 @endsection
@@ -109,7 +125,9 @@
                           'syphilis_result': $(".syphilis_result").val(),
                           'hepatitis_b_result': $(".hepatitis_b_result").val(),
                           'hepatitis_c_result': $(".hepatitis_c_result").val(),
-                          'order_status': $(".deal_name").val()
+                          'order_status': $(".deal_name").val(),
+                          'check_doctor': $("#check_doctor").val(),
+                          'check_desc': $("#check_desc").val()
                       }, function (res) {
                           if (res.code == 200) {
                               layer.msg('操作成功！！', {'icon': 1, time: 1200}, function () {

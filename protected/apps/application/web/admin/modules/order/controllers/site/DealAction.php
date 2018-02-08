@@ -20,6 +20,8 @@ class DealAction extends AdminBaseAction{
             $order->syphilis_result = $postData['syphilis_result'];
             $order->hepatitis_b_result = $postData['hepatitis_b_result'];
             $order->hepatitis_c_result = $postData['hepatitis_c_result'];
+            $order->check_doctor = $postData['check_doctor'];
+            $order->check_desc = $postData['check_desc'];
             if( $order->save() ){
                 return ['code'=>200];
             }else{

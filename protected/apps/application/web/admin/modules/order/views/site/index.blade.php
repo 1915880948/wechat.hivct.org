@@ -200,7 +200,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                     'headerOptions' => ['class' => 'center'],
                                     'contentOptions' => ['class' => 'col-sm-1 center'],
                                     'class' => 'yii\grid\ActionColumn',
-                                    'template' => '{ship} {deal} {detail} {export} {delete}',
+                                    'template' => '{ship} {deal} {memo} {detail} {export} {delete}',
                                     'buttons' => [
                                         'ship' => function ($url, $model) {
                                             if ($model->pay_status == 1 && $model->order_status == 2) {
@@ -211,6 +211,9 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                             if (in_array($model->order_status, $dealArr) && $userinfo['is_admin']==1 ) {
                                                 return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'deal','target'=>'_blank']);
                                             }
+                                        },
+                                        'memo' => function($url,$model){
+                                            return Html::a('备注', 'javascript:;', ['data-id' => $model['uuid'], 'class' => 'memo'], []);
                                         },
                                         'detail' => function ($url, $model) {
                                             return Html::a('详情', ['/order/site/detail', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'detail','target'=>'_blank']);
@@ -274,6 +277,14 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             <label class="col-md-3 control-label">快递单号</label>
             <div class="col-md-9">
                 <input type="text" class="form-control input-inline input-medium ship_code" placeholder="快递单号">
+            </div>
+        </div>
+    </div>
+    <div id="memo-content" style="display:none">
+        <div class="form-group">
+            <label class="col-md-2 control-label">备注</label>
+            <div class="col-md-10">
+                <textarea class="form-control "  id="memo"></textarea>
             </div>
         </div>
     </div>
@@ -343,7 +354,41 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                 } else {
                     location.href = "{{yUrl(['site/export'])}}";
                 }
-            })
+            });
+
+            $(".memo").click(function (i) {
+                _this = $(this);
+                var uuid = _this.data('id');
+                layer.open({
+                    type: 1,
+                    title: '填写备注信息',
+                    shadeClose: true,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['420px', '200px'], //宽高
+                    content: $('#memo-content'),
+                    btn: ['确定', '取消'],
+                    yes: function () {
+                        if ( $("#memo").val()  ) {
+                            $.post("{{yUrl(['site/memo'])}}",
+                                {
+                                    'uuid': uuid,
+                                    'memo': $("#memo").val(),
+                                }, function (res) {
+                                    if (res.code == 200) {
+                                        layer.msg('备注成功！！', {'icon': 1, time: 1200}, function () {
+                                            layer.closeAll();
+                                            location.reload();
+                                        });
+                                    }
+                                }
+                            );
+                        } else {
+                            $("#memo-content .form-group").addClass("has-error");
+                        }
+                    }
+                });
+            });
+
         });
     </script>
 @endpush

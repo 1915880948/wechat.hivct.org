@@ -5,6 +5,7 @@ use application\models\base\Express;
 use application\models\base\Logistics;
 use application\models\base\OrderDetail;
 use application\models\base\OrderList;
+use application\models\base\OrderMemoLog;
 use application\models\base\User;
 use application\models\base\UserAddress;
 use application\web\admin\components\AdminBaseAction;
@@ -16,7 +17,10 @@ class DetailAction extends AdminBaseAction{
         $query = OrderDetail::find()
                     ->andWhere(['order_uuid'=>$uuid]);
         $provider = DataProviderHelper::create( $query );
-
+        $memoQuery = OrderMemoLog::find()
+            ->andWhere(['order_uuid'=>$uuid])
+            ->orderBy(['id'=>SORT_DESC]);
+        $memoProvider = DataProviderHelper::create( $memoQuery );
         $order_data = OrderList::find()
                     ->andWhere(['uuid'=>$uuid])
                     ->one();
@@ -31,6 +35,6 @@ class DetailAction extends AdminBaseAction{
             $address = UserAddress::getAddressInfo($order_data['address_uuid']);
 
         }
-        return $this->render(compact('ship','userdata','provider','order_data','logisticsInfo','address'));
+        return $this->render(compact('ship','userdata','provider','memoProvider','order_data','logisticsInfo','address'));
     }
 }

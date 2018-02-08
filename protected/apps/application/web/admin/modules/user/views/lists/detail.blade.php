@@ -34,7 +34,7 @@ use yii\helpers\ArrayHelper;
         <div class="col-xs-3">QQ：{{ $data['qq'] }}</div>
         <div class="col-xs-3">电话：{{ $data['telephone'] }}</div>
         <div class="col-xs-3">地址：{{ $data['address'] }}</div>
-        <div class="col-xs-3">{{ $data['is_subscribe'] }}</div>
+        <div class="col-xs-3">是否关注：{{ $data['is_subscribe']==1?'是':'否' }}</div>
     </div>
     <h3>收货地址列表</h3>
     <div class="row">
@@ -62,13 +62,11 @@ use yii\helpers\ArrayHelper;
                                         'contentOptions' => ['class' => 'col-sm-1'],
                                         'attribute'      => 'city',
                                         'label'          => '城市',
-
                                     ],
                                     [
-                                        'contentOptions' => ['class' => 'col-sm-1'],
+                                        'contentOptions' => ['class' => 'col-sm-2'],
                                         'attribute'      => 'address',
                                         'label'          => '详细地址',
-
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-1'],
@@ -77,7 +75,6 @@ use yii\helpers\ArrayHelper;
                                         'value'          =>function($model){
                                             return $model->is_default==1?'是':'';
                                         }
-
                                     ],
                                     [
                                         'contentOptions' => ['class' => 'col-sm-2'],

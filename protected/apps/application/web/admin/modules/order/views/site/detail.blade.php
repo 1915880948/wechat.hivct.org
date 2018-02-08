@@ -14,10 +14,12 @@
             'url'   => yRoute($selfurl),
         ]]])
 
-    <div class="row">
+    <div class="row order">
+        <div class="col-xs-6">内部流水号：{{ gPayStatus($order_data['out_trade_no']) }}</div>
+        <div class="col-xs-6">微信订单号：{{ gPayStatus($order_data['wx_transaction_id']) }}</div>
       <div class="col-xs-2">真实姓名：{{ $userdata['realname'] }}</div>
       <div class="col-xs-3">订单标题：{{ $order_data['info'] }}</div>
-      <div class="col-xs-2">内部流水号：{{ gPayStatus($order_data['out_trade_no']) }}</div>
+      <div class="col-xs-2">订单时间：{{ gPayStatus($order_data['created_at']) }}</div>
       <div class="col-xs-2">支付状态：{{ gPayStatus($order_data['pay_status']) }}</div>
       <div class="col-xs-2">支付时间：{{ gPayStatus($order_data['pay_time']) }}</div>
       <div class="col-xs-2">订单状态：{{ gOrderStatus($order_data['order_status']) }}</div>
@@ -31,7 +33,7 @@
         @endif
       </div>
     </div>
-    <div class="row">
+    <div class="row order">
       <div class="col-xs-12">发货地：@if($logisticsInfo!=null) {{$logisticsInfo['title']}} @endif</div>
       <div class="col-xs-12">
         @if($address)
@@ -42,7 +44,8 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-sm-5">
+              <h4>订单清单</h4>
             <div class="portlet light portlet-fit portlet-form bordered">
               <div class="portlet-body">
                   <?php
@@ -59,7 +62,7 @@
                               /** @see yii\grid\ActionColumn */
                               'header'         => '商品名称',
                               'headerOptions'  => ['class' => 'center'],
-                              'contentOptions' => ['class' => 'col-sm-1 center'],
+                              'contentOptions' => ['class' => 'col-sm-8 center'],
                               'class'          => 'yii\grid\ActionColumn',
                               'template'       => '{detail}',
                               'buttons'        => [
@@ -69,21 +72,9 @@
                               ],
                           ],
                           [
-                              'contentOptions' => ['class' => 'col-sm-1'],
+                              'contentOptions' => ['class' => 'col-sm-3'],
                               'attribute'      => 'goods_price',
                               'label'          => '商品价格',
-                          ],
-                          [
-                              'contentOptions' => ['class' => 'col-sm-1'],
-                              'attribute'      => 'order_time',
-                              'label'          => '订单时间',
-
-                          ],
-                          [
-                              'contentOptions' => ['class' => 'col-sm-1'],
-                              'attribute'      => 'created_at',
-                              'label'          => '创建时间',
-
                           ],
                       ],
                       'showHeader'   => true,
@@ -95,9 +86,49 @@
               </div>
             </div>
           </div>
+            <div class="col-sm-7">
+                <h4>备注清单</h4>
+                <div class="portlet light portlet-fit portlet-form bordered">
+                    <div class="portlet-body">
+                        <?php
+                        /**  */
+                        echo GridView::widget([
+                            'dataProvider' => $memoProvider,
+                            'columns'      => [
+                                [
+                                    'contentOptions' => ['class' => 'col-sm-1'],
+                                    'attribute'      => 'id',
+                                    'label'          => 'ID',
+                                ],
+                                [
+                                    'contentOptions' => ['class' => 'col-sm-2'],
+                                    'attribute'      => 'admin_account',
+                                    'label'          => '备注人',
+                                ],
+                                [
+                                    'contentOptions' => ['class' => 'col-sm-6'],
+                                    'attribute'      => 'memo_history',
+                                    'label'          => '备注信息',
+                                ],
+                                [
+                                    'contentOptions' => ['class' => 'col-sm-3'],
+                                    'attribute'      => 'datetime',
+                                    'label'          => '备注时间',
+                                ],
+                            ],
+                            'showHeader'   => true,
+                            'layout'       => '<div class="table-responsive no-padding">{items}</div><div class="box-footer clearfix"><div class=" no-marginpull-right">{pager}</div></div>',
+                            'tableOptions' => ['class' => 'table table-striped table-bordered table-hover no-margin-bottom no-border-top'],
+                            'options'      => ['class' => '']
+                        ]);
+                        ?>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>
+
     <div id="ship-content" style="display:none">
       <div class="form-group">
         <label class="col-md-3 control-label">快递公司</label>
@@ -120,6 +151,9 @@
 @endsection
 @push('head-style')
   <style type="text/css">
+      .order div{
+          margin: 5px 0;
+      }
     #ship-content .form-group{
       text-align:center;
       padding:20px;

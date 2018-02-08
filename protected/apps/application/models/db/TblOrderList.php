@@ -39,6 +39,8 @@ use Yii;
  * @property integer $syphilis_result
  * @property integer $hepatitis_b_result
  * @property integer $hepatitis_c_result
+ * @property string $check_doctor
+ * @property string $check_desc
  */
 class TblOrderList extends \application\common\db\ApplicationActiveRecord
 {
@@ -66,9 +68,10 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             [['memo'], 'string', 'max' => 100],
             [['pay_time'], 'string', 'max' => 14],
             [['ship_name', 'address_mobile'], 'string', 'max' => 20],
-            [['ship_code'], 'string', 'max' => 30],
+            [['ship_code', 'check_doctor'], 'string', 'max' => 30],
             [['source_type'], 'string', 'max' => 10],
             [['address_detail'], 'string', 'max' => 200],
+            [['check_desc'], 'string', 'max' => 255],
             [['out_trade_no'], 'unique'],
             [['uuid'], 'unique']
         ];
@@ -90,7 +93,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'total_price' => 'Total Price',
             'wx_transaction_id' => '微信订单号',
             'pay_status' => '支付状态，0待支付，1已支付，-1支付失败',
-            'order_status' => '订单状态：0未处理，1处理中，2已支付，3已发货，4已收货，11申请退款，12退款中，13退款完成，99已完成',
+            'order_status' => '订单状态：0未处理，1处理中，2已支付，21已发货，22已收货，23用户不存在，29发货完成，11申请退款，12退款审核，13退款成功，14退款失败，18退款处理中，19退款完成，99订单完成，100未知状态',
             'pay_time' => '支付时间',
             'order_updated_at' => '订单更新时间',
             'ship_name' => '快递名称',
@@ -112,6 +115,8 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'syphilis_result' => '梅毒检测结果:1阴性，2：阳性',
             'hepatitis_b_result' => '乙肝检测结果:1阴性，2：阳性',
             'hepatitis_c_result' => '丙肝检测结果:1阴性，2：阳性',
+            'check_doctor' => '检测医师',
+            'check_desc' => '检测描述',
         ];
     }
 }

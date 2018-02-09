@@ -190,16 +190,17 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                 [
                                     'contentOptions' => ['class' => 'col-sm-1'],
                                     'attribute' => 'ship_code',
-                                    'format' =>'raw',
+                                    'format' => 'raw',
                                     'label' => '快递单号',
-                                    'value' =>function($model)use($logistics){
+                                    'value' => function ($model) use ($logistics) {
                                         $logistic_name = '';
-                                        foreach ($logistics as $item ){
-                                            if($item['id'] == $model->logistic_id)  $logistic_name = $item['title'];
+                                        foreach ($logistics as $item) {
+                                            if ($item['id'] == $model->logistic_id) $logistic_name = $item['title'];
                                         }
-                                        return '<button class="btn btn-default popovers" data-container="body" data-trigger="hover" data-placement="top"
-                                                     data-content="发货地：'.$logistic_name.'--快递公司：'.$model->ship_name.'--快递单号：'.$model->ship_code.'--收货地址：'.$model->address_contact.$model->address_detail.'"
-                                                     data-original-title="发货信息">'.$model->ship_code.'</button>';
+
+                                        return "<span class='popovers' data-container='body' data-trigger='hover' data-placement='top'
+                                                     data-content='{$logistic_name} | {$model->address_contact} |  $model->address_detail'
+                                                     data-original-title='{$model->ship_name}($model->ship_code)'>{$model->ship_code}</span>";
                                     }
                                 ],
                                 [
@@ -219,8 +220,8 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                     'template' => '{edit_logistic} {ship} {deal} {memo} {detail} {export} {delete}',
                                     'buttons' => [
                                         'edit_logistic' => function ($url, $model) {
-                                        if($model->ship_status !=1 ){
-                                            return Html::a('修改发货地', 'javascript:;', ['data-id' => $model['uuid'],'logistic_id'=>$model['logistic_id'], 'class' => 'edit_logistic'], []);
+                                            if ($model->ship_status != 1) {
+                                                return Html::a('修改发货地', 'javascript:;', ['data-id' => $model['uuid'], 'logistic_id' => $model['logistic_id'], 'class' => 'edit_logistic'], []);
                                             }
                                         },
                                         'ship' => function ($url, $model) {
@@ -363,7 +364,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                 'logistic_id': $(".logistic_name").val()
                             }, function (res) {
                                 if (res.code == 200) {
-                                    _this.attr('logistic_id',$(".logistic_name").val());
+                                    _this.attr('logistic_id', $(".logistic_name").val());
                                     layer.msg('保存成功！！', {'icon': 1, time: 1200}, function () {
                                         layer.closeAll();
                                     });

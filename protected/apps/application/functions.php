@@ -114,6 +114,9 @@ function jssdk()
 }
 
 function gFormatPayTime($time){
+    if(!$time || strlen($time )!=14){
+        return "";
+    }
     $y = substr($time,0,4);
     $other = str_split(substr($time,4),2);
     $times = ArrayHelper::merge((array)$y,$other);

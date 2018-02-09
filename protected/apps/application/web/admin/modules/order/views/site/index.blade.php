@@ -19,8 +19,14 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
         #export {
             color: #3fd5c0;
         }
+
         .select2-dropdown {
-            z-index: 20000000000; }
+            z-index: 20000000000;
+        }
+
+        .edit_logistic {
+            color: #585814;
+        }
     </style>
 @endpush
 @section('breadcrumb')
@@ -51,18 +57,18 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
         <div class="btn-group">
             {{--<a href="#" class="btn bg-yellow btn-default">全部</a>--}}
             @if( $userinfo['is_admin']== 1)
-            @foreach( $logArr as $k=>$v)
-                <a href="{{yUrl(['',
+                @foreach( $logArr as $k=>$v)
+                    <a href="{{yUrl(['',
                 'logistic_id'      => $k,
                 'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', '-99'),
-                'pay_status'        => \yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', '-99'),
+                'pay_status'        => \yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', $conditions['pay_status']),
                 'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', '-99'),
                 'wx_transaction_id' => \yii\helpers\ArrayHelper::getValue($_GET, 'wx_transaction_id', ''),
                 'ship_code'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_code', '')
                 ])}}" title="{{ $v }}"
-                   class="btn btn-default {{ $k==\yii\helpers\ArrayHelper::getValue($_GET, 'logistic_id', '-99')?'bg-yellow':'' }} ">{{ explode('-',$v)[0] }}</a>
-            @endforeach
-                @endif
+                       class="btn btn-default {{ $k==\yii\helpers\ArrayHelper::getValue($_GET, 'logistic_id', '-99')?'bg-yellow':'' }} ">{{ explode('-',$v)[0] }}</a>
+                @endforeach
+            @endif
         </div>
         <?php
         /** @var InlineForm $form */
@@ -198,25 +204,30 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                     /** @see yii\grid\ActionColumn */
                                     'header' => '功能管理',
                                     'headerOptions' => ['class' => 'center'],
-                                    'contentOptions' => ['class' => 'col-sm-1 center'],
+                                    'contentOptions' => ['class' => 'col-sm-2 center'],
                                     'class' => 'yii\grid\ActionColumn',
-                                    'template' => '{ship} {deal} {memo} {detail} {export} {delete}',
+                                    'template' => '{edit_logistic} {ship} {deal} {memo} {detail} {export} {delete}',
                                     'buttons' => [
+                                        'edit_logistic' => function ($url, $model) {
+                                        if($model->ship_status !=1 ){
+                                            return Html::a('修改发货地', 'javascript:;', ['data-id' => $model['uuid'],'logistic_id'=>$model['logistic_id'], 'class' => 'edit_logistic'], []);
+                                            }
+                                        },
                                         'ship' => function ($url, $model) {
                                             if ($model->pay_status == 1 && $model->order_status == 2) {
                                                 return Html::a('发货', 'javascript:;', ['data-id' => $model['uuid'], 'class' => 'ship'], []);
                                             }
                                         },
-                                        'deal' => function ($url, $model) use ($dealArr,$userinfo) {
-                                            if (in_array($model->order_status, $dealArr) && $userinfo['is_admin']==1 ) {
-                                                return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'deal','target'=>'_blank']);
+                                        'deal' => function ($url, $model) use ($dealArr, $userinfo) {
+                                            if (in_array($model->order_status, $dealArr) && $userinfo['is_admin'] == 1) {
+                                                return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'deal', 'target' => '_blank']);
                                             }
                                         },
-                                        'memo' => function($url,$model){
+                                        'memo' => function ($url, $model) {
                                             return Html::a('备注', 'javascript:;', ['data-id' => $model['uuid'], 'class' => 'memo'], []);
                                         },
                                         'detail' => function ($url, $model) {
-                                            return Html::a('详情', ['/order/site/detail', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'detail','target'=>'_blank']);
+                                            return Html::a('详情', ['/order/site/detail', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'detail', 'target' => '_blank']);
                                         },
                                         'export' => function ($url, $model) {
                                             return Html::a('导出', ['/order/site/export', 'uuid' => $model['uuid']], [
@@ -261,7 +272,18 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             </div>
         </div>
     </div>
-
+    <div id="edit_logistic-content" style="display:none">
+        <div class="form-group">
+            <label class="col-md-3 control-label">修改发货地</label>
+            <div class="col-md-9">
+                <select class="form-control logistic_name" id="logistic_name">
+                    @foreach( $logistics as $item)
+                        <option value="{{ $item['id'] }}">{{$item['title']}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
     <div id="ship-content" style="display:none">
         <div class="form-group">
             <label class="col-md-3 control-label">快递公司</label>
@@ -284,7 +306,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
         <div class="form-group">
             <label class="col-md-2 control-label">备注</label>
             <div class="col-md-10">
-                <textarea class="form-control "  id="memo"></textarea>
+                <textarea class="form-control " id="memo"></textarea>
             </div>
         </div>
     </div>
@@ -310,6 +332,38 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             });
 
             var _this;
+            $(".edit_logistic").click(function (i) {
+                _this = $(this);
+                var uuid = _this.data('id');
+                var logistic_id = _this.attr('logistic_id');
+                $("#logistic_name").val(logistic_id);
+                layer.open({
+                    type: 1,
+                    title: '修改发货地',
+                    shadeClose: true,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['420px', '240px'], //宽高
+                    content: $('#edit_logistic-content'),
+                    btn: ['保存', '取消'],
+                    yes: function () {
+                        $.post("{{yUrl(['site/exitlogistic'])}}",
+                            {
+                                'uuid': uuid,
+                                'back_url': "{{$selfurl}}",
+                                'logistic_id': $(".logistic_name").val()
+                            }, function (res) {
+                                if (res.code == 200) {
+                                    _this.attr('logistic_id',$(".logistic_name").val());
+                                    layer.msg('保存成功！！', {'icon': 1, time: 1200}, function () {
+                                        layer.closeAll();
+                                    });
+                                }
+                            }
+                        );
+                    }
+                });
+            });
+
             $(".ship").click(function (i) {
                 _this = $(this);
                 var uuid = _this.data('id');
@@ -324,7 +378,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                     yes: function () {
                         var select_index = document.getElementById("ship_name").selectedIndex;
                         var object = $(".ship_name option")[select_index];
-                        if ( ($(".ship_name").val() && $(".ship_code").val()) || object.text=='自取'  ) {
+                        if (($(".ship_name").val() && $(".ship_code").val()) || object.text == '自取') {
                             $.post("{{yUrl(['site/ship'])}}",
                                 {
                                     'uuid': uuid,
@@ -368,7 +422,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                     content: $('#memo-content'),
                     btn: ['确定', '取消'],
                     yes: function () {
-                        if ( $("#memo").val()  ) {
+                        if ($("#memo").val()) {
                             $.post("{{yUrl(['site/memo'])}}",
                                 {
                                     'uuid': uuid,

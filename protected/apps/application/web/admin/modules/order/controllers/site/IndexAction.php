@@ -90,6 +90,6 @@ class IndexAction extends AdminBaseAction
             OrderList::ORDER_STATUS_REFUND_FINISHED,
         ];
 
-        return $this->render(compact('dealArr', 'payArr', 'logArr', 'expressArr', 'ship', 'provider', 'conditions'));
+        return $this->render(compact('dealArr', 'payArr', 'logArr', 'expressArr', 'ship', 'provider', 'conditions','logistics'));
     }
 }

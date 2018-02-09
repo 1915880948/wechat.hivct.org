@@ -4,6 +4,7 @@ namespace application\models\base;
 
 use application\models\db\TblOrderPayLog;
 use qiqi\helper\ip\IpHelper;
+use qiqi\helper\log\FileLogHelper;
 
 /**
  * This is the model class for tableClass "TblOrderPayLog".
@@ -51,5 +52,8 @@ class OrderPayLog extends TblOrderPayLog
         $m->client_ip = IpHelper::getRealIP();
         $m->add_time = $_SERVER['REQUEST_TIME'];
         $m->save();
+        if($m->hasErrors()){
+            FileLogHelper::xlog(['error'=>$m->getErrors()],'db/save');
+        }
     }
 }

@@ -26,7 +26,7 @@
       </div>
       {{--<div class="col-xs-3">订单标题：{{ $order_data['info'] }}</div>--}}
       <div class="col-xs-2">订单时间：{{ ($order_data['created_at']) }}</div>
-      <div class="col-xs-2">支付状态：{{ gPayStatus($order_data['pay_status']) }}</div>
+      <div class="col-xs-2">支付状态：<span class="label label-success"> {{ gPayStatus($order_data['pay_status']) }}</span></div>
       <div class="col-xs-2">支付时间：{{ ($order_data['pay_time']) }}</div>
       <div class="col-xs-2">订单状态：<span class="label label-danger"> {{ gOrderStatus($order_data['order_status']) }}</span></div>
       <div class="col-xs-2">发货状态：<span class="label label-warning">{{ ($order_data['ship_status']==1?'已发货':'未发货') }}</span></div>

@@ -15,11 +15,15 @@
         ]]])
 
     <div class="row order">
-        <div class="col-xs-6">内部流水号：{{ ($order_data['out_trade_no']) }}</div>
-        <div class="col-xs-6">微信订单号：{{ ($order_data['wx_transaction_id']) }}</div>
-      <div class="col-xs-6">真实姓名：{{ $survey['name'] or '' }} (微信呢称：<a href="{{yUrl(['/user/lists/detail','uid'=>$userdata['uid']])}}" target="_blank">{{$userdata['realname']}}</a>)</div>
+      <div class="col-xs-6">内部流水号：{{ ($order_data['out_trade_no']) }}</div>
+      <div class="col-xs-6">微信订单号：{{ ($order_data['wx_transaction_id']) }}</div>
+      <div class="col-xs-6">
+        <span>真实姓名：{{ $survey['name'] or '' }}</span>
+        <span>(微信呢称：<a href="{{yUrl(['/user/lists/detail','uid'=>$userdata['uid']])}}" target="_blank">{{$userdata['realname']}}</a>)</span>
+        <span><a class="label label-success" href="{{yUrl(['/survey/site/detail','uuid'=>$order_data['source_uuid']])}}" target="_blank">查看调研</a></span>
+      </div>
       <div class="col-xs-3"></div>
-      <div class="col-xs-3"><a class="label label-success" href="{{yUrl(['/survey/site/detail','uuid'=>$order_data['source_uuid']])}}" target="_blank">查看调研</a></div>
+      <div class="col-xs-3"></div>
       <br/>
       {{--<div class="col-xs-3">订单标题：{{ $order_data['info'] }}</div>--}}
       <div class="col-xs-2">订单时间：{{ ($order_data['created_at']) }}</div>
@@ -40,17 +44,16 @@
       <div class="col-xs-12">发货地：@if($logisticsInfo!=null) {{$logisticsInfo['title']}} @endif</div>
       <div class="col-xs-12">
         @if($address)
-          <strong>地区：</strong>{{$address['city']}} <br />
+          <strong>地区：</strong>{{$address['city']}} <br/>
         @endif
-          <strong>收件人：</strong>{{$order_data['address_contact']}} <br />
-          <strong>手机：</strong>{{$order_data['address_mobile'] or ''}}<br />
-          <strong>地址：</strong>{{$order_data['address_detail']}}</div>
+        <strong>收件人：</strong>{{$order_data['address_contact']}} <br/> <strong>手机：</strong>{{$order_data['address_mobile'] or ''}}<br/>
+        <strong>地址：</strong>{{$order_data['address_detail']}}</div>
     </div>
     <div class="row">
       <div class="col-xs-12">
         <div class="row">
           <div class="col-sm-6">
-              <h4>订单清单</h4>
+            <h4>订单清单</h4>
             <div class="portlet light portlet-fit portlet-form bordered">
               <div class="portlet-body">
                   <?php
@@ -91,45 +94,45 @@
               </div>
             </div>
           </div>
-            <div class="col-sm-6">
-                <h4>备注清单</h4>
-                <div class="portlet light portlet-fit portlet-form bordered">
-                    <div class="portlet-body">
-                        <?php
-                        /**  */
-                        echo GridView::widget([
-                            'dataProvider' => $memoProvider,
-                            'columns'      => [
-                                [
-                                    'contentOptions' => ['class' => 'col-sm-1'],
-                                    'attribute'      => 'id',
-                                    'label'          => 'ID',
-                                ],
-                                [
-                                    'contentOptions' => ['class' => 'col-sm-2'],
-                                    'attribute'      => 'admin_account',
-                                    'label'          => '备注人',
-                                ],
-                                [
-                                    'contentOptions' => ['class' => 'col-sm-6'],
-                                    'attribute'      => 'memo_history',
-                                    'label'          => '备注信息',
-                                ],
-                                [
-                                    'contentOptions' => ['class' => 'col-sm-3'],
-                                    'attribute'      => 'datetime',
-                                    'label'          => '备注时间',
-                                ],
-                            ],
-                            'showHeader'   => true,
-                            'layout'       => '<div class="table-responsive no-padding">{items}</div><div class="box-footer clearfix"><div class=" no-marginpull-right">{pager}</div></div>',
-                            'tableOptions' => ['class' => 'table table-striped table-bordered table-hover no-margin-bottom no-border-top'],
-                            'options'      => ['class' => '']
-                        ]);
-                        ?>
-                    </div>
-                </div>
+          <div class="col-sm-6">
+            <h4>备注清单</h4>
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-body">
+                  <?php
+                  /**  */
+                  echo GridView::widget([
+                      'dataProvider' => $memoProvider,
+                      'columns'      => [
+                          [
+                              'contentOptions' => ['class' => 'col-sm-1'],
+                              'attribute'      => 'id',
+                              'label'          => 'ID',
+                          ],
+                          [
+                              'contentOptions' => ['class' => 'col-sm-2'],
+                              'attribute'      => 'admin_account',
+                              'label'          => '备注人',
+                          ],
+                          [
+                              'contentOptions' => ['class' => 'col-sm-6'],
+                              'attribute'      => 'memo_history',
+                              'label'          => '备注信息',
+                          ],
+                          [
+                              'contentOptions' => ['class' => 'col-sm-3'],
+                              'attribute'      => 'datetime',
+                              'label'          => '备注时间',
+                          ],
+                      ],
+                      'showHeader'   => true,
+                      'layout'       => '<div class="table-responsive no-padding">{items}</div><div class="box-footer clearfix"><div class=" no-marginpull-right">{pager}</div></div>',
+                      'tableOptions' => ['class' => 'table table-striped table-bordered table-hover no-margin-bottom no-border-top'],
+                      'options'      => ['class' => '']
+                  ]);
+                  ?>
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
@@ -138,11 +141,11 @@
       <div class="form-group">
         <label class="col-md-3 control-label">快递公司</label>
         <div class="col-md-9">
-            <select class="form-control js-express-tags input-medium ship_name" id="ship_name">
-                @foreach( $ship as $k=>$v)
-                    <option value="{{ $k }}" {{ $k==$order_data['ship_uuid']?"selected":''}} {{ $v=='自取'?"data-values=".$v:'' }}>{{$v}}</option>
-                @endforeach
-            </select>
+          <select class="form-control js-express-tags input-medium ship_name" id="ship_name">
+            @foreach( $ship as $k=>$v)
+              <option value="{{ $k }}" {{ $k==$order_data['ship_uuid']?"selected":''}} {{ $v=='自取'?"data-values=".$v:'' }}>{{$v}}</option>
+            @endforeach
+          </select>
         </div>
       </div>
       <div class="form-group">
@@ -156,15 +159,15 @@
 @endsection
 @push('head-style')
   <style type="text/css">
-      .order div{
-          margin: 5px 0;
-      }
+    .order div{
+      margin:5px 0;
+    }
     #ship-content .form-group{
       text-align:center;
       padding:20px;
     }
-    .select2-dropdown {
-        z-index: 20000000000; }
+    .select2-dropdown{
+      z-index:20000000000; }
   </style>
 @endpush
 @push('foot-script')
@@ -189,7 +192,7 @@
                   yes: function () {
                       var select_index = document.getElementById("ship_name").selectedIndex;
                       var object = $(".ship_name option")[select_index];
-                      if ( ($(".ship_name").val() && $(".ship_code").val()) || object.text=='自取'  ) {
+                      if (($(".ship_name").val() && $(".ship_code").val()) || object.text == '自取') {
                           $.post("{{yUrl('ship')}}",
                               {
                                   'uuid': uuid,

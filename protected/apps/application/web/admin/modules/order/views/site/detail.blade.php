@@ -23,7 +23,7 @@
       <div class="col-xs-2">支付状态：{{ gPayStatus($order_data['pay_status']) }}</div>
       <div class="col-xs-2">支付时间：{{ gPayStatus($order_data['pay_time']) }}</div>
       <div class="col-xs-2">订单状态：{{ gOrderStatus($order_data['order_status']) }}</div>
-      <div class="col-xs-2">发货状态：{{ ($order_data['ship_status']==1?'已发货':'未发货') }}</div>
+      <div class="col-xs-2">发货状态：<span class="green">{{ ($order_data['ship_status']==1?'已发货':'未发货') }}</span></div>
       <div class="col-xs-1">
         @if( $order_data['pay_status']== 1 && $order_data['order_status'] == 2 && $order_data['ship_status'] != 1 )
           <button type="button" class="btn green ship" data-id="{{$order_data['uuid']}}">发货</button>

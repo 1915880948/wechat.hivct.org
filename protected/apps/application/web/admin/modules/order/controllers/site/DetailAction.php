@@ -6,8 +6,10 @@ use application\models\base\Logistics;
 use application\models\base\OrderDetail;
 use application\models\base\OrderList;
 use application\models\base\OrderMemoLog;
+use application\models\base\SurveyList;
 use application\models\base\User;
 use application\models\base\UserAddress;
+use application\models\base\UserEvent;
 use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\DataProviderHelper;
 
@@ -33,8 +35,13 @@ class DetailAction extends AdminBaseAction{
         }
         if($order_data['address_uuid']){
             $address = UserAddress::getAddressInfo($order_data['address_uuid']);
-
         }
-        return $this->render(compact('ship','userdata','provider','memoProvider','order_data','logisticsInfo','address'));
+        $eventInfo = UserEvent::find()->andWhere(['order_uuid'=>$uuid])->one();
+        $survey = [];
+        if($eventInfo->event_type == 'survey'){
+            $survey = SurveyList::findByUuid($eventInfo->event_type_uuid);
+        }
+
+        return $this->render(compact('ship','userdata','provider','memoProvider','order_data','logisticsInfo','address','survey'));
     }
 }

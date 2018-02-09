@@ -17,7 +17,7 @@
     <div class="row order">
         <div class="col-xs-6">内部流水号：{{ ($order_data['out_trade_no']) }}</div>
         <div class="col-xs-6">微信订单号：{{ ($order_data['wx_transaction_id']) }}</div>
-      <div class="col-xs-2">真实姓名：{{ $userdata['realname'] }}</div>
+      <div class="col-xs-2">真实姓名：{{ $survey['name'] || '' }} (微信呢称：{{$userdata['realname']}})</div>
       <div class="col-xs-3">订单标题：{{ $order_data['info'] }}</div>
       <div class="col-xs-2">订单时间：{{ gPayStatus($order_data['created_at']) }}</div>
       <div class="col-xs-2">支付状态：{{ gPayStatus($order_data['pay_status']) }}</div>
@@ -46,7 +46,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="row">
-          <div class="col-sm-5">
+          <div class="col-sm-6">
               <h4>订单清单</h4>
             <div class="portlet light portlet-fit portlet-form bordered">
               <div class="portlet-body">
@@ -88,7 +88,7 @@
               </div>
             </div>
           </div>
-            <div class="col-sm-7">
+            <div class="col-sm-6">
                 <h4>备注清单</h4>
                 <div class="portlet light portlet-fit portlet-form bordered">
                     <div class="portlet-body">

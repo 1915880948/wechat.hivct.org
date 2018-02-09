@@ -36,14 +36,14 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             {{--<a href="#" class="btn bg-yellow btn-default">全部</a>--}}
             @foreach( $payArr as $k=>$v)
                 <a href="{{yUrl(['',
-                'logistics_id'      => \yii\helpers\ArrayHelper::getValue($_GET, 'logistics_id', '-99'),
-                'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', '-99'),
+                'logistics_id'      => yRequest()->get('logistics_id',-99),
+                'ship_uuid'         => yRequest()->get('ship_uuid',-99),
                 'pay_status'        => $k,
-                'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', '-99'),
-                'wx_transaction_id' => \yii\helpers\ArrayHelper::getValue($_GET, 'wx_transaction_id', ''),
-                'ship_code'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_code', '')
+                'order_status'      => yRequest()->get('order_status',-99),
+                'wx_transaction_id' => yRequest()->get('wx_transaction_id'),
+                'ship_code'         => yRequest()->get('ship_code')
                 ])}}" title="{{ $v }}-{{$k}}"
-                   class="btn btn-default {{ $k==\yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', '-99')?'bg-yellow':'' }} ">{{ $v }}</a>
+                   class="btn btn-default {{ $k==yRequest()->get('pay_status',-99)?'bg-yellow':'' }} ">{{ $v }}</a>
             @endforeach
         </div>
     </div>

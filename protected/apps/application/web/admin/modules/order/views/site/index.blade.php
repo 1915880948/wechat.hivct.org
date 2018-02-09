@@ -142,11 +142,11 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                     'attribute' => 'address_mobile',
                                     'label' => '电话'
                                 ],
-                                [
-                                    'contentOptions' => ['class' => 'col-sm-1'],
-                                    'attribute' => 'address_detail',
-                                    'label' => '详细地址'
-                                ],
+                                // [
+                                //     'contentOptions' => ['class' => 'col-sm-1'],
+                                //     'attribute' => 'address_detail',
+                                //     'label' => '详细地址'
+                                // ],
                                 [
                                     'contentOptions' => ['class' => 'col-sm-1'],
                                     'attribute' => 'total_price',

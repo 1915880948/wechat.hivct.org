@@ -148,7 +148,7 @@ class OrderList extends TblOrderList
      * @param int $isUpResult
      * @return OrderList[]|array|\yii\db\ActiveRecord[]
      */
-    public static function getLastMonthOrder($userId, $payStatus = 1, $orderStatus = OrderList::PAY_STATUS_SUCCESS, $isUpResult = 0)
+    public static function getLastMonthOrder($userId, $payStatus = 1, $orderStatus = [OrderList::ORDER_STATUS_PAID,OrderList::ORDER_STATUS_SHIP], $isUpResult = 0)
     {
         return OrderList::find()
                         ->andWhere(['uid' => $userId, 'pay_status' => $payStatus, 'order_status' => $orderStatus, 'is_up_result' => $isUpResult])

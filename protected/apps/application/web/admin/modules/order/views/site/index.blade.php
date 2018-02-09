@@ -35,7 +35,14 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
         <div class="btn-group">
             {{--<a href="#" class="btn bg-yellow btn-default">全部</a>--}}
             @foreach( $payArr as $k=>$v)
-                <a href="{{yUrl(['','pay_status' => $k,])}}" title="{{ $v }}-{{$k}}"
+                <a href="{{yUrl(['',
+                'logistic_id'      => yRequest()->get('logistic_id',-99),
+                'ship_uuid'         => yRequest()->get('ship_uuid',-99),
+                'pay_status'        => $k,
+                'order_status'      => yRequest()->get('order_status',-99),
+                'wx_transaction_id' => yRequest()->get('wx_transaction_id'),
+                'ship_code'         => yRequest()->get('ship_code')
+                ])}}" title="{{ $v }}-{{$k}}"
                    class="btn btn-default {{ $k==$conditions['pay_status']?'bg-yellow':'' }} ">{{ $v }}</a>
             @endforeach
         </div>

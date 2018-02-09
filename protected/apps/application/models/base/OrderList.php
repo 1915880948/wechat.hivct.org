@@ -144,13 +144,14 @@ class OrderList extends TblOrderList
     /**
      * @param     $userId
      * @param int $payStatus
+     * @param int $orderStatus
      * @param int $isUpResult
      * @return OrderList[]|array|\yii\db\ActiveRecord[]
      */
-    public static function getLastMonthOrder($userId, $payStatus = 1, $isUpResult = 0)
+    public static function getLastMonthOrder($userId, $payStatus = 1, $orderStatus = OrderList::PAY_STATUS_SUCCESS, $isUpResult = 0)
     {
         return OrderList::find()
-                        ->andWhere(['uid' => $userId, 'pay_status' => $payStatus, 'is_up_result' => $isUpResult])
+                        ->andWhere(['uid' => $userId, 'pay_status' => $payStatus, 'order_status' => $orderStatus, 'is_up_result' => $isUpResult])
                         ->andWhere(['>', 'created_at', date("Y-m-d H:i:s", time() - 86400 * 30)])
                         ->asArray()
                         ->all();
@@ -159,7 +160,7 @@ class OrderList extends TblOrderList
     public function updatePayStatus($status)
     {
         $this->pay_status = $status;
-        $this->pay_time  = date("Y-m-d H:i:s");
+        $this->pay_time = date("Y-m-d H:i:s");
         $this->save();
     }
 

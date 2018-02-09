@@ -190,7 +190,17 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                 [
                                     'contentOptions' => ['class' => 'col-sm-1'],
                                     'attribute' => 'ship_code',
+                                    'format' =>'raw',
                                     'label' => '快递单号',
+                                    'value' =>function($model)use($logistics){
+                                        $logistic_name = '';
+                                        foreach ($logistics as $item ){
+                                            if($item['id'] == $model->logistic_id)  $logistic_name = $item['title'];
+                                        }
+                                        return '<button class="btn btn-default popovers" data-container="body" data-trigger="hover" data-placement="top"
+                                                     data-content="发货地：'.$logistic_name.'--快递公司：'.$model->ship_name.'--快递单号：'.$model->ship_code.'--收货地址：'.$model->address_contact.$model->address_detail.'"
+                                                     data-original-title="发货信息">'.$model->ship_code.'</button>';
+                                    }
                                 ],
                                 [
                                     'contentOptions' => ['class' => 'col-sm-1'],

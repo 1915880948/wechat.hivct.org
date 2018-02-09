@@ -43,7 +43,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                 'wx_transaction_id' => yRequest()->get('wx_transaction_id'),
                 'ship_code'         => yRequest()->get('ship_code')
                 ])}}" title="{{ $v }}-{{$k}}"
-                   class="btn btn-default {{ $k==yRequest()->get('pay_status',-99)?'bg-yellow':'' }} ">{{ $v }}</a>
+                   class="btn btn-default {{ $k==$conditions['pay_status']?'bg-yellow':'' }} ">{{ $v }}</a>
             @endforeach
         </div>
     </div>

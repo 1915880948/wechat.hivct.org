@@ -58,7 +58,9 @@ class PayAction extends WwwBaseAction
             $details[] = $product['name'];
         }
 
-        $totalPrice+=30.15;
+        $totalPrice += 30;
+        $totalPrice = round($totalPrice * 1.015,2);
+        // $totalPrice+=30.15;
         /**
          * $payinfo
          */

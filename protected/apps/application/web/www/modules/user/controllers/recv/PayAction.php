@@ -58,8 +58,9 @@ class PayAction extends WwwBaseAction
             $details[] = $product['name'];
         }
 
-        $totalPrice += 30;
-        $totalPrice = round($totalPrice * 1.015,2);
+        $totalPrice += 30; //加30的押金
+        $totalPrice = round($totalPrice * 1.015,2);//总金额*1.015的手续费
+
         // $totalPrice+=30.15;
         /**
          * $payinfo

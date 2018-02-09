@@ -17,14 +17,13 @@
     <div class="row order">
       <div class="col-xs-6">内部流水号：{{ ($order_data['out_trade_no']) }}</div>
       <div class="col-xs-6">微信订单号：{{ ($order_data['wx_transaction_id']) }}</div>
-      <div class="col-xs-6">
-        <span>真实姓名：{{ $survey['name'] or '' }}</span>
-        <span>(微信呢称：<a href="{{yUrl(['/user/lists/detail','uid'=>$userdata['uid']])}}" target="_blank">{{$userdata['realname']}}</a>)</span>
-        <span><a class="label label-success" href="{{yUrl(['/survey/site/detail','uuid'=>$order_data['source_uuid']])}}" target="_blank">查看调研</a></span>
+      <div class="row">
+        <div class="col-xs-12">
+          <span>真实姓名：{{ $survey['name'] or '' }}</span>
+          <span>(微信呢称：<a href="{{yUrl(['/user/lists/detail','uid'=>$userdata['uid']])}}" target="_blank">{{$userdata['realname']}}</a>)</span>
+          <span><a class="label label-success" href="{{yUrl(['/survey/site/detail','uuid'=>$order_data['source_uuid']])}}" target="_blank">查看调研</a></span>
+        </div>
       </div>
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"></div>
-      <br/>
       {{--<div class="col-xs-3">订单标题：{{ $order_data['info'] }}</div>--}}
       <div class="col-xs-2">订单时间：{{ ($order_data['created_at']) }}</div>
       <div class="col-xs-2">支付状态：{{ gPayStatus($order_data['pay_status']) }}</div>

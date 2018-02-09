@@ -41,7 +41,7 @@ class OrderPayLog extends TblOrderPayLog
          */
         $m = new self;
         $m->device_info = $device;
-        $m->trade_type = $payInfo['trade_type'];
+        $m->trade_type = 1;
         $m->bank_type = $payInfo['bank_type'];
         $m->out_trade_no = $payInfo['out_trade_no'];
         $m->transaction_id = $payInfo['transaction_id'];

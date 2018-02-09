@@ -46,14 +46,14 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             @if( $userinfo['is_admin']== 1)
             @foreach( $logArr as $k=>$v)
                 <a href="{{yUrl(['',
-                'logistics_id'      => $k,
+                'logistic_id'      => $k,
                 'ship_uuid'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_uuid', '-99'),
                 'pay_status'        => \yii\helpers\ArrayHelper::getValue($_GET, 'pay_status', '-99'),
                 'order_status'      => \yii\helpers\ArrayHelper::getValue($_GET, 'order_status', '-99'),
                 'wx_transaction_id' => \yii\helpers\ArrayHelper::getValue($_GET, 'wx_transaction_id', ''),
                 'ship_code'         => \yii\helpers\ArrayHelper::getValue($_GET, 'ship_code', '')
                 ])}}" title="{{ $v }}"
-                   class="btn btn-default {{ $k==\yii\helpers\ArrayHelper::getValue($_GET, 'logistics_id', '-99')?'bg-yellow':'' }} ">{{ explode('-',$v)[0] }}</a>
+                   class="btn btn-default {{ $k==\yii\helpers\ArrayHelper::getValue($_GET, 'logistic_id', '-99')?'bg-yellow':'' }} ">{{ explode('-',$v)[0] }}</a>
             @endforeach
                 @endif
         </div>
@@ -61,7 +61,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
         /** @var InlineForm $form */
         $form = InlineForm::begin(['action' => yUrl(['site/index']), 'method' => 'get']);
         echo $form->label("", Html::input('hidden', "pay_status", ArrayHelper::getValue($_GET, 'pay_status', '-99')));
-        echo $form->label("", Html::input('hidden', "logistics_id", ArrayHelper::getValue($_GET, 'logistics_id', '-99')));
+        echo $form->label("", Html::input('hidden', "logistic_id", ArrayHelper::getValue($_GET, 'logistic_id', '-99')));
         echo $form->label("快递公司", Html::dropDownList("ship_uuid", ArrayHelper::getValue($_GET, 'ship_uuid', ''), $expressArr));
         echo $form->label("订单状态", Html::dropDownList("order_status", ArrayHelper::getValue($_GET, 'order_status', ''), [
             '-99' => '全部',

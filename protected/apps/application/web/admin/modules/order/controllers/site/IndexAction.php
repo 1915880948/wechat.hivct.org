@@ -13,11 +13,10 @@ use application\models\base\Logistics;
 use application\models\base\OrderList;
 use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\DataProviderHelper;
-use qiqi\traits\Render;
 
 class IndexAction extends AdminBaseAction
 {
-    public function run($logistics_id = '-99', $ship_uuid = '-99', $pay_status = '1', $order_status = '-99', $adis_result = '-99', $syphilis_result = '-99', $hepatitis_b_result = '-99', $hepatitis_c_result = '-99', $ship_code = '', $wx_transaction_id = '', $address_contact = '', $address_mobile = '')
+    public function run($logistic_id = '-99', $ship_uuid = '-99', $pay_status = '1', $order_status = '-99', $adis_result = '-99', $syphilis_result = '-99', $hepatitis_b_result = '-99', $hepatitis_c_result = '-99', $ship_code = '', $wx_transaction_id = '', $address_contact = '', $address_mobile = '')
     {
         $logistics = Logistics::find()
                               ->andWhere(['status' => 1])
@@ -30,11 +29,11 @@ class IndexAction extends AdminBaseAction
         $query = OrderList::find();
 
         if(!$this->userinfo['is_admin']){
-            $logistics_id = $this->userinfo['logistic_id'];
+            $logistic_id = $this->userinfo['logistic_id'];
         }
 
         $conditions = [
-            'logistics_id'       => $logistics_id,
+            'logistic_id'        => $logistic_id,
             'ship_uuid'          => $ship_uuid,
             'pay_status'         => $pay_status,
             'order_status'       => $order_status,
@@ -91,6 +90,6 @@ class IndexAction extends AdminBaseAction
             OrderList::ORDER_STATUS_REFUND_FINISHED,
         ];
 
-        return $this->render(compact('dealArr', 'payArr', 'logArr', 'expressArr', 'ship', 'provider','conditions'));
+        return $this->render(compact('dealArr', 'payArr', 'logArr', 'expressArr', 'ship', 'provider', 'conditions'));
     }
 }

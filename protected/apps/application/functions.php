@@ -112,3 +112,10 @@ function jssdk()
 {
     return WechatHelper::getApp()->js;
 }
+
+function gFormatPayTime($time){
+    $y = substr($time,0,4);
+    $other = str_split(substr($time,4),2);
+    $times = ArrayHelper::merge((array)$y,$other);
+    return vsprintf("%s-%s-%s %s:%s:%s",$times);
+}

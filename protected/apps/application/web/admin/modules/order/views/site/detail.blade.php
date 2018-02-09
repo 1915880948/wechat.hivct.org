@@ -15,8 +15,8 @@
         ]]])
 
     <div class="row order">
-        <div class="col-xs-6">内部流水号：{{ gPayStatus($order_data['out_trade_no']) }}</div>
-        <div class="col-xs-6">微信订单号：{{ gPayStatus($order_data['wx_transaction_id']) }}</div>
+        <div class="col-xs-6">内部流水号：{{ ($order_data['out_trade_no']) }}</div>
+        <div class="col-xs-6">微信订单号：{{ ($order_data['wx_transaction_id']) }}</div>
       <div class="col-xs-2">真实姓名：{{ $userdata['realname'] }}</div>
       <div class="col-xs-3">订单标题：{{ $order_data['info'] }}</div>
       <div class="col-xs-2">订单时间：{{ gPayStatus($order_data['created_at']) }}</div>

@@ -17,7 +17,7 @@ use qiqi\traits\Render;
 
 class IndexAction extends AdminBaseAction
 {
-    public function run($logistics_id='-99',$ship_uuid='-99',$pay_status='-99',$order_status='-99',$adis_result='-99',$syphilis_result='-99',$hepatitis_b_result='-99',$hepatitis_c_result='-99',$ship_code='',$wx_transaction_id='',$address_contact='',$address_mobile='')
+    public function run($logistics_id='-99',$ship_uuid='-99',$pay_status='1',$order_status='-99',$adis_result='-99',$syphilis_result='-99',$hepatitis_b_result='-99',$hepatitis_c_result='-99',$ship_code='',$wx_transaction_id='',$address_contact='',$address_mobile='')
     {
         $logistics = Logistics::find()->andWhere(['status' => 1])->asArray()->all();
         $express = Express::find()->andWhere(['status' => 1])->asArray()->all();

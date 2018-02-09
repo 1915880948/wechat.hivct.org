@@ -23,7 +23,8 @@ use Yii;
  * @property string $refund_fee
  * @property string $time_end
  * @property string $client_ip
- * @property integer $add_time
+ * @property string $created_at
+ * @property string $updated_at
  */
 class TblOrderPayLog extends \application\common\db\ApplicationActiveRecord
 {
@@ -41,11 +42,14 @@ class TblOrderPayLog extends \application\common\db\ApplicationActiveRecord
     public function rules()
     {
         return [
-            [['trade_type', 'add_time'], 'integer'],
+            [['trade_type'], 'integer'],
             [['out_trade_no', 'transaction_id'], 'required'],
             [['total_fee', 'cash_fee', 'refund_fee'], 'number'],
-            [['device_info', 'bank_type', 'err_code', 'err_code_des'], 'string', 'max' => 255],
+            [['created_at', 'updated_at'], 'safe'],
+            [['device_info'], 'string', 'max' => 255],
+            [['bank_type'], 'string', 'max' => 10],
             [['out_trade_no', 'transaction_id', 'out_refund_no', 'refund_id', 'result_code'], 'string', 'max' => 32],
+            [['err_code', 'err_code_des'], 'string', 'max' => 50],
             [['time_end', 'client_ip'], 'string', 'max' => 20]
         ];
     }
@@ -72,7 +76,8 @@ class TblOrderPayLog extends \application\common\db\ApplicationActiveRecord
             'refund_fee' => '申请退款金额',
             'time_end' => '完成时间',
             'client_ip' => '操作终端IP',
-            'add_time' => '添加时间',
+            'created_at' => '添加时间',
+            'updated_at' => 'Updated At',
         ];
     }
 }

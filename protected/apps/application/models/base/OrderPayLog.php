@@ -24,21 +24,6 @@ class OrderPayLog extends TblOrderPayLog
      */
     public static function log($payInfo, $device = 'wechat')
     {
-        /**
-         * @property string  $out_trade_no
-         * @property string  $transaction_id
-         * @property string  $out_refund_no
-         * @property string  $refund_id
-         * @property string  $result_code
-         * @property string  $err_code
-         * @property string  $err_code_des
-         * @property string  $total_fee
-         * @property string  $cash_fee
-         * @property string  $refund_fee
-         * @property string  $time_end
-         * @property string  $client_ip
-         * @property integer $add_time
-         */
         $m = new self;
         $m->device_info = $device;
         $m->trade_type = 1;
@@ -50,7 +35,6 @@ class OrderPayLog extends TblOrderPayLog
         $m->result_code = $payInfo['result_code'];
         $m->time_end = $payInfo['time_end'];
         $m->client_ip = IpHelper::getRealIP();
-        $m->add_time = $_SERVER['REQUEST_TIME'];
         $m->save();
         if($m->hasErrors()){
             FileLogHelper::xlog(['error'=>$m->getErrors()],'db/save');

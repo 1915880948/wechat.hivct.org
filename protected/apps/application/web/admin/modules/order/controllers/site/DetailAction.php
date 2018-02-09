@@ -38,7 +38,7 @@ class DetailAction extends AdminBaseAction{
         }
         $eventInfo = UserEvent::find()->andWhere(['order_uuid'=>$uuid])->one();
         $survey = [];
-        if($eventInfo->event_type == 'survey'){
+        if($eventInfo && $eventInfo->event_type == 'survey'){
             $survey = SurveyList::findByUuid($eventInfo->event_type_uuid);
         }
 

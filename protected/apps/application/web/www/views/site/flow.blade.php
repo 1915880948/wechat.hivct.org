@@ -47,33 +47,34 @@
         </div>
       </div>
     </div>
-    @include('global.navbar')
-    @stop
+  </div>
+  @include('global.navbar')
+@stop
 
-    @push('foot-script')
-      <script>
-          $(function () {
-              $('.join_in').click(function () {
-                  if ($(this).hasClass('weui_btn_disabled')) {
-                      $.alert("请先阅读知同意书，阅读并同意后方可继续 ！", "提醒！");
-                      return false;
-                  }
-                  var tag = "{{$is_allow}}";
-                  if (tag == "0") {
-                      $.toast('近一个月您有申请记录');
-                  } else {
-                      location.href = "{{yUrl(['/user/recv'])}}";
-                  }
-              });
-
-              $('#weuiAgree').on('change', function () {
-                  if ($(this).is(':checked')) {
-                      $('#join').addClass('weui-btn_warn f-white').removeClass('f-black weui_btn_disabled');
-                  } else {
-                      $('#join').removeClass('weui-btn_warn f-white').addClass('f-black weui_btn_disabled');
-                  }
-
-              })
+@push('foot-script')
+  <script>
+      $(function () {
+          $('.join_in').click(function () {
+              if ($(this).hasClass('weui_btn_disabled')) {
+                  $.alert("请先阅读知同意书，阅读并同意后方可继续 ！", "提醒！");
+                  return false;
+              }
+              var tag = "{{$is_allow}}";
+              if (tag == "0") {
+                  $.toast('近一个月您有申请记录');
+              } else {
+                  location.href = "{{yUrl(['/user/recv'])}}";
+              }
           });
-      </script>
-  @endpush
+
+          $('#weuiAgree').on('change', function () {
+              if ($(this).is(':checked')) {
+                  $('#join').addClass('weui-btn_warn f-white').removeClass('f-black weui_btn_disabled');
+              } else {
+                  $('#join').removeClass('weui-btn_warn f-white').addClass('f-black weui_btn_disabled');
+              }
+
+          })
+      });
+  </script>
+@endpush

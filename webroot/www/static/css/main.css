@@ -136,3 +136,11 @@ i.icon.icon-next, i.icon.icon-prev{width:.5rem;height:.5rem;}
 
 
 .weui-uploader__file-content img{width:80px;height:80px}
+.weui-agree{display:block}
+.weui-agree a{color:#586C94}
+.weui-agree-text{color:#999}
+.weui-agree input:checked{-webkit-appearance:none}
+.weui-agree-checkbox{background-color:#FFF;border:1px solid #D1D1D1;border-radius:3px;font-size:0;height:16px;outline:0 none;position:relative;top:2px;vertical-align:0;width:16px}
+.weui-agree-checkbox:checked::before{color:#09BB07;content:"\EA08";display:inline-block;font-family:weui;font-size:16px;font-style:normal;font-variant:normal;font-weight:400;left:50%;position:absolute;text-align:center;text-decoration:inherit;text-transform:none;top:50%;transform:translate(-50%,-48%) scale(.73);vertical-align:middle}
+.weui-agree-checkbox:disabled{background-color:#E1E1E1}
+.weui-agree-checkbox:disabled::before{color:#ADADAD}

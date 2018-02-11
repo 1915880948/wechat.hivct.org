@@ -83,11 +83,23 @@ class SurveyList extends TblSurveyList
         ];
     }
 
-    public function getSurveyByUserId($userId)
+    public function getSurveyByUserId($userId, $options = [])
     {
         return self::find()
                    ->andWhere(['uid' => $userId])
                    ->asArray()
                    ->one();
+    }
+
+    /**
+     * @param $userId
+     * @return int|string
+     */
+    public function getLastMonthSurvey($userId)
+    {
+        return SurveyList::find()
+                         ->andWhere(['uid' => $userId])
+                         ->andWhere(['>', 'created_at', date('Y-m-d H:i:s', '-1 month')])
+                         ->one();
     }
 }

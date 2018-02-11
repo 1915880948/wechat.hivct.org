@@ -36,4 +36,18 @@ class UserEvent extends TblUserEvent
         ];
         return ArrayHelper::merge(parent::attributeLabels(), []);
     }
+
+    /**
+     * 获取用户是否在一个月内提交过这个问题
+     * @param $userId
+     * @return UserEvent|array|null|\yii\db\ActiveRecord
+     */
+    public function getUserLastMonthSurvey($userId)
+    {
+        return self::find()
+                   ->andWhere(['uid' => $userId])
+                   ->andWhere(['event_type' => 'survey'])
+                   ->andWhere(['>', 'created_at', date('Y-m-d H:i:s', '-1 month')])
+                   ->one();
+    }
 }

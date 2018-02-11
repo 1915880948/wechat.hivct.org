@@ -11,15 +11,32 @@ namespace application\web\www\modules\user\controllers\recv;
 use application\models\base\Logistics;
 use application\models\base\Reagent;
 use application\models\base\RelationReagentLogistics;
+use application\models\base\SurveyList;
 use application\models\base\UserAddress;
+use application\models\base\UserEvent;
 use application\web\www\components\WwwBaseAction;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
 class IndexAction extends WwwBaseAction
 {
+    /**
+     * 每个人一个月只能申请一次，通过微信和手机号判断，只要微信或手机其中一个申请过，就只能一个月后再申请。
+     *
+     * @param int    $use_address
+     * @param string $event_type
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
     public function run($use_address = 0, $event_type = '')
     {
+        $survey = (new UserEvent)->getUserLastMonthSurvey($this->account['id']);
+
+
+        /**
+         * check is applied
+         */
+
         $model = new Reagent();
         $reagents = Reagent::all();
         $products = [];
@@ -49,7 +66,7 @@ class IndexAction extends WwwBaseAction
 
         $targetUrl = $this->getTargetUrl($event_type);
 
-        return $this->render(compact('products', 'model', 'logistics', 'targetUrl', 'use_address', 'hasDefaultAddress', 'address','event_type','rel'));
+        return $this->render(compact('products', 'model', 'logistics', 'targetUrl', 'use_address', 'hasDefaultAddress', 'address','event_type','rel','survey'));
     }
 
     protected function getTargetUrl($type)

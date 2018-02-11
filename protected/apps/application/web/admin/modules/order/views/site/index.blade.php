@@ -219,8 +219,8 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                     'class' => 'yii\grid\ActionColumn',
                                     'template' => '{edit_logistic} {ship} {deal} {memo} {detail} {export} {delete}',
                                     'buttons' => [
-                                        'edit_logistic' => function ($url, $model) {
-                                            if ($model->ship_status != 1) {
+                                        'edit_logistic' => function ($url, $model)use($userinfo) {
+                                            if ($model->ship_status != 1 && $userinfo['is_admin'] == 1) {
                                                 return Html::a('修改发货地', 'javascript:;', ['data-id' => $model['uuid'], 'logistic_id' => $model['logistic_id'], 'class' => 'edit_logistic'], []);
                                             }
                                         },
@@ -230,7 +230,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                             }
                                         },
                                         'deal' => function ($url, $model) use ($dealArr, $userinfo) {
-                                            if (in_array($model->order_status, $dealArr) && $userinfo['is_admin'] == 1) {
+                                            if (in_array($model->order_status, $dealArr) ) {
                                                 return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'deal', 'target' => '_blank']);
                                             }
                                         },

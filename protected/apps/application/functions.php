@@ -12,7 +12,7 @@ use qiqi\helper\WechatHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\helpers\Url;
-
+use wechat\Weixin;
 /**
  * @param $url
  * @return bool|string
@@ -121,4 +121,14 @@ function gFormatPayTime($time){
     $other = str_split(substr($time,4),2);
     $times = ArrayHelper::merge((array)$y,$other);
     return vsprintf("%s-%s-%s %s:%s:%s",$times);
+}
+
+function gSendMessage($to_user,$template_id,$url,$content){
+    $weixin = Weixin::getApp();
+    $weixin->template_message->send([
+        'touser' => $to_user,
+        'template_id' => $template_id,
+        'url' => $url,
+        'data' => $content,
+    ]);
 }

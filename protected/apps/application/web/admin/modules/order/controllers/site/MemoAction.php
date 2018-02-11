@@ -4,6 +4,7 @@ namespace application\web\admin\modules\order\controllers\site;
 
 use application\models\base\OrderList;
 use application\models\base\OrderMemoLog;
+use application\models\base\User;
 use application\web\admin\components\AdminBaseAction;
 
 class MemoAction extends AdminBaseAction

@@ -32,6 +32,15 @@
                         </div>
                     </div>
                     <div class="form-group " >
+                        <label class="control-label" >请输入旧密码:</label>
+                        <div>
+                            <div class="input-group spinner">
+                                <input type="password" class="form-control " name="password_old" value="" >
+                            </div>
+                            <p class="help-block ">不改密码，空白即可</p>
+                        </div>
+                    </div>
+                    <div class="form-group " >
                         <label class="control-label" >请输入新密码:</label>
                         <div>
                             <div class="input-group spinner">

@@ -79,7 +79,7 @@
             <div class="col-xs-12">
                 <label class="col-md-3 control-label">操作状态</label>
                 <div class="col-md-6">
-                    <select class="form-control input-inline input-medium deal_name">
+                    <select class="form-control input-inline input-medium deal_name" {{ $userinfo->is_admin?'':'disabled' }} >
                         @foreach($orderStatus as $k=>$v)
                             <option value="{{$k}}" {{ $orderData['order_status']==$k?'selected':'' }}>{{$v}}</option>
                         @endforeach

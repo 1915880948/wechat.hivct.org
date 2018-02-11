@@ -9,6 +9,7 @@ class PaybackAction extends WwwBaseAction
 {
     public function run()
     {
+        $orderList = OrderList::getLastMonthOrder($this->account['uid']);
         if(\Yii::$app->request->isPost){
             \Yii::$app->response->format = 'json';
             $postData = \Yii::$app->request->post();
@@ -30,6 +31,6 @@ class PaybackAction extends WwwBaseAction
             }
         }
 
-        return $this->render(compact(''));
+        return $this->render(compact('orderList'));
     }
 }

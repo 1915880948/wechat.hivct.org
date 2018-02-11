@@ -25,7 +25,12 @@
                 <label for="name" class="weui-label">选择订单</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" id="order" type="text"  onfocus="this.blur()">
+                {{--<input class="weui-input" id="order" type="text"  onfocus="this.blur()">--}}
+                <select class="weui-select"  name="order" id="order">
+                    @foreach( $orderList as $item )
+                        <option value="{{$item['uuid']}}">{{$item['info'].$item['created_at']}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="weui-cell">
@@ -48,17 +53,17 @@
 @push('foot-script')
     <script>
         $(function () {
-            order_list();
+//            order_list();
 
             $(".apply_back").click(function () {
 
-                if ( !$("#order").attr('data-values') ) {
+                if ( !$("#order").val() ) {
                     $.toast('请完整填写表单！', 'forbidden');
                     return false;
                 }
                 var data = {
                     'method'    : 'payback',
-                    'order_uuid':$("#order").attr('data-values'),
+                    'order_uuid':$("#order").val(),
                     'alipay': $('.alipay').val(),
 
                 };

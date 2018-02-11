@@ -29,9 +29,10 @@ class DealAction extends AdminBaseAction{
             }
         }
 
-        if( !$this->userinfo['is_admin'] ){
-            return MessageHelper::success('对不起，您没有权限！');
-        }
+//        if( !$this->userinfo['is_admin'] ){
+//            return MessageHelper::success('对不起，您没有权限！');
+//        }
+
         $images = PayImage::find()
             ->andWhere(['user_id'=>$uid,'order_uuid'=>$uuid])
             ->asArray()

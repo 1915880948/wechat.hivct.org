@@ -99,7 +99,7 @@ class SurveyList extends TblSurveyList
     {
         return SurveyList::find()
                          ->andWhere(['uid' => $userId])
-                         ->andWhere(['>', 'created_at', date('Y-m-d H:i:s', '-1 month')])
+                         ->andWhere(['>', 'created_at', date('Y-m-d H:i:s', strtotime('-1 month'))])
                          ->one();
     }
 }

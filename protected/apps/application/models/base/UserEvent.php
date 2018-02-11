@@ -47,7 +47,7 @@ class UserEvent extends TblUserEvent
         return self::find()
                    ->andWhere(['uid' => $userId])
                    ->andWhere(['event_type' => 'survey'])
-                   ->andWhere(['>', 'created_at', date('Y-m-d H:i:s', '-1 month')])
+                   ->andWhere(['>', 'created_at', date('Y-m-d H:i:s', strtotime('-1 month'))])
                    ->one();
     }
 }

@@ -11,7 +11,7 @@ namespace application\web\www\modules\user\controllers;
 use application\web\www\modules\user\components\UserBaseController;
 use common\core\base\controller\ActionsTrait;
 
-class UpCheckController extends UserBaseController
+class Upcheck2Controller extends UserBaseController
 {
     use ActionsTrait;
 }

@@ -41,6 +41,8 @@ use Yii;
  * @property integer $hepatitis_c_result
  * @property string $check_doctor
  * @property string $check_desc
+ * @property integer $is_to_examine
+ * @property string $to_examine_admin
  */
 class TblOrderList extends \application\common\db\ApplicationActiveRecord
 {
@@ -59,7 +61,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
     {
         return [
             [['out_trade_no'], 'required'],
-            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result'], 'integer'],
+            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result', 'is_to_examine'], 'integer'],
             [['total_price'], 'number'],
             [['order_updated_at', 'created_at', 'updated_at'], 'safe'],
             [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
@@ -68,7 +70,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             [['memo'], 'string', 'max' => 100],
             [['pay_time'], 'string', 'max' => 14],
             [['ship_name', 'address_mobile'], 'string', 'max' => 20],
-            [['ship_code', 'check_doctor'], 'string', 'max' => 30],
+            [['ship_code', 'check_doctor', 'to_examine_admin'], 'string', 'max' => 30],
             [['source_type'], 'string', 'max' => 10],
             [['address_detail'], 'string', 'max' => 200],
             [['check_desc'], 'string', 'max' => 255],
@@ -117,6 +119,8 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'hepatitis_c_result' => '丙肝检测结果:1阴性，2：阳性',
             'check_doctor' => '检测医师',
             'check_desc' => '检测描述',
+            'is_to_examine' => '审核状态：0：未审核 1：通过，2：未通过',
+            'to_examine_admin' => '审核人',
         ];
     }
 }

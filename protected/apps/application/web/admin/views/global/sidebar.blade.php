@@ -4,14 +4,14 @@
         @foreach(adminMenuData() as $menu)
             @if(isset($menu['sub']) && $menu['sub'] )
                 {{--{{adminMenuActive($menu['sub'])?'active':""}}--}}
-                @if( $userinfo['is_admin'] || $menu['is_power'])
+                @if( $menu['is_power'] || (!$menu['is_power'] && $userinfo['is_admin'] ) )
                     <li class="nav-item  active ">
                         <a href="javascript:;" class="nav-link nav-toggle"> <i class="fa {{$menu['icon']}}"></i> <span
                                     class="title"> {{$menu['name']}}</span>
                             <span class="arrow"></span></a>
                         <ul class="sub-menu">
                             @foreach($menu['sub'] as $item)
-                                @if( $userinfo['is_admin'] || $item['is_power'])
+                                @if( $item['is_power'] || ($userinfo['is_admin'] && !$item['is_power']))
                                 <li class="nav-item @if(ltrim($item['action'],"/" )== yRequest()->getPathInfo()) active @endif">
                                     <a href="{{yUrl([$item['action']])}}"><i class="fa fa-circle-o"></i>
                                         {{$item['name']}}

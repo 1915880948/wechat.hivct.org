@@ -64,6 +64,7 @@ class IndexAction extends AdminBaseAction
             $query = $query->andWhere(['order_stauts' => OrderList::ORDER_STATUS_APPLY_FOR_REFUND])
                            ->andWhere(['is_to_examine' => 1]);
         }
+
         $provider = DataProviderHelper::create($query, 20);
         $provider->setSort(['defaultOrder' => ['id' => SORT_DESC]]);
 

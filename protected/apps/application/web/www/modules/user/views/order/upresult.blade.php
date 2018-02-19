@@ -19,37 +19,29 @@
     </div>
   </div>
   <div class="weui-cells weui-cells_form">
-    <div class="weui-cell">
-      <div class="weui-cell__hd">
-        <label for="name" class="weui-label">选择订单</label>
-      </div>
-      <div class="weui-cell__bd">
-        {{--<input class="weui-input" id="order" type="text" value="" data-values="" onfocus="this.blur()">--}}
-        {{--<input class="weui-input" id="order" type="text" value="" data-values="" onfocus="this.blur()">--}}
-      </div>
-      <div class="weui-cells weui-cells_radio">
-        {{--<label class="weui-cell weui-check__label f-888" for="xx0">--}}
-          {{--<div class="weui-cell__bd">--}}
-            {{--<p>不选择任何试剂</p>--}}
-          {{--</div>--}}
-          {{--<div class="weui-cell__ft">--}}
-            {{--<input type="radio" class="weui-check" name="product[{{$type}}]" value="0" id="xx0"> <span class="weui-icon-checked"></span>--}}
-          {{--</div>--}}
-        {{--</label>--}}
-        {{--@foreach($orderList as $product)--}}
-          {{--<label class="weui-cell weui-check__label f-888" for="xx{{$product['id']}}">--}}
-            {{--<div class="weui-cell__bd">--}}
-              {{--<p>{{$product['name']}}</p>--}}
-            {{--</div>--}}
-            {{--<div class="weui-cell__ft">--}}
-              {{--<input type="radio" class="weui-check" name="product[{{$type}}]" value="{{$product['id']}}" id="xx{{$product['id']}}" @if(isset($rel[$product['id']])) data-rel="{{json_encode($rel[$product['id']])}} @endif">--}}
-              {{--<span class="weui-icon-checked"></span>--}}
-            {{--</div>--}}
-          {{--</label>--}}
-        {{--@endforeach--}}
-      </div>
-    </div>
+    <div class="weui-cells__title f-black ">选择订单</div>
+    <div class="weui-cells weui-cells_radio">
+      {{--<label class="weui-cell weui-check__label f-888" for="xx0">--}}
+      {{--<div class="weui-cell__bd">--}}
+      {{--<p>不选择任何试剂</p>--}}
+      {{--</div>--}}
+      {{--<div class="weui-cell__ft">--}}
+      {{--<input type="radio" class="weui-check" name="product[{{$type}}]" value="0" id="xx0"> <span class="weui-icon-checked"></span>--}}
+      {{--</div>--}}
+      {{--</label>--}}
 
+      @foreach($orderList as $product)
+        <label class="weui-cell weui-check__label f-888" for="xx{{$product['uuid']}}">
+          <div class="weui-cell__bd">
+            <p>{{$product['description']}}</p>
+          </div>
+          <div class="weui-cell__ft">
+            <input type="radio" class="weui-check" name="orderlist" value="{{$product['uuid']}}" id="xx{{$product['uuid']}}" @if($loop->first)checked="checked" @endif>
+            <span class="weui-icon-checked"></span>
+          </div>
+        </label>
+      @endforeach
+    </div>
     <div class="weui-cell">
       <div class="weui-cell__bd">
         <div class="weui-uploader">
@@ -59,7 +51,7 @@
               <form id="file_form" enctype="multipart/form-data">
                 <input type="hidden" name="token">
               </form>
-              <input class="weui-uploader__input uploader" id="uploader" type="file" accept="image/*" />
+              <input class="weui-uploader__input uploader" id="uploader" type="file" accept="image/*"/>
             </div>
           </div>
         </div>
@@ -80,18 +72,19 @@
   <script>
       var uploader;
       $(function () {
-          order_list();
+          // order_list();
           $(".apply_back").click(function () {
               var images = '';
               $('input[name="images[]"]').each(function () {
                   images += $(this).val() + ',';
               });
-              if (!$("#order").attr('data-values') || !images) {
-                  $.toast('请完整填写表单！', 'forbidden');
+              var orderUUID = $("input[name='orderlist']:checked").val()||'';
+              if (orderUUID === '' || !images) {
+                  $.alert('请选择订单且上传上应的图片！','警告');
                   return false;
               }
               var data = {
-                  'order_uuid': $("#order").attr('data-values'),
+                  'order_uuid':orderUUID ,
                   'alipay': $('.alipay').val(),
                   'images': images
               };
@@ -130,8 +123,10 @@
                   preserve_headers: false
               },
               init: {
-                  'FilesAdded': function (up, files) {},
-                  'BeforeUpload': function (up, file) {},
+                  'FilesAdded': function (up, files) {
+                  },
+                  'BeforeUpload': function (up, file) {
+                  },
                   'UploadProgress': function (up, file) {
                       NProgress.start();
                   },

@@ -36,7 +36,7 @@
             <p>{{$product['description']}}</p>
           </div>
           <div class="weui-cell__ft">
-            <input type="radio" class="weui-check" name="orderlist" value="{{$product['uuid']}}" id="xx{{$product['uuid']}}" @if($loop->first)checked="checked" @endif>
+            <input type="radio" class="weui-check" name="order" value="{{$product['uuid']}}" id="xx{{$product['uuid']}}" @if($loop->first)checked="checked" @endif>
             <span class="weui-icon-checked"></span>
           </div>
         </label>
@@ -100,10 +100,12 @@
               }
               var data = {
                   'method': 'payback',
-                  'order_uuid': $("#order").val(),
+                  'order_uuid': $("input[name='order']").val(),
                   'alipay': $('.alipay').val(),
 
               };
+              console.log(data);
+              return ;
               $.post("{{ yUrl(['order/payback']) }}", data, function (res) {
                   if (res.code == '200') {
                       $.toast('操作成功！');

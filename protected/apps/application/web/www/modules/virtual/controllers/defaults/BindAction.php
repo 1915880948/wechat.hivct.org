@@ -8,7 +8,6 @@
 
 namespace application\web\www\modules\virtual\controllers\defaults;
 
-use application\models\base\User;
 use application\web\admin\components\AdminBaseAction;
 use application\web\www\WwwUser;
 
@@ -24,17 +23,14 @@ class BindAction extends AdminBaseAction
             $member = WwwUser::findIdentityByAccessToken($openid);
         }
         if(intval($uid) >= 0){
-            $uinfo = User::find()
-                         ->andWhere(['user_id' => $uid])
-                         ->one();
-            if($uinfo){
-                $member = WwwUser::findIdentityByAccessToken($uinfo['wxid']);
-            }
+            $member = WwwUser::findByPk($uid);
         }
         if($member){
             \Yii::$app->getUser()
                       ->login($member);
             echo "Success", yLink('go', ['/site/index']);
+            exit;
         }
+        echo "Access Denied";
     }
 }

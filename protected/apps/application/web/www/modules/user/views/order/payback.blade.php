@@ -79,7 +79,7 @@
   {{--</div>--}}
   {{--</div>--}}
   {{--    @if( gPayStatus($orderData['pay_status']) == '已支付' && (gOrderStatus($orderData['pay_status'])=='已发货' || gOrderStatus($orderData['pay_status'])=='已收货') )--}}
-  @if(!$orderList)
+  @if($orderList)
     <a href="javascript:;" class="weui-btn weui-btn_primary apply_back" style="margin-top:1rem;">申请退回保证金</a>
   @endif
 

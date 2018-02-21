@@ -6,7 +6,7 @@
  * @since
  */
 
-use application\web\admin\modules\virtual\Module;
+use application\web\www\modules\virtual\Module;
 
 return [
     'id'    => basename(__DIR__),//如果需要和目录同名，就这样写

@@ -6,7 +6,7 @@
  * @since
  */
 
-namespace application\web\admin\modules\virtual;
+namespace application\web\www\modules\virtual;
 
 class Module extends \yii\base\Module
 {

@@ -6,7 +6,7 @@
  * @since
  */
 
-namespace application\web\admin\modules\virtual\controllers\defaults;
+namespace application\web\www\modules\virtual\controllers\defaults;
 
 use application\models\base\User;
 use application\web\admin\components\AdminBaseAction;

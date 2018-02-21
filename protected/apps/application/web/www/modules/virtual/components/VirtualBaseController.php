@@ -6,7 +6,7 @@
  * @since
  */
 
-namespace application\web\admin\modules\virtual\components;
+namespace application\web\www\modules\virtual\components;
 
 use application\models\service\AccountService;
 use application\web\admin\components\AdminBaseController;

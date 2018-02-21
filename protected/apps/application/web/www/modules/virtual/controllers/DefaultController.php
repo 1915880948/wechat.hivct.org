@@ -6,9 +6,9 @@
  * @since
  */
 
-namespace application\web\admin\modules\virtual\controllers;
+namespace application\web\www\modules\virtual\controllers;
 
-use application\web\admin\modules\virtual\components\VirtualBaseController;
+use application\web\www\modules\virtual\components\VirtualBaseController;
 use common\core\base\controller\ActionKeywordsTrait;
 
 class DefaultController extends VirtualBaseController

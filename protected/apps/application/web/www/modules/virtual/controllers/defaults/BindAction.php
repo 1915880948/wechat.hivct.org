@@ -10,11 +10,14 @@ namespace application\web\www\modules\virtual\controllers\defaults;
 
 use application\web\admin\components\AdminBaseAction;
 use application\web\www\WwwUser;
+use common\core\session\GSession;
+use qiqi\helper\ip\IpHelper;
 
 class BindAction extends AdminBaseAction
 {
     public function run($openid = '', $uid = null)
     {
+        echo IpHelper::getRealIP();
         if(!$openid && $uid === null){
             return "Access Denied";
         }
@@ -28,6 +31,7 @@ class BindAction extends AdminBaseAction
         if($member){
             \Yii::$app->getUser()
                       ->login($member);
+            GSession::set('debug', true);
             echo "Success", yLink('go', ['/site/index']);
             exit;
         }

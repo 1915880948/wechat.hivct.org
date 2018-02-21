@@ -93,7 +93,7 @@
 //            order_list();
 
           $(".apply_back").click(function () {
-              var orderUuid = $("input[name='order']").val();
+              var orderUuid = $("input[name='order']:checked").val();
               if (orderUuid === '') {
                   $.toast('请完整填写表单！', 'forbidden');
                   return false;

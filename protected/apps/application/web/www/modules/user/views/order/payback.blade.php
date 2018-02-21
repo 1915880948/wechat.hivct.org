@@ -51,7 +51,7 @@
         <label for="name" class="weui-label">支付宝帐号</label>
       </div>
       <div class="weui-cell__bd">
-        <input class="weui-input alipay" type="text" placeholder="请正确输入支付宝帐号">
+        <input class="weui-input alipay" type="text" placeholder="如需支付宝退还，请输入支付宝账号">
       </div>
     </div>
   </div>

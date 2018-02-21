@@ -93,14 +93,14 @@
 //            order_list();
 
           $(".apply_back").click(function () {
-
-              if (!$("#order").val()) {
+              var orderUuid = $("input[name='order']").val();
+              if (orderUuid === '') {
                   $.toast('请完整填写表单！', 'forbidden');
                   return false;
               }
               var data = {
                   'method': 'payback',
-                  'order_uuid': $("input[name='order']").val(),
+                  'order_uuid': orderUuid,
                   'alipay': $('.alipay').val(),
 
               };

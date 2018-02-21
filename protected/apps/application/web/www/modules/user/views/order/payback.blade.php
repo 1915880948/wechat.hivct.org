@@ -104,8 +104,8 @@
                   'alipay': $('.alipay').val(),
 
               };
-              console.log(data);
-              return ;
+              // console.log(data);
+              // return ;
               $.post("{{ yUrl(['order/payback']) }}", data, function (res) {
                   if (res.code == '200') {
                       $.toast('操作成功！');

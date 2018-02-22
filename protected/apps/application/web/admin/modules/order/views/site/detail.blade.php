@@ -11,7 +11,6 @@
         'url'   => ['/order/site/index'],
     ],[
             'label' => '订单详情 ',
-            'url'   => yRoute($selfurl),
         ]]])
     <div class="row">
       <div class="col-md-6 ">
@@ -79,135 +78,130 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6 col-sm-12">
-        <div class="portlet green-meadow box">
-          <div class="portlet-title">
-            <div class="caption">
-              <i class="fa fa-cogs"></i>订单信息
-            </div>
-            <div class="actions">
-              <a href="{{yUrl(['/survey/site/detail','uuid'=>$order_data['source_uuid']])}}" target="_blank" class="btn btn-success btn-sm">查看调研</a>
-            </div>
-          </div>
-          <div class="portlet-body">
-            <div class="row static-info">
-              <div class="col-md-4 name"> 真实姓名:</div>
-              <div class="col-md-8 value"> {{ $survey['name'] or '' }}
-                <span>(微信呢称：<a href="{{yUrl(['/user/lists/detail','uid'=>$userdata['uid']])}}" target="_blank">{{$userdata['realname']}}</a>，用户ID:{{$userdata['uid']}})</span>
-              </div>
-            </div>
-            <div class="row static-info">
-              <div class="col-md-4 name"> 订单时间:</div>
-              <div class="col-md-8 value"> {{ ($order_data['created_at']) }}</div>
-            </div>
-            <div class="row static-info">
-              <div class="col-md-4 name"> 支付状态:</div>
-              <div class="col-md-8 value">
-                <span class="label label-success">  {{ gPayStatus($order_data['pay_status']) }} </span>
-              </div>
-            </div>
-            <div class="row static-info">
-              <div class="col-md-4 name"> 支付时间:</div>
-              <div class="col-md-8 value"> {{ gFormatPayTime($order_data['pay_time']) }} </div>
-            </div>
-            <div class="row static-info">
-              <div class="col-md-4 name"> 订单状态:</div>
-              <div class="col-md-8 value"><span class="label label-danger"> {{ gOrderStatus($order_data['order_status']) }}</span>
-              </div>
+        <div class="col-sm-12">
+          <h4>备注</h4>
+          <div class="portlet light portlet-fit portlet-form bordered">
+            <div class="portlet-body">
+                <?php
+                /**  */
+                echo GridView::widget([
+                    'dataProvider' => $memoProvider,
+                    'columns'      => [
+                        [
+                            'contentOptions' => ['class' => 'col-sm-1'],
+                            'attribute'      => 'id',
+                            'label'          => 'ID',
+                        ],
+                        [
+                            'contentOptions' => ['class' => 'col-sm-2'],
+                            'attribute'      => 'admin_account',
+                            'label'          => '备注人',
+                        ],
+                        [
+                            'contentOptions' => ['class' => 'col-sm-6'],
+                            'attribute'      => 'memo_history',
+                            'label'          => '备注信息',
+                        ],
+                        [
+                            'contentOptions' => ['class' => 'col-sm-3'],
+                            'attribute'      => 'datetime',
+                            'label'          => '备注时间',
+                        ],
+                    ],
+                    'showHeader'   => true,
+                    'layout'       => '<div class="table-responsive no-padding">{items}</div><div class="box-footer clearfix"><div class=" no-marginpull-right">{pager}</div></div>',
+                    'tableOptions' => ['class' => 'table table-striped table-bordered table-hover no-margin-bottom no-border-top'],
+                    'options'      => ['class' => '']
+                ]);
+                ?>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
+      <div class="col-md-6 ">
         <div class="row">
-          <div class="col-sm-6">
-            <h4>订单清单</h4>
-            <div class="portlet light portlet-fit portlet-form bordered">
-              <div class="portlet-body">
-                  <?php
-                  /**  */
-                  echo GridView::widget([
-                      'dataProvider' => $provider,
-                      'columns'      => [
-                          [
-                              'contentOptions' => ['class' => 'col-sm-1'],
-                              'attribute'      => 'id',
-                              'label'          => 'ID',
-                          ],
-                          [
-                              /** @see yii\grid\ActionColumn */
-                              'header'         => '商品名称',
-                              'headerOptions'  => ['class' => 'center'],
-                              'contentOptions' => ['class' => 'col-sm-8 center'],
-                              'class'          => 'yii\grid\ActionColumn',
-                              'template'       => '{detail}',
-                              'buttons'        => [
-                                  'detail' => function($url, $model) {
-                                      return Html::a($model->goods_title, ['/system/reagent', 'id' => $model['goods_uuid']], []);
-                                  },
-                              ],
-                          ],
-                          [
-                              'contentOptions' => ['class' => 'col-sm-3'],
-                              'attribute'      => 'goods_price',
-                              'label'          => '商品价格',
-                          ],
-                      ],
-                      'showHeader'   => true,
-                      'layout'       => '<div class="table-responsive no-padding">{items}</div><div class="box-footer clearfix"><div class=" no-marginpull-right">{pager}</div></div>',
-                      'tableOptions' => ['class' => 'table table-striped table-bordered table-hover no-margin-bottom no-border-top'],
-                      'options'      => ['class' => '']
-                  ]);
-                  ?>
+          <div class="portlet green-meadow box">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-cogs"></i>订单信息
+              </div>
+              <div class="actions">
+                <a href="{{yUrl(['/survey/site/detail','uuid'=>$order_data['source_uuid']])}}" target="_blank" class="btn btn-success btn-sm">查看调研</a>
+              </div>
+            </div>
+            <div class="portlet-body">
+              <div class="row static-info">
+                <div class="col-md-4 name"> 真实姓名:</div>
+                <div class="col-md-8 value"> {{ $survey['name'] or '' }}
+                  <span>(微信呢称：<a href="{{yUrl(['/user/lists/detail','uid'=>$userdata['uid']])}}" target="_blank">{{$userdata['realname']}}</a>，用户ID:{{$userdata['uid']}})</span>
+                </div>
+              </div>
+              <div class="row static-info">
+                <div class="col-md-4 name"> 订单时间:</div>
+                <div class="col-md-8 value"> {{ ($order_data['created_at']) }}</div>
+              </div>
+              <div class="row static-info">
+                <div class="col-md-4 name"> 支付状态:</div>
+                <div class="col-md-8 value">
+                  <span class="label label-success">  {{ gPayStatus($order_data['pay_status']) }} </span>
+                </div>
+              </div>
+              <div class="row static-info">
+                <div class="col-md-4 name"> 支付时间:</div>
+                <div class="col-md-8 value"> {{ gFormatPayTime($order_data['pay_time']) }} </div>
+              </div>
+              <div class="row static-info">
+                <div class="col-md-4 name"> 订单状态:</div>
+                <div class="col-md-8 value"><span class="label label-danger"> {{ gOrderStatus($order_data['order_status']) }}</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
-            <h4>备注清单</h4>
-            <div class="portlet light portlet-fit portlet-form bordered">
-              <div class="portlet-body">
-                  <?php
-                  /**  */
-                  echo GridView::widget([
-                      'dataProvider' => $memoProvider,
-                      'columns'      => [
-                          [
-                              'contentOptions' => ['class' => 'col-sm-1'],
-                              'attribute'      => 'id',
-                              'label'          => 'ID',
-                          ],
-                          [
-                              'contentOptions' => ['class' => 'col-sm-2'],
-                              'attribute'      => 'admin_account',
-                              'label'          => '备注人',
-                          ],
-                          [
-                              'contentOptions' => ['class' => 'col-sm-6'],
-                              'attribute'      => 'memo_history',
-                              'label'          => '备注信息',
-                          ],
-                          [
-                              'contentOptions' => ['class' => 'col-sm-3'],
-                              'attribute'      => 'datetime',
-                              'label'          => '备注时间',
-                          ],
-                      ],
-                      'showHeader'   => true,
-                      'layout'       => '<div class="table-responsive no-padding">{items}</div><div class="box-footer clearfix"><div class=" no-marginpull-right">{pager}</div></div>',
-                      'tableOptions' => ['class' => 'table table-striped table-bordered table-hover no-margin-bottom no-border-top'],
-                      'options'      => ['class' => '']
-                  ]);
-                  ?>
-              </div>
+        </div>
+        <div class="row">
+          <h4>订单详情</h4>
+          <div class="portlet light portlet-fit portlet-form bordered">
+            <div class="portlet-body">
+                <?php
+                /**  */
+                echo GridView::widget([
+                    'dataProvider' => $provider,
+                    'columns'      => [
+                        [
+                            'contentOptions' => ['class' => 'col-sm-1'],
+                            'attribute'      => 'id',
+                            'label'          => 'ID',
+                        ],
+                        [
+                            /** @see yii\grid\ActionColumn */
+                            'header'         => '商品名称',
+                            'headerOptions'  => ['class' => 'center'],
+                            'contentOptions' => ['class' => 'col-sm-8 center'],
+                            'class'          => 'yii\grid\ActionColumn',
+                            'template'       => '{detail}',
+                            'buttons'        => [
+                                'detail' => function($url, $model) {
+                                    return Html::a($model->goods_title, ['/system/reagent', 'id' => $model['goods_uuid']], []);
+                                },
+                            ],
+                        ],
+                        [
+                            'contentOptions' => ['class' => 'col-sm-3'],
+                            'attribute'      => 'goods_price',
+                            'label'          => '商品价格',
+                        ],
+                    ],
+                    'showHeader'   => true,
+                    'layout'       => '<div class="table-responsive no-padding">{items}</div><div class="box-footer clearfix"><div class=" no-marginpull-right">{pager}</div></div>',
+                    'tableOptions' => ['class' => 'table table-striped table-bordered table-hover no-margin-bottom no-border-top'],
+                    'options'      => ['class' => '']
+                ]);
+                ?>
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <div id="ship-content" style="display:none">
       <div class="form-group">
         <label class="col-md-3 control-label">快递公司</label>

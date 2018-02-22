@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="weui-cells weui-cells_form">
-    <div class="weui-cells__title f-black ">请选择订单</div>
+    <div class="weui-cells__title f-black ">请选择可退保证金的订单（只有上传了检测照片后方可申请）</div>
     <div class="weui-cells weui-cells_radio">
       {{--<label class="weui-cell weui-check__label f-888" for="xx0">--}}
       {{--<div class="weui-cell__bd">--}}

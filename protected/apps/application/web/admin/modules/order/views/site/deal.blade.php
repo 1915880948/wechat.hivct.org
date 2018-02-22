@@ -1,10 +1,5 @@
 @extends('layouts.main')@section('title','订单处理')
 @push('head-style')
-  <style type="text/css">
-    .col-xs-12{
-      margin-bottom:20px;
-    }
-  </style>
 
 @endpush
 

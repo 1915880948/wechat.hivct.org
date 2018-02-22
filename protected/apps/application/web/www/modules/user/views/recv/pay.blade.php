@@ -33,7 +33,7 @@
       <div class="weui-cells">
         <div class="weui-cell ">
           <div class="weui-cell__bd">
-            <p style="margin-left:15px;">保证金<span class="f-red">30</span>元（手续费为总金额的1.5%），等你上传完毕后，我们将会原路返回到您的微信账号里</p>
+            <p style="margin-left:15px;">保证金<span class="f-red">30</span>元（手续费为总金额的1.5%，该手续费由微信收取），等你上传完毕后，我们将会原路返回到您的微信账号里</p>
           </div>
         </div>
       </div>
@@ -41,8 +41,8 @@
   </div>
   <div class="weui-tabbar">
     {{--<form method="post" action="{{yUrl(['/user/recv/submitorder'])}}" id="submit_order" style="width:100%">--}}
-      {{--<input type="text" name="_csrf" value="{{yRequest()->getCsrfToken()}}"/>--}}
-      {{--<input type="text" name="payinfo" value="{{$payinfo}}"/>--}}
+    {{--<input type="text" name="_csrf" value="{{yRequest()->getCsrfToken()}}"/>--}}
+    {{--<input type="text" name="payinfo" value="{{$payinfo}}"/>--}}
     {{--</form>--}}
     <div class="weui-form-preview" style="width:100%">
       <div class="weui-form-preview__ft">
@@ -57,8 +57,9 @@
 @push('foot-script')
   <script>
       $(function () {
-            {{--var payinfo = '{{$payinfo}}';--}}
-          var totalPrice = {{$totalPrice}};
+        {{--var payinfo = '{{$payinfo}}';--}}
+          //取两位小数
+          var totalPrice = parseFloat('{{$totalPrice}}').toFixed(2);
           $('#_dosubmit').on('click', function (e) {
               e.preventDefault();
               $.confirm('您确认要提交订单吗？', '确认', function (e) {

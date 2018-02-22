@@ -46,14 +46,15 @@
         </label>
       @endforelse
     </div>
-    <div class="weui-cell">
-      <div class="weui-cell__hd">
-        <label for="name" class="weui-label">支付宝帐号</label>
-      </div>
-      <div class="weui-cell__bd">
-        <input class="weui-input alipay" type="text" placeholder="如需支付宝退还，请输入支付宝账号">
-      </div>
-    </div>
+    {{----}}
+    {{--<div class="weui-cell">--}}
+    {{--<div class="weui-cell__hd">--}}
+    {{--<label for="name" class="weui-label">支付宝帐号</label>--}}
+    {{--</div>--}}
+    {{--<div class="weui-cell__bd">--}}
+    {{--<input class="weui-input alipay" type="text" placeholder="如需支付宝退还，请输入支付宝账号">--}}
+    {{--</div>--}}
+    {{--</div>--}}
   </div>
   {{--<div class="weui-cells weui-cells_form">--}}
   {{--<div class="weui-cell">--}}
@@ -91,25 +92,25 @@
   <script>
       $(function () {
 //            order_list();
-
           $(".apply_back").click(function () {
               var orderUuid = $("input[name='order']:checked").val();
               if (orderUuid === '') {
                   $.toast('请完整填写表单！', 'forbidden');
                   return false;
               }
+              //$('.alipay').val()
               var data = {
-                  'method': 'payback',
-                  'order_uuid': orderUuid,
-                  'alipay': $('.alipay').val(),
-
+                  method: 'payback',
+                  order_uuid: orderUuid,
+                  alipay: ''
               };
               // console.log(data);
               // return ;
               $.post("{{ yUrl(['order/payback']) }}", data, function (res) {
                   if (res.code == '200') {
-                      $.toast('操作成功！');
-                      location.href = "{{yUrl(['/site/index'])}}";
+                      $.toast('操作成功！', function () {
+                          location.href = "{{yUrl(['/site/index'])}}";
+                      });
                   }
               })
           });

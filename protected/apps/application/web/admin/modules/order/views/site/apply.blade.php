@@ -1,4 +1,4 @@
-@extends('layouts.main')@section('title','订单列表')<?php
+@extends('layouts.main')@section('title','审核列表')<?php
 use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelper;use yii\helpers\Html;use yii\web\View;
 /** @var $view View */
 ?>
@@ -10,16 +10,14 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
     </style>
 @endpush
 @section('breadcrumb')
-    @include('global.breadcrumb',['title'=>'订单列表','subtitle'=>'订单审核','breads'=>[[
+    @include('global.breadcrumb',['title'=>'审核列表','subtitle'=>'订单审核','breads'=>[[
         'label' => '订单审核 ',
         'url'   => $selfurl,
     ]]])
 @stop
 @section('content')
-
     <div style="">
         <div class="btn-group">
-            {{--<a href="#" class="btn bg-yellow btn-default">全部</a>--}}
             @foreach( $applyArr as $k=>$v)
                 <a href="{{yUrl(['','is_to_examine'=> $k])}}" title="{{ $v }}-{{$k}}"
                    class="btn btn-default {{ $k== yRequest()->get('is_to_examine')?'bg-yellow':'' }} ">{{ $v }}</a>
@@ -92,8 +90,8 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                     'label' => '审核状态',
                                     'value' => function ($model) {
                                         if($model->is_to_examine == 0)  return '未审核';
-                                        if($model->is_to_examine) return '通过';
-                                        if($model->is_to_examine) return '未通过';
+                                        if($model->is_to_examine == 1) return '通过';
+                                        if($model->is_to_examine == 2) return '未通过';
                                     }
                                 ],
                                 [
@@ -105,7 +103,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                     'template' => '{apply} {delete}',
                                     'buttons' => [
                                         'apply' => function ($url, $model) {
-                                            return Html::a('审核', ['/order/site/detail', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'detail', 'target' => '_blank']);
+                                            return Html::a('审核', ['site/applydeal','uuid' => $model['uuid'], 'uid' => $model['uid'],'is_to_examine'=>$model['is_to_examine'],'class' => 'apply']);
                                         },
                                         'delete' => function ($url, $model) use ($selfurl) {
                                             return Html::a('删除', ['/order/site/delete', 'id' => $model['id']], [
@@ -139,6 +137,18 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             </div>
         </div>
     </div>
+    <div id="apply-content" style="display:none">
+        <div class="form-group">
+            <label class="col-md-3 control-label">订单审核</label>
+            <div class="col-md-9">
+                <select class="form-control apply_result" id="apply_result">
+                    <option value="0">未审核</option>
+                    <option value="1">通过</option>
+                    <option value="2">未通过</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
 @endsection
 @push('head-style')
@@ -152,6 +162,38 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
 @push('foot-script')
     <script>
         $(function () {
+            var _this;
+            $(".apply").click(function (i) {
+                _this = $(this);
+                var uuid = _this.attr('uuid');
+                var is_to_examine = _this.attr('is_to_examine');
+                $("#apply_result").val(is_to_examine);
+                layer.open({
+                    type: 1,
+                    title: '订单审核',
+                    shadeClose: true,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['420px', '240px'], //宽高
+                    content: $('#apply-content'),
+                    btn: ['保存', '取消'],
+                    yes: function () {
+                        $.post("{{yUrl(['site/apply'])}}",
+                            {
+                                'uuid': uuid,
+                                'is_to_examine': $(".apply_result").val()
+                            }, function (res) {
+                                if (res.code == 200) {
+//                                    _this.attr('logistic_id', $(".logistic_name").val());
+                                    layer.msg('保存成功！！', {'icon': 1, time: 1200}, function () {
+                                        layer.closeAll();
+                                        location.reload();
+                                    });
+                                }
+                            }
+                        );
+                    }
+                });
+            });
 
         });
     </script>

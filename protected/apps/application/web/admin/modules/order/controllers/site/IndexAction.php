@@ -87,6 +87,9 @@ class IndexAction extends AdminBaseAction
         ];
 
         $dealArr = [
+//            OrderList::ORDER_STATUS_PAID                  => '已支付',
+//            OrderList::ORDER_STATUS_SHIP                  => '已发货',
+//            OrderList::ORDER_STATUS_SHIP_USER_RECEIVED    => '已收货',
             OrderList::ORDER_STATUS_APPLY_FOR_REFUND,
             OrderList::ORDER_STATUS_REFUND_REVIEW,
             OrderList::ORDER_STATUS_REFUND_REVIEW_SUCCESS,

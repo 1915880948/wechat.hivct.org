@@ -26,7 +26,8 @@ class ApplyAction extends AdminBaseAction
             ->andWhere(['status' => 1])
             ->asArray()
             ->all();
-        $query = OrderList::find();
+        $query = OrderList::find()
+            ->andWhere(['is_up_result'=>1]);
 
         if(!$this->userinfo['is_admin']){
             $query = $query->andWhere(['logistic_id'=>$this->userinfo['logistic_id']]);

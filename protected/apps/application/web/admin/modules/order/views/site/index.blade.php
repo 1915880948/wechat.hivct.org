@@ -230,9 +230,9 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                             }
                                         },
                                         'deal' => function ($url, $model) use ($dealArr, $userinfo) {
-                                            if (in_array($model->order_status, $dealArr) ) {
+//                                            if (in_array($model->order_status, $dealArr) ) {
                                                 return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class' => 'deal', 'target' => '_blank']);
-                                            }
+//                                            }
                                         },
                                         'memo' => function ($url, $model) {
                                             return Html::a('备注', 'javascript:;', ['data-id' => $model['uuid'], 'class' => 'memo'], []);

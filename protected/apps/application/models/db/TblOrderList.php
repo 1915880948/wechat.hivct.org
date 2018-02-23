@@ -43,6 +43,7 @@ use Yii;
  * @property string $check_desc
  * @property integer $is_to_examine
  * @property string $to_examine_admin
+ * @property string $examine_reason
  */
 class TblOrderList extends \application\common\db\ApplicationActiveRecord
 {
@@ -67,7 +68,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
             [['info', 'address_contact', 'alipay'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 250],
-            [['memo'], 'string', 'max' => 100],
+            [['memo', 'examine_reason'], 'string', 'max' => 100],
             [['pay_time'], 'string', 'max' => 14],
             [['ship_name', 'address_mobile'], 'string', 'max' => 20],
             [['ship_code', 'check_doctor', 'to_examine_admin'], 'string', 'max' => 30],
@@ -121,6 +122,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'check_desc' => '检测描述',
             'is_to_examine' => '审核状态：0：未审核 1：通过，2：未通过',
             'to_examine_admin' => '审核人',
+            'examine_reason' => '审核未通过原因',
         ];
     }
 }

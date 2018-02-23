@@ -161,7 +161,7 @@
 <script src="{{gStatic('vendor/yii/yii.js')}}"></script>
 {{--<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>--}}
 <script type="text/javascript" charset="utf-8">
-    {{--wx.config({!! jssdk()->config(['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','menuItem:profile','menuItem:addContact','menuItem:share:appMessage','menuItem:share:timeline','chooseImage','downloadImage','uploadImage','getLocalImgData'],true) !!});--}}
+{{--    wx.config({!! jssdk()->config(['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','menuItem:profile','menuItem:addContact','menuItem:share:appMessage','menuItem:share:timeline','chooseImage','downloadImage','uploadImage','getLocalImgData'],true) !!});--}}
 </script>@if( !yUser()->getIsGuest() && in_array($account['id'],[1,6,18]) )
   <script src="//res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/3.0.0/vconsole.min.js"></script>
   <script>var vConsole = new VConsole();</script>

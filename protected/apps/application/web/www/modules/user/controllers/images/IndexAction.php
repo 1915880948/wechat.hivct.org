@@ -9,7 +9,8 @@ class IndexAction extends WwwBaseAction{
         if( \Yii::$app->request->isPost ){
             \Yii::$app->response->format = 'json';
             $postData = \Yii::$app->request->post();
-
+            $orderModel = OrderList::find()->andWhere(['uuid'=>$postData['order_uuid']])->one();
+            $orderModel->is_up_result = 1;
             $imageArr  = explode(',',trim($postData['images'],','));
             foreach ( $imageArr as $k=>$v ){
                 $imageModel = new PayImage();
@@ -19,7 +20,10 @@ class IndexAction extends WwwBaseAction{
                 $imageModel->created_at = date('Y-m-d H:i:s');
                 $imageModel->save();
             }
-            return ['code'=>200];
+            if( $orderModel->save()) {
+                return ['code' => 200];
+            }
+            return ['code'=>500,'message'=>$orderModel->getErrors()];
         }
         return $this->render(compact(''));
     }

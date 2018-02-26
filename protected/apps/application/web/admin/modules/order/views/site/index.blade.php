@@ -256,13 +256,13 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                 ]);
                             },
                             'delete'        => function($url, $model) use ($selfurl) {
-                                return Html::a('删除', ['/order/site/delete', 'id' => $model['id']], [
+                                return Html::a('删除', ['/order/site/delete', 'id' => $model['uuid']], [
                                     'class' => 'delete',
                                     'data'  => [
                                         'method'  => 'post',
                                         'confirm' => '您确认要删除吗？',
                                         'params'  => [
-                                            'id' => $model['id']
+                                            'id' => $model['uuid']
                                         ]
                                     ]
                                 ]);

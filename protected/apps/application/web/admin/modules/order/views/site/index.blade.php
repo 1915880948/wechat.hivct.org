@@ -131,7 +131,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                         'attribute'      => 'id',
                         'label'          => '订单ID',
                         'value'          => function($model) {
-                            return $model->id * 999 + strtotime('2018-01-01');
+                            return $model->id * 9 + strtotime('2018-01-01');
                         }
                     ],
                     [

@@ -14,14 +14,17 @@ class DealAction extends AdminBaseAction{
             $order = OrderList::find()
                 ->andWhere(['uuid'=>$postData['uuid']])
                 ->one();
-            $order->order_updated_at = date("Y-m-d H:i:s");
-            $order->order_status = $postData['order_status'];
-            $order->adis_result = $postData['adis_result'];
-            $order->syphilis_result = $postData['syphilis_result'];
-            $order->hepatitis_b_result = $postData['hepatitis_b_result'];
-            $order->hepatitis_c_result = $postData['hepatitis_c_result'];
-            $order->check_doctor = $postData['check_doctor'];
-            $order->check_desc = $postData['check_desc'];
+            if( $postData['method'] == 'deal_check' ){
+                $order->order_updated_at = date("Y-m-d H:i:s");
+                $order->adis_result = $postData['adis_result'];
+                $order->syphilis_result = $postData['syphilis_result'];
+                $order->hepatitis_b_result = $postData['hepatitis_b_result'];
+                $order->hepatitis_c_result = $postData['hepatitis_c_result'];
+                $order->check_doctor = $postData['check_doctor'];
+                $order->check_desc = $postData['check_desc'];
+            }elseif ($postData['method'] == 'deal_status'){
+                $order->order_status = $postData['order_status'];
+            }
             if( $order->save() ){
                 return ['code'=>200];
             }else{

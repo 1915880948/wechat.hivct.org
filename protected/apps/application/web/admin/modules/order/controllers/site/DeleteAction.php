@@ -8,7 +8,7 @@ use qiqi\helper\MessageHelper;
 class DeleteAction extends AdminBaseAction{
     public $method = 'post';
     public function run(){
-        $logi = OrderList::findByPk($this->request->post('id'));
+        $logi = OrderList::findByUuid($this->request->post('id'));
         if($logi){
             $logi->delete();
         }

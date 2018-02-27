@@ -3,7 +3,7 @@
 namespace application\web\admin\modules\order\controllers\site;
 
 
-ini_set('memory_limit',10240000);
+ini_set('memory_limit','512M');
 use application\models\base\OrderList;
 use application\models\base\SurveyList;
 use application\models\base\UserEvent;

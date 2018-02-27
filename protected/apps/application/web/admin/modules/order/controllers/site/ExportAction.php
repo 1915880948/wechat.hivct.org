@@ -431,7 +431,7 @@ class ExportAction extends AdminBaseAction
             header('Content-Disposition:attachment;filename="' . '订单-调研信息' . date("Y年m月d日") . '.xls"');
             $objWriter = PHPExcel_IOFactory::createWriter($objectPHPExcel, 'Excel5');
             $objWriter->save('php://output');
-
+            return;
         }
         $query = OrderList::find()->select("*");
         if ($logistics_id != '-99') {

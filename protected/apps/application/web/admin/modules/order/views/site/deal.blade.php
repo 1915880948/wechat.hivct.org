@@ -157,7 +157,7 @@
           <div class="row static-info">
             <div class="col-xs-4">订单状态</div>
             <div class="col-xs-8">
-              <select class="form-control input-inline input-medium deal_name" {{ $userinfo->is_admin?'':'disabled' }} >
+              <select class="form-control input-inline input-medium order_status" {{ $userinfo->is_admin?'':'disabled' }} >
                 @foreach($orderStatus as $k=>$v)
                   <option value="{{$k}}" {{ $orderData['order_status']==$k?'selected':'' }}>{{$v}}</option>
                 @endforeach
@@ -167,7 +167,7 @@
           <div class="row static-info">
             <div class="col-xs-4"></div>
             <div class="col-xs-8">
-              <input type="button" class="input-group-btn btn btn-default btn-sm input-small update" value="更新订单状态" style="background: #3fd5c0;color: #ffffff;">
+              <input type="button" class="input-group-btn btn btn-default btn-sm input-small update" {{ $userinfo->is_admin?'':'disabled' }} value="更新订单状态" style="background: #3fd5c0;color: #ffffff;">
             </div>
           </div>
         </div>
@@ -230,30 +230,42 @@
               );
           });
 
-          $(".save").click(function (i) {
-              if ($(".deal_name").val()) {
-                  $.post("{{yUrl(['site/deal'])}}",
-                      {
-                          'uuid': "{{ $orderData['uuid'] }}",
-                          'back_url': "{{$selfurl}}",
-                          'adis_result': $(".adis_result").val(),
-                          'syphilis_result': $(".syphilis_result").val(),
-                          'hepatitis_b_result': $(".hepatitis_b_result").val(),
-                          'hepatitis_c_result': $(".hepatitis_c_result").val(),
-                          'order_status': $(".deal_name").val(),
-                          'check_doctor': $("#check_doctor").val(),
-                          'check_desc': $("#check_desc").val()
-                      }, function (res) {
-                          if (res.code == 200) {
-                              layer.msg('操作成功！！', {'icon': 1, time: 1200}, function () {
-                                  location.href = "{{yUrl(['/order/site'])}}";
-                              });
-                          }
+          $(".save").click(function () {
+              $.post("{{yUrl(['site/deal'])}}",
+                  {
+                      'uuid': "{{ $orderData['uuid'] }}",
+                      'method': 'deal_check',
+                      'adis_result': $(".adis_result").val(),
+                      'syphilis_result': $(".syphilis_result").val(),
+                      'hepatitis_b_result': $(".hepatitis_b_result").val(),
+                      'hepatitis_c_result': $(".hepatitis_c_result").val(),
+                      //'order_status': $(".order_status").val(),
+                      'check_doctor': $("#check_doctor").val(),
+                      'check_desc': $("#check_desc").val()
+                  }, function (res) {
+                      if (res.code == 200) {
+                          layer.msg('操作成功！！', {'icon': 1, time: 1200}, function () {
+                              location.reload();
+                          });
                       }
-                  );
-              } else {
-                  $("#deal-content .form-group").addClass("has-error");
-              }
+                  }
+              );
+          });
+
+          $(".update").click(function () {
+              $.post("{{yUrl(['site/deal'])}}",
+                  {
+                      'uuid': "{{ $orderData['uuid'] }}",
+                      'method': 'deal_status',
+                      'order_status': $(".order_status").val()
+                  }, function (res) {
+                      if (res.code == 200) {
+                          layer.msg('操作成功！！', {'icon': 1, time: 1200}, function () {
+                              location.reload();
+                          });
+                      }
+                  }
+              );
           });
       });
       function examine_reason() {

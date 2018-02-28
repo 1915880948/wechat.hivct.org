@@ -274,11 +274,12 @@
       });
 
       function examine_reason() {
-          if ($("#apply_result").val() == 2) {
-              document.getElementById("examine_reason").style.display = "block";
-          } else {
-              document.getElementById("examine_reason").style.display = "none";
-          }
+          $('#examine_reason').css("display",$("#apply_result").val() == 2?"block":"none");
+          // if ($("#apply_result").val() == 2) {
+          //     document.getElementById("examine_reason").style.display = "block";
+          // } else {
+          //     document.getElementById("examine_reason").style.display = "none";
+          // }
       }
 
       function uploader(id) {

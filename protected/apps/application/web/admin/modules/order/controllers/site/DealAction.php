@@ -4,7 +4,6 @@ namespace application\web\admin\modules\order\controllers\site;
 use application\models\base\OrderList;
 use application\models\base\PayImage;
 use application\web\admin\components\AdminBaseAction;
-use qiqi\helper\MessageHelper;
 
 class DealAction extends AdminBaseAction{
     public function run($uuid='',$uid=''){
@@ -22,6 +21,7 @@ class DealAction extends AdminBaseAction{
                 $order->hepatitis_c_result = $postData['hepatitis_c_result'];
                 $order->check_doctor = $postData['check_doctor'];
                 $order->check_desc = $postData['check_desc'];
+                $order->check_time = date('Y-m-d H:i:s',time());
             }elseif ($postData['method'] == 'deal_status'){
                 $order->order_status = $postData['order_status'];
             }

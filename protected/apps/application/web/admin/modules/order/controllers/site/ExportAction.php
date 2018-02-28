@@ -32,7 +32,7 @@ class ExportAction extends AdminBaseAction
             $n = 0;
             //报表头的输出
             $objectPHPExcel->getActiveSheet()->mergeCells('A1:J1');
-            $objectPHPExcel->getActiveSheet()->setCellValue('A1', '订单信息');
+            $objectPHPExcel->getActiveSheet()->setCellValue('A1', '订单信息'.$orderData['created_at']);
 
             $objectPHPExcel->setActiveSheetIndex(0)->setCellValue('B2', '订单信息'.$orderData['created_at']);
             $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A1')->getFont()->setSize(24);

@@ -31,9 +31,20 @@ class TplMessage
         ]);
     }
 
-    public function refund()
+    public function refund($to, $title, $orderNo, $price, $desc)
     {
-
+        $app = Weixin::getApp();
+        $app->notice->send([
+            'touser'      => $to,
+            'template_id' => 'UYM3134ZtGhMyjKAK8zSVm78hL3Fp-eFYMhPDF6yL4Y',
+            'url'         => '',
+            'data'        => [
+                'first'    => $title,
+                'keyword1' => $orderNo,
+                'keyword2' => $price,
+                'remark'   => $desc
+            ]
+        ]);
     }
 
     public function refundOver()

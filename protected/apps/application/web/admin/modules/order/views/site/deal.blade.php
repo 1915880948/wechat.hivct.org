@@ -149,6 +149,24 @@
       <div class="portlet blue-hoki box">
         <div class="portlet-title">
           <div class="caption">
+            <i class="fa fa-cogs"></i>订单号
+          </div>
+          <div class="actions"></div>
+        </div>
+        <div class="portlet-body">
+          <div class="row static-info">
+            <div class="col-md-4 name"> 内部流水号:</div>
+            <div class="col-md-8 value"> {{ ($order_data['out_trade_no']) }} </div>
+          </div>
+          <div class="row static-info">
+            <div class="col-md-4 name"> 微信订单号:</div>
+            <div class="col-md-8 value"> {{ ($order_data['wx_transaction_id']) }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="portlet blue-hoki box">
+        <div class="portlet-title">
+          <div class="caption">
             <i class="fa fa-cogs"></i>订单状态处理
           </div>
           <div class="actions"></div>

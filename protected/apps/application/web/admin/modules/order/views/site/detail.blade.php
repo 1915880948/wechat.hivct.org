@@ -181,7 +181,7 @@
                             'template'       => '{detail}',
                             'buttons'        => [
                                 'detail' => function($url, $model) {
-                                    return Html::a($model->goods_title, ['/system/reagent', 'id' => $model['goods_uuid']], []);
+                                    return Html::a($model->goods_title, ['/system/reagent', 'id' => $model['goods_uuid']], ['target' => '_blank']);
                                 },
                             ],
                         ],
@@ -197,6 +197,42 @@
                     'options'      => ['class' => '']
                 ]);
                 ?>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+              <div class="caption">
+                <i class="icon-share font-blue"></i> <span class="caption-subject font-blue bold uppercase">订单操作历史</span>
+              </div>
+            </div>
+            <div class="portlet-body">
+              <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                <ul class="feeds">
+                  @foreach($oplogs as $oplog)
+                    <li>
+                      <div class="col1">
+                        <div class="cont">
+                          <div class="cont-col1">
+                            <div class="label label-sm label-info">
+                              <i class="fa fa-bell-o"></i>
+                            </div>
+                          </div>
+                          <div class="cont-col2">
+                            <div class="desc">
+                              {{$managers[$oplog['user_id']]}} 将订单从 <span class="label label-default">{{gOrderStatus($oplog['status_origin'])}}</span> 修改为 <span class="label label-success">{{gOrderStatus($oplog['status_new'])}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col2" style="width:150px;margin-left:-150px;">
+                        <div class="date"> {{$oplog['created_at']}}</div>
+                      </div>
+                    </li>
+                  @endforeach
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -220,7 +256,6 @@
         </div>
       </div>
     </div>
-
 @endsection
 @push('head-style')
   <style type="text/css">

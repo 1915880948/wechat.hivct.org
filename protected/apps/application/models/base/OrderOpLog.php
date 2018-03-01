@@ -3,6 +3,7 @@
 namespace application\models\base;
 
 use application\models\db\TblOrderOpLog;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for tableClass "TblOrderOpLog".
@@ -25,5 +26,19 @@ class OrderOpLog extends TblOrderOpLog
         $m->status_origin = $statusOrigin;
         $m->status_new = $statusNew;
         $m->save();
+    }
+
+    /**
+     * @param $uuid
+     * @param $field
+     * @return array|ActiveRecord[]
+     */
+    public static function findAllByUUID($uuid, $field)
+    {
+        return static::find()
+                     ->orderBy(['created_at' => SORT_DESC])
+                     ->andWhere([$field => $uuid])
+                     ->asArray()
+                     ->all();
     }
 }

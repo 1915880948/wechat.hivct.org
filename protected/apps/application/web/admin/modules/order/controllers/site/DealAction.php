@@ -18,6 +18,7 @@ class DealAction extends AdminBaseAction
             $order = OrderList::find()
                               ->andWhere(['uuid' => $postData['uuid']])
                               ->one();
+            $orderStatusOrigin = $order->order_status;
             if($postData['method'] == 'deal_check'){
                 $order->order_updated_at = date("Y-m-d H:i:s");
                 $order->adis_result = $postData['adis_result'];
@@ -32,8 +33,8 @@ class DealAction extends AdminBaseAction
                 $order->order_status = $postData['order_status'];
             }
             if($order->save()){
-                if($addToLog === true && $order->getOldAttribute('order_status') != $order->order_status){
-                    OrderOpLog::addLog($this->userinfo['id'], $uuid, $order->getOldAttribute('order_status'), $order->order_status);
+                if($addToLog === true && $orderStatusOrigin != $order->order_status){
+                    OrderOpLog::addLog($this->userinfo['id'], $postData['uuid'], $orderStatusOrigin, $order->order_status);
                 }
                 return ['code' => 200];
             } else{

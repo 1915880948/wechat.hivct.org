@@ -39,6 +39,19 @@ class QActiveRecord extends ActiveRecord
     }
 
     /**
+     * @param $uuid
+     * @param $field
+     * @return array|ActiveRecord[]
+     */
+    public static function findAllByUUID($uuid, $field)
+    {
+        return static::find()
+                     ->andWhere([$field => $uuid])
+                     ->asArray()
+                     ->all();
+    }
+
+    /**
      * 这里,如果需要记录更新时间和更新人,应该加上
      * @return array
      */

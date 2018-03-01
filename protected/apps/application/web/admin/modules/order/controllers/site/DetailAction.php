@@ -2,16 +2,19 @@
 
 namespace application\web\admin\modules\order\controllers\site;
 
+use application\models\base\Admins;
 use application\models\base\Express;
 use application\models\base\Logistics;
 use application\models\base\OrderDetail;
 use application\models\base\OrderList;
 use application\models\base\OrderMemoLog;
+use application\models\base\OrderOpLog;
 use application\models\base\SurveyList;
 use application\models\base\User;
 use application\models\base\UserAddress;
 use application\web\admin\components\AdminBaseAction;
 use qiqi\helper\DataProviderHelper;
+use yii\helpers\ArrayHelper;
 
 class DetailAction extends AdminBaseAction
 {
@@ -50,6 +53,12 @@ class DetailAction extends AdminBaseAction
             $survey = SurveyList::findByUuid($order_data->source_uuid);
         }
 
-        return $this->render(compact('ship', 'userdata', 'provider', 'memoProvider', 'order_data', 'logisticsInfo', 'address', 'survey'));
+        /**
+         * managers
+         */
+        $managers = ArrayHelper::map(Admins::getAll(),'aid','nickname');
+        $oplogs = OrderOpLog::findAllByUUID($uuid,'order_uuid');
+
+        return $this->render(compact('ship', 'userdata', 'provider', 'memoProvider', 'order_data', 'logisticsInfo', 'address', 'survey','managers','oplogs'));
     }
 }

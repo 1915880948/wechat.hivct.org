@@ -157,11 +157,11 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                             return $model->total_price / 100;
                         }
                     ],
-                    [
-                        'contentOptions' => ['class' => 'col-sm-1'],
-                        'attribute'      => 'wx_transaction_id',
-                        'label'          => '微信订单号',
-                    ],
+                    // [
+                    //     'contentOptions' => ['class' => 'col-sm-1'],
+                    //     'attribute'      => 'wx_transaction_id',
+                    //     'label'          => '微信订单号',
+                    // ],
                     [
                         'contentOptions' => ['class' => 'col-sm-1'],
                         'attribute'      => 'pay_status',

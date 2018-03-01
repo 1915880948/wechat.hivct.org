@@ -156,11 +156,11 @@
         <div class="portlet-body">
           <div class="row static-info">
             <div class="col-md-4 name"> 内部流水号:</div>
-            <div class="col-md-8 value"> {{ ($order_data['out_trade_no']) }} </div>
+            <div class="col-md-8 value"> {{ ($orderData['out_trade_no']) }} </div>
           </div>
           <div class="row static-info">
             <div class="col-md-4 name"> 微信订单号:</div>
-            <div class="col-md-8 value"> {{ ($order_data['wx_transaction_id']) }}</div>
+            <div class="col-md-8 value"> {{ ($orderData['wx_transaction_id']) }}</div>
           </div>
         </div>
       </div>

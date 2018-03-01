@@ -158,7 +158,8 @@
             <div class="col-xs-4">订单状态</div>
             <div class="col-xs-8">
               @if($userinfo->is_admin)
-                <select class="form-control input-inline input-medium order_status" {{ $userinfo->is_admin?'':'disabled' }} >
+                <select class="form-control input-inline input-medium order_status">
+                  <option value="-1">请选择操作状态</option>
                   @foreach($orderStatus as $k=>$v)
                     <option value="{{$k}}" {{ $orderData['order_status']==$k?'selected':'' }}>{{$v}}</option>
                   @endforeach
@@ -257,6 +258,13 @@
           });
 
           $(".update").click(function () {
+
+              var orderStatus = $(".order_status").val();
+              if (orderStatus === '-1') {
+                  layer.msg('未选择订单状态');
+                  return;
+              }
+
               $.post("{{yUrl(['site/deal'])}}",
                   {
                       'uuid': "{{ $orderData['uuid'] }}",
@@ -274,7 +282,7 @@
       });
 
       function examine_reason() {
-          $('#examine_reason').css("display",$("#apply_result").val() == 2?"block":"none");
+          $('#examine_reason').css("display", $("#apply_result").val() == 2 ? "block" : "none");
           // if ($("#apply_result").val() == 2) {
           //     document.getElementById("examine_reason").style.display = "block";
           // } else {

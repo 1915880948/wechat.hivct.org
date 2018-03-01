@@ -41,6 +41,7 @@ use Yii;
  * @property integer $hepatitis_c_result
  * @property string $check_doctor
  * @property string $check_desc
+ * @property string $check_time
  * @property integer $is_to_examine
  * @property string $to_examine_admin
  * @property string $examine_reason
@@ -64,7 +65,7 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             [['out_trade_no'], 'required'],
             [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result', 'is_to_examine'], 'integer'],
             [['total_price'], 'number'],
-            [['order_updated_at', 'created_at', 'updated_at'], 'safe'],
+            [['order_updated_at', 'created_at', 'updated_at', 'check_time'], 'safe'],
             [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
             [['info', 'address_contact', 'alipay'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 250],
@@ -120,9 +121,10 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'hepatitis_c_result' => '丙肝检测结果:1阴性，2：阳性',
             'check_doctor' => '检测医师',
             'check_desc' => '检测描述',
+            'check_time' => '检测时间',
             'is_to_examine' => '审核状态：0：未审核 1：通过，2：未通过',
             'to_examine_admin' => '审核人',
-            'examine_reason' => '审核未通过原因',
+            'examine_reason' => 'Examine Reason',
         ];
     }
 }

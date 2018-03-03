@@ -9,14 +9,19 @@ class PaybackAction extends WwwBaseAction
 {
     public function run()
     {
-        $orderList = OrderList::getLastMonthOrder($this->account['uid']);
+        $orderStatus = [
+            OrderList::ORDER_STATUS_PAID,
+            OrderList::ORDER_STATUS_SHIP
+        ];
+        //取已上传的图片
+        $orderList = OrderList::getLastMonthOrder($this->account['uid'], $payStatus = 1, $orderStatus, $isUpResult = 1);
         if(\Yii::$app->request->isPost){
             \Yii::$app->response->format = 'json';
             $postData = \Yii::$app->request->post();
-            if($postData['method'] == 'list'){
-                $orderList = OrderList::getLastMonthOrder($this->account['uid']);
-                return $orderList;
-            }
+            // if($postData['method'] == 'list'){
+            //     $orderList = OrderList::getLastMonthOrder($this->account['uid']);
+            //     return $orderList;
+            // }
             if($postData['method'] == 'payback'){
                 $orderModel = OrderList::find()
                                        ->andWhere(['uuid' => $postData['order_uuid']])

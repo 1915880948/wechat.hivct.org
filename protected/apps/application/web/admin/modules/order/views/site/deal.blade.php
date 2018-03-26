@@ -80,50 +80,181 @@
           <div class="portlet-body">
             <div class="row static-info">
               <div class="col-xs-12">
-                <label class="col-md-3 control-label">支付宝账号</label>
-                <div class="col-md-6">
+                <label class="col-md-8 control-label">支付宝账号</label>
+                <div class="col-md-4">
                   {{ $orderData['alipay'] }}
                 </div>
               </div>
               <div class="col-xs-12">
-                <label class="col-md-3 control-label">艾滋病检测结果</label>
-                <div class="col-md-6">
-                  <select class="form-control input-inline input-medium adis_result">
-                    <option value="0">未检测</option>
-                    <option value="1" {{$orderData['adis_result']==1?'selected':''}}>阴性</option>
-                    <option value="2" {{$orderData['adis_result']==2?'selected':''}}>阳性</option>
-                  </select>
-                </div>
+                  <label class="col-md-3 control-label">艾滋病检测结果</label>
+                  <div class="col-md-6">
+                      <select class="form-control input-inline input-medium adis_result">
+                          @foreach($checkArr as $k=>$v)
+                              <option value="{{$k}}" {{$orderData['adis_result']==$k?'selected':''}}>{{$v}}</option>
+                          @endforeach
+                      </select>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-6 control-label">是否确证</label>
+                      <div class="col-md-6">
+                          <select class="form-control input-inline adis_is_confirm">
+                              @foreach($isNotArr as $k=>$v)
+                                  <option value="{{$k}}" {{$orderData['adis_is_confirm']==$k?'selected':''}}>{{$v}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-4 control-label">确证时间</label>
+                      <div class="col-md-8">
+                          <input class="form-control adis_confirm_time" value="{{$orderData['adis_confirm_time']}}" >
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-6 control-label">是否治疗</label>
+                      <div class="col-md-6">
+                          <select class="form-control input-inline  adis_is_cure">
+                              @foreach($isNotArr as $k=>$v)
+                                  <option value="{{$k}}" {{$orderData['adis_is_cure']==$k?'selected':''}}>{{$v}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-4 control-label">治疗时间</label>
+                      <div class="col-md-8">
+                          <input class="form-control adis_cure_time" value="{{$orderData['adis_cure_time']}}">
+                      </div>
+                  </div>
               </div>
               <div class="col-xs-12">
                 <label class="col-md-3 control-label">梅毒检测结果</label>
                 <div class="col-md-6">
                   <select class="form-control input-inline input-medium syphilis_result">
-                    <option value="0">未检测</option>
-                    <option value="1" {{$orderData['syphilis_result']==1?'selected':''}}>阴性</option>
-                    <option value="2" {{$orderData['syphilis_result']==2?'selected':''}}>阳性</option>
+                      @foreach($checkArr as $k=>$v)
+                          <option value="{{$k}}" {{$orderData['syphilis_result']==$k?'selected':''}}>{{$v}}</option>
+                      @endforeach
                   </select>
                 </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-6 control-label">是否确证</label>
+                      <div class="col-md-6">
+                          <select class="form-control input-inline syphilis_is_confirm">
+                              @foreach($isNotArr as $k=>$v)
+                                  <option value="{{$k}}" {{$orderData['syphilis_is_confirm']==$k?'selected':''}}>{{$v}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-4 control-label">确证时间</label>
+                      <div class="col-md-8">
+                          <input class="form-control syphilis_confirm_time" value="{{$orderData['syphilis_confirm_time']}}" >
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-6 control-label">是否治疗</label>
+                      <div class="col-md-6">
+                          <select class="form-control input-inline  syphilis_is_cure">
+                              @foreach($isNotArr as $k=>$v)
+                                  <option value="{{$k}}" {{$orderData['syphilis_is_cure']==$k?'selected':''}}>{{$v}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-4 control-label">治疗时间</label>
+                      <div class="col-md-8">
+                          <input class="form-control syphilis_cure_time" value="{{  $orderData['syphilis_cure_time']}}">
+                      </div>
+                  </div>
+
               </div>
               <div class="col-xs-12">
                 <label class="col-md-3 control-label">甲肝检测结果</label>
                 <div class="col-md-6">
                   <select class="form-control input-inline input-medium hepatitis_b_result">
-                    <option value="0">未检测</option>
-                    <option value="1" {{$orderData['hepatitis_b_result']==1?'selected':''}}>阴性</option>
-                    <option value="2" {{$orderData['hepatitis_b_result']==2?'selected':''}}>阳性</option>
+                      @foreach($checkArr as $k=>$v)
+                          <option value="{{$k}}" {{$orderData['hepatitis_b_result']==$k?'selected':''}}>{{$v}}</option>
+                      @endforeach
                   </select>
                 </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-6 control-label">是否确证</label>
+                      <div class="col-md-6">
+                          <select class="form-control input-inline hepatitis_b_is_confirm">
+                              @foreach($isNotArr as $k=>$v)
+                                  <option value="{{$k}}" {{$orderData['hepatitis_b_is_confirm']==$k?'selected':''}}>{{$v}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-4 control-label">确证时间</label>
+                      <div class="col-md-8">
+                          <input class="form-control hepatitis_b_confirm_time" value="{{$orderData['hepatitis_b_confirm_time']}}" >
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-6 control-label">是否治疗</label>
+                      <div class="col-md-6">
+                          <select class="form-control input-inline  hepatitis_b_is_cure">
+                              @foreach($isNotArr as $k=>$v)
+                                  <option value="{{$k}}" {{$orderData['hepatitis_b_is_cure']==$k?'selected':''}}>{{$v}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-4 control-label">治疗时间</label>
+                      <div class="col-md-8">
+                          <input class="form-control hepatitis_b_cure_time" value="{{ $orderData['hepatitis_b_cure_time'] }}">
+                      </div>
+                  </div>
+
               </div>
               <div class="col-xs-12">
                 <label class="col-md-3 control-label">乙肝检测结果</label>
                 <div class="col-md-6">
                   <select class="form-control input-inline input-medium hepatitis_c_result">
-                    <option value="0">未检测</option>
-                    <option value="1" {{$orderData['hepatitis_c_result']==1?'selected':''}}>阴性</option>
-                    <option value="2" {{$orderData['hepatitis_c_result']==2?'selected':''}}>阳性</option>
+                      @foreach($checkArr as $k=>$v)
+                          <option value="{{$k}}" {{$orderData['hepatitis_c_result']==$k?'selected':''}}>{{$v}}</option>
+                      @endforeach
                   </select>
                 </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-6 control-label">是否确证</label>
+                      <div class="col-md-6">
+                          <select class="form-control input-inline hepatitis_c_is_confirm">
+                              @foreach($isNotArr as $k=>$v)
+                                  <option value="{{$k}}" {{$orderData['hepatitis_c_is_confirm']==$k?'selected':''}}>{{$v}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-4 control-label">确证时间</label>
+                      <div class="col-md-8">
+                          <input class="form-control hepatitis_c_confirm_time" value="{{$orderData['hepatitis_c_confirm_time']}}" >
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-6 control-label">是否治疗</label>
+                      <div class="col-md-6">
+                          <select class="form-control input-inline  hepatitis_c_is_cure">
+                              @foreach($isNotArr as $k=>$v)
+                                  <option value="{{$k}}" {{$orderData['hepatitis_c_is_cure']==$k?'selected':''}}>{{$v}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="col-md-4 control-label">治疗时间</label>
+                      <div class="col-md-8">
+                          <input class="form-control hepatitis_c_cure_time" value="{{ $orderData['hepatitis_c_cure_time'] }}">
+                      </div>
+                  </div>
+
               </div>
               <div class="col-xs-12">
                 <label class="col-md-3 control-label">检测医生</label>
@@ -209,8 +340,14 @@
   <script src="{{gStatic('vendor/plugins/plupload/i18n/zh_CN.js')}}"></script>
   <script src="{{gStatic('vendor/plugins/qiniu/qiniu.min.js')}}"></script>
   <script src="{{gStatic('vendor/plugins/qiniu/progress.js')}}"></script>
+  <script src="{{gStatic('vendor/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
   <script>
       $(function () {
+          $('.adis_confirm_time,.adis_cure_time,.syphilis_confirm_time,.syphilis_cure_time,.hepatitis_b_confirm_time,.hepatitis_b_cure_time,.hepatitis_c_confirm_time,.hepatitis_c_cure_time').datepicker({
+              autoclose: true,
+              format: 'yyyy-mm-dd',
+          });
+
           $(".up_images").click(function () {
               uploader();
           });
@@ -259,9 +396,26 @@
                       'uuid': "{{ $orderData['uuid'] }}",
                       'method': 'deal_check',
                       'adis_result': $(".adis_result").val(),
+                      'adis_is_confirm': $(".adis_is_confirm").val(),
+                      'adis_confirm_time': $(".adis_confirm_time").val(),
+                      'adis_is_cure': $(".adis_is_cure").val(),
+                      'adis_cure_time': $(".adis_cure_time").val(),
                       'syphilis_result': $(".syphilis_result").val(),
+                      'syphilis_is_confirm': $(".syphilis_is_confirm").val(),
+                      'syphilis_confirm_time': $(".syphilis_confirm_time").val(),
+                      'syphilis_is_cure': $(".syphilis_is_cure").val(),
+                      'syphilis_cure_time': $(".syphilis_cure_time").val(),
                       'hepatitis_b_result': $(".hepatitis_b_result").val(),
+                      'hepatitis_b_is_confirm': $(".hepatitis_b_is_confirm").val(),
+                      'hepatitis_b_confirm_time': $(".hepatitis_b_confirm_time").val(),
+                      'hepatitis_b_is_cure': $(".hepatitis_b_is_cure").val(),
+                      'hepatitis_b_cure_time': $(".hepatitis_b_cure_time").val(),
                       'hepatitis_c_result': $(".hepatitis_c_result").val(),
+                      'hepatitis_c_is_confirm': $(".hepatitis_c_is_confirm").val(),
+                      'hepatitis_c_confirm_time': $(".hepatitis_c_confirm_time").val(),
+                      'hepatitis_c_is_cure': $(".hepatitis_c_is_cure").val(),
+                      'hepatitis_c_cure_time': $(".hepatitis_c_cure_time").val(),
+
                       //'order_status': $(".order_status").val(),
                       'check_doctor': $("#check_doctor").val(),
                       'check_desc': $("#check_desc").val()

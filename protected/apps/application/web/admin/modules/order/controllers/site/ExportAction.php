@@ -710,7 +710,7 @@ class ExportAction extends AdminBaseAction
                     $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), $n + 1);
                 }elseif($v=='adis_result' || $v=='syphilis_result'){
                     $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3),
-                        ( $data[$v]==1?'阴性':($data[$v]==2?'阳性':'未检测')  )
+                        ( gCheckResult($data[$v])  )
                     );
                 }elseif ($v == 'partner_method'){
                     $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3),

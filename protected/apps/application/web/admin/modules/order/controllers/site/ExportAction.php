@@ -713,49 +713,39 @@ class ExportAction extends AdminBaseAction
                         ( gCheckResult($data[$v])  )
                     );
                 }elseif ($v == 'partner_method'){
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3),
-                        (
-                            $data['partner_sns']==1?'互联网（社交软件等）':' '.
-                            $data['partner_bar']==1?'酒吧':' '.
-                            $data['partner_ktv']==1?'KTV':' '.
-                            $data['partner_park']==1?'公园':' '.
-                            $data['partner_other']
-                        )
-                    );
+                    $tmp = [];
+                    $tmp[] = $data['partner_sns']==1?'互联网（社交软件等）':' ';
+                    $tmp[] = $data['partner_bar']==1?'酒吧':' ';
+                    $tmp[] = $data['partner_ktv']==1?'KTV':' ';
+                    $tmp[] = $data['partner_park']==1?'公园':' ';
+                    $tmp[] = $data['partner_other'];
+                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), join("," , $tmp));
                 }elseif ( $v == 'where_can_check_HIV'){
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3),
-                        (
-                        $data['detect_hospital']==1?'医院':' '.
-                        $data['detect_jk_center']==1?'疾控中心':' '.
-                        $data['detect_community']==1?'社区小组':' '.
-                        $data['detect_drugstore']==1?'药店':' '.
-                        $data['detect_clinic']==1?'个体诊所':' '.
-                            $data['detect_other']
-                        )
-                    );
+                    $tmp = [];
+                    $tmp[] = $data['detect_hospital']==1?'医院':' ';
+                    $tmp[] = $data['detect_jk_center']==1?'疾控中心':' ';
+                    $tmp[] = $data['detect_community']==1?'社区小组':' ';
+                    $tmp[] = $data['detect_drugstore']==1?'药店':' ';
+                    $tmp[] = $data['detect_clinic']==1?'个体诊所':' ';
+                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), join("," , $tmp));
                 }elseif ( $v == 'hope_check_channel'){
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3),
-                        (
-                        $data['detect_channel_hospital']==1?'医院':' '.
-                        $data['detect_channel_jk_center']==1?'疾控中心':' '.
-                        $data['detect_channel_community']==1?'社区小组':' '.
-                        $data['detect_channel_drugstore']==1?'药店':' '.
-                        $data['detect_channel_clinic']==1?'个体诊所':' '.
-                            $data['detect_channel_other']
-                        )
-                    );
+                    $tmp = [];
+                    $tmp[] = $data['detect_channel_hospital']==1?'医院':' ';
+                    $tmp[] = $data['detect_channel_jk_center']==1?'疾控中心':' ';
+                    $tmp[] = $data['detect_channel_community']==1?'社区小组':' ';
+                    $tmp[] = $data['detect_channel_drugstore']==1?'药店':' ';
+                    $tmp[] = $data['detect_channel_clinic']==1?'个体诊所':' ';
+                    $tmp[] = $data['detect_channel_other'];
+                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), join("," , $tmp));
                 }elseif ( $v == 'attitude'){
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3),
-                        (
-                        $data['active_treatment']==1?'积极接受治疗':''.
-                        $data['unaccept_medical']==1?'担心药物副作用，暂不接受':''.
-                        $data['treatment_until_standard']==1?'未到治疗标准就不用治疗':''.
-                        $data['resistant_care']==1?'担心很快耐药':''.
-                        $data['explore_care']==1?'担心吃药后被人发现':''.
-                        $data['not_treatment']==1?'认为无法治愈，不治疗，任其自然':''.
-                            $data['treatment_other']
-                        )
-                    );
+                    $tmp = [];
+                    $tmp[] = $data['active_treatment']==1?'积极接受治疗':'';
+                    $tmp[] = $data['unaccept_medical']==1?'担心药物副作用，暂不接受':'';
+                    $tmp[] = $data['treatment_until_standard']==1?'未到治疗标准就不用治疗':'';
+                    $tmp[] = $data['resistant_care']==1?'担心很快耐药':'';
+                    $tmp[] = $data['explore_care']==1?'担心吃药后被人发现':'';
+                    $tmp[] = $data['not_treatment']==1?'认为无法治愈，不治疗，任其自然':'';
+                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), join("," , $tmp));
                 }else{
                     $value = $data[$v]==1?'是':($data[$v]==='0'?'否':$data[$v]);
                     $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), $value);

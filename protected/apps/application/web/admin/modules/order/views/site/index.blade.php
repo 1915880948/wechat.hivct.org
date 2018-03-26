@@ -175,7 +175,8 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                         'attribute'      => 'order_status',
                         'label'          => '订单状态',
                         'value'          => function($model) {
-                            return gOrderStatus($model->order_status);
+
+                            return gOrderStatus($model->order_status)."($model->order_status)";
                         }
                     ],
                     //                                    [

@@ -86,6 +86,13 @@ class IndexAction extends AdminBaseAction
             OrderList::PAY_STATUS_SUCCESS => '已支付'
         ];
 
+        $checkArr = [
+            '-99' => '全部',
+            '1'   => '阴性',
+            '2'   => '阳性',
+            '3'   => '检测失败'
+        ];
+
         $dealArr = [
 //            OrderList::ORDER_STATUS_PAID                  => '已支付',
 //            OrderList::ORDER_STATUS_SHIP                  => '已发货',
@@ -98,6 +105,6 @@ class IndexAction extends AdminBaseAction
             OrderList::ORDER_STATUS_REFUND_FINISHED,
         ];
 
-        return $this->render(compact('dealArr', 'payArr', 'logArr', 'expressArr', 'ship', 'provider', 'conditions', 'logistics'));
+        return $this->render(compact('dealArr', 'checkArr','payArr', 'logArr', 'expressArr', 'ship', 'provider', 'conditions', 'logistics'));
     }
 }

@@ -88,26 +88,10 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
           '100' => '未知状态'
       ]));
       echo "<br />";
-      echo $form->label("艾滋病检测结果", Html::dropDownList("adis_result", ArrayHelper::getValue($_GET, 'adis_result', ''), [
-          '-99' => '全部',
-          '1'   => '阴性',
-          '2'   => '阳性'
-      ]));
-      echo $form->label("梅毒检测结果", Html::dropDownList("syphilis_result", ArrayHelper::getValue($_GET, 'syphilis_result', ''), [
-          '-99' => '全部',
-          '1'   => '阴性',
-          '2'   => '阳性'
-      ]));
-      echo $form->label("乙肝检测结果", Html::dropDownList("hepatitis_b_result", ArrayHelper::getValue($_GET, 'hepatitis_b_result', ''), [
-          '-99' => '全部',
-          '1'   => '阴性',
-          '2'   => '阳性'
-      ]));
-      echo $form->label("丙肝检测结果", Html::dropDownList("hepatitis_c_result", ArrayHelper::getValue($_GET, 'hepatitis_c_result', ''), [
-          '-99' => '全部',
-          '1'   => '阴性',
-          '2'   => '阳性'
-      ]));
+      echo $form->label("艾滋病检测结果", Html::dropDownList("adis_result", ArrayHelper::getValue($_GET, 'adis_result', ''), $checkArr));
+      echo $form->label("梅毒检测结果", Html::dropDownList("syphilis_result", ArrayHelper::getValue($_GET, 'syphilis_result', ''), $checkArr));
+      echo $form->label("乙肝检测结果", Html::dropDownList("hepatitis_b_result", ArrayHelper::getValue($_GET, 'hepatitis_b_result', ''), $checkArr));
+      echo $form->label("丙肝检测结果", Html::dropDownList("hepatitis_c_result", ArrayHelper::getValue($_GET, 'hepatitis_c_result', ''), $checkArr));
       echo "<br />";
       echo $form->label("微信订单号", Html::textInput("wx_transaction_id", ArrayHelper::getValue($_GET, 'wx_transaction_id', '')));
       echo $form->label("快递单号", Html::textInput("ship_code", ArrayHelper::getValue($_GET, 'ship_code', '')));

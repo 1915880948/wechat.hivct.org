@@ -36,9 +36,25 @@ use Yii;
  * @property string $alipay
  * @property integer $is_up_result
  * @property integer $adis_result
+ * @property integer $adis_is_confirm
+ * @property string $adis_confirm_time
+ * @property integer $adis_is_cure
+ * @property string $adis_cure_time
  * @property integer $syphilis_result
+ * @property integer $syphilis_is_confirm
+ * @property string $syphilis_confirm_time
+ * @property integer $syphilis_is_cure
+ * @property string $syphilis_cure_time
  * @property integer $hepatitis_b_result
+ * @property integer $hepatitis_b_is_confirm
+ * @property string $hepatitis_b_confirm_time
+ * @property integer $hepatitis_b_is_cure
+ * @property string $hepatitis_b_cure_time
  * @property integer $hepatitis_c_result
+ * @property integer $hepatitis_c_is_confirm
+ * @property string $hepatitis_c_confirm_time
+ * @property integer $hepatitis_c_is_cure
+ * @property string $hepatitis_c_cure_time
  * @property string $check_doctor
  * @property string $check_desc
  * @property string $check_time
@@ -63,9 +79,9 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
     {
         return [
             [['out_trade_no'], 'required'],
-            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result', 'is_to_examine'], 'integer'],
+            [['uid', 'pay_status', 'order_status', 'ship_status', 'logistic_id', 'is_up_result', 'adis_result', 'adis_is_confirm', 'adis_is_cure', 'syphilis_result', 'syphilis_is_confirm', 'syphilis_is_cure', 'hepatitis_b_result', 'hepatitis_b_is_confirm', 'hepatitis_b_is_cure', 'hepatitis_c_result', 'hepatitis_c_is_confirm', 'hepatitis_c_is_cure', 'is_to_examine'], 'integer'],
             [['total_price'], 'number'],
-            [['order_updated_at', 'created_at', 'updated_at', 'check_time'], 'safe'],
+            [['order_updated_at', 'created_at', 'updated_at', 'adis_confirm_time', 'adis_cure_time', 'syphilis_confirm_time', 'syphilis_cure_time', 'hepatitis_b_confirm_time', 'hepatitis_b_cure_time', 'hepatitis_c_confirm_time', 'hepatitis_c_cure_time', 'check_time'], 'safe'],
             [['uuid', 'out_trade_no', 'wx_transaction_id', 'ship_uuid', 'source_uuid', 'address_uuid'], 'string', 'max' => 36],
             [['info', 'address_contact', 'alipay'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 250],
@@ -115,16 +131,32 @@ class TblOrderList extends \application\common\db\ApplicationActiveRecord
             'address_detail' => 'Address Detail',
             'alipay' => '支付宝 和pay_images的支付宝一致',
             'is_up_result' => '是否上传自检结果：1:是，0:否',
-            'adis_result' => '艾滋病检测结果:1阴性，2：阳性',
-            'syphilis_result' => '梅毒检测结果:1阴性，2：阳性',
-            'hepatitis_b_result' => '乙肝检测结果:1阴性，2：阳性',
-            'hepatitis_c_result' => '丙肝检测结果:1阴性，2：阳性',
+            'adis_result' => '艾滋病检测结果:0:未检测，1阴性，2：阳性，3：检测失败',
+            'adis_is_confirm' => '是否确证：1:是。0:否',
+            'adis_confirm_time' => 'Adis Confirm Time',
+            'adis_is_cure' => '是否治疗：1：是，0：否',
+            'adis_cure_time' => 'Adis Cure Time',
+            'syphilis_result' => '梅毒检测结果: 0:未检测，1阴性，2：阳性，3：检测失败',
+            'syphilis_is_confirm' => '是否确证：1:是。0:否',
+            'syphilis_confirm_time' => 'Syphilis Confirm Time',
+            'syphilis_is_cure' => '是否治疗：1：是，0：否',
+            'syphilis_cure_time' => 'Syphilis Cure Time',
+            'hepatitis_b_result' => '乙肝检测结果: 0:未检测，1阴性，2：阳性，3：检测失败',
+            'hepatitis_b_is_confirm' => '是否确证：1:是。0:否',
+            'hepatitis_b_confirm_time' => 'Hepatitis B Confirm Time',
+            'hepatitis_b_is_cure' => '是否治疗：1：是，0：否',
+            'hepatitis_b_cure_time' => 'Hepatitis B Cure Time',
+            'hepatitis_c_result' => '丙肝检测结果: 0:未检测，1阴性，2：阳性，3：检测失败',
+            'hepatitis_c_is_confirm' => '是否确证：1:是。0:否',
+            'hepatitis_c_confirm_time' => 'Hepatitis C Confirm Time',
+            'hepatitis_c_is_cure' => '是否治疗：1：是，0：否',
+            'hepatitis_c_cure_time' => 'Hepatitis C Cure Time',
             'check_doctor' => '检测医师',
             'check_desc' => '检测描述',
             'check_time' => '检测时间',
             'is_to_examine' => '审核状态：0：未审核 1：通过，2：未通过',
             'to_examine_admin' => '审核人',
-            'examine_reason' => 'Examine Reason',
+            'examine_reason' => '审核未通过原因',
         ];
     }
 }

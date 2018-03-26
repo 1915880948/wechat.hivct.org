@@ -134,16 +134,11 @@ function gSendMessage($to_user,$template_id,$url,$content){
 }
 
 function gCheckResult($result){
-    if( $result == 0){
-        return '未检测';
-    }
-    if( $result == 1){
-        return '阴性';
-    }
-    if( $result == 2){
-        return '阳性';
-    }
-    if( $result == 3){
-        return '检测失败';
-    }
+    $arr = [
+        '0' => '未检测',
+        '1' => '阴性',
+        '2' => '阳性',
+        '3' => '检测失败',
+    ];
+    return ArrayHelper::getValue($arr,$result,'未知检测数据');
 }

@@ -78,8 +78,8 @@ class ExportAction extends AdminBaseAction
             $objectPHPExcel->getActiveSheet()->setCellValue('E' . ($n + 3), $orderData['address_detail'] );
             $objectPHPExcel->getActiveSheet()->setCellValue('F' . ($n + 3), $orderData['info']           );
             $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($n + 3), $orderData['description']    );
-            $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($n + 3), $orderData['adis_result']==1?'阴性':($orderData['adis_result']==2?'阳性':'未检测')    );
-            $objectPHPExcel->getActiveSheet()->setCellValue('I' . ($n + 3), $orderData['syphilis_result']==1?'阴性':($orderData['syphilis_result']==2?'阳性':'未检测')    );
+            $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($n + 3), gCheckResult( $orderData['adis_result'] )    );
+            $objectPHPExcel->getActiveSheet()->setCellValue('I' . ($n + 3), gCheckResult($orderData['syphilis_result'])   );
             //设置边框
             $objectPHPExcel->getActiveSheet()->getStyle('A' . ($n + 3) . ':J' . ($n + 3))
                 ->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
@@ -481,8 +481,8 @@ class ExportAction extends AdminBaseAction
         $objectPHPExcel = new PHPExcel();
         $objectPHPExcel->setActiveSheetIndex(0);
         $n = 0;
-        $column = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ', 'BA', 'BB', 'BC', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BK', 'BL', 'BM', 'BN', 'BO', 'BP', 'BQ', 'BR', 'BS', 'BT', 'BU', 'BV', 'BW', 'BX', 'BY', 'BZ', 'CA', 'CB', 'CC', 'CD', 'CE', 'CF', 'CG', 'CH', 'CI', 'CJ', 'CK', 'CL', 'CM', 'CN', 'CO', 'CP', 'CQ', 'CR', 'CS', 'CT', 'CU', 'CV', 'CW','CX','CY','CZ','DA','DB'];
-        $header = ['序号', '发货地','收货人', '电话', '详细地址', '订单标题', '订单说明','订单时间','艾滋病检测结果','梅毒检测结果','检测时间',
+        $column = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ', 'BA', 'BB', 'BC', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BK', 'BL', 'BM', 'BN', 'BO', 'BP', 'BQ', 'BR', 'BS', 'BT', 'BU', 'BV', 'BW', 'BX', 'BY', 'BZ', 'CA', 'CB', 'CC', 'CD', 'CE', 'CF', 'CG', 'CH', 'CI', 'CJ', 'CK', 'CL', 'CM', 'CN', 'CO', 'CP', 'CQ', 'CR', 'CS', 'CT', 'CU', 'CV', 'CW','CX','CY','CZ','DA','DB','DE','DF','DG','DH','DI','DJ','DK','DL'];
+        $header = ['序号', '发货地','收货人', '电话', '详细地址', '订单标题', '订单说明','订单时间','艾滋病检测结果','是否确认','确认时间','是否治疗','治疗时间','梅毒检测结果','是否确认','确认时间','是否治疗','治疗时间','检测时间',
             '姓名或称呼',
             '民族',
             '性别',
@@ -579,7 +579,7 @@ class ExportAction extends AdminBaseAction
             '其他服务',
             '你对感染HIV后是否需要接受治疗的看法是'
         ];
-        $db_column = ['id','title','address_contact', 'address_mobile','address_detail','info','description','created_at','adis_result','syphilis_result','check_time',
+        $db_column = ['id','title','address_contact', 'address_mobile','address_detail','info','description','created_at','adis_result','adis_is_confirm','adis_confirm_time','adis_is_cure','adis_cure_time','syphilis_result','syphilis_is_confirm','syphilis_confirm_time','syphilis_is_cure','syphilis_cure_time','check_time',
             'name',
             'nation',
             'gender',

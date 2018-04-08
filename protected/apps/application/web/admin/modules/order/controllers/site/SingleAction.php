@@ -7,7 +7,7 @@
  */
 
 namespace application\web\admin\modules\order\controllers\site;
-ini_set('memory_limit','512M');
+ini_set('memory_limit','1024M');
 use application\models\base\Logistics;
 use application\models\base\OrderList;
 use application\models\base\SurveyList;
@@ -101,61 +101,69 @@ class SingleAction extends AdminBaseAction
                     ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
 
-                $currentRow_BC = $currentRow_EF = 1;
+                $currentRow_BC = 2;
                 //明细的输出
                 //基本信息
-                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + (++$currentRow_BC)) . ':J' . ($surveyRow + (++$currentRow_EF)));
+                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + ($currentRow_BC)) . ':J' . ($surveyRow + ($currentRow_BC)));
                 $objectPHPExcel->getActiveSheet()->setCellValue('A' . ($surveyRow + $currentRow_BC), '基本信息');
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))->getFont()->setSize(18);
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))
                     ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '姓名或称呼');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '姓名或称呼');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['name']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '民族');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['nation']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '民族');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['nation']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '性别');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '性别');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['gender']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '出生日期');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['birthday']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '出生日期');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['birthday']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '文化程度');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '文化程度');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['education']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '婚姻状况');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['marriage']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '婚姻状况');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['marriage']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '职业');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '职业');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['job'] . ' ' . $surveyData['job_other']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '收入');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['income']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '收入');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['income']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '户籍地');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '户籍地');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['household']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '现居地');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['livecity']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '现居地');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['livecity']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '居住时长');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '居住时长');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['livetime']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), '');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), '');
 
+                $currentRow_BC+=1;
                 // 性行为情况
-                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + (++$currentRow_BC)) . ':J' . ($surveyRow + (++$currentRow_EF)));
+                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + ($currentRow_BC)) . ':J' . ($surveyRow + ($currentRow_BC)));
                 $objectPHPExcel->getActiveSheet()->setCellValue('A' . ($surveyRow + $currentRow_BC), '性行为情况');
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))->getFont()->setSize(18);
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))
                     ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '是否有过性行为');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '是否有过性行为');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['has_sex'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '第一次性行为年龄');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['sex_age']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '第一次性行为年龄');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['sex_age']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '寻找性伴侣的方式');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '寻找性伴侣的方式');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['partner']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '寻找性伴侣的途径');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)),
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '寻找性伴侣的途径');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)),
                     $surveyData['partner_sns'] ? '互联网' : '' .
                     $surveyData['partner_bar'] ? '酒吧' : '' .
                     $surveyData['partner_ktv'] ? 'KTV' : '' .
@@ -163,143 +171,170 @@ class SingleAction extends AdminBaseAction
                         $surveyData['partner_other']
                 );
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '常用性行为方式');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '常用性行为方式');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['sex_type']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '其他方式');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['sex_type_other']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '其他方式');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['sex_type_other']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '性取向');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '性取向');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['sex_direction']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '你近三个月内有过性行为吗');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['has_sex_3month'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '你近三个月内有过性行为吗');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['has_sex_3month'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '近三个月内您有多少个异性伙伴');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '近三个月内您有多少个异性伙伴');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['hetero_partner_num']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '是否全程使用安全套');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['condom_full_use'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '是否全程使用安全套');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['condom_full_use'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '在最近三个月没有全程使用安全套的比例');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '在最近三个月没有全程使用安全套的比例');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['condom_percent']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近一次与异性发生性行为是否使用安全套');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['condom_near'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近一次与异性发生性行为是否使用安全套');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['condom_near'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近一次是否未全程使用安全套');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近一次是否未全程使用安全套');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['condom_full_use_not']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '是否有肛交行为');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['anal_sex'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '是否有肛交行为');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['anal_sex'] == 1 ? '是' : '否');
 
+                $currentRow_BC+=1;
                 // 毒品使用情况
-                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + (++$currentRow_BC)) . ':J' . ($surveyRow + (++$currentRow_EF)));
+                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + ($currentRow_BC)) . ':J' . ($surveyRow + ($currentRow_BC)));
                 $objectPHPExcel->getActiveSheet()->setCellValue('A' . ($surveyRow + $currentRow_BC), '毒品使用情况');
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))->getFont()->setSize(18);
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))
                     ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '是否使用过毒品');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '是否使用过毒品');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['is_use_drug'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '毒品类型');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['drug_type']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '毒品类型');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['drug_type']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '毒品使用频率');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '毒品使用频率');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['drug_rate']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '近一个月使用过毒品');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['is_use_drug_near_month']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '近一个月使用过毒品');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['is_use_drug_near_month']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '近一个月使用毒品的频率');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '近一个月使用毒品的频率');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['drug_near_month_num']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '注射过毒品');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['is_use_inject'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '注射过毒品');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['is_use_inject'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近一个月是否注射过毒品');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近一个月是否注射过毒品');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['is_use_inject_near_month'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近一个月注射毒品的频率');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['inject_near_month_num']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近一个月注射毒品的频率');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['inject_near_month_num']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '曾经与别人是否共用过针具');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '曾经与别人是否共用过针具');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['is_use_pinhead'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近一个月注射毒品时是否与别人共用过针具');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['is_use_pinhead_near_month'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近一个月注射毒品时是否与别人共用过针具');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['is_use_pinhead_near_month'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近一个月注射毒品时，与别人共用针具的频率如何');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近一个月注射毒品时，与别人共用针具的频率如何');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['pinhead_near_month_num']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近三个月,是否有过吸食毒品后发生性行为');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['is_sex_after_drug_3month'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近三个月,是否有过吸食毒品后发生性行为');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['is_sex_after_drug_3month'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '在最近三个月与多少人是在吸食毒品后发生的性行为');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '在最近三个月与多少人是在吸食毒品后发生的性行为');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['sex_after_drug_3month_num']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近一个月,是否有过吸食毒品后发生性行为');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['is_sex_after_drug_1month'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近一个月,是否有过吸食毒品后发生性行为');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['is_sex_after_drug_1month'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近一个月,与多少人是在吸食毒品后发生的性行为');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近一个月,与多少人是在吸食毒品后发生的性行为');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['sex_after_drug_1month_num']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), '');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), '');
 
+                $currentRow_BC+=1;
                 // 结核和其他调查
-                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + (++$currentRow_BC)) . ':J' . ($surveyRow + (++$currentRow_EF)));
+                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + ($currentRow_BC)) . ':J' . ($surveyRow + ($currentRow_BC)));
                 $objectPHPExcel->getActiveSheet()->setCellValue('A' . ($surveyRow + $currentRow_BC), '结核和其他调查');
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))->getFont()->setSize(18);
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))
                     ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '咳嗽、咳痰持续2周以上');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '咳嗽、咳痰持续2周以上');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['cough_2week'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '反复咳出的痰中带血');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['cough_withblood'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '反复咳出的痰中带血');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['cough_withblood'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '咳嗽、咳痰持续2周以上');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '咳嗽、咳痰持续2周以上');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['cough_2week'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '反复咳出的痰中带血');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['cough_withblood'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '反复咳出的痰中带血');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['cough_withblood'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '夜间经常出汗');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '夜间经常出汗');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['sweat_on_night'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '无法解思的体重明显下降');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['weight_downgrade'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '无法解思的体重明显下降');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['weight_downgrade'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '经常容易疲劳或呼吸短促');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '经常容易疲劳或呼吸短促');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['always_tired'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '反复发热持续2周以上');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['fever_2week'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '反复发热持续2周以上');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['fever_2week'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '淋巴结肿大');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '淋巴结肿大');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['lymphadenectasis'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '结核病人接触史');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['tuberculosis_contact_history'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '结核病人接触史');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['tuberculosis_contact_history'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '无结核相关症状');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '无结核相关症状');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['no_tuberculosis'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '结核病人接触史');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['tuberculosis_contact_history'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '结核病人接触史');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['tuberculosis_contact_history'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近是否做过结核检查（痰检或X胸片）');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近是否做过结核检查（痰检或X胸片）');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['is_phthisic_checked'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '结核检测结果');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['phthisic_result']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '结核检测结果');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['phthisic_result']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '是否做过梅毒检查');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '是否做过梅毒检查');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['is_syphilis'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '梅毒检测结果');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['syphilis_result']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '梅毒检测结果');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['syphilis_result']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近是否做过乙肝检测');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近是否做过乙肝检测');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['is_hepatitis_b'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '乙肝检测结果');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['hepatitis_b_result']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '乙肝检测结果');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['hepatitis_b_result']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近是否做过丙肝检测');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近是否做过丙肝检测');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['is_hepatitis_c'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '丙肝检测结果');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['hepatitis_c_result']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '丙肝检测结果');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['hepatitis_c_result']);
 
+                $currentRow_BC+=1;
                 // HIV快速检测
-                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + (++$currentRow_BC)) . ':J' . ($surveyRow + (++$currentRow_EF)));
+                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + ($currentRow_BC)) . ':J' . ($surveyRow + ($currentRow_BC)));
                 $objectPHPExcel->getActiveSheet()->setCellValue('A' . ($surveyRow + $currentRow_BC), 'HIV快速检测');
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))->getFont()->setSize(18);
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))
                     ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '既往检测机构');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '既往检测机构');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)),
                     $surveyData['past_channel_hospital'] == 1 ? '医院' : '' .
                     $surveyData['past_channel_jk'] == 1 ? '疾控' : '' .
@@ -308,7 +343,9 @@ class SingleAction extends AdminBaseAction
                     $surveyData['past_channel_community'] == 1 ? '社区组织' : '' .
                         $surveyData['past_channel_other']
                 );
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '你知道本地哪里可以检测HIV');
+
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '你知道本地哪里可以检测HIV');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)),
                     $surveyData['detect_hospital'] == 1 ? '&#10003;' : '' .
                     $surveyData['detect_hospital'] == 1 ? '医院' : '' .
@@ -318,43 +355,50 @@ class SingleAction extends AdminBaseAction
                     $surveyData['detect_clinic'] == 1 ? '个体诊所' : '' .
                         $surveyData['detect_other']
                 );
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '是否接受过HIV检测');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['is_accept_detect_hiv'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '是否接受过HIV检测');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['is_accept_detect_hiv'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '接受过几次HIV检测');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '接受过几次HIV检测');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['detect_num']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近一年内接受过几次HIV检测');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['detect_num_near_1year']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近一年内接受过几次HIV检测');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['detect_num_near_1year']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近6个月内接受过几次HIV检测');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近6个月内接受过几次HIV检测');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['detect_num_near_6month']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近一次参加HIV检测日期');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['last_hiv_checkdate']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近一次参加HIV检测日期');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['last_hiv_checkdate']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '是否知道自己最近一次的HIV检测结果');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '是否知道自己最近一次的HIV检测结果');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['is_know_detect_result'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近一次主动检测HIV还是被动员检测');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['hiv_check_mode']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近一次主动检测HIV还是被动员检测');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['hiv_check_mode']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近一次参加检测的原因');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近一次参加检测的原因');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['hiv_check_reason']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近一次参加检测的其他原因');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['hiv_check_reason_other']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近一次参加检测的其他原因');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['hiv_check_reason_other']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '最近一次通过何种方式参加HIV检测');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '最近一次通过何种方式参加HIV检测');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['last_hiv_check_mode']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '最近一次通过其他方式参加HIV检测');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['last_hiv_check_mode_other']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '最近一次通过其他方式参加HIV检测');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['last_hiv_check_mode_other']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '对于参加HIV检测是否有顾虑');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '对于参加HIV检测是否有顾虑');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['is_detect_care'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), 'HIV检测的主要顾虑是什么');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['hiv_check_care']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), 'HIV检测的主要顾虑是什么');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['hiv_check_care']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), 'HIV检测的其他顾虑是什么');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), 'HIV检测的其他顾虑是什么');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['hiv_check_care_other']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '你期望获得HIV检测的渠道');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)),
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '你期望获得HIV检测的渠道');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)),
                     $surveyData['detect_channel_hospital'] == 1 ? '医院' : '' .
                     $surveyData['detect_channel_jk_center'] == 1 ? '疾控中心' : '' .
                     $surveyData['detect_channel_community'] == 1 ? '社区小组' : '' .
@@ -363,64 +407,75 @@ class SingleAction extends AdminBaseAction
                         $surveyData['detect_channel_other']
                 );
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '是否愿意获自费购买HIV检测试剂');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '是否愿意获自费购买HIV检测试剂');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['detect_by_self'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '再次申请获得一次项目邮寄免费检测试剂');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['hiv_check_time']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '再次申请获得一次项目邮寄免费检测试剂');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['hiv_check_time']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '本次是否申请梅毒检测试剂');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '本次是否申请梅毒检测试剂');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['apply_for_free'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), '');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), '');
 
+                $currentRow_BC+=1;
                 // 配偶/性伴及其他检测
-                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + (++$currentRow_BC)) . ':J' . ($surveyRow + (++$currentRow_EF)));
+                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + ($currentRow_BC)) . ':J' . ($surveyRow + ($currentRow_BC)));
                 $objectPHPExcel->getActiveSheet()->setCellValue('A' . ($surveyRow + $currentRow_BC), '配偶/性伴及其他检测');
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))->getFont()->setSize(18);
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))
                     ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '配偶/性伴是否检测过HIV');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '配偶/性伴是否检测过HIV');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['partner_is_check_hiv']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '配偶/性伴的检测结果');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['partner_check_result']);
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '配偶/性伴的检测结果');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['partner_check_result']);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '是否愿意动员配偶/性伴进行HIV检测');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '是否愿意动员配偶/性伴进行HIV检测');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['partner_mobilize'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), '');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), '');
 
+                $currentRow_BC+=1;
                 // 转介及后续服务
-                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + (++$currentRow_BC)) . ':J' . ($surveyRow + (++$currentRow_EF)));
+                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + ($currentRow_BC)) . ':J' . ($surveyRow + ($currentRow_BC)));
                 $objectPHPExcel->getActiveSheet()->setCellValue('A' . ($surveyRow + $currentRow_BC), '转介及后续服务');
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))->getFont()->setSize(18);
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow + $currentRow_BC))
                     ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '提供进一步快检服务');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '提供进一步快检服务');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['fast_detect_service'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '提供确证和CD4检测机构信息');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['org_for_cd4'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '提供确证和CD4检测机构信息');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['org_for_cd4'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '提供抗病毒治疗或相关医疗机构信息');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '提供抗病毒治疗或相关医疗机构信息');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['org_therapy'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '提供性病诊断治疗机构信息');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['org_syphilis'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '提供性病诊断治疗机构信息');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['org_syphilis'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '提供机会性感染治疗及其他相关治疗机构信息');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '提供机会性感染治疗及其他相关治疗机构信息');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['org_syphilis_other'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '提供心理咨询和帮助机构信息');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['org_psychological'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '提供心理咨询和帮助机构信息');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['org_psychological'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '提供母婴阻断机构信息');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '提供母婴阻断机构信息');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['org_pmtct'] == 1 ? '是' : '否');
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '提供结核诊断治疗机构信息');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)), $surveyData['org_phthisis'] == 1 ? '是' : '否');
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '提供结核诊断治疗机构信息');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)), $surveyData['org_phthisis'] == 1 ? '是' : '否');
 
-                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + (++$currentRow_BC)), '其他服务');
+                $currentRow_BC+=1;
+                $objectPHPExcel->getActiveSheet()->setCellValue('B' . ($surveyRow + ($currentRow_BC)), '其他服务');
                 $objectPHPExcel->getActiveSheet()->setCellValue('C' . ($surveyRow + ($currentRow_BC)), $surveyData['org_other']);
-                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + (++$currentRow_EF)), '你对感染HIV后是否需要接受治疗的看法是');
-                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_EF)),
+                $objectPHPExcel->getActiveSheet()->setCellValue('G' . ($surveyRow + ($currentRow_BC)), '你对感染HIV后是否需要接受治疗的看法是');
+                $objectPHPExcel->getActiveSheet()->setCellValue('H' . ($surveyRow + ($currentRow_BC)),
                     $surveyData['active_treatment'] == 1 ? '积极接受治疗' : '' .
                     $surveyData['unaccept_medical'] == 1 ? '担心药物副作用，暂不接受' : '' .
                     $surveyData['treatment_until_standard'] == 1 ? '未到治疗标准就不用治疗' : '' .
@@ -431,7 +486,7 @@ class SingleAction extends AdminBaseAction
                 );
 
                 // 样式
-                $objectPHPExcel->getActiveSheet()->getStyle('A' . ($surveyRow + 1) . ':J' . ($currentRow_EF))
+                $objectPHPExcel->getActiveSheet()->getStyle('A' . ($surveyRow + 1) . ':J' . ($currentRow_BC))
                     ->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 
             } else {
@@ -442,10 +497,10 @@ class SingleAction extends AdminBaseAction
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow))->getFont()->setSize(24);
                 $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A' . ($surveyRow))
                     ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                $currentRow_BC = $currentRow_EF = 1;
+                $currentRow_BC =2;
                 //明细的输出
                 //基本信息
-                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + (++$currentRow_BC)) . ':J' . ($surveyRow + (++$currentRow_EF)));
+                $objectPHPExcel->getActiveSheet()->mergeCells('A' . ($surveyRow + ($currentRow_BC)) . ':J' . ($surveyRow + ($currentRow_BC)));
                 $objectPHPExcel->getActiveSheet()->setCellValue('A' . ($surveyRow + $currentRow_BC), '暂无调研信息');
             }
 

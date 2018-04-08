@@ -133,6 +133,14 @@ use yii\widgets\ActiveForm;
             <div class="col-xs-12"><span>丙肝检测结果 ：    </span> {{ $data['hepatitis_c_result'] }}</div>
 
             <div class="col-xs-12"><h4>HIV快速检测</h4></div>
+            <div class="col-xs-12"><h5>既往检测机构：</h5></div>
+            <div class="col-xs-12"><span>医院 ：    </span> {{ $data['past_channel_hospital']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-12"><span>疾控 ：    </span> {{ $data['past_channel_jk']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-12"><span>自检 ：    </span> {{ $data['past_channel_self']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-12"><span>VCT门诊 ：    </span> {{ $data['past_channel_vct']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-12"><span>社区组织 ：    </span> {{ $data['past_channel_community']==1?'&#10003;':'' }}</div>
+            <div class="col-xs-12"><span>其他 ：    </span> {{ $data['past_channel_other'] }}</div>
+
             <div class="col-xs-12"><h5>你知道本地哪里可以检测HIV：</h5></div>
             <div class="col-xs-12"><span>医院 ：    </span> {{ $data['detect_hospital']==1?'&#10003;':'' }}</div>
             <div class="col-xs-12"><span>疾控中心 ： </span> {{ $data['detect_jk_center']==1?'&#10003;':'' }}</div>

@@ -101,6 +101,12 @@ use Yii;
  * @property integer $is_detect_care
  * @property string $hiv_check_care
  * @property string $hiv_check_care_other
+ * @property integer $past_channel_hospital
+ * @property integer $past_channel_jk
+ * @property integer $past_channel_self
+ * @property integer $past_channel_vct
+ * @property integer $past_channel_community
+ * @property integer $past_channel_other
  * @property integer $detect_channel_hospital
  * @property integer $detect_channel_jk_center
  * @property integer $detect_channel_community
@@ -148,7 +154,7 @@ class TblSurveyList extends \application\common\db\ApplicationActiveRecord
     {
         return [
             [['uid', 'create_time'], 'required'],
-            [['uid', 'has_sex', 'sex_age', 'partner_sns', 'partner_bar', 'partner_ktv', 'partner_park', 'has_sex_3month', 'hetero_partner_num', 'condom_full_use', 'condom_full_use_not', 'anal_sex', 'anal_sex_partner_num', 'anal_sex_full_use', 'anal_sex_full_use_not', 'is_use_drug', 'drug_near_month_num', 'is_use_inject', 'is_use_inject_near_month', 'inject_near_month_num', 'is_use_pinhead', 'is_use_pinhead_near_month', 'is_sex_after_drug_3month', 'sex_after_drug_3month_num', 'is_sex_after_drug_1month', 'sex_after_drug_1month_num', 'cough_2week', 'cough_withblood', 'sweat_on_night', 'weight_downgrade', 'always_tired', 'fever_2week', 'lymphadenectasis', 'tuberculosis_contact_history', 'no_tuberculosis', 'is_phthisic_checked', 'is_syphilis', 'is_hepatitis_b', 'is_hepatitis_c', 'detect_hospital', 'detect_jk_center', 'detect_community', 'detect_drugstore', 'detect_clinic', 'is_accept_detect_hiv', 'detect_num', 'detect_num_near_1year', 'detect_num_near_6month', 'is_know_detect_result', 'is_detect_care', 'detect_channel_hospital', 'detect_channel_jk_center', 'detect_channel_community', 'detect_channel_drugstore', 'detect_channel_clinic', 'detect_by_self', 'apply_for_free', 'partner_mobilize', 'fast_detect_service', 'org_for_cd4', 'org_therapy', 'org_syphilis', 'org_syphilis_other', 'org_psychological', 'org_pmtct', 'org_phthisis', 'active_treatment', 'unaccept_medical', 'treatment_until_standard', 'resistant_care', 'explore_care', 'not_treatment'], 'integer'],
+            [['uid', 'has_sex', 'sex_age', 'partner_sns', 'partner_bar', 'partner_ktv', 'partner_park', 'has_sex_3month', 'hetero_partner_num', 'condom_full_use', 'condom_full_use_not', 'anal_sex', 'anal_sex_partner_num', 'anal_sex_full_use', 'anal_sex_full_use_not', 'is_use_drug', 'drug_near_month_num', 'is_use_inject', 'is_use_inject_near_month', 'inject_near_month_num', 'is_use_pinhead', 'is_use_pinhead_near_month', 'is_sex_after_drug_3month', 'sex_after_drug_3month_num', 'is_sex_after_drug_1month', 'sex_after_drug_1month_num', 'cough_2week', 'cough_withblood', 'sweat_on_night', 'weight_downgrade', 'always_tired', 'fever_2week', 'lymphadenectasis', 'tuberculosis_contact_history', 'no_tuberculosis', 'is_phthisic_checked', 'is_syphilis', 'is_hepatitis_b', 'is_hepatitis_c', 'detect_hospital', 'detect_jk_center', 'detect_community', 'detect_drugstore', 'detect_clinic', 'is_accept_detect_hiv', 'detect_num', 'detect_num_near_1year', 'detect_num_near_6month', 'is_know_detect_result', 'is_detect_care', 'past_channel_hospital', 'past_channel_jk', 'past_channel_self', 'past_channel_vct', 'past_channel_community', 'past_channel_other', 'detect_channel_hospital', 'detect_channel_jk_center', 'detect_channel_community', 'detect_channel_drugstore', 'detect_channel_clinic', 'detect_by_self', 'apply_for_free', 'partner_mobilize', 'fast_detect_service', 'org_for_cd4', 'org_therapy', 'org_syphilis', 'org_syphilis_other', 'org_psychological', 'org_pmtct', 'org_phthisis', 'active_treatment', 'unaccept_medical', 'treatment_until_standard', 'resistant_care', 'explore_care', 'not_treatment'], 'integer'],
             [['create_time', 'birthday', 'last_hiv_checkdate', 'created_at'], 'safe'],
             [['uuid'], 'string', 'max' => 36],
             [['name', 'nation', 'education', 'marriage', 'job', 'job_other', 'income', 'household', 'livecity', 'livecity_code', 'livetime', 'partner', 'sex_type', 'sex_type_other', 'sex_direction', 'condom_percent', 'condom_near', 'anal_sex_role', 'anal_sex_percent', 'anal_sex_near', 'drug_type', 'drug_rate', 'pinhead_near_month_num', 'phthisic_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result', 'last_hiv_checkdate_choose', 'hiv_check_reason', 'last_hiv_check_mode', 'hiv_check_care', 'hiv_check_time', 'partner_check_result'], 'string', 'max' => 20],
@@ -259,6 +265,12 @@ class TblSurveyList extends \application\common\db\ApplicationActiveRecord
             'is_detect_care' => '对于参加HIV检测是否有顾虑',
             'hiv_check_care' => 'HIV检测的主要顾虑是什么',
             'hiv_check_care_other' => 'HIV检测的其他顾虑是什么',
+            'past_channel_hospital' => '既往获得HIV检测的机构-医院',
+            'past_channel_jk' => '既往获得HIV检测的机构-疾控',
+            'past_channel_self' => '既往获得HIV检测的机构-自检',
+            'past_channel_vct' => '既往获得HIV检测的机构-VCT门诊',
+            'past_channel_community' => '既往获得HIV检测的机构-社区组织',
+            'past_channel_other' => '既往获得HIV检测的机构-其他',
             'detect_channel_hospital' => '期望获得HIV检测的渠道-医院',
             'detect_channel_jk_center' => '期望获得HIV检测的渠道-疾控中心',
             'detect_channel_community' => '期望获得HIV检测的渠道-社区小组',

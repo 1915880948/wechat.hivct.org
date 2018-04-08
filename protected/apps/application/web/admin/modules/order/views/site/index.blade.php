@@ -230,7 +230,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                 ]);
                             },
                             'export'        => function($url, $model) {
-                                return Html::a('导出', ['/order/site/export', 'uuid' => $model['uuid']], [
+                                return Html::a('导出', ['/order/site/single', 'uuid' => $model['uuid']], [
                                     'id'   => 'export',
                                     'data' => [
                                         'method' => 'post',

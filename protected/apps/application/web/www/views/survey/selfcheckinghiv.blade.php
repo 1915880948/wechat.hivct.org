@@ -68,6 +68,50 @@
         </div>
       </div>
       <div id="accept_detect_hiv" class="app-hide">
+        <div class="weui-cells__title">既往检测机构：</div>
+        <div class="weui-cell weui-cell_switch">
+          <div class="weui-cell__bd ">医院</div>
+          <div class="weui-cell__ft">
+            <input type="hidden" name="past_channel_hospital" value="0"/>
+            <input id="past_channel_hospital" name="past_channel_hospital" class="weui-switch" type="checkbox">
+          </div>
+        </div>
+        <div class="weui-cell weui-cell_switch">
+          <div class="weui-cell__bd">疾控</div>
+          <div class="weui-cell__ft">
+            <input type="hidden" name="past_channel_jk" value="0"/>
+            <input class="weui-switch" type="checkbox" id="past_channel_jk" name="past_channel_jk">
+          </div>
+        </div>
+        <div class="weui-cell weui-cell_switch">
+          <div class="weui-cell__bd">自检</div>
+          <div class="weui-cell__ft">
+            <input type="hidden" name="past_channel_self" value="0"/>
+            <input class="weui-switch" type="checkbox" id="past_channel_self" name="past_channel_self">
+          </div>
+        </div>
+        <div class="weui-cell weui-cell_switch">
+          <div class="weui-cell__bd">VCT门诊</div>
+          <div class="weui-cell__ft">
+            <input type="hidden" name="past_channel_vct" value="0"/>
+            <input class="weui-switch" type="checkbox" id="past_channel_vct" name="past_channel_vct">
+          </div>
+        </div>
+        <div class="weui-cell weui-cell_switch">
+          <div class="weui-cell__bd">社区组织</div>
+          <div class="weui-cell__ft">
+            <input type="hidden" name="past_channel_community" value="0"/>
+            <input class="weui-switch" type="checkbox" id="past_channel_community" name="past_channel_community">
+          </div>
+        </div>
+        <div class="weui-cell ">
+          <div class="weui-cell__hd">其他</div>
+          <div class="weui-cell__bd">
+            <input class="weui-input" type="text" name="past_channel_other" id="past_channel_other" placeholder="请输入"></div>
+          <div class="weui-cell__ft">
+            {{--<button class="" style="width:1rem;">人</button>--}}
+          </div>
+        </div>
         <div class="weui-cell ">
           <div class="weui-cell__hd">接受过几次HIV检测？</div>
           <div class="weui-cell__bd">

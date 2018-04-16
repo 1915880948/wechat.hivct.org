@@ -202,11 +202,11 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                             if(in_array($model->adis_result, [1, 2])){
                                 $ops[] = sprintf("是否确症：%s", adminConfirmStatus($model->adis_is_confirm));
                                 if($model->adis_is_confirm){
-                                    $ops[] = sprintf("日期:%s", $model->adis_confirm_time);
+                                    $ops[] = sprintf("日期:%s", substr($model->adis_confirm_time,0,10));
 
                                     $ops[] = sprintf("是否治疗：%s", adminConfirmStatus($model->adis_is_cure));
                                     if($model->adis_is_cure){
-                                        $ops[] = sprintf("日期:%s", $model->adis_cure_time);
+                                        $ops[] = sprintf("日期:%s", substr($model->adis_cure_time,0,10));
                                     }
                                 }
                             }

@@ -198,7 +198,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                         'attribute'      => 'adis_result',
                         'label'          => '艾滋检测状况',
                         'value'          => function($model) {
-                            $ops[] = adminGetAidsStatus($model->adis_result??0);
+                            $ops[] = adminGetAidsStatus(isset($model->adis_result)?$model->adis_result:0);
                             if(in_array($model->adis_result, [1, 2])){
                                 $ops[] = sprintf("是否确症：%s", adminConfirmStatus($model->adis_is_confirm));
                                 if($model->adis_is_confirm){

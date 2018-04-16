@@ -53,7 +53,6 @@ class ExportAction extends AdminBaseAction
             ->leftJoin(Logistics::tableName(),OrderList::tableName().'.logistic_id='.Logistics::tableName().'.id')
             ->orderBy([SurveyList::tableName().'.id' => SORT_DESC])->asArray()->all();
 
-        echo count($listData);exit;
         $objectPHPExcel = new PHPExcel();
         $objectPHPExcel->setActiveSheetIndex(0);
         $n = 0;

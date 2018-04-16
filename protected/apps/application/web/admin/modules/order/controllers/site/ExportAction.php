@@ -540,7 +540,7 @@ class ExportAction extends AdminBaseAction
                     $objectPHPExcel->getActiveSheet()
                                    ->setCellValue($k . ($n + 3), join(",", $tmp));
                 } else{
-                    $value = $data[$v] == 1 ? '是' : ($data[$v] === '0' ? '否' : $data[$v]);
+                    $value = isset($data[$v])?($data[$v] == 1 ? '是' : ($data[$v] === '0' ? '否' : $data[$v])):"";
                     $objectPHPExcel->getActiveSheet()
                                    ->setCellValue($k . ($n + 3), $value);
                 }

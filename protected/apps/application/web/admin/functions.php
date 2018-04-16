@@ -2,6 +2,7 @@
 
 use application\models\base\SystemMenu;
 use qiqi\helper\TreeHelper;
+use yii\helpers\ArrayHelper;
 
 /**
  * @category ${NAME}
@@ -37,4 +38,24 @@ function adminMenuActive($menus, $isFirst = false)
         return true;
     }
     return false;
+}
+
+function adminGetAidsStatus($aidsResult = null)
+{
+    $checkArr = [
+        '0' => '未检测',
+        '1' => '阴性',
+        '2' => '阳性',
+        '3' => '检测失败'
+    ];
+    if($aidsResult === null){
+        return $checkArr;
+    }
+    return ArrayHelper::getValue($checkArr, $aidsResult, '未知');
+}
+
+function adminConfirmStatus($status)
+{
+    $arr = [0 => '否', 1 => '是'];
+    return ArrayHelper::getValue($arr, $status, '否');
 }

@@ -194,10 +194,31 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                         }
                     ],
                     [
+                        'contentOptions' => ['style' => 'width:20%'],
+                        'attribute'      => 'adis_result',
+                        'label'          => '艾滋检测状况',
+                        'value'          => function($model) {
+                            $ops[] = adminGetAidsStatus($model->adis_result);
+                            if(in_array($model->adis_result, [1, 2])){
+                                $ops[] = sprintf("是否确症：%s", adminConfirmStatus($model->adis_is_confirm));
+                                if($model->adis_is_confirm){
+                                    $ops[] = sprintf("日期:%s", $model->adis_confirm_time);
+
+                                    $ops[] = sprintf("是否治疗：%s", adminConfirmStatus($model->adis_is_cure));
+                                    if($model->adis_is_cure){
+                                        $ops[] = sprintf("日期:%s", $model->adis_cure_time);
+                                    }
+                                }
+                            }
+                            return join(";", $ops);
+                        }
+                    ],
+
+                    [
                         /** @see yii\grid\ActionColumn */
                         'header'         => '功能管理',
                         'headerOptions'  => ['class' => 'center'],
-                        'contentOptions' => ['class' => 'col-sm-2 center'],
+                        'contentOptions' => ['class' => 'col-sm-2 center', 'style' => 'width:15%'],
                         'class'          => 'yii\grid\ActionColumn',
                         'template'       => '{edit_logistic} {ship} {deal} {memo} {detail} {export} {delete}',
                         'buttons'        => [

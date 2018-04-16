@@ -66,8 +66,8 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
       <?php
       /** @var InlineForm $form */
       $form = InlineForm::begin(['action' => yUrl(['site/index']), 'method' => 'get']);
-      echo $form->label("", Html::input('hidden', "pay_status", ArrayHelper::getValue($_GET, 'pay_status', '-99')));
-      echo $form->label("", Html::input('hidden', "logistic_id", ArrayHelper::getValue($_GET, 'logistic_id', '-99')));
+      echo $form->label("", Html::input('hidden', "pay_status", $pay_status != -99 ? $pay_status : ArrayHelper::getValue($_GET, 'pay_status', '-99')));
+      echo $form->label("", Html::input('hidden', "logistic_id", $logistic_id != -99 ? $logistic_id : ArrayHelper::getValue($_GET, 'logistic_id', '-99')));
       echo $form->label("快递公司", Html::dropDownList("ship_uuid", ArrayHelper::getValue($_GET, 'ship_uuid', ''), $expressArr));
       echo $form->label("订单状态", Html::dropDownList("order_status", ArrayHelper::getValue($_GET, 'order_status', ''), [
           '-99' => '全部',

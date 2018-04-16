@@ -110,21 +110,21 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
             <div class="portlet-body">
                 <?php
                 $columns = [
+                    // [
+                    //     'contentOptions' => ['class' => 'col-sm-1'],
+                    //     'attribute'      => 'id',
+                    //     'label'          => '订单ID',
+                    //     'value'          => function($model) {
+                    //         return $model->id * 9 + strtotime('2018-01-01');
+                    //     }
+                    // ],
                     [
-                        'contentOptions' => ['class' => 'col-sm-1'],
-                        'attribute'      => 'id',
-                        'label'          => '订单ID',
-                        'value'          => function($model) {
-                            return $model->id * 9 + strtotime('2018-01-01');
-                        }
-                    ],
-                    [
-                        'contentOptions' => ['class' => 'col-sm-1'],
+                        'contentOptions' => ['style' => 'width:8%'],
                         'attribute'      => 'address_contact',
                         'label'          => '收货人'
                     ],
                     [
-                        'contentOptions' => ['class' => 'col-sm-1'],
+                        'contentOptions' => ['style' => 'width:5%'],
                         'attribute'      => 'address_mobile',
                         'label'          => '电话'
                     ],
@@ -134,7 +134,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                     //     'label' => '详细地址'
                     // ],
                     [
-                        'contentOptions' => ['class' => 'col-sm-1'],
+                        'contentOptions' => ['style' => 'width:5%'],
                         'attribute'      => 'total_price',
                         'label'          => '总价',
                         'value'          => function($model) {
@@ -147,7 +147,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                     //     'label'          => '微信订单号',
                     // ],
                     [
-                        'contentOptions' => ['class' => 'col-sm-1'],
+                        'contentOptions' => ['style' => 'width:5%'],
                         'attribute'      => 'pay_status',
                         'label'          => '支付状态',
                         'value'          => function($model) {
@@ -155,12 +155,12 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                         }
                     ],
                     [
-                        'contentOptions' => ['class' => 'col-sm-1'],
+                        'contentOptions' => ['style' => 'width:5%'],
                         'attribute'      => 'order_status',
                         'label'          => '订单状态',
                         'value'          => function($model) {
 
-                            return gOrderStatus($model->order_status)."($model->order_status)";
+                            return gOrderStatus($model->order_status) . "($model->order_status)";
                         }
                     ],
                     //                                    [
@@ -169,7 +169,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                     //                                        'label' => '快递公司',
                     //                                    ],
                     [
-                        'contentOptions' => ['class' => 'col-sm-1'],
+                        'contentOptions' => ['style' => 'width:5%'],
                         'attribute'      => 'ship_code',
                         'format'         => 'raw',
                         'label'          => '快递单号',
@@ -186,7 +186,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                         }
                     ],
                     [
-                        'contentOptions' => ['class' => 'col-sm-1'],
+                        'contentOptions' => ['style' => 'width:5%'],
                         'attribute'      => 'ship_status',
                         'label'          => '配送状态',
                         'value'          => function($model) {
@@ -203,9 +203,10 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                         'buttons'        => [
                             'edit_logistic' => function($url, $model) use ($userinfo) {
                                 if($model->ship_status != 1 && $userinfo['is_admin'] == 1){
-                                    return Html::a('修改发货地', 'javascript:;', ['data-id'     => $model['uuid'],
-                                                                             'logistic_id' => $model['logistic_id'],
-                                                                             'class'       => 'edit_logistic'
+                                    return Html::a('修改发货地', 'javascript:;', [
+                                        'data-id'     => $model['uuid'],
+                                        'logistic_id' => $model['logistic_id'],
+                                        'class'       => 'edit_logistic'
                                     ], []);
                                 }
                             },
@@ -216,8 +217,9 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                             },
                             'deal'          => function($url, $model) use ($dealArr, $userinfo) {
                                 //                                            if (in_array($model->order_status, $dealArr) ) {
-                                return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class'  => 'deal',
-                                                                                                                              'target' => '_blank'
+                                return Html::a('处理', ['/order/site/deal', 'uuid' => $model['uuid'], 'uid' => $model['uid']], [
+                                    'class'  => 'deal',
+                                    'target' => '_blank'
                                 ]);
                                 //                                            }
                             },
@@ -225,8 +227,9 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                                 return Html::a('备注', 'javascript:;', ['data-id' => $model['uuid'], 'class' => 'memo'], []);
                             },
                             'detail'        => function($url, $model) {
-                                return Html::a('详情', ['/order/site/detail', 'uuid' => $model['uuid'], 'uid' => $model['uid']], ['class'  => 'detail',
-                                                                                                                                'target' => '_blank'
+                                return Html::a('详情', ['/order/site/detail', 'uuid' => $model['uuid'], 'uid' => $model['uid']], [
+                                    'class'  => 'detail',
+                                    'target' => '_blank'
                                 ]);
                             },
                             'export'        => function($url, $model) {

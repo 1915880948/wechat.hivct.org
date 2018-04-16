@@ -199,7 +199,7 @@ use common\assets\ace\InlineForm;use yii\grid\GridView;use yii\helpers\ArrayHelp
                         'label'          => '艾滋检测状况',
                         'value'          => function($model) {
                             $ops[] = adminGetAidsStatus(isset($model->adis_result)?$model->adis_result:0);
-                            if(in_array($model->adis_result, [1, 2])){
+                            if(2 == $model->adis_result){
                                 $ops[] = sprintf("是否确症：%s", adminConfirmStatus($model->adis_is_confirm));
                                 if($model->adis_is_confirm){
                                     $ops[] = sprintf("日期:%s", substr($model->adis_confirm_time,0,10));

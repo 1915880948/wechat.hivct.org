@@ -1,23 +1,26 @@
 <?php
 
 namespace application\web\admin\modules\order\controllers\site;
-ini_set('memory_limit','1024M');
+
+ini_set('memory_limit', '1024M');
+
 use application\models\base\Logistics;
 use application\models\base\OrderList;
 use application\models\base\SurveyList;
 use application\models\base\UserEvent;
 use application\web\admin\components\AdminBaseAction;
 use PHPExcel;
+use PHPExcel_IOFactory;
 use PHPExcel_Style_Alignment;
 use PHPExcel_Style_Border;
 use PHPExcel_Style_Fill;
-use PHPExcel_IOFactory;
 
 class ExportAction extends AdminBaseAction
 {
     public function run($logistic_id = '-99', $ship_uuid = '-99', $pay_status = '1', $order_status = '-99', $adis_result = '-99', $syphilis_result = '-99', $hepatitis_b_result = '-99', $hepatitis_c_result = '-99', $ship_code = '', $wx_transaction_id = '', $address_contact = '', $address_mobile = '')
     {
-        $query = OrderList::find()->select("*");
+        $query = OrderList::find()
+                          ->select("*");
         $conditions = [
             'logistic_id'        => $logistic_id,
             'ship_uuid'          => $ship_uuid,
@@ -34,30 +37,175 @@ class ExportAction extends AdminBaseAction
             }
         }
 
-        if ($ship_code) {
+        if($ship_code){
             $query = $query->andWhere(['like', 'ship_code', $ship_code]);
         }
-        if ($wx_transaction_id) {
+        if($wx_transaction_id){
             $query = $query->andWhere(['like', 'wx_transaction_id', $wx_transaction_id]);
         }
-        if ($address_contact) {
+        if($address_contact){
             $query = $query->andWhere(['like', 'address_contact', $address_contact]);
         }
-        if ($address_mobile) {
+        if($address_mobile){
             $query = $query->andWhere(['like', 'address_mobile', $address_mobile]);
         }
 
-        $listData = $query
-            ->leftJoin(UserEvent::tableName(),OrderList::tableName().'.uuid='.UserEvent::tableName().'.order_uuid')
-            ->leftJoin(SurveyList::tableName(),'event_type_uuid='.SurveyList::tableName().'.uuid')
-            ->leftJoin(Logistics::tableName(),OrderList::tableName().'.logistic_id='.Logistics::tableName().'.id')
-            ->orderBy([SurveyList::tableName().'.id' => SORT_DESC])->asArray()->all();
+        $query->leftJoin(UserEvent::tableName(), OrderList::tableName() . '.uuid=' . UserEvent::tableName() . '.order_uuid')
+              ->leftJoin(SurveyList::tableName(), 'event_type_uuid=' . SurveyList::tableName() . '.uuid');
+        if($logistic_id != -99){
+            $query->leftJoin(Logistics::tableName(), OrderList::tableName() . '.logistic_id=' . Logistics::tableName() . '.id');
+        }
+
+        $listData = $query->orderBy([SurveyList::tableName() . '.id' => SORT_DESC])
+                          ->asArray()
+                          ->all();
 
         $objectPHPExcel = new PHPExcel();
         $objectPHPExcel->setActiveSheetIndex(0);
         $n = 0;
-        $column = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ', 'BA', 'BB', 'BC', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BK', 'BL', 'BM', 'BN', 'BO', 'BP', 'BQ', 'BR', 'BS', 'BT', 'BU', 'BV', 'BW', 'BX', 'BY', 'BZ', 'CA', 'CB', 'CC', 'CD', 'CE', 'CF', 'CG', 'CH', 'CI', 'CJ', 'CK', 'CL', 'CM', 'CN', 'CO', 'CP', 'CQ', 'CR', 'CS', 'CT', 'CU', 'CV', 'CW','CX','CY','CZ','DA','DB','DE','DF','DG','DH','DI','DJ','DK','DL','DM','DN','DO','DP','DQ','DR','DS'];
-        $header = ['序号', '发货地','收货人', '电话', '详细地址', '订单标题', '订单说明','订单时间','艾滋病检测结果','是否确认','确认时间','是否治疗','治疗时间','梅毒检测结果','是否确认','确认时间','是否治疗','治疗时间','检测时间',
+        $column = [
+            'A',
+            'B',
+            'C',
+            'D',
+            'E',
+            'F',
+            'G',
+            'H',
+            'I',
+            'J',
+            'K',
+            'L',
+            'M',
+            'N',
+            'O',
+            'P',
+            'Q',
+            'R',
+            'S',
+            'T',
+            'U',
+            'V',
+            'W',
+            'X',
+            'Y',
+            'Z',
+            'AA',
+            'AB',
+            'AC',
+            'AD',
+            'AE',
+            'AF',
+            'AG',
+            'AH',
+            'AI',
+            'AJ',
+            'AK',
+            'AL',
+            'AM',
+            'AN',
+            'AO',
+            'AP',
+            'AQ',
+            'AR',
+            'AS',
+            'AT',
+            'AU',
+            'AV',
+            'AW',
+            'AX',
+            'AY',
+            'AZ',
+            'BA',
+            'BB',
+            'BC',
+            'BD',
+            'BE',
+            'BF',
+            'BG',
+            'BH',
+            'BI',
+            'BJ',
+            'BK',
+            'BL',
+            'BM',
+            'BN',
+            'BO',
+            'BP',
+            'BQ',
+            'BR',
+            'BS',
+            'BT',
+            'BU',
+            'BV',
+            'BW',
+            'BX',
+            'BY',
+            'BZ',
+            'CA',
+            'CB',
+            'CC',
+            'CD',
+            'CE',
+            'CF',
+            'CG',
+            'CH',
+            'CI',
+            'CJ',
+            'CK',
+            'CL',
+            'CM',
+            'CN',
+            'CO',
+            'CP',
+            'CQ',
+            'CR',
+            'CS',
+            'CT',
+            'CU',
+            'CV',
+            'CW',
+            'CX',
+            'CY',
+            'CZ',
+            'DA',
+            'DB',
+            'DE',
+            'DF',
+            'DG',
+            'DH',
+            'DI',
+            'DJ',
+            'DK',
+            'DL',
+            'DM',
+            'DN',
+            'DO',
+            'DP',
+            'DQ',
+            'DR',
+            'DS'
+        ];
+        $header = [
+            '序号',
+            '发货地',
+            '收货人',
+            '电话',
+            '详细地址',
+            '订单标题',
+            '订单说明',
+            '订单时间',
+            '艾滋病检测结果',
+            '是否确认',
+            '确认时间',
+            '是否治疗',
+            '治疗时间',
+            '梅毒检测结果',
+            '是否确认',
+            '确认时间',
+            '是否治疗',
+            '治疗时间',
+            '检测时间',
             '姓名或称呼',
             '民族',
             '性别',
@@ -161,7 +309,26 @@ class ExportAction extends AdminBaseAction
             '其他服务',
             '你对感染HIV后是否需要接受治疗的看法是'
         ];
-        $db_column = ['id','title','address_contact', 'address_mobile','address_detail','info','description','created_at','adis_result','adis_is_confirm','adis_confirm_time','adis_is_cure','adis_cure_time','syphilis_result','syphilis_is_confirm','syphilis_confirm_time','syphilis_is_cure','syphilis_cure_time','check_time',
+        $db_column = [
+            'id',
+            'title',
+            'address_contact',
+            'address_mobile',
+            'address_detail',
+            'info',
+            'description',
+            'created_at',
+            'adis_result',
+            'adis_is_confirm',
+            'adis_confirm_time',
+            'adis_is_cure',
+            'adis_cure_time',
+            'syphilis_result',
+            'syphilis_is_confirm',
+            'syphilis_confirm_time',
+            'syphilis_is_cure',
+            'syphilis_cure_time',
+            'check_time',
             'name',
             'nation',
             'gender',
@@ -267,112 +434,160 @@ class ExportAction extends AdminBaseAction
         ];
 
         //报表头的输出
-        $objectPHPExcel->getActiveSheet()->mergeCells('A1:'.end($column).'1');
-        $objectPHPExcel->getActiveSheet()->setCellValue('A1', '订单、调研列表');
+        $objectPHPExcel->getActiveSheet()
+                       ->mergeCells('A1:' . end($column) . '1');
+        $objectPHPExcel->getActiveSheet()
+                       ->setCellValue('A1', '订单、调研列表');
 
-        $objectPHPExcel->setActiveSheetIndex(0)->setCellValue('B2', '订单、调研列表');
-        $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A1')->getFont()->setSize(24);
-        $objectPHPExcel->setActiveSheetIndex(0)->getStyle('A1')
-            ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objectPHPExcel->setActiveSheetIndex(0)
+                       ->setCellValue('B2', '订单、调研列表');
+        $objectPHPExcel->setActiveSheetIndex(0)
+                       ->getStyle('A1')
+                       ->getFont()
+                       ->setSize(24);
+        $objectPHPExcel->setActiveSheetIndex(0)
+                       ->getStyle('A1')
+                       ->getAlignment()
+                       ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         //加粗
-        $objectPHPExcel->getActiveSheet()->getStyle("A2:".end($column).'2')->getFont()->setBold(true);
+        $objectPHPExcel->getActiveSheet()
+                       ->getStyle("A2:" . end($column) . '2')
+                       ->getFont()
+                       ->setBold(true);
         //设置居中
-        $objectPHPExcel->getActiveSheet()->getStyle('A2:'.end($column).'2')
-            ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objectPHPExcel->getActiveSheet()
+                       ->getStyle('A2:' . end($column) . '2')
+                       ->getAlignment()
+                       ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         //设置边框
-        $objectPHPExcel->getActiveSheet()->getStyle('A2:'.end($column).'2')
-            ->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objectPHPExcel->getActiveSheet()
+                       ->getStyle('A2:' . end($column) . '2')
+                       ->getBorders()
+                       ->getTop()
+                       ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 
         //设置颜色
-        $objectPHPExcel->getActiveSheet()->getStyle('A2:'.end($column).'2')->getFill()
-            ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('0013fd5c0');
+        $objectPHPExcel->getActiveSheet()
+                       ->getStyle('A2:' . end($column) . '2')
+                       ->getFill()
+                       ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                       ->getStartColor()
+                       ->setARGB('0013fd5c0');
 
-        foreach (array_combine($column, $header) as $k => $v) {
-            $objectPHPExcel->getActiveSheet()->getColumnDimension($k)->setAutoSize(true);
-            $objectPHPExcel->setActiveSheetIndex(0)->setCellValue($k . '2', $v);
+        foreach(array_combine($column, $header) as $k => $v){
+            $objectPHPExcel->getActiveSheet()
+                           ->getColumnDimension($k)
+                           ->setAutoSize(true);
+            $objectPHPExcel->setActiveSheetIndex(0)
+                           ->setCellValue($k . '2', $v);
         }
-        foreach ($listData as $data) {
+        foreach($listData as $data){
             //明细的输出
-            foreach (array_combine($column, $db_column) as $k => $v) {
-                if( $v == 'id'){
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), $n + 1);
-                }elseif($v=='adis_result' || $v=='syphilis_result'){
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3),
-                        ( gCheckResult($data[$v])  )
-                    );
-                }elseif ($v == 'partner_method'){
+            foreach(array_combine($column, $db_column) as $k => $v){
+                if($v == 'id'){
+                    $objectPHPExcel->getActiveSheet()
+                                   ->setCellValue($k . ($n + 3), $n + 1);
+                } elseif($v == 'adis_result' || $v == 'syphilis_result'){
+                    $objectPHPExcel->getActiveSheet()
+                                   ->setCellValue($k . ($n + 3), (gCheckResult($data[$v])));
+                } elseif($v == 'partner_method'){
                     $tmp = [];
-                    $tmp[] = $data['partner_sns']==1?'互联网（社交软件等）':' ';
-                    $tmp[] = $data['partner_bar']==1?'酒吧':' ';
-                    $tmp[] = $data['partner_ktv']==1?'KTV':' ';
-                    $tmp[] = $data['partner_park']==1?'公园':' ';
+                    $tmp[] = $data['partner_sns'] == 1 ? '互联网（社交软件等）' : ' ';
+                    $tmp[] = $data['partner_bar'] == 1 ? '酒吧' : ' ';
+                    $tmp[] = $data['partner_ktv'] == 1 ? 'KTV' : ' ';
+                    $tmp[] = $data['partner_park'] == 1 ? '公园' : ' ';
                     $tmp[] = $data['partner_other'];
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), join("," , $tmp));
-                }elseif ( $v == 'past_check_organize'){
+                    $objectPHPExcel->getActiveSheet()
+                                   ->setCellValue($k . ($n + 3), join(",", $tmp));
+                } elseif($v == 'past_check_organize'){
                     $tmp = [];
-                    $tmp[] = $data['past_channel_hospital']==1?'医院':' ';
-                    $tmp[] = $data['past_channel_jk']==1?'疾控':' ';
-                    $tmp[] = $data['past_channel_self']==1?'自检':' ';
-                    $tmp[] = $data['past_channel_vct']==1?'VCT门诊':' ';
-                    $tmp[] = $data['past_channel_community']==1?'社区组织':' ';
+                    $tmp[] = $data['past_channel_hospital'] == 1 ? '医院' : ' ';
+                    $tmp[] = $data['past_channel_jk'] == 1 ? '疾控' : ' ';
+                    $tmp[] = $data['past_channel_self'] == 1 ? '自检' : ' ';
+                    $tmp[] = $data['past_channel_vct'] == 1 ? 'VCT门诊' : ' ';
+                    $tmp[] = $data['past_channel_community'] == 1 ? '社区组织' : ' ';
                     $tmp[] = $data['past_channel_other'];
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), join("," , $tmp));
-                }elseif ( $v == 'where_can_check_HIV'){
+                    $objectPHPExcel->getActiveSheet()
+                                   ->setCellValue($k . ($n + 3), join(",", $tmp));
+                } elseif($v == 'where_can_check_HIV'){
                     $tmp = [];
-                    $tmp[] = $data['detect_hospital']==1?'医院':' ';
-                    $tmp[] = $data['detect_jk_center']==1?'疾控中心':' ';
-                    $tmp[] = $data['detect_community']==1?'社区小组':' ';
-                    $tmp[] = $data['detect_drugstore']==1?'药店':' ';
-                    $tmp[] = $data['detect_clinic']==1?'个体诊所':' ';
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), join("," , $tmp));
-                }elseif ( $v == 'hope_check_channel'){
+                    $tmp[] = $data['detect_hospital'] == 1 ? '医院' : ' ';
+                    $tmp[] = $data['detect_jk_center'] == 1 ? '疾控中心' : ' ';
+                    $tmp[] = $data['detect_community'] == 1 ? '社区小组' : ' ';
+                    $tmp[] = $data['detect_drugstore'] == 1 ? '药店' : ' ';
+                    $tmp[] = $data['detect_clinic'] == 1 ? '个体诊所' : ' ';
+                    $objectPHPExcel->getActiveSheet()
+                                   ->setCellValue($k . ($n + 3), join(",", $tmp));
+                } elseif($v == 'hope_check_channel'){
                     $tmp = [];
-                    $tmp[] = $data['detect_channel_hospital']==1?'医院':' ';
-                    $tmp[] = $data['detect_channel_jk_center']==1?'疾控中心':' ';
-                    $tmp[] = $data['detect_channel_community']==1?'社区小组':' ';
-                    $tmp[] = $data['detect_channel_drugstore']==1?'药店':' ';
-                    $tmp[] = $data['detect_channel_clinic']==1?'个体诊所':' ';
+                    $tmp[] = $data['detect_channel_hospital'] == 1 ? '医院' : ' ';
+                    $tmp[] = $data['detect_channel_jk_center'] == 1 ? '疾控中心' : ' ';
+                    $tmp[] = $data['detect_channel_community'] == 1 ? '社区小组' : ' ';
+                    $tmp[] = $data['detect_channel_drugstore'] == 1 ? '药店' : ' ';
+                    $tmp[] = $data['detect_channel_clinic'] == 1 ? '个体诊所' : ' ';
                     $tmp[] = $data['detect_channel_other'];
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), join("," , $tmp));
-                }elseif ( $v == 'attitude'){
+                    $objectPHPExcel->getActiveSheet()
+                                   ->setCellValue($k . ($n + 3), join(",", $tmp));
+                } elseif($v == 'attitude'){
                     $tmp = [];
-                    $tmp[] = $data['active_treatment']==1?'积极接受治疗':'';
-                    $tmp[] = $data['unaccept_medical']==1?'担心药物副作用，暂不接受':'';
-                    $tmp[] = $data['treatment_until_standard']==1?'未到治疗标准就不用治疗':'';
-                    $tmp[] = $data['resistant_care']==1?'担心很快耐药':'';
-                    $tmp[] = $data['explore_care']==1?'担心吃药后被人发现':'';
-                    $tmp[] = $data['not_treatment']==1?'认为无法治愈，不治疗，任其自然':'';
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), join("," , $tmp));
-                }else{
-                    $value = $data[$v]==1?'是':($data[$v]==='0'?'否':$data[$v]);
-                    $objectPHPExcel->getActiveSheet()->setCellValue($k . ($n + 3), $value);
+                    $tmp[] = $data['active_treatment'] == 1 ? '积极接受治疗' : '';
+                    $tmp[] = $data['unaccept_medical'] == 1 ? '担心药物副作用，暂不接受' : '';
+                    $tmp[] = $data['treatment_until_standard'] == 1 ? '未到治疗标准就不用治疗' : '';
+                    $tmp[] = $data['resistant_care'] == 1 ? '担心很快耐药' : '';
+                    $tmp[] = $data['explore_care'] == 1 ? '担心吃药后被人发现' : '';
+                    $tmp[] = $data['not_treatment'] == 1 ? '认为无法治愈，不治疗，任其自然' : '';
+                    $objectPHPExcel->getActiveSheet()
+                                   ->setCellValue($k . ($n + 3), join(",", $tmp));
+                } else{
+                    $value = $data[$v] == 1 ? '是' : ($data[$v] === '0' ? '否' : $data[$v]);
+                    $objectPHPExcel->getActiveSheet()
+                                   ->setCellValue($k . ($n + 3), $value);
                 }
             }
 
             //设置边框
             $currentRowNum = $n + 4;
-            $objectPHPExcel->getActiveSheet()->getStyle('A' . ($n + 3) . ':'.end($column) . $currentRowNum)
-                ->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-            $objectPHPExcel->getActiveSheet()->getStyle('A' . ($n + 3) . ':'.end($column) . $currentRowNum)
-                ->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-            $objectPHPExcel->getActiveSheet()->getStyle('A' . ($n + 3) . ':'.end($column) . $currentRowNum)
-                ->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-            $objectPHPExcel->getActiveSheet()->getStyle('A' . ($n + 3) . ':'.end($column) . $currentRowNum)
-                ->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-            $objectPHPExcel->getActiveSheet()->getStyle('A' . ($n + 3) . ':'.end($column) . $currentRowNum)
-                ->getBorders()->getVertical()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+            $objectPHPExcel->getActiveSheet()
+                           ->getStyle('A' . ($n + 3) . ':' . end($column) . $currentRowNum)
+                           ->getBorders()
+                           ->getTop()
+                           ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+            $objectPHPExcel->getActiveSheet()
+                           ->getStyle('A' . ($n + 3) . ':' . end($column) . $currentRowNum)
+                           ->getBorders()
+                           ->getLeft()
+                           ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+            $objectPHPExcel->getActiveSheet()
+                           ->getStyle('A' . ($n + 3) . ':' . end($column) . $currentRowNum)
+                           ->getBorders()
+                           ->getRight()
+                           ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+            $objectPHPExcel->getActiveSheet()
+                           ->getStyle('A' . ($n + 3) . ':' . end($column) . $currentRowNum)
+                           ->getBorders()
+                           ->getBottom()
+                           ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+            $objectPHPExcel->getActiveSheet()
+                           ->getStyle('A' . ($n + 3) . ':' . end($column) . $currentRowNum)
+                           ->getBorders()
+                           ->getVertical()
+                           ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
             $n = $n + 1;
         }
 
         //设置分页显示
         //$objectPHPExcel->getActiveSheet()->setBreak( 'I55' , PHPExcel_Worksheet::BREAK_ROW );
         //$objectPHPExcel->getActiveSheet()->setBreak( 'I10' , PHPExcel_Worksheet::BREAK_COLUMN );
-        $objectPHPExcel->getActiveSheet()->getPageSetup()->setHorizontalCentered(true);
-        $objectPHPExcel->getActiveSheet()->getPageSetup()->setVerticalCentered(false);
+        $objectPHPExcel->getActiveSheet()
+                       ->getPageSetup()
+                       ->setHorizontalCentered(true);
+        $objectPHPExcel->getActiveSheet()
+                       ->getPageSetup()
+                       ->setVerticalCentered(false);
 
-//        ob_end_clean();
-//        ob_start();
+        //        ob_end_clean();
+        //        ob_start();
 
         header('Content-Type:application/vnd.ms-excel');
         header('Content-Disposition:attachment;filename="' . '订单/调研列表-' . date("Y年m月d日") . '.xls"');

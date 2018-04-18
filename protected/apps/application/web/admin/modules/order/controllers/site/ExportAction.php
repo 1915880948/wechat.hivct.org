@@ -54,6 +54,11 @@ class ExportAction extends AdminBaseAction
               ->leftJoin(SurveyList::tableName(), 'event_type_uuid=' . SurveyList::tableName() . '.uuid');
         if($logistic_id != -99){
             $query->leftJoin(Logistics::tableName(), OrderList::tableName() . '.logistic_id=' . Logistics::tableName() . '.id');
+        } else{
+            $logistics = Logistics::find()
+                                  ->indexBy('id')
+                                  ->asArray()
+                                  ->all();
         }
 
         $listData = $query->orderBy([SurveyList::tableName() . '.id' => SORT_DESC])
@@ -539,8 +544,16 @@ class ExportAction extends AdminBaseAction
                     $tmp[] = $data['not_treatment'] == 1 ? '认为无法治愈，不治疗，任其自然' : '';
                     $objectPHPExcel->getActiveSheet()
                                    ->setCellValue($k . ($n + 3), join(",", $tmp));
+                } elseif($v == 'title'){
+                    if(isset($data[$v]) && $data[$v]){
+                        $value = $data[$v];
+                    } else{
+                        $value = isset($logistics[$data['logistics_id']]) ? $logistics[$data['logistics_id']]['title'] : '';
+                    }
+                    $objectPHPExcel->getActiveSheet()
+                                   ->setCellValue($k . ($n + 3), $value);
                 } else{
-                    $value = isset($data[$v])?($data[$v] == 1 ? '是' : ($data[$v] === '0' ? '否' : $data[$v])):"";
+                    $value = isset($data[$v]) ? ($data[$v] == 1 ? '是' : ($data[$v] === '0' ? '否' : $data[$v])) : "";
                     $objectPHPExcel->getActiveSheet()
                                    ->setCellValue($k . ($n + 3), $value);
                 }

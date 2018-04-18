@@ -548,7 +548,7 @@ class ExportAction extends AdminBaseAction
                     if(isset($data[$v]) && $data[$v]){
                         $value = $data[$v];
                     } else{
-                        $value = isset($logistics[$data['logistics_id']]) ? $logistics[$data['logistics_id']]['title'] : '';
+                        $value = isset($logistics[$data['logistic_id']]) ? $logistics[$data['logistic_id']]['title'] : '';
                     }
                     $objectPHPExcel->getActiveSheet()
                                    ->setCellValue($k . ($n + 3), $value);

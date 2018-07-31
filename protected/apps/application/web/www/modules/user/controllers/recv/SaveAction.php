@@ -22,12 +22,18 @@ class SaveAction extends WwwBaseAction
 
     public function run()
     {
+        $event = new UserEvent();
         $post = $this->request->post();
 
         $products = ArrayHelper::getValue($post, 'product');
+
+        if(!$products){
+            $event->addError('order_temporary','请至少选择一个免费试剂');
+        }
+
         $logistics = ArrayHelper::getValue($post, 'logistics');
 
-        $event = new UserEvent();
+
         if(!$logistics){
             $event->addError('uuid', '请选择发货地');
         }

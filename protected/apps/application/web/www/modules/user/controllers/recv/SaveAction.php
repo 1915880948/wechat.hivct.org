@@ -30,6 +30,9 @@ class SaveAction extends WwwBaseAction
         if(!$products){
             $event->addError('order_temporary','请至少选择一个免费试剂');
         }
+        if(!isset($products['free'])||!$products['free']){
+            $event->addError('order_temporary','请至少选择一个免费试剂');
+        }
 
         $logistics = ArrayHelper::getValue($post, 'logistics');
 

@@ -138,6 +138,8 @@
               $('input[data-rel]').each(function () {
                   if ($.inArray(id, $(this).data('rel')) === -1) {
                       $(this).attr('disabled', true);
+                  }else{
+                      $(this).attr('disabled', false);
                   }
               });
           });

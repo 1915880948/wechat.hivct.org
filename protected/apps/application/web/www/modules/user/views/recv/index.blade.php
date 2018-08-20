@@ -33,7 +33,7 @@
                     <p>{{$product['name']}}</p>
                   </div>
                   <div class="weui-cell__ft">
-                    <input type="radio" class="weui-check" name="product[{{$type}}]" value="{{$product['id']}}" id="xx{{$product['id']}}" @if(isset($rel[$product['id']])) data-rel="{{json_encode($rel[$product['id']])}} @endif">
+                    <input type="radio" class="weui-check" name="product[{{$type}}]" value="{{$product['id']}}" id="xx{{$product['id']}}" @if(isset($rel[$product['id']])) data-rel="{{json_encode($rel[$product['id']])}}" @endif>
                     <span class="weui-icon-checked"></span>
                   </div>
                 </label>

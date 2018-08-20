@@ -136,6 +136,7 @@
               var id = parseInt($(this).data('values'));
               console.log(id);
               $('input[data-rel]').each(function () {
+                  console.log(id, $(this).data('rel'));
                   if ($.inArray(id, $(this).data('rel')) === -1) {
                       $(this).attr('disabled', true);
                   }else{

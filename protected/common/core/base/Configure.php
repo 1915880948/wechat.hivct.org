@@ -7,13 +7,13 @@
  */
 namespace common\core\base;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Class Configure
  * @package app\common\base
  */
-class Configure extends Object
+class Configure extends BaseObject
 {
     /**
      * @param $key

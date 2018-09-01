@@ -22,6 +22,18 @@ use Yii;
  */
 class TblFields extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const LABEL = 'label';
+     const FIELD = 'field';
+     const TYPE = 'type';
+     const DATA = 'data';
+     const DEFAULT_VALUE = 'default_value';
+     const HINT = 'hint';
+     const REQUIRED = 'required';
+     const REGEX = 'regex';
+     const PID = 'pid';
+     const FM_ID = 'fm_id';
+     const SORT = 'sort';
     /**
      * @inheritdoc
      */

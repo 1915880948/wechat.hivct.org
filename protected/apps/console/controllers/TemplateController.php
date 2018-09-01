@@ -20,4 +20,10 @@ class TemplateController extends Controller
         TplMessage::getInstance()
                   ->refund($to = 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q', $title = 'XXX 申请退款', $orderNo = 12345, $price = '100.01', $desc = '申请退款通知');
     }
+
+    public function actionShip()
+    {
+        TplMessage::getInstance()
+                  ->ship('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', $title = '您的物流已经发货', $express = "顺丰", $code = "123456789", $memo = "要小心", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
+    }
 }

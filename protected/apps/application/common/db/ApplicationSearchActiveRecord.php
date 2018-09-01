@@ -9,13 +9,13 @@
 namespace application\common\db;
 
 use common\core\db\base\QSearchInstance;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Class ApplicationSearchActiveRecord
  * @package application\common\db
  */
-class ApplicationSearchActiveRecord extends Object
+class ApplicationSearchActiveRecord extends BaseObject
 {
     use QSearchInstance;
 }

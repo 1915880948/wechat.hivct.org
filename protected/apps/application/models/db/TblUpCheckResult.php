@@ -24,6 +24,20 @@ use Yii;
  */
 class TblUpCheckResult extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const UID = 'uid';
+     const NAME = 'name';
+     const PHONE = 'phone';
+     const EMAIL = 'email';
+     const CHECK_DOCTOR = 'check_doctor';
+     const CHECK_DESC = 'check_desc';
+     const ADIS_RESULT = 'adis_result';
+     const SYPHILIS_RESULT = 'syphilis_result';
+     const HEPATITIS_B_RESULT = 'hepatitis_b_result';
+     const HEPATITIS_C_RESULT = 'hepatitis_c_result';
+     const IS_CHECK = 'is_check';
+     const CREATED_AT = 'created_at';
+     const UPDATED_AT = 'updated_at';
     /**
      * @inheritdoc
      */

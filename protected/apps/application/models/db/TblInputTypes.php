@@ -13,6 +13,9 @@ use Yii;
  */
 class TblInputTypes extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const TYPE = 'type';
+     const COMMENT = 'comment';
     /**
      * @inheritdoc
      */

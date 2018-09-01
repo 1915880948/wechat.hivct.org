@@ -13,6 +13,9 @@ use Yii;
  */
 class TblWxNotifyLog extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const DATA = 'data';
+     const ADD_TIME = 'add_time';
     /**
      * @inheritdoc
      */

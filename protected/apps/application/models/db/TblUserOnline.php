@@ -15,6 +15,11 @@ use Yii;
  */
 class TblUserOnline extends \application\common\db\ApplicationActiveRecord
 {
+     const OPENID = 'openid';
+     const TOKEN = 'token';
+     const VERIFY_CODE = 'verify_code';
+     const VERIFY_TIME = 'verify_time';
+     const UPDATED_AT = 'updated_at';
     /**
      * @inheritdoc
      */

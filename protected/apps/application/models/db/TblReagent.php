@@ -21,6 +21,17 @@ use Yii;
  */
 class TblReagent extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const UUID = 'uuid';
+     const NAME = 'name';
+     const SUBNAME = 'subname';
+     const DESCRIPTION = 'description';
+     const TYPE = 'type';
+     const PRICE = 'price';
+     const STATUS = 'status';
+     const STOCK = 'stock';
+     const COMMENT = 'comment';
+     const IMAGE = 'image';
     /**
      * @inheritdoc
      */

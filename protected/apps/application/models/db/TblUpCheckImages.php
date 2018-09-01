@@ -16,6 +16,12 @@ use Yii;
  */
 class TblUpCheckImages extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const UID = 'uid';
+     const UP_CHECK_RESULT_ID = 'up_check_result_id';
+     const IMAGE = 'image';
+     const STATUS = 'status';
+     const CREATED_AT = 'created_at';
     /**
      * @inheritdoc
      */

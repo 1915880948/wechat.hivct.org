@@ -13,6 +13,9 @@ use Yii;
  */
 class TblCache extends \application\common\db\ApplicationActiveRecord
 {
+     const KEY = 'key';
+     const VALUE = 'value';
+     const EXPIRE_TIME = 'expire_time';
     /**
      * @inheritdoc
      */

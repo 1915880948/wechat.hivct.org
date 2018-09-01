@@ -33,6 +33,29 @@ use Yii;
  */
 class TblUsers extends \application\common\db\ApplicationActiveRecord
 {
+     const UID = 'uid';
+     const OPENID = 'openid';
+     const UNIONID = 'unionid';
+     const NICKNAME = 'nickname';
+     const REALNAME = 'realname';
+     const GENDER = 'gender';
+     const BIRTHDATE = 'birthdate';
+     const NATION = 'nation';
+     const PROVINCE = 'province';
+     const CITY = 'city';
+     const COUNTRY = 'country';
+     const HEADIMGURL = 'headimgurl';
+     const AGE = 'age';
+     const EMAIL = 'email';
+     const QQ = 'qq';
+     const TELEPHONE = 'telephone';
+     const ADDRESS = 'address';
+     const IS_UPDATED = 'is_updated';
+     const IS_SUBSCRIBE = 'is_subscribe';
+     const SUBSCRIBE_TIME = 'subscribe_time';
+     const TAGS = 'tags';
+     const CREATED_AT = 'created_at';
+     const UPDATED_AT = 'updated_at';
     /**
      * @inheritdoc
      */

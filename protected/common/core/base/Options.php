@@ -8,14 +8,14 @@
 namespace common\core\base;
 
 use Mage\Config;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\ArrayHelper;
 
 /**
  * Class Options
  * @package common\core\base
  */
-class Options extends Object
+class Options extends BaseObject
 {
     private static $_options = [];
 

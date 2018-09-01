@@ -8,13 +8,13 @@
 namespace application\common\base;
 
 use qiqi\helper\base\InstanceTrait;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Class Attachments
  * @package application\common\base
  */
-class Attachments extends Object
+class Attachments extends BaseObject
 {
     use InstanceTrait;
     public $savetype = [

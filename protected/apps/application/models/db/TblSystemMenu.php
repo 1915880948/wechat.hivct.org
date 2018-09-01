@@ -18,6 +18,14 @@ use Yii;
  */
 class TblSystemMenu extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const NAME = 'name';
+     const ACTION = 'action';
+     const PID = 'pid';
+     const ICON = 'icon';
+     const ORDINAL = 'ordinal';
+     const STATUS = 'status';
+     const IS_POWER = 'is_power';
     /**
      * @inheritdoc
      */

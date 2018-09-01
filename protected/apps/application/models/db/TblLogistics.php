@@ -15,6 +15,11 @@ use Yii;
  */
 class TblLogistics extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const SIGN_NAME = 'sign_name';
+     const TITLE = 'title';
+     const STATUS = 'status';
+     const CREATED_AT = 'created_at';
     /**
      * @inheritdoc
      */

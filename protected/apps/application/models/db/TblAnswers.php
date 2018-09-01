@@ -27,6 +27,23 @@ use Yii;
  */
 class TblAnswers extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const ORDER_NO = 'order_no';
+     const REFUND_NO = 'refund_no';
+     const DATA = 'data';
+     const FORM_NAME = 'form_name';
+     const FEE = 'fee';
+     const POSTAGE = 'postage';
+     const OTHER_FEE = 'other_fee';
+     const STATUS = 'status';
+     const EXPRESS = 'express';
+     const EXPRESS_NO = 'express_no';
+     const REJECT_APPLY_CAUSE = 'reject_apply_cause';
+     const FEEDBACK_FAIL_CAUSE = 'feedback_fail_cause';
+     const ADD_TIME = 'add_time';
+     const UPD_TIME = 'upd_time';
+     const UID = 'uid';
+     const PREPAY_ID = 'prepay_id';
     /**
      * @inheritdoc
      */

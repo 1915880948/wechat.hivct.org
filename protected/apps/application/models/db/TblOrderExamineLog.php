@@ -15,6 +15,11 @@ use Yii;
  */
 class TblOrderExamineLog extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const ORDER_ID = 'order_id';
+     const ORDER_EXAMINE = 'order_examine';
+     const ORDER_EXAMINE_USER = 'order_examine_user';
+     const CREATED_AT = 'created_at';
     /**
      * @inheritdoc
      */

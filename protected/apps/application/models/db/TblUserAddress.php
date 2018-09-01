@@ -20,6 +20,16 @@ use Yii;
  */
 class TblUserAddress extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const UUID = 'uuid';
+     const UID = 'uid';
+     const REALNAME = 'realname';
+     const MOBILE = 'mobile';
+     const CITY = 'city';
+     const CITY_CODE = 'city_code';
+     const ADDRESS = 'address';
+     const CREATED_AT = 'created_at';
+     const IS_DEFAULT = 'is_default';
     /**
      * @inheritdoc
      */

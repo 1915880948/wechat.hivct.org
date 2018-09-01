@@ -9,7 +9,7 @@ namespace common\assets\editor;
 
 use app\web\admin\components\assets\QiniuUploadAsset;
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\web\JsExpression;
@@ -19,7 +19,7 @@ use yii\web\View;
  * Class Kindeditor
  * @package common\extension
  */
-class Kindeditor extends Object
+class Kindeditor extends BaseObject
 {
     public static $initUpload = false;
     public static $initEditor = false;

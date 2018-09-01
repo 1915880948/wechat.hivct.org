@@ -25,6 +25,21 @@ use Yii;
  */
 class TblUserEvent extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const UUID = 'uuid';
+     const UID = 'uid';
+     const EVENT_TYPE = 'event_type';
+     const EVENT_TYPE_UUID = 'event_type_uuid';
+     const EVENT_TYPE_STEP_TOTAL = 'event_type_step_total';
+     const EVENT_TYPE_STEP_CURRENT = 'event_type_step_current';
+     const EVENT_MEMO = 'event_memo';
+     const ORDER_TEMPORARY = 'order_temporary';
+     const ORDER_UUID = 'order_uuid';
+     const ORDER_IS_PAID = 'order_is_paid';
+     const ORDER_IS_SHIPPED = 'order_is_shipped';
+     const USER_ADDRESS_UUID = 'user_address_uuid';
+     const CREATED_AT = 'created_at';
+     const UPDATED_AT = 'updated_at';
     /**
      * @inheritdoc
      */

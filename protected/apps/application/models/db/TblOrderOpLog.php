@@ -16,6 +16,12 @@ use Yii;
  */
 class TblOrderOpLog extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const ORDER_UUID = 'order_uuid';
+     const USER_ID = 'user_id';
+     const STATUS_ORIGIN = 'status_origin';
+     const STATUS_NEW = 'status_new';
+     const CREATED_AT = 'created_at';
     /**
      * @inheritdoc
      */

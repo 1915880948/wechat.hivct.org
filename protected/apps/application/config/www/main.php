@@ -6,8 +6,8 @@
  * @since
  */
 
-use common\core\template\blade\BladeView;
-use common\core\template\blade\ViewRenderer;
+use qiqi\core\template\blade\BladeView;
+use qiqi\core\template\blade\ViewRenderer;
 
 $appId = basename(__DIR__);
 $appName = defined('APP_GROUP') ? APP_GROUP : APP_NAME;

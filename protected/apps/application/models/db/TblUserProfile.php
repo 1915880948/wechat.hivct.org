@@ -18,6 +18,14 @@ use Yii;
  */
 class TblUserProfile extends \application\common\db\ApplicationActiveRecord
 {
+     const UID = 'uid';
+     const UUID = 'uuid';
+     const REALNAME = 'realname';
+     const MOBILE = 'mobile';
+     const CITY = 'city';
+     const CITY_CODE = 'city_code';
+     const AVATAR = 'avatar';
+     const WEBSITE = 'website';
     /**
      * @inheritdoc
      */

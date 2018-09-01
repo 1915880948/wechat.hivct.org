@@ -6,7 +6,7 @@
  * @since
  */
 
-use yii\gii\Module;
+use qiqi\modules\tools\Module;
 
 $params = array_merge( //ALL PARAMS
     require(PROJECT_GLOBAL_CONFIG_PATH . '/params.php'),//global params
@@ -18,15 +18,13 @@ return [
     'name'                => $appId,
     'basePath'            => APP_PATH,
     'controllerNamespace' => "console\\controllers",
-    'components'          => [
-    ],
+    'components'          => [],
     'params'              => $params,
     'bootstrap'           => [
         'tools'
     ],
     'modules'             => [
-        'tools' => console\modules\tools\Module::className()
+        'tools' => Module::className()
     ],
-    'controllerMap' => [
-    ],
+    'controllerMap'       => [],
 ];

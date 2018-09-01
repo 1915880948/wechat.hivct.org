@@ -14,6 +14,10 @@ use Yii;
  */
 class TblRelationReagentLogistics extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const UUID = 'uuid';
+     const REAGENT_ID = 'reagent_id';
+     const LOGISTICS_ID = 'logistics_id';
     /**
      * @inheritdoc
      */

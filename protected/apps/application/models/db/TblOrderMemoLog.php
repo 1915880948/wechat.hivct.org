@@ -16,6 +16,12 @@ use Yii;
  */
 class TblOrderMemoLog extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const ORDER_UUID = 'order_uuid';
+     const ADMIN_ID = 'admin_id';
+     const ADMIN_ACCOUNT = 'admin_account';
+     const DATETIME = 'datetime';
+     const MEMO_HISTORY = 'memo_history';
     /**
      * @inheritdoc
      */

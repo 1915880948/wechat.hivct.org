@@ -8,7 +8,9 @@
 
 namespace wechat;
 
+use EasyWeChat\Core\Exceptions\InvalidArgumentException;
 use qiqi\helper\base\InstanceTrait;
+use qiqi\helper\log\FileLogHelper;
 
 class TplMessage
 {
@@ -50,5 +52,26 @@ class TplMessage
     public function refundOver()
     {
 
+    }
+
+    public function ship($to , $title = '您的订单已经发货', $express, $code, $memo = '', $remark = '')
+    {
+        try{
+            Weixin::getApp()->notice->send([
+                'touser'      => $to,// $userInfo['openid'],
+                'template_id' => 'DcwX2k69pf08WiBl5Zfa-Tsd6pit3NDhKhIgaIc01Ds',
+                'url'         => '',
+                'data'        => [
+                    'first'    => $title,
+                    'keyword1' => "您的订单已经由{$express}进行发货",
+                    'keyword2' => "物流单号：{$code}",
+                    'keyword3' => date("Y-m-d H:i"),
+                    'keyword4' => '',
+                    'remark'   => '',
+                ],
+            ]);
+        } catch(InvalidArgumentException $e){
+            FileLogHelper::xlog($e->getMessage(), 'wechat/template');
+        }
     }
 }

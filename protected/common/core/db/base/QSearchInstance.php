@@ -10,7 +10,7 @@ namespace common\core\db\base;
 use qiqi\helper\base\InstanceTrait;
 use qiqi\helper\DataProviderHelper;
 use yii\base\InvalidParamException;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\validators\NumberValidator;

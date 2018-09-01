@@ -16,6 +16,12 @@ use Yii;
  */
 class TblExpress extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const NAME = 'name';
+     const PHONE = 'phone';
+     const ADDRESS = 'address';
+     const STATUS = 'status';
+     const CREATED_AT = 'created_at';
     /**
      * @inheritdoc
      */

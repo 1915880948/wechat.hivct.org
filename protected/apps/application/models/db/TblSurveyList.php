@@ -101,12 +101,6 @@ use Yii;
  * @property integer $is_detect_care
  * @property string $hiv_check_care
  * @property string $hiv_check_care_other
- * @property integer $past_channel_hospital
- * @property integer $past_channel_jk
- * @property integer $past_channel_self
- * @property integer $past_channel_vct
- * @property integer $past_channel_community
- * @property integer $past_channel_other
  * @property integer $detect_channel_hospital
  * @property integer $detect_channel_jk_center
  * @property integer $detect_channel_community
@@ -139,6 +133,129 @@ use Yii;
  */
 class TblSurveyList extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const UUID = 'uuid';
+     const UID = 'uid';
+     const CREATE_TIME = 'create_time';
+     const NAME = 'name';
+     const NATION = 'nation';
+     const GENDER = 'gender';
+     const BIRTHDAY = 'birthday';
+     const EDUCATION = 'education';
+     const MARRIAGE = 'marriage';
+     const JOB = 'job';
+     const JOB_OTHER = 'job_other';
+     const INCOME = 'income';
+     const HOUSEHOLD = 'household';
+     const LIVECITY = 'livecity';
+     const LIVECITY_CODE = 'livecity_code';
+     const LIVETIME = 'livetime';
+     const HAS_SEX = 'has_sex';
+     const SEX_AGE = 'sex_age';
+     const PARTNER = 'partner';
+     const PARTNER_SNS = 'partner_sns';
+     const PARTNER_BAR = 'partner_bar';
+     const PARTNER_KTV = 'partner_ktv';
+     const PARTNER_PARK = 'partner_park';
+     const PARTNER_OTHER = 'partner_other';
+     const SEX_TYPE = 'sex_type';
+     const SEX_TYPE_OTHER = 'sex_type_other';
+     const SEX_DIRECTION = 'sex_direction';
+     const HAS_SEX_3MONTH = 'has_sex_3month';
+     const HETERO_PARTNER_NUM = 'hetero_partner_num';
+     const CONDOM_FULL_USE = 'condom_full_use';
+     const CONDOM_PERCENT = 'condom_percent';
+     const CONDOM_NEAR = 'condom_near';
+     const CONDOM_FULL_USE_NOT = 'condom_full_use_not';
+     const ANAL_SEX = 'anal_sex';
+     const ANAL_SEX_ROLE = 'anal_sex_role';
+     const ANAL_SEX_PARTNER_NUM = 'anal_sex_partner_num';
+     const ANAL_SEX_FULL_USE = 'anal_sex_full_use';
+     const ANAL_SEX_PERCENT = 'anal_sex_percent';
+     const ANAL_SEX_NEAR = 'anal_sex_near';
+     const ANAL_SEX_FULL_USE_NOT = 'anal_sex_full_use_not';
+     const IS_USE_DRUG = 'is_use_drug';
+     const DRUG_TYPE = 'drug_type';
+     const DRUG_RATE = 'drug_rate';
+     const IS_USE_DRUG_NEAR_MONTH = 'is_use_drug_near_month';
+     const DRUG_NEAR_MONTH_NUM = 'drug_near_month_num';
+     const IS_USE_INJECT = 'is_use_inject';
+     const IS_USE_INJECT_NEAR_MONTH = 'is_use_inject_near_month';
+     const INJECT_NEAR_MONTH_NUM = 'inject_near_month_num';
+     const IS_USE_PINHEAD = 'is_use_pinhead';
+     const IS_USE_PINHEAD_NEAR_MONTH = 'is_use_pinhead_near_month';
+     const PINHEAD_NEAR_MONTH_NUM = 'pinhead_near_month_num';
+     const IS_SEX_AFTER_DRUG_3MONTH = 'is_sex_after_drug_3month';
+     const SEX_AFTER_DRUG_3MONTH_NUM = 'sex_after_drug_3month_num';
+     const IS_SEX_AFTER_DRUG_1MONTH = 'is_sex_after_drug_1month';
+     const SEX_AFTER_DRUG_1MONTH_NUM = 'sex_after_drug_1month_num';
+     const COUGH_2WEEK = 'cough_2week';
+     const COUGH_WITHBLOOD = 'cough_withblood';
+     const SWEAT_ON_NIGHT = 'sweat_on_night';
+     const WEIGHT_DOWNGRADE = 'weight_downgrade';
+     const ALWAYS_TIRED = 'always_tired';
+     const FEVER_2WEEK = 'fever_2week';
+     const LYMPHADENECTASIS = 'lymphadenectasis';
+     const TUBERCULOSIS_CONTACT_HISTORY = 'tuberculosis_contact_history';
+     const NO_TUBERCULOSIS = 'no_tuberculosis';
+     const IS_PHTHISIC_CHECKED = 'is_phthisic_checked';
+     const PHTHISIC_RESULT = 'phthisic_result';
+     const IS_SYPHILIS = 'is_syphilis';
+     const SYPHILIS_RESULT = 'syphilis_result';
+     const IS_HEPATITIS_B = 'is_hepatitis_b';
+     const HEPATITIS_B_RESULT = 'hepatitis_b_result';
+     const IS_HEPATITIS_C = 'is_hepatitis_c';
+     const HEPATITIS_C_RESULT = 'hepatitis_c_result';
+     const DETECT_HOSPITAL = 'detect_hospital';
+     const DETECT_JK_CENTER = 'detect_jk_center';
+     const DETECT_COMMUNITY = 'detect_community';
+     const DETECT_DRUGSTORE = 'detect_drugstore';
+     const DETECT_CLINIC = 'detect_clinic';
+     const DETECT_OTHER = 'detect_other';
+     const IS_ACCEPT_DETECT_HIV = 'is_accept_detect_hiv';
+     const DETECT_NUM = 'detect_num';
+     const DETECT_NUM_NEAR_1YEAR = 'detect_num_near_1year';
+     const DETECT_NUM_NEAR_6MONTH = 'detect_num_near_6month';
+     const LAST_HIV_CHECKDATE = 'last_hiv_checkdate';
+     const LAST_HIV_CHECKDATE_CHOOSE = 'last_hiv_checkdate_choose';
+     const IS_KNOW_DETECT_RESULT = 'is_know_detect_result';
+     const HIV_CHECK_MODE = 'hiv_check_mode';
+     const HIV_CHECK_REASON = 'hiv_check_reason';
+     const HIV_CHECK_REASON_OTHER = 'hiv_check_reason_other';
+     const LAST_HIV_CHECK_MODE = 'last_hiv_check_mode';
+     const LAST_HIV_CHECK_MODE_OTHER = 'last_hiv_check_mode_other';
+     const IS_DETECT_CARE = 'is_detect_care';
+     const HIV_CHECK_CARE = 'hiv_check_care';
+     const HIV_CHECK_CARE_OTHER = 'hiv_check_care_other';
+     const DETECT_CHANNEL_HOSPITAL = 'detect_channel_hospital';
+     const DETECT_CHANNEL_JK_CENTER = 'detect_channel_jk_center';
+     const DETECT_CHANNEL_COMMUNITY = 'detect_channel_community';
+     const DETECT_CHANNEL_DRUGSTORE = 'detect_channel_drugstore';
+     const DETECT_CHANNEL_CLINIC = 'detect_channel_clinic';
+     const DETECT_CHANNEL_OTHER = 'detect_channel_other';
+     const DETECT_BY_SELF = 'detect_by_self';
+     const HIV_CHECK_TIME = 'hiv_check_time';
+     const APPLY_FOR_FREE = 'apply_for_free';
+     const PARTNER_IS_CHECK_HIV = 'partner_is_check_hiv';
+     const PARTNER_CHECK_RESULT = 'partner_check_result';
+     const PARTNER_MOBILIZE = 'partner_mobilize';
+     const FAST_DETECT_SERVICE = 'fast_detect_service';
+     const ORG_FOR_CD4 = 'org_for_cd4';
+     const ORG_THERAPY = 'org_therapy';
+     const ORG_SYPHILIS = 'org_syphilis';
+     const ORG_SYPHILIS_OTHER = 'org_syphilis_other';
+     const ORG_PSYCHOLOGICAL = 'org_psychological';
+     const ORG_PMTCT = 'org_pmtct';
+     const ORG_PHTHISIS = 'org_phthisis';
+     const ORG_OTHER = 'org_other';
+     const ACTIVE_TREATMENT = 'active_treatment';
+     const UNACCEPT_MEDICAL = 'unaccept_medical';
+     const TREATMENT_UNTIL_STANDARD = 'treatment_until_standard';
+     const RESISTANT_CARE = 'resistant_care';
+     const EXPLORE_CARE = 'explore_care';
+     const NOT_TREATMENT = 'not_treatment';
+     const TREATMENT_OTHER = 'treatment_other';
+     const CREATED_AT = 'created_at';
     /**
      * @inheritdoc
      */
@@ -154,7 +271,7 @@ class TblSurveyList extends \application\common\db\ApplicationActiveRecord
     {
         return [
             [['uid', 'create_time'], 'required'],
-            [['uid', 'has_sex', 'sex_age', 'partner_sns', 'partner_bar', 'partner_ktv', 'partner_park', 'has_sex_3month', 'hetero_partner_num', 'condom_full_use', 'condom_full_use_not', 'anal_sex', 'anal_sex_partner_num', 'anal_sex_full_use', 'anal_sex_full_use_not', 'is_use_drug', 'drug_near_month_num', 'is_use_inject', 'is_use_inject_near_month', 'inject_near_month_num', 'is_use_pinhead', 'is_use_pinhead_near_month', 'is_sex_after_drug_3month', 'sex_after_drug_3month_num', 'is_sex_after_drug_1month', 'sex_after_drug_1month_num', 'cough_2week', 'cough_withblood', 'sweat_on_night', 'weight_downgrade', 'always_tired', 'fever_2week', 'lymphadenectasis', 'tuberculosis_contact_history', 'no_tuberculosis', 'is_phthisic_checked', 'is_syphilis', 'is_hepatitis_b', 'is_hepatitis_c', 'detect_hospital', 'detect_jk_center', 'detect_community', 'detect_drugstore', 'detect_clinic', 'is_accept_detect_hiv', 'detect_num', 'detect_num_near_1year', 'detect_num_near_6month', 'is_know_detect_result', 'is_detect_care', 'past_channel_hospital', 'past_channel_jk', 'past_channel_self', 'past_channel_vct', 'past_channel_community', 'past_channel_other', 'detect_channel_hospital', 'detect_channel_jk_center', 'detect_channel_community', 'detect_channel_drugstore', 'detect_channel_clinic', 'detect_by_self', 'apply_for_free', 'partner_mobilize', 'fast_detect_service', 'org_for_cd4', 'org_therapy', 'org_syphilis', 'org_syphilis_other', 'org_psychological', 'org_pmtct', 'org_phthisis', 'active_treatment', 'unaccept_medical', 'treatment_until_standard', 'resistant_care', 'explore_care', 'not_treatment'], 'integer'],
+            [['uid', 'has_sex', 'sex_age', 'partner_sns', 'partner_bar', 'partner_ktv', 'partner_park', 'has_sex_3month', 'hetero_partner_num', 'condom_full_use', 'condom_full_use_not', 'anal_sex', 'anal_sex_partner_num', 'anal_sex_full_use', 'anal_sex_full_use_not', 'is_use_drug', 'drug_near_month_num', 'is_use_inject', 'is_use_inject_near_month', 'inject_near_month_num', 'is_use_pinhead', 'is_use_pinhead_near_month', 'is_sex_after_drug_3month', 'sex_after_drug_3month_num', 'is_sex_after_drug_1month', 'sex_after_drug_1month_num', 'cough_2week', 'cough_withblood', 'sweat_on_night', 'weight_downgrade', 'always_tired', 'fever_2week', 'lymphadenectasis', 'tuberculosis_contact_history', 'no_tuberculosis', 'is_phthisic_checked', 'is_syphilis', 'is_hepatitis_b', 'is_hepatitis_c', 'detect_hospital', 'detect_jk_center', 'detect_community', 'detect_drugstore', 'detect_clinic', 'is_accept_detect_hiv', 'detect_num', 'detect_num_near_1year', 'detect_num_near_6month', 'is_know_detect_result', 'is_detect_care', 'detect_channel_hospital', 'detect_channel_jk_center', 'detect_channel_community', 'detect_channel_drugstore', 'detect_channel_clinic', 'detect_by_self', 'apply_for_free', 'partner_mobilize', 'fast_detect_service', 'org_for_cd4', 'org_therapy', 'org_syphilis', 'org_syphilis_other', 'org_psychological', 'org_pmtct', 'org_phthisis', 'active_treatment', 'unaccept_medical', 'treatment_until_standard', 'resistant_care', 'explore_care', 'not_treatment'], 'integer'],
             [['create_time', 'birthday', 'last_hiv_checkdate', 'created_at'], 'safe'],
             [['uuid'], 'string', 'max' => 36],
             [['name', 'nation', 'education', 'marriage', 'job', 'job_other', 'income', 'household', 'livecity', 'livecity_code', 'livetime', 'partner', 'sex_type', 'sex_type_other', 'sex_direction', 'condom_percent', 'condom_near', 'anal_sex_role', 'anal_sex_percent', 'anal_sex_near', 'drug_type', 'drug_rate', 'pinhead_near_month_num', 'phthisic_result', 'syphilis_result', 'hepatitis_b_result', 'hepatitis_c_result', 'last_hiv_checkdate_choose', 'hiv_check_reason', 'last_hiv_check_mode', 'hiv_check_care', 'hiv_check_time', 'partner_check_result'], 'string', 'max' => 20],
@@ -265,12 +382,6 @@ class TblSurveyList extends \application\common\db\ApplicationActiveRecord
             'is_detect_care' => '对于参加HIV检测是否有顾虑',
             'hiv_check_care' => 'HIV检测的主要顾虑是什么',
             'hiv_check_care_other' => 'HIV检测的其他顾虑是什么',
-            'past_channel_hospital' => '既往获得HIV检测的机构-医院',
-            'past_channel_jk' => '既往获得HIV检测的机构-疾控',
-            'past_channel_self' => '既往获得HIV检测的机构-自检',
-            'past_channel_vct' => '既往获得HIV检测的机构-VCT门诊',
-            'past_channel_community' => '既往获得HIV检测的机构-社区组织',
-            'past_channel_other' => '既往获得HIV检测的机构-其他',
             'detect_channel_hospital' => '期望获得HIV检测的渠道-医院',
             'detect_channel_jk_center' => '期望获得HIV检测的渠道-疾控中心',
             'detect_channel_community' => '期望获得HIV检测的渠道-社区小组',

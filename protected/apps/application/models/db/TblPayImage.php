@@ -16,6 +16,12 @@ use Yii;
  */
 class TblPayImage extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const USER_ID = 'user_id';
+     const ORDER_UUID = 'order_uuid';
+     const IMAGE = 'image';
+     const STATUS = 'status';
+     const CREATED_AT = 'created_at';
     /**
      * @inheritdoc
      */

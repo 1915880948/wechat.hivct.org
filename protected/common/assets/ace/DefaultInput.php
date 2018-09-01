@@ -7,7 +7,7 @@
  */
 namespace common\assets\ace;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
  *
  * @package common\assets\ace
  */
-class DefaultInput extends Object
+class DefaultInput extends BaseObject
 {
     static protected $options
         = [

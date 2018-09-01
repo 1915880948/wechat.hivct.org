@@ -15,6 +15,11 @@ use Yii;
  */
 class TblForms extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const NAME = 'name';
+     const STATUS = 'status';
+     const ADD_TIME = 'add_time';
+     const UPD_TIME = 'upd_time';
     /**
      * @inheritdoc
      */

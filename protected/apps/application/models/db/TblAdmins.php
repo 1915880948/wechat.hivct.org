@@ -19,6 +19,15 @@ use Yii;
  */
 class TblAdmins extends \application\common\db\ApplicationActiveRecord
 {
+     const AID = 'aid';
+     const ACCOUNT = 'account';
+     const PASSWORD = 'password';
+     const NICKNAME = 'nickname';
+     const LOGIN_TIME = 'login_time';
+     const LOGIN_IP = 'login_ip';
+     const IS_SUPER = 'is_super';
+     const LOGISTIC_ID = 'logistic_id';
+     const IS_ADMIN = 'is_admin';
     /**
      * @inheritdoc
      */

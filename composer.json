@@ -9,8 +9,8 @@
         }
     ],
     "require":{
-        "php":">=5.6.0",
-        "yiisoft/yii2":"2.0.12",
+        "php":">=7.2",
+        "yiisoft/yii2":"2.0.14",
         "guzzlehttp/guzzle":"~6.0",
         "vlucas/phpdotenv":"~2.4",
         "phpspec/php-diff":"~1.0",
@@ -22,20 +22,22 @@
         "yiisoft/yii2-redis":"2.0.6",
         "phpoffice/phpexcel":"dev-master",
         "qiniu/php-sdk":"dev-master",
-        "yzhan/qiqi":"master"
+        "yzhan/qiqi":"~2.0"
     },
     "repositories":[
         {
             "type":"vcs",
-            "url":"https://git:123456@git.yzhan.com/yzhan/qiqi.git"
+            "url":"https://git.yzhan.com/yzhan/qiqi.git"
         }
     ],
     "require-dev":{
     },
-    "extra":{
-        "asset-installer-paths":{
-            "npm-asset-library":"vendor/npm",
-            "bower-asset-library":"vendor/bower"
+    "config":{
+        "fxp-asset":{
+            "installer-paths":{
+                "npm-asset-library":"vendor/npm",
+                "bower-asset-library":"vendor/bower"
+            }
         }
     },
     "scripts":{

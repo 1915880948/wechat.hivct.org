@@ -17,6 +17,13 @@ use Yii;
  */
 class TblFeedback extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const ORD_ID = 'ord_id';
+     const RAW_FILENAME = 'raw_filename';
+     const FILENAME = 'filename';
+     const SAVEPATH = 'savepath';
+     const EXT = 'ext';
+     const SIZE = 'size';
     /**
      * @inheritdoc
      */

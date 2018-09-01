@@ -28,6 +28,24 @@ use Yii;
  */
 class TblOrderPayLog extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const DEVICE_INFO = 'device_info';
+     const TRADE_TYPE = 'trade_type';
+     const BANK_TYPE = 'bank_type';
+     const OUT_TRADE_NO = 'out_trade_no';
+     const TRANSACTION_ID = 'transaction_id';
+     const OUT_REFUND_NO = 'out_refund_no';
+     const REFUND_ID = 'refund_id';
+     const RESULT_CODE = 'result_code';
+     const ERR_CODE = 'err_code';
+     const ERR_CODE_DES = 'err_code_des';
+     const TOTAL_FEE = 'total_fee';
+     const CASH_FEE = 'cash_fee';
+     const REFUND_FEE = 'refund_fee';
+     const TIME_END = 'time_end';
+     const CLIENT_IP = 'client_ip';
+     const CREATED_AT = 'created_at';
+     const UPDATED_AT = 'updated_at';
     /**
      * @inheritdoc
      */

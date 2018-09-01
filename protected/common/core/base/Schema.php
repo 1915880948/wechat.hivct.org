@@ -9,7 +9,7 @@ namespace common\core\base;
 
 use qiqi\helper\ip\IpHelper;
 use qiqi\helper\StringHelper;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 
@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
  *
  * @package common\core\response
  */
-abstract class Schema extends Object
+abstract class Schema extends BaseObject
 {
     const STATUS_NEED_LOGIN = -1;
     const STATUS_SUCCESS = 1;

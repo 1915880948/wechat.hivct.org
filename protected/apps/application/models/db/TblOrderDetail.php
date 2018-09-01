@@ -23,6 +23,19 @@ use Yii;
  */
 class TblOrderDetail extends \application\common\db\ApplicationActiveRecord
 {
+     const ID = 'id';
+     const UUID = 'uuid';
+     const ORDER_UUID = 'order_uuid';
+     const GOODS_UUID = 'goods_uuid';
+     const GOODS_TITLE = 'goods_title';
+     const GOODS_PRICE = 'goods_price';
+     const ORDER_TIME = 'order_time';
+     const IS_SHIPPED = 'is_shipped';
+     const SHIP_TYPE = 'ship_type';
+     const SHIP_CODE = 'ship_code';
+     const SHIP_TIME = 'ship_time';
+     const CREATED_AT = 'created_at';
+     const UPDATED_AT = 'updated_at';
     /**
      * @inheritdoc
      */

@@ -27,7 +27,7 @@
     "repositories":[
         {
             "type":"vcs",
-            "url":"https://git.yzhan.com/yzhan/qiqi.git"
+            "url":"https://git:123456@git.yzhan.com/yzhan/qiqi.git"
         }
     ],
     "require-dev":{

@@ -13,6 +13,7 @@ use application\models\base\OrderPayLog;
 use application\web\www\components\WwwBaseAction;
 use common\core\base\Schema;
 use qiqi\helper\log\FileLogHelper;
+use wechat\TplMessage;
 use yii\helpers\Json;
 
 class PayCallbackAction extends WwwBaseAction
@@ -22,10 +23,10 @@ class PayCallbackAction extends WwwBaseAction
 
     public function run()
     {
-        FileLogHelper::xlog($this->request->post(),'oauth/payment');
+        FileLogHelper::xlog($this->request->post(), 'oauth/payment');
         $outTradeNo = $this->request->post('out_trade_no');
         $payStatus = $this->request->post('pay_status');
-        $payinfo = Json::decode($this->request->post('pay_info','[]'));
+        $payinfo = Json::decode($this->request->post('pay_info', '[]'));
 
         $orderList = OrderList::findByOurtradeNo($outTradeNo);
         if(!$orderList){
@@ -38,7 +39,10 @@ class PayCallbackAction extends WwwBaseAction
         if(OrderList::ORDER_STATUS_PAID == $status){
 
             OrderPayLog::log($payinfo);
-
+            TplMessage::getInstance()
+                      ->paid('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', '有订单支付', $payinfo['total_fee'], $payinfo['out_trade_no'], '微信', $this->request->post('pay_info', '[]'));
+            TplMessage::getInstance()
+                      ->paid('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', '有订单支付', $payinfo['total_fee'], $payinfo['out_trade_no'], '微信', $this->request->post('pay_info', '[]'));
             return Schema::SuccessNotify('更新订单成功');
         }
         return Schema::FailureNotify('更新失败');

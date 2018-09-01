@@ -54,7 +54,7 @@ class TplMessage
 
     }
 
-    public function ship($to , $title = '您的订单已经发货', $express, $code, $memo = '', $remark = '')
+    public function ship($to, $title = '您的订单已经发货', $express, $code, $memo = '', $remark = '')
     {
         try{
             Weixin::getApp()->notice->send([
@@ -66,8 +66,8 @@ class TplMessage
                     'keyword1' => "您的订单已经由{$express}进行发货",
                     'keyword2' => "物流单号：{$code}",
                     'keyword3' => date("Y-m-d H:i"),
-                    'keyword4' => '',
-                    'remark'   => '',
+                    'keyword4' => $memo,
+                    'remark'   => $remark,
                 ],
             ]);
         } catch(InvalidArgumentException $e){

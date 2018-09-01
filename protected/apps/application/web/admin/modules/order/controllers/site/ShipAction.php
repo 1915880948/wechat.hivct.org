@@ -7,7 +7,7 @@ use application\models\base\OrderList;
 use application\models\base\User;
 use application\web\admin\components\AdminBaseAction;
 use EasyWeChat\Core\Exceptions\InvalidArgumentException;
-use qiqi\helper\WechatHelper;
+use wechat\TplMessage;
 
 class ShipAction extends AdminBaseAction
 {
@@ -58,19 +58,23 @@ class ShipAction extends AdminBaseAction
                      备注：{{keyword4.DATA}}
                      {{remark.DATA}}
                      */
-                    WechatHelper::getApp()->notice->send([
-                        'touser'      => 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q',// $userInfo['openid'],
-                        'template_id' => 'DcwX2k69pf08WiBl5Zfa-Tsd6pit3NDhKhIgaIc01Ds',
-                        'url'         => '',
-                        'data'        => [
-                            'first'    => '您的订单已经发货',
-                            'keyword1' => "您的订单已经由{$express['name']}进行发货",
-                            'keyword2' => "物流单号：{$ship_code}",
-                            'keyword3' => date("Y-m-d H:i"),
-                            'keyword4' => '',
-                            'remark'   => '',
-                        ],
-                    ]);
+                    // WechatHelper::getApp()->notice->send([
+                    //     'touser'      => 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q',// $userInfo['openid'],
+                    //     'template_id' => 'DcwX2k69pf08WiBl5Zfa-Tsd6pit3NDhKhIgaIc01Ds',
+                    //     'url'         => '',
+                    //     'data'        => [
+                    //         'first'    => '您的订单已经发货',
+                    //         'keyword1' => "您的订单已经由{$express['name']}进行发货",
+                    //         'keyword2' => "物流单号：{$ship_code}",
+                    //         'keyword3' => date("Y-m-d H:i"),
+                    //         'keyword4' => '',
+                    //         'remark'   => '',
+                    //     ],
+                    // ]);
+                    TplMessage::getInstance()
+                              ->ship('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', $title = '您的订单已经发货', $express = $express['name'], $code = $ship_code, $memo = "要小心", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
+                    TplMessage::getInstance()
+                              ->ship('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', $title = '您的订单已经发货', $express = $express['name'], $code = $ship_code, $memo = "要小心", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
                 } catch(InvalidArgumentException $e){
 
                 }

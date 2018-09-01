@@ -69,7 +69,7 @@
               </div>
               <div class="row static-info">
                 <div class="col-md-4 name"> 手机:</div>
-                <div class="col-md-8 value">{{$order_data['address_mobile'] or ''}}</div>
+                <div class="col-md-8 value">{{$order_data['address_mobile']}}</div>
               </div>
               <div class="row static-info">
                 <div class="col-md-4 name"> 地址:</div>

@@ -59,7 +59,7 @@ class Weixin
             'aes_key'     => env('WECHAT_AES_KEY'), // 可选
             'log'         => [
                 'level' => 'debug',
-                'file'  => sys_get_temp_dir() . '/easywechat_survey.hivct.org.log', // XXX: 绝对路径！！！！
+                'file'  => \Yii::getAlias('@runtime') . '/easywechat_survey.hivct.org.log', // XXX: 绝对路径！！！！
             ],
             'guzzle'      => [
                 'timeout' => 30,

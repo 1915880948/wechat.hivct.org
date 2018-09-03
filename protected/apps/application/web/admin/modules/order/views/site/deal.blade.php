@@ -314,7 +314,7 @@
                   @endforeach
                 </select>
               @else
-                {{$orderStatus[$orderData['order_status']] or ''}}
+                {{isset($orderStatus[$orderData['order_status']])?$orderStatus[$orderData['order_status']]:''}}
               @endif
             </div>
           </div>

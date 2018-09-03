@@ -30,7 +30,7 @@
       <ul class="nav navbar-nav pull-right">
         <li class="dropdown dropdown-user ">
           <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-            <span class="username username-hide-on-mobile"> {{$userinfo['account'] or "admin"}} </span>
+            <span class="username username-hide-on-mobile"> {{ isset($userinfo['account'])&&$userinfo['account'] ? $userinfo['account']: "admin"}} </span>
             <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
             <img alt="" class="img-circle" src="{{yStatic('assets/layouts/layout4/img/avatar9.jpg')}}"/> </a>
           <ul class="dropdown-menu dropdown-menu-default">

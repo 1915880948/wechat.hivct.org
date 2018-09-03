@@ -13,10 +13,10 @@
         }
         region.ready({
             labels: ["", " ", " "],
-            elem: "{{$select or '#region_select'}}",
+            elem: "{{isset($select)&&$select?$select : '#region_select'}}",
             values: provinces,
             onSelect: function (target, value) {
-                $("{{$input or '#region_input'}}").val(value);
+                $("{{isset($input)&&$input ?$input: '#region_input'}}").val(value);
             }
         });
     });

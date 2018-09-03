@@ -38,6 +38,6 @@
 </div>
 @if(isset($title))
   <h3 class="page-title"> {{$title}}
-    <small>{{$subtitle or ''}}</small>
+    <small>{{isset($subtitle)&&$subtitle ? $subtitle : ''}}</small>
   </h3>
 @endif

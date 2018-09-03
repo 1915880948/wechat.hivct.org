@@ -132,7 +132,7 @@
             <div class="portlet-body">
               <div class="row static-info">
                 <div class="col-md-4 name"> 真实姓名:</div>
-                <div class="col-md-8 value"> {{ $survey['name'] or '' }}
+                <div class="col-md-8 value"> {{ isset($survey['name'])?$survey['name'] : '' }}
                   <span>(微信呢称：<a href="{{yUrl(['/user/lists/detail','uid'=>$userdata['uid']])}}" target="_blank">{{$userdata['realname']}}</a>，用户ID:{{$userdata['uid']}})</span>
                 </div>
               </div>

@@ -72,9 +72,9 @@ class ShipAction extends AdminBaseAction
                     //     ],
                     // ]);
                     TplMessage::getInstance()
-                              ->ship('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', $title = '您的订单已经发货', $express = $express['name'], $code = $ship_code, $memo = "要小心", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
+                              ->ship('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', $title = '您的订单已经发货',  $express['name'], $code = $ship_code, $memo = "要小心", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
                     TplMessage::getInstance()
-                              ->ship('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', $title = '您的订单已经发货', $express = $express['name'], $code = $ship_code, $memo = "要小心", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
+                              ->ship('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', $title = '您的订单已经发货',  $express['name'], $code = $ship_code, $memo = "要小心", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
                 } catch(InvalidArgumentException $e){
 
                 }

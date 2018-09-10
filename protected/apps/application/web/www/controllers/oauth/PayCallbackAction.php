@@ -36,13 +36,17 @@ class PayCallbackAction extends WwwBaseAction
         $orderList->updatePayStatus(OrderList::PAY_STATUS_SUCCESS);
         $orderList->updateOrderStatus($status);
         $orderList->updateOrderInfo($payinfo);
-        if(OrderList::ORDER_STATUS_PAID == $status){
-
-            OrderPayLog::log($payinfo);
-            TplMessage::getInstance()
-                      ->paid('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', '有订单支付', $payinfo['total_fee'], $payinfo['out_trade_no'], '微信', $this->request->post('pay_info', '[]'));
+        try{
             TplMessage::getInstance()
                       ->paid('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', '有订单支付', $payinfo['total_fee'], $payinfo['out_trade_no'], '微信', $this->request->post('pay_info', '[]'));
+            TplMessage::getInstance()
+                      ->paid('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', '有订单支付', $payinfo['total_fee'], $payinfo['out_trade_no'], '微信', $this->request->post('pay_info', '[]'));
+        } catch(\Exception $e){
+            FileLogHelper::xlog($e->getMessage(), 'oauth/payment');
+        }
+
+        if(OrderList::ORDER_STATUS_PAID == $status){
+            OrderPayLog::log($payinfo);
             return Schema::SuccessNotify('更新订单成功');
         }
         return Schema::FailureNotify('更新失败');

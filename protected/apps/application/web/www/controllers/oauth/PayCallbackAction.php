@@ -41,11 +41,11 @@ class PayCallbackAction extends WwwBaseAction
             TplMessage::getInstance()
                       ->paid('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', '有订单支付', round($payinfo['total_fee'] / 100, 2) .
                                                                       "元", substr($payinfo['out_trade_no'], 3), $logisticInfo['title'] ??
-                                                                                                                "未知发货点", "{$orderList['address_contract']},{$orderList['address_mobile']},{$orderList['description']}");
+                                                                                                                "未知发货点", "{$orderList['address_contact']},{$orderList['address_mobile']},{$orderList['description']}");
             TplMessage::getInstance()
                       ->paid('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', '有订单支付', round($payinfo['total_fee'] / 100, 2) .
                                                                       "元", substr($payinfo['out_trade_no'], 3), $logisticInfo['title'] ??
-                                                                                                                "未知发货点", "{$orderList['address_contract']},{$orderList['address_mobile']},{$orderList['description']}");
+                                                                                                                "未知发货点", "{$orderList['address_contact']},{$orderList['address_mobile']},{$orderList['description']}");
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'oauth/payment');
         }

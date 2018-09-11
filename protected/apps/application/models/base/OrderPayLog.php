@@ -30,14 +30,14 @@ class OrderPayLog extends TblOrderPayLog
         $m->bank_type = $payInfo['bank_type'];
         $m->out_trade_no = $payInfo['out_trade_no'];
         $m->transaction_id = $payInfo['transaction_id'];
-        $m->cash_fee = $payInfo['cash_fee'];
-        $m->total_fee = $payInfo['total_fee'];
+        $m->cash_fee = round($payInfo['cash_fee'] / 100, 2);
+        $m->total_fee = round($payInfo['total_fee'] / 100, 2);
         $m->result_code = $payInfo['result_code'];
         $m->time_end = $payInfo['time_end'];
         $m->client_ip = IpHelper::getRealIP();
         $m->save();
         if($m->hasErrors()){
-            FileLogHelper::xlog(['error'=>$m->getErrors()],'db/save');
+            FileLogHelper::xlog(['error' => $m->getErrors()], 'db/save');
         }
     }
 }

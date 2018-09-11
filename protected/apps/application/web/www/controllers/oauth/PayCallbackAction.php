@@ -23,11 +23,10 @@ class PayCallbackAction extends WwwBaseAction
 
     public function run()
     {
-        FileLogHelper::xlog($this->request->post(), 'oauth/payment');
+        FileLogHelper::xlog(['post' => $this->request->post()], 'oauth/payment');
         $outTradeNo = $this->request->post('out_trade_no');
         $payStatus = $this->request->post('pay_status');
         $payinfo = Json::decode($this->request->post('pay_info', '[]'));
-
         $orderList = OrderList::findByOurtradeNo($outTradeNo);
         if(!$orderList){
             return Schema::FailureNotify('订单不存在');

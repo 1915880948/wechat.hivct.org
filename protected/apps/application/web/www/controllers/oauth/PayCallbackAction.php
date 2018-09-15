@@ -38,14 +38,26 @@ class PayCallbackAction extends WwwBaseAction
         $orderList->updateOrderStatus($status);
         $orderList->updateOrderInfo($payinfo);
         try{
-            TplMessage::getInstance()
-                      ->paid('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', '有订单支付', round($payinfo['total_fee'] / 100, 2) .
-                                                                      "元", substr($payinfo['out_trade_no'], 3), $logisticInfo['title'] ??
-                                                                                                                "未知发货点", "{$orderList['address_contact']},{$orderList['address_mobile']},{$orderList['description']}");
-            TplMessage::getInstance()
-                      ->paid('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', '有订单支付', round($payinfo['total_fee'] / 100, 2) .
-                                                                      "元", substr($payinfo['out_trade_no'], 3), $logisticInfo['title'] ??
-                                                                                                                "未知发货点", "{$orderList['address_contact']},{$orderList['address_mobile']},{$orderList['description']}");
+            $openId = Logistics::getLogisticsOpenId($orderList['logistic_id']);
+            $tmplInfo = [
+                'title'         => '有订单支付',
+                'title_unknown' => '有订单支付（没有该发货地对应的微信ID））',
+                'fee'           => round($payinfo['total_fee'] / 100, 2) . "元",
+                'trade_no'      => substr($payinfo['out_trade_no'], 3),
+                'logistic'      => $logisticInfo['title'] ?? "未知发货点",
+                'simple'        => sprintf("%s先生,%s****%s,%s****（更多信息请到后台查看）", mb_substr($orderList['address_contact'], 0, 1, 'UTF-8'), substr($orderList['address_mobile'], 0, 3), substr($orderList['address_mobile'], 8, 4), mb_substr($orderList['description'], 0, 5)),
+                'detail'        => "{$orderList['address_contact']},{$orderList['address_mobile']},{$orderList['description']}"
+            ];
+
+            $tplmessage = TplMessage::getInstance();
+
+            $tplmessage->paid($openId, $tmplInfo['title'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['simple']);
+            if($openId == 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q'){
+                $tplmessage->paid('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', $tmplInfo['title_unknown'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['detail']);
+            }
+
+            $tplmessage->paid('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', $openId == 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q' ? $tmplInfo['title_unknown']
+                : $tmplInfo['title'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['detail']);
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'oauth/payment');
         }

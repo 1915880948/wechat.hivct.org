@@ -2,6 +2,7 @@
 
 namespace application\web\admin\modules\order\controllers\site;
 
+use application\common\base\OpenIds;
 use application\models\base\Express;
 use application\models\base\OrderList;
 use application\models\base\User;
@@ -71,10 +72,9 @@ class ShipAction extends AdminBaseAction
                     //         'remark'   => '',
                     //     ],
                     // ]);
-                    TplMessage::getInstance()
-                              ->ship('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', $title = '您的订单已经发货',  $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
-                    TplMessage::getInstance()
-                              ->ship('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', $title = '您的订单已经发货',  $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
+                    $tplMsg = TplMessage::getInstance();
+                    $tplMsg->ship(OpenIds::getMomoOpenId(), $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
+                    $tplMsg->ship(OpenIds::getGoukiOpenId(), $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
                 } catch(InvalidArgumentException $e){
 
                 }

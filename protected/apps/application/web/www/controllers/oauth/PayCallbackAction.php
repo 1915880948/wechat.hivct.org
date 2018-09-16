@@ -8,6 +8,7 @@
 
 namespace application\web\www\controllers\oauth;
 
+use application\common\base\OpenIds;
 use application\models\base\Logistics;
 use application\models\base\OrderList;
 use application\models\base\OrderPayLog;
@@ -52,11 +53,11 @@ class PayCallbackAction extends WwwBaseAction
             $tplmessage = TplMessage::getInstance();
 
             $tplmessage->paid($openId, $tmplInfo['title'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['simple']);
-            if($openId == 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q'){
-                $tplmessage->paid('oVP2NjryYmAJ7_K6auO5gFdpVr6Q', $tmplInfo['title_unknown'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['detail']);
+            if($openId == OpenIds::getMomoOpenId()){
+                $tplmessage->paid($openId, $tmplInfo['title_unknown'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['detail']);
             }
 
-            $tplmessage->paid('oVP2NjsmJtw0HQGI41wP9KJ9cW5Q', $openId == 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q' ? $tmplInfo['title_unknown']
+            $tplmessage->paid(OpenIds::getGoukiOpenId(), $openId == 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q' ? $tmplInfo['title_unknown']
                 : $tmplInfo['title'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['detail']);
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'oauth/payment');

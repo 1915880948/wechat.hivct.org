@@ -2,6 +2,7 @@
 
 namespace application\models\base;
 
+use application\common\base\OpenIds;
 use application\models\db\TblLogistics;
 use qiqi\core\db\base\QSearch;
 use yii\helpers\ArrayHelper;
@@ -30,7 +31,8 @@ class Logistics extends TblLogistics
     public static function getLogisticsOpenId($id)
     {
         $openids = [
-            '99' => 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q',
+            //6Q是gouki,5Q是momo
+            '99' => OpenIds::getMomoOpenId(),
             '1'  => 'oVP2NjuAQCgTdJaY1uJfLC2_k8Eo',
             '9'  => 'oVP2Njg3lIo5UHwjTL8puckIFyg0',
             '8'  => 'oVP2NjjErppuncBbLsZoqFxKZZ-Y',

@@ -45,6 +45,14 @@
                     <label class="weui-form-preview__label">订单时间</label>
                     <span class="weui-form-preview__value">{{ $item['created_at'] }}</span>
                 </div>
+              @if($item['ship_code'] != "")
+                <div class="weui-form-preview__item">
+                  <label class="weui-form-preview__label">快递公司</label> <span class="weui-form-preview__value">{{ $item['ship_name'] }}</span>
+                </div>
+                <div class="weui-form-preview__item">
+                  <label class="weui-form-preview__label">快递单号</label> <span class="weui-form-preview__value">{{ $item['ship_code'] }}</span>
+                </div>
+              @endif
             </div>
             <div class="weui-form-preview__ft">
                 @if( gOrderStatus($item['pay_status']) == '已发货' )

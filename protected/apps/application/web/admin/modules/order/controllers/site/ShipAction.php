@@ -75,6 +75,8 @@ class ShipAction extends AdminBaseAction
                     $tplMsg = TplMessage::getInstance();
                     $tplMsg->ship(OpenIds::getMomoOpenId(), $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
                     $tplMsg->ship(OpenIds::getGoukiOpenId(), $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
+                    //发送给客户
+                    $tplMsg->ship($userInfo['openid'], $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，审核完成后可以进行退款申请");
                 } catch(InvalidArgumentException $e){
 
                 }

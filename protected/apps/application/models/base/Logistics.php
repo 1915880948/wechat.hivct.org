@@ -75,7 +75,7 @@ class Logistics extends TblLogistics
             '7'  => 'oVP2NjnT1qn25KcNV7YaxhWSwTc4',
             '13' => 'oVP2Nju7_VfS-j2kKQGK8MTwxwu4',
             '4'  => 'oVP2NjtK6BbIoUD2Enn6XIL8s-cI',
-            '26' => 'oVP2Njqsjkf-KxKAFaqffP8Le0qM',
+            '26' => ['oVP2Njqsjkf-KxKAFaqffP8Le0qM','oVP2NjsDgCjqfHSVP1avbPO3ZYrQ'],
             //郑州
             '23' => 'oVP2Njt7eMvVx40kQi06Sy9XjrHU'
 

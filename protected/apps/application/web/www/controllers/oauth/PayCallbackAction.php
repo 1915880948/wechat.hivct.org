@@ -40,6 +40,7 @@ class PayCallbackAction extends WwwBaseAction
         $orderList->updateOrderInfo($payinfo);
         try{
             $openId = Logistics::getLogisticsOpenId($orderList['logistic_id']);
+
             $tmplInfo = [
                 'title'         => '有订单支付',
                 'title_unknown' => '有订单支付（没有该发货地对应的微信ID））',
@@ -51,14 +52,19 @@ class PayCallbackAction extends WwwBaseAction
             ];
 
             $tplmessage = TplMessage::getInstance();
-
-            $tplmessage->paid($openId, $tmplInfo['title'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['simple']);
-            if($openId == OpenIds::getMomoOpenId()){
-                $tplmessage->paid($openId, $tmplInfo['title_unknown'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['detail']);
+            if(is_array($openId)){
+                $openIds = $openId;
+                unset($openId);
+                foreach($openIds as $openId){
+                    $tplmessage->paid($openId, $tmplInfo['title'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['simple']);
+                }
+            } else{
+                $tplmessage->paid($openId, $tmplInfo['title'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['simple']);
+                if($openId == OpenIds::getMomoOpenId()){
+                    $tplmessage->paid($openId, $tmplInfo['title_unknown'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['detail']);
+                }
             }
-
-            $tplmessage->paid(OpenIds::getGoukiOpenId(), $openId == 'oVP2NjryYmAJ7_K6auO5gFdpVr6Q' ? $tmplInfo['title_unknown']
-                : $tmplInfo['title'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['detail']);
+            $tplmessage->paid(OpenIds::getGoukiOpenId(), $tmplInfo['title'], $tmplInfo['fee'], $tmplInfo['trade_no'], $tmplInfo['logistic'], $tmplInfo['detail']);
         } catch(\Exception $e){
             FileLogHelper::xlog($e->getMessage(), 'oauth/payment');
         }

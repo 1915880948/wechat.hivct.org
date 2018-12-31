@@ -60,20 +60,20 @@ class Logistics extends TblLogistics
             '99' => OpenIds::getMomoOpenId(),
             '1'  => 'oVP2NjuAQCgTdJaY1uJfLC2_k8Eo',
             '9'  => 'oVP2Njg3lIo5UHwjTL8puckIFyg0',
-            '8'  => 'oVP2NjjErppuncBbLsZoqFxKZZ-Y',
-            '3'  => 'oVP2NjsJflVooVCY2k-Mq8dHdovw',
+            // '8'  => 'oVP2NjjErppuncBbLsZoqFxKZZ-Y',
+            // '3'  => 'oVP2NjsJflVooVCY2k-Mq8dHdovw',
             //两个杭州的
-            '6'  => 'oVP2NjtOrepxul60ycZWsds_XFMM',
-            '22' => 'oVP2Njpq8BHZ2oV7dId4940OmyAY',
+            // '6'  => 'oVP2NjtOrepxul60ycZWsds_XFMM',
+            // '22' => 'oVP2Njpq8BHZ2oV7dId4940OmyAY',
             //
-            '17' => 'oVP2NjuquxBk6GW2abq-uJzWdxVg',
-            '16' => 'oVP2NjuLdxPslsOlNj5bh0e1PTCU',
-            '10' => 'oVP2Njg2xN14u4EG9Gnkj2AsFsx8',
+            // '17' => 'oVP2NjuquxBk6GW2abq-uJzWdxVg',
+            // '16' => 'oVP2NjuLdxPslsOlNj5bh0e1PTCU',
+            // '10' => 'oVP2Njg2xN14u4EG9Gnkj2AsFsx8',
             '12' => 'oVP2NjmuSd7bGbAMf0aTpRiknzm4',
 
             '19' => 'oVP2NjhjJM0dpAkQchMidubAL-_M',
-            '7'  => 'oVP2NjnT1qn25KcNV7YaxhWSwTc4',
-            '13' => 'oVP2Nju7_VfS-j2kKQGK8MTwxwu4',
+            // '7'  => 'oVP2NjnT1qn25KcNV7YaxhWSwTc4',
+            // '13' => 'oVP2Nju7_VfS-j2kKQGK8MTwxwu4',
             '4'  => 'oVP2NjtK6BbIoUD2Enn6XIL8s-cI',
             '26' => ['oVP2Njqsjkf-KxKAFaqffP8Le0qM','oVP2NjsDgCjqfHSVP1avbPO3ZYrQ'],
             //郑州
@@ -84,7 +84,7 @@ class Logistics extends TblLogistics
             '29' => '1',
             '27' => '3',
             // '22' => '6',
-            '14' => '13',
+            // '14' => '13',
         ];
         return ArrayHelper::getValue($openids, $id, ArrayHelper::getValue($openids, $refs[$id] ?? '99'));
     }

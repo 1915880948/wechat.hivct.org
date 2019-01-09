@@ -54,7 +54,7 @@ class ShipAction extends AdminBaseAction
                 try{
                     $sess = \Yii::$app->session;
                     //同一时刻只发一条，半小时内
-                    if(time() - $sess->get($ship_code, 0) > 1800){
+                    if(time() - $sess->get($ship_code) > 1800){
                         $sess->set($ship_code, time());
                         $tplMsg = TplMessage::getInstance();
                         $tplMsg->ship(OpenIds::getMomoOpenId(), $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");

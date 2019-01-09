@@ -306,16 +306,16 @@
           <div class="row static-info">
             <div class="col-xs-4">订单状态</div>
             <div class="col-xs-8">
-              @if($userinfo->is_admin)
+              {{--@if($userinfo->is_admin)--}}
                 <select class="form-control input-inline input-medium order_status">
                   <option value="-1">请选择操作状态</option>
                   @foreach($orderStatus as $k=>$v)
                     <option value="{{$k}}" {{ $orderData['order_status']==$k?'selected':'' }}>{{$v}}</option>
                   @endforeach
                 </select>
-              @else
-                {{isset($orderStatus[$orderData['order_status']])?$orderStatus[$orderData['order_status']]:''}}
-              @endif
+              {{--@else--}}
+{{--                {{isset($orderStatus[$orderData['order_status']])?$orderStatus[$orderData['order_status']]:''}}--}}
+              {{--@endif--}}
             </div>
           </div>
           <div class="row static-info">

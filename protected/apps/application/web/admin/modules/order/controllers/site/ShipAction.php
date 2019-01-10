@@ -12,10 +12,17 @@ use wechat\TplMessage;
 
 class ShipAction extends AdminBaseAction
 {
+    const SHIP_SEND = 'SHIP::send';
+
     public function run()
     {
         \Yii::$app->session->open();
+        $sess = \Yii::$app->session;
+        // $sess->set(self::SHIP_SEND, time());
         if(\Yii::$app->request->isPost){
+            if(time() - $sess->get(self::SHIP_SEND, 0) < 60){
+                return ['code' => 5000, 'error' => '请不要重复提交'];
+            }
             \Yii::$app->response->format = 'json';
             $uuid = \Yii::$app->request->post('uuid');
             $back_url = \Yii::$app->request->post('back_url');
@@ -52,7 +59,6 @@ class ShipAction extends AdminBaseAction
             $userInfo = User::findByPk($userId);
             if($userInfo){
                 try{
-                    $sess = \Yii::$app->session;
                     //同一时刻只发一条，半小时内
                     if(time() - $sess->get($ship_code) > 1800){
                         $sess->set($ship_code, time());
@@ -91,9 +97,11 @@ class ShipAction extends AdminBaseAction
             $order->ship_status = 1;
             $order->order_status = OrderList::ORDER_STATUS_SHIP;
             if($order->save()){
-                return ['code' => 200];
+                $sess->set(self::SHIP_SEND, time());
+                return ['code' => 200,];
             } else{
-                return ['code' => 500, 'error' => $order->getErrors()];
+                $sess->set(self::SHIP_SEND, time());
+                return ['code' => 500, 'error' => join(",", $order->getFirstErrors())];
             }
         }
     }

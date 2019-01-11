@@ -321,9 +321,9 @@
           <div class="row static-info">
             <div class="col-xs-4"></div>
             <div class="col-xs-8">
-              @if($userinfo->is_admin)
+              {{--@if($userinfo->is_admin)--}}
                 <input type="button" class="input-group-btn btn btn-default btn-sm input-small update" value="更新订单状态" style="background: #3fd5c0;color: #ffffff;">
-              @endif
+              {{--@endif--}}
             </div>
           </div>
         </div>

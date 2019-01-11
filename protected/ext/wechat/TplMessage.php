@@ -72,6 +72,9 @@ class TplMessage
             ]);
         } catch(InvalidArgumentException $e){
             FileLogHelper::xlog($e->getMessage(), 'wechat/template');
+        } catch(\Exception $e){
+            FileLogHelper::xlog($e->getMessage(), 'wechat/template');
         }
+
     }
 }

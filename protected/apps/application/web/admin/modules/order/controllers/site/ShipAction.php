@@ -8,6 +8,7 @@ use application\models\base\OrderList;
 use application\models\base\User;
 use application\web\admin\components\AdminBaseAction;
 use EasyWeChat\Core\Exceptions\InvalidArgumentException;
+use qiqi\helper\log\FileLogHelper;
 use wechat\TplMessage;
 
 class ShipAction extends AdminBaseAction
@@ -92,6 +93,8 @@ class ShipAction extends AdminBaseAction
 
                 } catch(InvalidArgumentException $e){
 
+                } catch(\Exception $e){
+                    FileLogHelper::xlog($e->getMessage(), 'wechat/template');
                 }
             }
             $order->ship_status = 1;

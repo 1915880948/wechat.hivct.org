@@ -17,7 +17,7 @@ class ShipAction extends AdminBaseAction
 
     public function run()
     {
-        \Yii::$app->session->open();
+        // \Yii::$app->session->open();
         $sess = \Yii::$app->session;
         // $sess->set(self::SHIP_SEND, time());
         if(\Yii::$app->request->isPost){

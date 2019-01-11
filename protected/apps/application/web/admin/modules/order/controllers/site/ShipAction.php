@@ -18,12 +18,8 @@ class ShipAction extends AdminBaseAction
     public function run()
     {
         // \Yii::$app->session->open();
-        $sess = \Yii::$app->session;
         // $sess->set(self::SHIP_SEND, time());
         if(\Yii::$app->request->isPost){
-            if(time() - $sess->get(self::SHIP_SEND, 0) < 60){
-                return ['code' => 5000, 'error' => '请不要重复提交'];
-            }
             \Yii::$app->response->format = 'json';
             $uuid = \Yii::$app->request->post('uuid');
             $back_url = \Yii::$app->request->post('back_url');
@@ -61,14 +57,11 @@ class ShipAction extends AdminBaseAction
             if($userInfo){
                 try{
                     //同一时刻只发一条，半小时内
-                    if(time() - $sess->get($ship_code) > 1800){
-                        $sess->set($ship_code, time());
-                        $tplMsg = TplMessage::getInstance();
-                        $tplMsg->ship(OpenIds::getMomoOpenId(), $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
-                        $tplMsg->ship(OpenIds::getGoukiOpenId(), $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
-                        //发送给客户
-                        $tplMsg->ship($userInfo['openid'], $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，审核完成后可以进行退款申请");
-                    }
+                    $tplMsg = TplMessage::getInstance();
+                    $tplMsg->ship(OpenIds::getMomoOpenId(), $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
+                    $tplMsg->ship(OpenIds::getGoukiOpenId(), $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，可以进行退款申请");
+                    //发送给客户
+                    $tplMsg->ship($userInfo['openid'], $title = '您的订单已经发货', $express['name'], $code = $ship_code, $memo = "", $remark = "收到试纸后测试完成并上传图片，审核完成后可以进行退款申请");
                     /*
                      * {{first.DATA}}
                      订单内容：{{keyword1.DATA}}
@@ -88,7 +81,7 @@ class ShipAction extends AdminBaseAction
                     //         'keyword3' => date("Y-m-d H:i"),
                     //         'keyword4' => '',
                     //         'remark'   => '',
-                    //     ],
+                    //     ],s
                     // ]);
 
                 } catch(InvalidArgumentException $e){
@@ -100,10 +93,8 @@ class ShipAction extends AdminBaseAction
             $order->ship_status = 1;
             $order->order_status = OrderList::ORDER_STATUS_SHIP;
             if($order->save()){
-                $sess->set(self::SHIP_SEND, time());
                 return ['code' => 200,];
             } else{
-                $sess->set(self::SHIP_SEND, time());
                 return ['code' => 500, 'error' => join(",", $order->getFirstErrors())];
             }
         }

@@ -59,7 +59,7 @@ class PayAction extends WwwBaseAction
         }
 
         $totalPrice += 30; //加30的押金
-        $totalPrice = round($totalPrice * 1.015,2);//总金额*1.015的手续费
+        $totalPrice = round($totalPrice * 1.015, 2);//总金额*1.015的手续费
 
         // $totalPrice+=30.15;
         /**
@@ -72,9 +72,10 @@ class PayAction extends WwwBaseAction
             'detail'       => join(",", $details),
             'out_trade_no' => $tradeno,
             // 'total_fee'    => $totalPrice, //目前是0
-            'total_fee'    => $totalPrice*100, //目前是1分钱
+            'total_fee'    => $totalPrice * 100, //目前是1分钱
             'openid'       => $this->account->openid,
             'notify_url'   => Url::to(['/oauth/notify'], true),
+            'return_url'   => Url::to(['/site/index'], true),
             'logistcis'    => $logistcisInfo !== null ? $logistcisInfo->attributes : [],
             'uid'          => $this->account->uid,
             'goods_list'   => Json::encode($products),
@@ -91,7 +92,7 @@ class PayAction extends WwwBaseAction
             $order = OrderList::create($postdata);
             $order->updateLogitics($logistcis);
             //更新回Event。。。
-            $eventInfo->updateAttributes(['order_uuid'=>$order->uuid,'order_is_paid'=>OrderList::ORDER_STATUS_WAIT_FOR_PAY]);
+            $eventInfo->updateAttributes(['order_uuid' => $order->uuid, 'order_is_paid' => OrderList::ORDER_STATUS_WAIT_FOR_PAY]);
             /**
              * 补充地址信息
              */

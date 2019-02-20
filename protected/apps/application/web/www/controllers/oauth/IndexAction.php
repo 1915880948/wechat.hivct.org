@@ -18,7 +18,7 @@ class IndexAction extends WwwBaseAction
     {
         FileLogHelper::xlog(['second', $this->account], 'oauth');
         if(!$this->account){
-            return $this->controller->redirect("http://hivct.open.nisinfo.com/oauth/redirect?url=" . Url::to(['/oauth/code'], true));
+            return $this->controller->redirect(env('WECHAT_OPEN_URL')."/oauth/redirect?url=" . Url::to(['/oauth/code'], true));
         }
         return $this->controller->redirect(['/site/index']);
     }

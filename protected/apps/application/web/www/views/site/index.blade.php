@@ -24,7 +24,7 @@
 
   </div>
   {{--<div class="wrapper" id="_form">--}}
-  {{--<header><a href="/" class="logo">你好志愿者网（www.hivct.org）</a></header>--}}
+  {{--<header><a href="/" class="logo">你好志愿者网（www.hivct.com）</a></header>--}}
   {{--<div class="mpart">--}}
   {{--<div class="vision" style="transform: translate3d(0px, 0px, 0px); transform-style: preserve-3d; backface-visibility: hidden;">--}}
   {{--<div class="s_mide layer" data-depth=".35" style="position: relative; display: block; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px); transform-style: preserve-3d; backface-visibility: hidden;"></div>--}}

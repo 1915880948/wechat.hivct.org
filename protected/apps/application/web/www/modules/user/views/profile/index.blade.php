@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="wrapper">
-    <header><a href="/" class="logo">你好志愿者网（www.hivct.org）</a></header>
+    <header><a href="/" class="logo">你好志愿者网（www.hivct.com）</a></header>
     <div class="plus">
       <div class="vision">
         <div class="s_mide layer" data-depth=".35"></div>

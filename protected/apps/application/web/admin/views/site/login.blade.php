@@ -6,7 +6,7 @@
 
 @section('content')
   <div class="logotext" style="margin:0px auto;padding:100px 10px 10px 10px; text-align:center">
-    <h1>Hivct.ORG</h1>
+    <h1>Hivct.COM</h1>
   </div>
   <div class="content">
     <form class="login-form" action="{{yUrl(['/site/login'])}}" method="post">

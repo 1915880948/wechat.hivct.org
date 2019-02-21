@@ -3,7 +3,7 @@
   <div class="page-header-inner ">
     <!-- BEGIN LOGO -->
     <div class="page-logo">
-      <h4 class="font-blue-steel font-lg bold uppercase" style="padding-left:20px;padding-top: 5px;" >Hivct.ORG</h4>
+      <h4 class="font-blue-steel font-lg bold uppercase" style="padding-left:20px;padding-top: 5px;" >Hivct.COM</h4>
       {{--<div class="menu-toggler sidebar-toggler"></div>--}}
     </div>
     <!-- END LOGO -->

@@ -52,8 +52,15 @@ class ExportAction extends AdminBaseAction
 
         $query->leftJoin(UserEvent::tableName(), OrderList::tableName() . '.uuid=' . UserEvent::tableName() . '.order_uuid')
               ->leftJoin(SurveyList::tableName(), 'event_type_uuid=' . SurveyList::tableName() . '.uuid');
+
+        $logistics = Logistics::find()
+                                          ->indexBy('id')
+                                          ->asArray()
+                                          ->all();
+
         if($logistic_id != -99){
-            $query->leftJoin(Logistics::tableName(), OrderList::tableName() . '.logistic_id=' . Logistics::tableName() . '.id');
+            $query->andWhere(['logistic_id'=>$logistic_id]);
+            // $query->leftJoin(Logistics::tableName(), OrderList::tableName() . '.logistic_id=' . Logistics::tableName() . '.id');
         } else{
             $logistics = Logistics::find()
                                   ->indexBy('id')
@@ -64,12 +71,6 @@ class ExportAction extends AdminBaseAction
         $listData = $query->orderBy([SurveyList::tableName() . '.id' => SORT_DESC])
                           ->asArray()
                           ->all();
-
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        echo count($listData);
-        exit;
 
         $objectPHPExcel = new PHPExcel();
         $objectPHPExcel->setActiveSheetIndex(0);
@@ -551,11 +552,11 @@ class ExportAction extends AdminBaseAction
                     $objectPHPExcel->getActiveSheet()
                                    ->setCellValue($k . ($n + 3), join(",", $tmp));
                 } elseif($v == 'title'){
-                    if(isset($data[$v]) && $data[$v]){
-                        $value = $data[$v];
-                    } else{
+                    // if(isset($data[$v]) && $data[$v]){
+                    //     $value = $data[$v];
+                    // } else{
                         $value = isset($logistics[$data['logistic_id']]) ? $logistics[$data['logistic_id']]['title'] : '';
-                    }
+                    // }
                     $objectPHPExcel->getActiveSheet()
                                    ->setCellValue($k . ($n + 3), $value);
                 } else{

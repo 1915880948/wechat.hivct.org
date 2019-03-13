@@ -65,6 +65,12 @@ class ExportAction extends AdminBaseAction
                           ->asArray()
                           ->all();
 
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        echo count($listData);
+        exit;
+
         $objectPHPExcel = new PHPExcel();
         $objectPHPExcel->setActiveSheetIndex(0);
         $n = 0;

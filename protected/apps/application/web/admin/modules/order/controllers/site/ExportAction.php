@@ -599,11 +599,11 @@ class ExportAction extends AdminBaseAction
                        ->getPageSetup()
                        ->setVerticalCentered(false);
 
-        //        ob_end_clean();
+        ob_end_clean();
         //        ob_start();
 
-        header('Content-Type:application/vnd.ms-excel');
-        header('Content-Disposition:attachment;filename="' . '订单/调研列表-' . date("Y年m月d日") . '.xls"');
+        header('Content-Type: application/vnd.ms-excel;charset=utf-8');
+        header('Content-Disposition: attachment;filename="' . '订单/调研列表-' . date("Y年m月d日") . '.xls"');
         $objWriter = PHPExcel_IOFactory::createWriter($objectPHPExcel, 'Excel5');
         $objWriter->save('php://output');
     }

@@ -19,6 +19,6 @@ class NotifyAction extends WwwBaseAction
 {
     public function run()
     {
-        
+        return $this->render();
     }
 }

@@ -76,6 +76,7 @@ class PayAction extends WwwBaseAction
             'openid'       => $this->account->openid,
             'notify_url'   => Url::to(['/oauth/notify'], true),
             'return_url'   => Url::to(['/site/index'], true),
+            'callback_url' => Url::to(['/oauth/paycallback'], true),
             'logistcis'    => $logistcisInfo !== null ? $logistcisInfo->attributes : [],
             'uid'          => $this->account->uid,
             'goods_list'   => Json::encode($products),

@@ -30,6 +30,7 @@ class IndexAction extends WwwBaseAction
      */
     public function run($use_address = 0, $event_type = '')
     {
+        return $this->controller->redirect('http://v2.survey.hivct.com');
         $survey = (new UserEvent)->getUserLastMonthSurvey($this->account['id']);
 
 

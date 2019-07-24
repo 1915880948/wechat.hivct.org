@@ -38,9 +38,9 @@ class WwwBaseController extends BaseController
         ];
     }
 
-    public function beforeAction($action)
-    {
-        return $this->redirect("http://v2.survey.hivct.com");
-    }
+    // public function beforeAction($action)
+    // {
+    //     return $this->redirect("http://v2.survey.hivct.com");
+    // }
 }
 

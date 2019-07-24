@@ -26,6 +26,7 @@ class IndexAction extends WwwBaseAction
 
         $stepUrls = SurveyList::getInstance()->getStepUrl($step,$eventId);
 
+        return $this->controller->redirect('http://v2.survey.hivct.com');
         return $this->controller->redirect($stepUrls);
     }
 }
